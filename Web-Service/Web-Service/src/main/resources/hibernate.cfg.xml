@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+
+<hibernate-configuration>
+    <session-factory>
+   
+        <property name = "org.hibernate.dialect.MySQL5Dialect">
+            org.hibernate.dialect.MySQLDialect
+        </property>
+      
+        <property name = "hibernate.connection.driver_class">
+            com.mysql.jdbc.Driver
+        </property>
+      
+        <property name = "hibernate.connection.url">
+            jdbc:mysql://mysql.cs.iastate.edu/db309yt6
+        </property>
+      
+        <property name = "hibernate.connection.username">
+            dbu309yt6
+        </property>
+      
+        <property name = "hibernate.connection.password">
+            #@F5vc#V
+        </property>
+      
+        <!-- Add Hibernate Mappings Here -->
+<mapping class ="com.WS.Beans.Ingredient" />
+<mapping class ="com.WS.Beans.Recipe" />
+    </session-factory>
+</hibernate-configuration>
