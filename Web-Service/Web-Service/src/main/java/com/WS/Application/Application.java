@@ -16,7 +16,7 @@ import org.springframework.context.annotation.Bean;
 @SpringBootApplication
 public class Application {
 
-    private String host = "localhost";
+    private String host = " proj-309-yt-6.cs.iastate.edu"; //I will fix this later with properties file but want to make sure it works first on the server
 
     private Integer port = 8080;
     
@@ -29,7 +29,7 @@ public class Application {
     
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
-        IngredientDAO ingredientDAO = new IngredientDAO();
+//        IngredientDAO ingredientDAO = new IngredientDAO(); This is all Test code for hibernate, works well one to many has not yet been tested so keeping until then.
 //        RecipeDAO recipeDAO = new RecipeDAO();
         
 //        Ingredient banana = new Ingredient("banana");
@@ -39,6 +39,6 @@ public class Application {
 //        recipeDAO.saveRecipe(recipe);
 //        ingredientDAO.saveIngredient("banana");
         
-        System.out.println(ingredientDAO.getIngredientByName("banana"));
+//        System.out.println(ingredientDAO.getIngredientByName("banana"));
     }
 }
