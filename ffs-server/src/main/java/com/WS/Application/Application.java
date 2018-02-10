@@ -16,8 +16,8 @@ import org.springframework.context.annotation.Bean;
 @SpringBootApplication
 public class Application {
 
-    private String host = " proj-309-yt-6.cs.iastate.edu"; //I will fix this later with properties file but want to make sure it works first on the server
-
+    // private String host = " proj-309-yt-6.cs.iastate.edu"; //I will fix this later with properties file but want to make sure it works first on the server
+    private String host = "localhost";
     private Integer port = 8080;
     
     public SocketIOServer socketIOServer() {
