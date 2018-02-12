@@ -9,7 +9,7 @@ export class ConnectionTestService {
 
   constructor() {
     this.socket.on('connect', () => console.log('successfully connected'));
-    this.socket.on('connect_failed', () => console.log('connection failed'));
+    this.socket.on('connect_error', () => console.log('connection failed'));
   }
 
 }
