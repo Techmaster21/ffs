@@ -1,0 +1,24 @@
+<h2>My Recipes</h2>
+<ul class="recipes">
+  <li *ngFor="let recipe of recipes" (click)="onSelect(recipe)">
+    {{recipe.name}}
+  </li>
+</ul>
+
+
+<div *ngIf="selectedRecipe">
+<h2>{{ selectedRecipe.name }} Details</h2>
+<div><span>ID: </span>{{selectedRecipe.id}}</div>
+<br>
+<div><span>Name: </span>{{selectedRecipe.name}}</div>
+<br>
+<div><span>Description: </span>{{selectedRecipe.description}}</div>
+<br>
+<div>Ingredients:</div>
+<ul>
+<div *ngFor="let s of selectedRecipe.ingredients">
+      <li>{{s}}</li>
+</div>
+</ul>
+<img src={{picture}}>
+</div>
