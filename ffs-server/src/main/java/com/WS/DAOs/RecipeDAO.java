@@ -15,6 +15,7 @@ import org.hibernate.SessionFactory;
  * @author Eric
  */
 public class RecipeDAO {
+
     private final SessionFactory factory = SessionFactoryFactory.getSessionFactory();
     private final Session session;
 
@@ -22,13 +23,11 @@ public class RecipeDAO {
         session = factory.openSession();
         session.beginTransaction();
     }
-    
-    public void saveRecipe(Recipe recipe){
+
+    public void saveRecipe(Recipe recipe) {
         this.session.persist(recipe);
         this.session.flush();
         this.session.getTransaction().commit();
     }
-    
-    
-    
+
 }

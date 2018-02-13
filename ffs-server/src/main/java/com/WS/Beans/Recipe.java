@@ -22,16 +22,16 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "recipes")
 public class Recipe {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "recipe_id")
-    private int id; 
-    
+    private int id;
+
     @Column(name = "recipe_name")
     private String recipeName;
-    
-    @OneToMany(mappedBy="ingredientId")
+
+    @OneToMany(mappedBy = "ingredientId")
     private Set<Ingredient> ingredients;
 
     public Recipe() {
@@ -99,7 +99,5 @@ public class Recipe {
     public String toString() {
         return "Recipe{" + "id=" + id + ", ingredients=" + ingredients + '}';
     }
-    
-    
-    
+
 }

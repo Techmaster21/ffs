@@ -55,13 +55,13 @@
             <artifactId>netty-socketio</artifactId>
             <version>1.7.7</version>
         </dependency>
-
+<!--
         <dependency>
             <groupId>com.project-ffs.ffs</groupId>
             <artifactId>ffs-client</artifactId>
             <version>${project.version}</version>
             <scope>runtime</scope>
-        </dependency>
+        </dependency>-->
     </dependencies>
 
     <build>

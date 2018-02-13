@@ -11,7 +11,6 @@ import com.corundumstudio.socketio.AckRequest;
 import com.corundumstudio.socketio.SocketIOClient;
 import com.corundumstudio.socketio.SocketIOServer;
 import com.corundumstudio.socketio.annotation.OnEvent;
-import com.corundumstudio.socketio.protocol.Packet;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -19,10 +18,11 @@ import org.springframework.stereotype.Component;
  *
  * @author Eric
  */
-    @Component
+@Component
 public class RecipeController {
+
     private final SocketIOServer server;
-    private IngredientDAO ingredientDAO = new IngredientDAO();
+    private final IngredientDAO ingredientDAO = new IngredientDAO();
 
     @Autowired
     public RecipeController(SocketIOServer server) {

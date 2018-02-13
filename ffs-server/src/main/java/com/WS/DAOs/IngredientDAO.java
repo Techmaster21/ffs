@@ -17,6 +17,7 @@ import org.hibernate.criterion.Restrictions;
  *
  * @author Eric
  */
+
 public class IngredientDAO {
 
     private final SessionFactory factory = SessionFactoryFactory.getSessionFactory();
@@ -30,14 +31,14 @@ public class IngredientDAO {
     public Ingredient getIngredientById(int i) {
         return session.get(Ingredient.class, i);
     }
-    
-    public Ingredient getIngredientByName(String name){
+
+    public Ingredient getIngredientByName(String name) {
         Criteria c1 = session.createCriteria(Ingredient.class);
         c1.add(Restrictions.like("name", name, MatchMode.EXACT));
-        return (Ingredient)c1.uniqueResult();
+        return (Ingredient) c1.uniqueResult();
     }
-    
-    public void saveIngredient(Ingredient ingredient){
+
+    public void saveIngredient(Ingredient ingredient) {
         session.persist(ingredient);
         session.flush();
         session.getTransaction().commit();

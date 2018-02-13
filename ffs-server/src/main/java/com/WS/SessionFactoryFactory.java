@@ -13,7 +13,9 @@ import org.hibernate.cfg.Configuration;
  * @author Eric
  */
 public class SessionFactoryFactory {
+
     private static final SessionFactory sessionFactory;
+
     static {
         try {
             Configuration config = new Configuration().configure();
@@ -22,7 +24,7 @@ public class SessionFactoryFactory {
             throw new ExceptionInInitializerError(e);
         }
     }
-    
+
     public static SessionFactory getSessionFactory() {
         return sessionFactory;
     }

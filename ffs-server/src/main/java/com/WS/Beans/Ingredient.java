@@ -13,7 +13,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-
 /**
  *
  * @author Eric
@@ -21,12 +20,12 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "ingredients")
 public class Ingredient {
-    
+
     @Id
     @Column(name = "ingredient_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int ingredientId;
-    
+
     @Column(name = "name")
     private String name;
 
@@ -86,6 +85,5 @@ public class Ingredient {
     public String toString() {
         return "Ingredient{" + "id=" + ingredientId + ", name=" + name + '}';
     }
-    
-    
+
 }
