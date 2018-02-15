@@ -12,7 +12,7 @@ public class Application {
 
     private String host = "localhost"; //I will fix this later with properties file but want to make sure it works first on the server
 
-    private Integer port = 8080;
+    private Integer port = 8090;
 
     @Bean
     public SocketIOServer socketIOServer() {

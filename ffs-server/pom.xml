@@ -73,13 +73,12 @@
             <artifactId>jaxb-impl</artifactId>
             <version>2.2.8</version>
         </dependency>
-<!--
         <dependency>
             <groupId>com.project-ffs.ffs</groupId>
             <artifactId>ffs-client</artifactId>
             <version>${project.version}</version>
             <scope>runtime</scope>
-        </dependency>-->
+        </dependency>
     </dependencies>
 
     <build>
