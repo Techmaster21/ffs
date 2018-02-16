@@ -1,5 +1,6 @@
 package com.WS;
 
+import com.WS.DAOs.RecipeDAO;
 import com.corundumstudio.socketio.Configuration;
 import com.corundumstudio.socketio.SocketIOServer;
 import com.corundumstudio.socketio.annotation.SpringAnnotationScanner;
@@ -29,15 +30,5 @@ public class Application {
 
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
-//        IngredientDAO ingredientDAO = new IngredientDAO(); This is all Test code for hibernate, works well one to many has not yet been tested so keeping until then.
-//        RecipeDAO recipeDAO = new RecipeDAO();
-
-//        Ingredient banana = new Ingredient("banana");
-//        Set<Ingredient> set = new HashSet<>();
-//        set.add(banana);
-//        Recipe recipe = new Recipe("banana recipe", set);
-//        recipeDAO.saveRecipe(recipe);
-//        ingredientDAO.saveIngredient("banana");
-//        System.out.println(ingredientDAO.getIngredientByName("banana"));
     }
 }

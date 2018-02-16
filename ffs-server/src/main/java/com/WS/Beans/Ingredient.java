@@ -5,12 +5,16 @@
  */
 package com.WS.Beans;
 
+import java.io.Serializable;
 import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
@@ -19,7 +23,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "ingredients")
-public class Ingredient {
+public class Ingredient implements Serializable {
 
     @Id
     @Column(name = "ingredient_id")
@@ -28,14 +32,27 @@ public class Ingredient {
 
     @Column(name = "name")
     private String name;
+    
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "recipe_id", nullable = false)
+    private Recipe recipe;
 
     public Ingredient() {
     }
 
-    public Ingredient(String name) {
+    public Ingredient(String name, Recipe recipe) {
         this.name = name;
+        this.recipe = recipe;
     }
 
+    public Recipe getRecipe() {
+        return recipe;
+    }
+
+    public void setRecipe(Recipe recipe) {
+        this.recipe = recipe;
+    }
+    
     public int getIngredientId() {
         return ingredientId;
     }
@@ -55,8 +72,8 @@ public class Ingredient {
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 61 * hash + this.ingredientId;
-        hash = 61 * hash + Objects.hashCode(this.name);
+        hash = 97 * hash + this.ingredientId;
+        hash = 97 * hash + Objects.hashCode(this.name);
         return hash;
     }
 
@@ -75,15 +92,13 @@ public class Ingredient {
         if (this.ingredientId != other.ingredientId) {
             return false;
         }
-        if (!Objects.equals(this.name, other.name)) {
-            return false;
-        }
         return true;
     }
 
     @Override
     public String toString() {
-        return "Ingredient{" + "id=" + ingredientId + ", name=" + name + '}';
+        return "Ingredient{" + "ingredientId=" + ingredientId + ", name=" + name + '}';
     }
-
+    
+    
 }

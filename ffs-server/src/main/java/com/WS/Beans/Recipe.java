@@ -5,10 +5,12 @@
  */
 package com.WS.Beans;
 
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -20,7 +22,7 @@ import javax.persistence.Table;
  * @author Eric
  */
 @Entity
-@Table(name = "recipes")
+@Table(name = "recipe")
 public class Recipe {
 
     @Id
@@ -31,8 +33,8 @@ public class Recipe {
     @Column(name = "recipe_name")
     private String recipeName;
 
-    @OneToMany(mappedBy = "ingredientId")
-    private Set<Ingredient> ingredients;
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "recipe")
+    private Set<Ingredient> ingredients = new HashSet<>();
 
     public Recipe() {
     }

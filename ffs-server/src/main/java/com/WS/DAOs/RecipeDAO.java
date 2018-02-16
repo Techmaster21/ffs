@@ -29,5 +29,9 @@ public class RecipeDAO {
         this.session.flush();
         this.session.getTransaction().commit();
     }
+    
+    public Recipe getRecipe(int id) {
+        return this.session.get(Recipe.class, id);
+    }
 
 }
