@@ -27,6 +27,7 @@ public class Runner implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         server.start();
+        Thread.sleep(Integer.MAX_VALUE);
         server.stop();
     }
 
