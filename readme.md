@@ -16,3 +16,7 @@ To not build frontend on command line:
 If you want Angular to constantly rebuild for dev purposes, you can still do that.
 Just go into the angular directory, and run "npm start". If you want to 
 be able to make calls to the backend, you will need to be running the server as well.
+
+Update:
+Added a new profile "prod" to maven build to use when building on the server. It will properly
+set socketio.
