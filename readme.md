@@ -14,5 +14,5 @@ To not build frontend on command line:
 ./mvnw clean install
 
 If you want Angular to constantly rebuild for dev purposes, you can still do that.
-Just go into the angular directory, and ng server --open like usual. If you want to 
+Just go into the angular directory, and run "npm start". If you want to 
 be able to make calls to the backend, you will need to be running the server as well.
