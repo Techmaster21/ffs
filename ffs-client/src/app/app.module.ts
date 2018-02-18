@@ -1,14 +1,15 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
+import { SocketIoModule, SocketIoConfig } from 'ng-socket-io';
 
 import { AppComponent } from './app.component';
 import { TestingComponent } from './testing/testing.component';
 import { ConnectionTestService } from './connection-test.service';
 import { HomeComponent } from './home/home.component';
 import { RecipesViewerComponent } from './recipes-viewer/recipes-viewer.component';
-import { AppRoutingModule } from './/app-routing.module';
+import { AppRoutingModule } from './app-routing.module';
 
+const config: SocketIoConfig = { url: 'http://localhost:8090', options: {} };
 
 @NgModule({
   declarations: [
@@ -19,9 +20,12 @@ import { AppRoutingModule } from './/app-routing.module';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    SocketIoModule.forRoot(config)
   ],
-  providers: [ConnectionTestService],
+  providers: [
+    ConnectionTestService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
