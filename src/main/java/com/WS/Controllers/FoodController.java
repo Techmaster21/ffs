@@ -5,13 +5,8 @@
  */
 package com.WS.Controllers;
 
-import com.WS.ClientBeans.ClientRecipe;
-import com.WS.DAOs.RecipeDAO;
-import com.corundumstudio.socketio.AckRequest;
-import com.corundumstudio.socketio.SocketIOClient;
+import com.WS.DAOs.FoodDAO;
 import com.corundumstudio.socketio.SocketIOServer;
-import com.corundumstudio.socketio.annotation.OnEvent;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,26 +17,19 @@ import org.springframework.stereotype.Component;
  * @author Eric
  */
 @Component
-public class RecipeController {
+public class FoodController {
 
     private final SocketIOServer server;
-    private final RecipeDAO recipeDAO = new RecipeDAO();
+    private final FoodDAO foodDAO = new FoodDAO();
     private final Logger logger = LoggerFactory.getLogger(RecipeController.class);
 
-    public RecipeController() {
+    public FoodController() {
         this.server = null;
     }
-    
+
     @Autowired
-    public RecipeController(SocketIOServer server) {
+    public FoodController(SocketIOServer server) {
         this.server = server;
     }
-
-    @OnEvent(value = "getRecipe")
-    public void getRecipe(SocketIOClient client, AckRequest request, Integer data) {
-        ClientRecipe recipe = recipeDAO.getRecipe(data);
-        client.sendEvent("getRecipe", recipe);
-    }
-    
 
 }

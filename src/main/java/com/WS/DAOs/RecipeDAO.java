@@ -6,6 +6,7 @@
 package com.WS.DAOs;
 
 import com.WS.Beans.Recipe;
+import com.WS.ClientBeans.ClientRecipe;
 import com.WS.SessionFactoryFactory;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -30,8 +31,8 @@ public class RecipeDAO {
         this.session.getTransaction().commit();
     }
     
-    public Recipe getRecipe(int id) {
-        return this.session.get(Recipe.class, id);
+    public ClientRecipe getRecipe(int id) {
+        return ClientRecipe.fromRecipe(this.session.get(Recipe.class, id));
     }
 
 }

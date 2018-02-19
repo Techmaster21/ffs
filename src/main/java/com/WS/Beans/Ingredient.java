@@ -43,7 +43,6 @@ public class Ingredient {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "recipe_id", nullable = false)
     private Recipe recipe;
-    
 
     public Ingredient() {
     }
@@ -96,6 +95,7 @@ public class Ingredient {
         this.recipe = recipe;
     }
 
+    
     @Override
     public int hashCode() {
         int hash = 3;
