@@ -12,9 +12,8 @@ export class RecipeAdderComponent implements OnInit {
   ingredients = [];
   addIngredient(newIngredient: string, newQuantity: number, newUnits: string) {
     if (newIngredient) {
-      var ingredient: Ingredient;
-      const numQuantity = +newQuantity;
-      ingredient = {name: newIngredient, quantity: numQuantity, unit: newUnits};
+      let ingredient: Ingredient;
+      ingredient = {name: newIngredient, quantity: +newQuantity, unit: newUnits};
       this.ingredients.push(ingredient);
     }
   }

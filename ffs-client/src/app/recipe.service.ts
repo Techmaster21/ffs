@@ -10,6 +10,7 @@ export class RecipeService {
 
   constructor(private socket: Socket) { }
 
+  // take callback?
   addRecipe(recipe: Recipe): Observable<Recipe> {
     return this.socket.emit('addRecipe');
   }

@@ -1,9 +1,11 @@
-<p>
-  recipes-viewer works!
-</p>
 <nav>
   <a routerLink="/home">Go Back</a>
 </nav>
 <nav>
   <a routerLink="/addrecipe">Add Recipe</a>
 </nav>
+<ul>
+  <li *ngFor="let recipe of recipes">
+    {{recipe.name}}
+  </li>
+</ul>
