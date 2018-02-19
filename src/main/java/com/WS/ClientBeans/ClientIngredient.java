@@ -25,5 +25,30 @@ public class ClientIngredient {
     public static ClientIngredient fromIngredient(Ingredient ingredient){
         return new ClientIngredient(ingredient.getFood().getFoodName(),ingredient.getUnit().getUnitName(), ingredient.getQuantity());
     }
+
+    public String getFoodName() {
+        return foodName;
+    }
+
+    public void setFoodName(String foodName) {
+        this.foodName = foodName;
+    }
+
+    public String getUnitName() {
+        return unitName;
+    }
+
+    public void setUnitName(String unitName) {
+        this.unitName = unitName;
+    }
+
+    public double getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(double quantity) {
+        this.quantity = quantity;
+    }
+    
     
 }

@@ -52,7 +52,7 @@ public class Recipe {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "recipe")
     private Set<Ingredient> ingredients = new HashSet<>();
     
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "recipestep")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "recipe")
     private Set<RecipeStep> steps = new HashSet<>();
     
     @ManyToOne(fetch = FetchType.LAZY)

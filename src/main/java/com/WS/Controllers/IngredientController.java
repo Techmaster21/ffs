@@ -35,8 +35,8 @@ public class IngredientController {
     public IngredientController(SocketIOServer server) {
         this.server = server;
     }
-    
-        @OnEvent(value = "getIngredient")
+
+    @OnEvent(value = "getIngredient")
     public void getIngredients(SocketIOClient client, AckRequest request, Integer data) {
         Ingredient ingredient = ingredientDAO.getIngredientById(data);
         client.sendEvent("getIngredient", ingredient);

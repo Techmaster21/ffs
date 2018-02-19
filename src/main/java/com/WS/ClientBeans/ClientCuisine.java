@@ -22,4 +22,14 @@ public class ClientCuisine {
     public static ClientCuisine fromCuisine(Cuisine cuisine){
         return new ClientCuisine(cuisine.getCuisineName());
     }
+
+    public String getCuisineName() {
+        return cuisineName;
+    }
+
+    public void setCuisineName(String cuisineName) {
+        this.cuisineName = cuisineName;
+    }
+    
+    
 }
