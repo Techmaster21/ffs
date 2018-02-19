@@ -10,6 +10,7 @@ import {Recipe} from '../recipe';
 })
 export class RecipeAdderComponent implements OnInit {
   ingredients = [];
+  steps = [];
   addIngredient(newIngredient: string, newQuantity: number, newUnits: string) {
     if (newIngredient) {
       let ingredient: Ingredient;
@@ -17,6 +18,17 @@ export class RecipeAdderComponent implements OnInit {
       this.ingredients.push(ingredient);
     }
   }
+  addStep(newStep: string) {
+    if (newStep) {
+      this.steps.push(newStep);
+    }
+  }
+  submitRecipe(name: string, description: string) {
+    let recipe: Recipe;
+    recipe = {name: name, description: description, instructions: this.steps, ingredients: this.ingredients};
+    console.log(recipe);
+  }
+
   ngOnInit() {
   }
 

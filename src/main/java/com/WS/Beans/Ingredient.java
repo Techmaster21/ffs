@@ -30,12 +30,22 @@ public class Ingredient implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int ingredientId;
 
-    @Column(name = "name")
-    private String name;
+    @Column(name = "food_id")
+    private int foodID;
+    
+//    @Column(name = "name")
+//    private String name;
+    
+    @Column(name = "quantity")
+    private double quantity;
+    
+    @Column(name = "unit_id")
+    private int unitID;
     
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "recipe_id", nullable = false)
     private Recipe recipe;
+    
 
     public Ingredient() {
     }
