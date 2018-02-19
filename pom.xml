@@ -22,8 +22,7 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
         <build.nofront>true</build.nofront>
-        <build.noProd>true</build.noProd>
-        <build.prod>false</build.prod>
+        <front.buildType>run build</front.buildType>
 
         <commons-io.version>2.6</commons-io.version>
         <maven-release-plugin.version>2.5.3</maven-release-plugin.version>
@@ -43,9 +42,7 @@
             <id>prod</id>
             <properties>
                 <build.nofront>false</build.nofront>
-                <build.noProd>false</build.noProd>
-                <build.prod>true</build.prod>
-                <skipTests>true</skipTests>
+                <front.buildType>run buildprod</front.buildType>
             </properties>
         </profile>
     </profiles>
@@ -171,18 +168,7 @@
                             <goal>npm</goal>
                         </goals>
                         <configuration>
-                            <arguments>run build</arguments>
-                            <skip>${build.prod}</skip>
-                        </configuration>
-                    </execution>
-                    <execution>
-                        <id>npm run buildprod</id>
-                        <goals>
-                            <goal>npm</goal>
-                        </goals>
-                        <configuration>
-                            <arguments>run buildprod</arguments>
-                            <skip>${build.noProd}</skip>
+                            <arguments>${front.buildType}</arguments>
                         </configuration>
                     </execution>
                 </executions>
