@@ -44,6 +44,7 @@ public class Ingredient implements Serializable {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "recipe_id", nullable = false)
     private Recipe recipe;
+    
 
     public Ingredient() {
     }

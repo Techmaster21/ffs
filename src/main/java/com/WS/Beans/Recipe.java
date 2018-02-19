@@ -50,7 +50,22 @@ public class Recipe {
     
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "recipe")
     private Set<Ingredient> ingredients = new HashSet<>();
+    
+    @Column(name = "recipe_description")
+    private String recipeDescription;
 
+    @Column(name = "cuisine_id")
+    private int cuisineID;
+    
+    @Column(name = "prep_time")
+    private String prepTime;
+    
+    @Column(name = "cook_time")
+    private String cookTime;
+    
+    @Column(name = "creator_id")
+    private String creatorName;
+    
     public Recipe() {
     }
 

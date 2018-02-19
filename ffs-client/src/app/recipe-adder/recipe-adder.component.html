@@ -1,32 +1,80 @@
 <h1> Add Recipe </h1>
 
-Recipe Name: <br>
+<div>Recipe Name:</div>
 <mat-form-field>
-<input matInput name="name" placeholder="name">
+<input #name matInput name="name" placeholder="name">
 </mat-form-field>
-<br>
-Description: <br>
-<mat-form-field>
-  <textarea matInput name="description" placeholder= "description" rows="4" cols="50"></textarea>
+<div>Description:</div>
+<div>
+  <mat-form-field>
+    <textarea #description matInput name="description" placeholder= "description" rows="4" cols="50"></textarea>
   </mat-form-field>
-<br>
+</div>
+<table class="table">
+  <tr>
+    <th>Ingredient Name</th>
+    <th>Quantity</th>
+    <th>Units</th>
+  </tr>
+  <tr *ngFor="let ingredient of ingredients">
+    <td>
+      {{ingredient.name}}
+    </td>
+    <td>
+      {{ingredient.quantity}}
+    </td>
+    <td>
+      {{ingredient.unit}}
+    </td>
+  </tr>
+</table>
 
-<ul><li *ngFor="let ingredient of ingredients">{{ingredient}}</li></ul>
-
+<div>
 <mat-form-field>
-  <input #newIngredient matInput name="ingredient" placeholder="ingredient" (keyup.enter)="addIngredient(newIngredient.value)"
-         (blur)="addIngredient(newIngredient.value); newIngredient.value='' ">
+  <input #newIngredient matInput name="ingredient" placeholder="ingredient"
+         (keyup.enter)="addIngredient(newIngredient.value, newIngredientQuantity.value,
+         newIngredientUnits.value); newIngredient.value=''; newIngredientQuantity.value='';newIngredientUnits.value='' ">
+</mat-form-field>
+<mat-form-field>
+  <input #newIngredientQuantity matInput name="quantity" placeholder="quantity"
+         (keyup.enter)="addIngredient(newIngredient.value, newIngredientQuantity.value,
+          newIngredientUnits.value); newIngredient.value=''; newIngredientQuantity.value='';newIngredientUnits.value='' ">
+</mat-form-field>
+<mat-form-field>
+  <input #newIngredientUnits matInput name="units" placeholder="units"
+         (keyup.enter)="addIngredient(newIngredient.value, newIngredientQuantity.value,
+         newIngredientUnits.value); newIngredient.value=''; newIngredientQuantity.value='';newIngredientUnits.value='' ">
 </mat-form-field>
 
 
-<button mat-raised-button color="accent" (click)='addIngredient(newIngredient.value)'>Add Ingredient</button>
-<br> <br>
+<button mat-raised-button color="accent" (click)="addIngredient(newIngredient.value, newIngredientQuantity.value,
+         newIngredientUnits.value); newIngredient.value=''; newIngredientQuantity.value='';newIngredientUnits.value='' ">
+  Add Ingredient</button>
+</div> <br>
 
-<button mat-raised-button color="accent" routerLink="/recipes">Cancel</button>
-<button mat-raised-button color="primary" routerLink="/recipes">Submit</button>
+<table class="table">
+  <tr>
+    <th>#</th>
+    <th>Step</th>
+  </tr>
+  <tr *ngFor="let step of steps; let i=index">
+    <td>
+      {{i+1}}
+    </td>
+    <td>
+      {{step}}
+    </td>
+  </tr>
+</table>
 
+<div>
+  <mat-form-field>
+    <textarea #newStep matInput name="step" placeholder= "step" rows="4" cols="50"></textarea>
+  </mat-form-field>
+  <button mat-raised-button color="accent" (click)="addStep(newStep.value); newStep.value=''" >
+    Add Step</button>
+</div>
 
-
-
-
+<button mat-raised-button color="accent"  routerLink="/recipes">Cancel</button>
+<button mat-raised-button color="primary" (click)="submitRecipe(name.value,description.value)" routerLink="/recipes">Submit</button>
 

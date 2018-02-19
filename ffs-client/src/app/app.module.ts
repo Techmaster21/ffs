@@ -1,6 +1,10 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { SocketIoModule, SocketIoConfig } from 'ng-socket-io';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatButtonModule, MatCheckboxModule, MatInputModule } from '@angular/material';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 
 import { AppComponent } from './app.component';
 import { TestingComponent } from './testing/testing.component';
@@ -10,8 +14,7 @@ import { RecipesViewerComponent } from './recipes-viewer/recipes-viewer.componen
 import { AppRoutingModule } from './app-routing.module';
 import { environment } from '../environments/environment';
 import { RecipeAdderComponent } from './recipe-adder/recipe-adder.component';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatButtonModule, MatCheckboxModule, MatInputModule} from '@angular/material';
+import {MatTableModule} from '@angular/material/table';
 
 const config: SocketIoConfig = { url: environment.socketUrl, options: {} };
 
@@ -31,6 +34,8 @@ const config: SocketIoConfig = { url: environment.socketUrl, options: {} };
     MatButtonModule,
     MatCheckboxModule,
     MatInputModule,
+    BrowserAnimationsModule,
+    MatTableModule
   ],
   providers: [
     ConnectionTestService
