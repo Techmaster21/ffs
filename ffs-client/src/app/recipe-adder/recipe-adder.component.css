@@ -16,7 +16,6 @@ textarea{
   width: 15em;
 }
 .table tr {
-  cursor: pointer;
   position: relative;
   left: 0;
   background-color: #EEE;
@@ -24,9 +23,4 @@ textarea{
   padding: .3em 0;
   height: 1.6em;
   border-radius: 4px;
-}
-.table tr:hover {
-  color: #607D8B;
-  background-color: #DDD;
-  left: .1em;
 }
