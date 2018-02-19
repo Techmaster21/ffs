@@ -5,6 +5,7 @@
  */
 package com.WS.Runner;
 
+import com.WS.DAOs.FoodDAO;
 import com.WS.DAOs.IngredientDAO;
 import com.WS.DAOs.RecipeDAO;
 import com.corundumstudio.socketio.SocketIOServer;
@@ -31,7 +32,8 @@ public class Runner implements CommandLineRunner {
         server.start();
         IngredientDAO ingredientDAO = new IngredientDAO();
         RecipeDAO recipeDAO = new RecipeDAO();
-        System.out.println(recipeDAO.getRecipe(1));
+        FoodDAO foodDAO = new FoodDAO();
+        System.out.println(foodDAO.getAllFoods());
         Thread.sleep(Integer.MAX_VALUE);
         server.stop();
     }

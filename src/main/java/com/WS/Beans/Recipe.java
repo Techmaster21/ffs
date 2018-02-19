@@ -15,6 +15,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -51,27 +52,11 @@ public class Recipe {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "recipe")
     private Set<Ingredient> ingredients = new HashSet<>();
     
-    @Column(name = "recipe_description")
-    private String recipeDescription;
-
-    @Column(name = "cuisine_id")
-    private int cuisineID;
-    
-    @Column(name = "prep_time")
-    private String prepTime;
-    
-    @Column(name = "cook_time")
-    private String cookTime;
-    
-    @Column(name = "creator_id")
-    private String creatorName;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn (name = "creator_id")
+    private Ffser ffser;
     
     public Recipe() {
-    }
-
-    public Recipe(String recipeName, Set<Ingredient> ingredients) {
-        this.recipeName = recipeName;
-        this.ingredients = ingredients;
     }
 
     public int getRecipeId() {
@@ -129,6 +114,16 @@ public class Recipe {
     public void setIngredients(Set<Ingredient> ingredients) {
         this.ingredients = ingredients;
     }
+
+    public Ffser getFfser() {
+        return ffser;
+    }
+
+    public void setFfser(Ffser ffser) {
+        this.ffser = ffser;
+    }
+
+    
 
     @Override
     public int hashCode() {
