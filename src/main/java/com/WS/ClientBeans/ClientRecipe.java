@@ -47,4 +47,67 @@ public class ClientRecipe {
         return new ClientRecipe(recipe.getRecipeName(), recipe.getRecipeDescription(), recipe.getCuisine().getCuisineName(), recipe.getPrepTime(), recipe.getCookTime(), 
                 getClientIngredients(recipe.getIngredients()), ClientFfser.fromFfser(recipe.getFfser()));
     }
+
+    @Override
+    public String toString() {
+        return "ClientRecipe{" + "recipeName=" + recipeName + ", recipeDescription=" + recipeDescription + ", cuisine=" + cuisine + ", prepTime=" + prepTime + ", cookTime=" + cookTime + ", clientIngredients=" + clientIngredients + ", clientFfser=" + clientFfser + '}';
+    }
+
+    public String getRecipeName() {
+        return recipeName;
+    }
+
+    public void setRecipeName(String recipeName) {
+        this.recipeName = recipeName;
+    }
+
+    public String getRecipeDescription() {
+        return recipeDescription;
+    }
+
+    public void setRecipeDescription(String recipeDescription) {
+        this.recipeDescription = recipeDescription;
+    }
+
+    public String getCuisine() {
+        return cuisine;
+    }
+
+    public void setCuisine(String cuisine) {
+        this.cuisine = cuisine;
+    }
+
+    public Time getPrepTime() {
+        return prepTime;
+    }
+
+    public void setPrepTime(Time prepTime) {
+        this.prepTime = prepTime;
+    }
+
+    public Time getCookTime() {
+        return cookTime;
+    }
+
+    public void setCookTime(Time cookTime) {
+        this.cookTime = cookTime;
+    }
+
+    public Set<ClientIngredient> getClientIngredients() {
+        return clientIngredients;
+    }
+
+    public void setClientIngredients(Set<ClientIngredient> clientIngredients) {
+        this.clientIngredients = clientIngredients;
+    }
+
+    public ClientFfser getClientFfser() {
+        return clientFfser;
+    }
+
+    public void setClientFfser(ClientFfser clientFfser) {
+        this.clientFfser = clientFfser;
+    }
+    
+    
 }
