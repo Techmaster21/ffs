@@ -5,8 +5,8 @@
  */
 package com.WS.Controllers;
 
-import com.WS.Beans.Ingredient;
-import com.WS.DAOs.IngredientDAO;
+import com.WS.ClientBeans.ClientRecipe;
+import com.WS.DAOs.RecipeDAO;
 import com.corundumstudio.socketio.AckRequest;
 import com.corundumstudio.socketio.SocketIOClient;
 import com.corundumstudio.socketio.SocketIOServer;
@@ -25,7 +25,7 @@ import org.springframework.stereotype.Component;
 public class RecipeController {
 
     private final SocketIOServer server;
-    private final IngredientDAO ingredientDAO = new IngredientDAO();
+    private final RecipeDAO recipeDAO = new RecipeDAO();
     private final Logger logger = LoggerFactory.getLogger(RecipeController.class);
 
     public RecipeController() {
@@ -37,10 +37,11 @@ public class RecipeController {
         this.server = server;
     }
 
-    @OnEvent(value = "getIngredient")
-    public void onEvent(SocketIOClient client, AckRequest request, Integer data) {
-        Ingredient ingredient = ingredientDAO.getIngredientById(data);
-        client.sendEvent("getIngredient", ingredient);
+    @OnEvent(value = "getRecipe")
+    public void getRecipe(SocketIOClient client, AckRequest request, Integer data) {
+        ClientRecipe recipe = recipeDAO.getRecipe(data);
+        client.sendEvent("getRecipe", recipe);
     }
+    
 
 }

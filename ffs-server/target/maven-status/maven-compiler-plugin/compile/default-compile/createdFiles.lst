@@ -1,8 +1,0 @@
-com\WS\Controllers\RecipeController.class
-com\WS\Application.class
-com\WS\Beans\Ingredient.class
-com\WS\Beans\Recipe.class
-com\WS\Runner\Runner.class
-com\WS\SessionFactoryFactory.class
-com\WS\DAOs\RecipeDAO.class
-com\WS\DAOs\IngredientDAO.class
