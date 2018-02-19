@@ -1,11 +1,58 @@
-<nav>
-  <a routerLink="/home">Go Back</a>
-</nav>
-<nav>
-  <a routerLink="/addrecipe">Add Recipe</a>
-</nav>
-<ul>
-  <li *ngFor="let recipe of recipes">
-    {{recipe.name}}
-  </li>
-</ul>
+<h1>Recipes</h1>
+<table>
+  <tr>
+    <th>Recipe Name</th>
+    <th>Description</th>
+  </tr>
+  <tr *ngFor="let recipe of recipes" (click)="recipeSelect(recipe)">
+    <td>
+      {{recipe.name}}
+    </td>
+    <td>
+      {{recipe.description}}
+    </td>
+  </tr>
+</table>
+
+
+<div *ngIf="selectedRecipe">
+  <h2>{{ selectedRecipe.name}} details</h2>
+  <p>Description: {{selectedRecipe.description}}</p>
+  <div><table>
+    <tr>
+      <th>Ingredient Name</th>
+      <th>Quantity</th>
+      <th>Units</th>
+    </tr>
+    <tr *ngFor="let ingredient of selectedRecipe.ingredients">
+      <td>
+        {{ingredient.name}}
+      </td>
+      <td>
+        {{ingredient.quantity}}
+      </td>
+      <td>
+        {{ingredient.unit}}
+      </td>
+    </tr>
+  </table></div>
+
+  <table>
+    <tr>
+      <th>#</th>
+      <th>Step</th>
+    </tr>
+    <tr *ngFor="let step of selectedRecipe.instructions; let i=index">
+      <td>
+        {{i+1}}
+      </td>
+      <td>
+        {{step}}
+      </td>
+    </tr>
+  </table>
+</div>
+
+
+<button mat-raised-button color="accent"  routerLink="/home">Home</button>
+<button mat-raised-button color="accent"  routerLink="/addrecipe">Add Recipe</button>

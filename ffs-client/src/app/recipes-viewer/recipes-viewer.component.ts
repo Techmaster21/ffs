@@ -8,6 +8,7 @@ import { Ingredient } from '../ingredient';
   styleUrls: ['./recipes-viewer.component.css']
 })
 export class RecipesViewerComponent implements OnInit {
+  selectedRecipe: Recipe;
   recipes: Recipe[] = [];
   constructor() {
   }
@@ -17,6 +18,11 @@ export class RecipesViewerComponent implements OnInit {
     ingredients.push({name: 'name', quantity: 2, unit: 'apple'});
     this.recipes.push({key: 1, name: 'test', description: 'desc', ingredients: ingredients,
       instructions: ['blah', 'blah']});
+  }
+
+  recipeSelect(recipe: Recipe): void {
+    this.selectedRecipe = recipe;
+    console.log(this.selectedRecipe);
   }
 
 }

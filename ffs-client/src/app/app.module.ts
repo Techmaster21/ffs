@@ -14,6 +14,7 @@ import { RecipesViewerComponent } from './recipes-viewer/recipes-viewer.componen
 import { AppRoutingModule } from './app-routing.module';
 import { environment } from '../environments/environment';
 import { RecipeAdderComponent } from './recipe-adder/recipe-adder.component';
+import {MatTableModule} from '@angular/material/table';
 
 const config: SocketIoConfig = { url: environment.socketUrl, options: {} };
 
@@ -33,7 +34,8 @@ const config: SocketIoConfig = { url: environment.socketUrl, options: {} };
     MatButtonModule,
     MatCheckboxModule,
     MatInputModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MatTableModule
   ],
   providers: [
     ConnectionTestService
