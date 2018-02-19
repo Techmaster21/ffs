@@ -5,8 +5,12 @@
  */
 package com.WS.Controllers;
 
+import com.WS.Beans.Ingredient;
 import com.WS.DAOs.IngredientDAO;
+import com.corundumstudio.socketio.AckRequest;
+import com.corundumstudio.socketio.SocketIOClient;
 import com.corundumstudio.socketio.SocketIOServer;
+import com.corundumstudio.socketio.annotation.OnEvent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,5 +34,11 @@ public class IngredientController {
     @Autowired
     public IngredientController(SocketIOServer server) {
         this.server = server;
+    }
+    
+        @OnEvent(value = "getIngredient")
+    public void getIngredients(SocketIOClient client, AckRequest request, Integer data) {
+        Ingredient ingredient = ingredientDAO.getIngredientById(data);
+        client.sendEvent("getIngredient", ingredient);
     }
 }

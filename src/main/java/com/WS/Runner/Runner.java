@@ -33,7 +33,7 @@ public class Runner implements CommandLineRunner {
         IngredientDAO ingredientDAO = new IngredientDAO();
         RecipeDAO recipeDAO = new RecipeDAO();
         FoodDAO foodDAO = new FoodDAO();
-        System.out.println(foodDAO.getAllFoods());
+        System.out.println(recipeDAO.getRecipe(1));
         Thread.sleep(Integer.MAX_VALUE);
         server.stop();
     }
