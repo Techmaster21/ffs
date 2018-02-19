@@ -29,7 +29,7 @@ const config: SocketIoConfig = { url: 'http://localhost:8090', options: {} };
     MatFormFieldModule,
     MatButtonModule,
     MatCheckboxModule,
-    MatInputModule
+    MatInputModule,
   ],
   providers: [
     ConnectionTestService

@@ -1,16 +1,42 @@
-Recipe Name:
+<h1> Add Recipe </h1>
+
+Recipe Name: <br>
 <mat-form-field>
-<input matInput placeholder="name" name="name" value="name">
+<input matInput name="name" placeholder="name">
 </mat-form-field>
 <br>
 Description: <br>
 <mat-form-field>
-  <textarea matInput placeholder="description" name="description" value="description" rows="4" cols="50"></textarea>
+  <textarea matInput name="description" placeholder= "description" rows="4" cols="50"></textarea>
   </mat-form-field>
 <br>
 
-<button routerLink="/recipes">Submit</button>
-<button routerLink="/recipes">Cancel</button>
+<table>
+  <tr>
+    <th>Ingredient Name</th>
+    <th>Quantity</th>
+    <th>Units</th>
+  </tr>
+  <tr>
+    <td><mat-form-field>
+      <input matInput placeholder="name">
+    </mat-form-field></td>
+    <td><mat-form-field>
+      <input matInput placeholder="quantity">
+    </mat-form-field></td>
+    <td><mat-form-field>
+      <input matInput placeholder="units">
+    </mat-form-field></td>
+  </tr>
+</table>
+<button mat-raised-button color="accent" (click)='incrementIngredients()'>Add Ingredient</button>
+<br> <br>
+
+<button mat-raised-button color="accent" routerLink="/recipes">Cancel</button>
+<button mat-raised-button color="primary" routerLink="/recipes">Submit</button>
+
+
+
 
 
 
