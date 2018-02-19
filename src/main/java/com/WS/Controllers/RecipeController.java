@@ -27,6 +27,10 @@ public class RecipeController {
     private final SocketIOServer server;
     private final IngredientDAO ingredientDAO = new IngredientDAO();
     private final Logger logger = LoggerFactory.getLogger(RecipeController.class);
+
+    public RecipeController() {
+        this.server = null;
+    }
     
     @Autowired
     public RecipeController(SocketIOServer server) {

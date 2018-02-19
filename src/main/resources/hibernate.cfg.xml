@@ -29,7 +29,11 @@ and open the template in the editor.
         </property>
       
         <!-- Add Hibernate Mappings Here -->
-<mapping class ="com.WS.Beans.Ingredient" />
-<mapping class ="com.WS.Beans.Recipe" />
+        <mapping class ="com.WS.Beans.Food" />
+        <mapping class ="com.WS.Beans.Ingredient" />
+        <mapping class ="com.WS.Beans.Recipe" />
+        <mapping class ="com.WS.Beans.Unit" />
+        <mapping class ="com.WS.Beans.Cuisine" />
+        <mapping class ="com.WS.Beans.Ffser" />
     </session-factory>
 </hibernate-configuration>

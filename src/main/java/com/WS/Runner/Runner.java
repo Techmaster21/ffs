@@ -5,6 +5,8 @@
  */
 package com.WS.Runner;
 
+import com.WS.DAOs.IngredientDAO;
+import com.WS.DAOs.RecipeDAO;
 import com.corundumstudio.socketio.SocketIOServer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -27,6 +29,9 @@ public class Runner implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         server.start();
+        IngredientDAO ingredientDAO = new IngredientDAO();
+        RecipeDAO recipeDAO = new RecipeDAO();
+        System.out.println(recipeDAO.getRecipe(1));
         Thread.sleep(Integer.MAX_VALUE);
         server.stop();
     }

@@ -1,5 +1,6 @@
 package com.WS;
 
+import com.WS.DAOs.IngredientDAO;
 import com.WS.DAOs.RecipeDAO;
 import com.corundumstudio.socketio.Configuration;
 import com.corundumstudio.socketio.SocketIOServer;
