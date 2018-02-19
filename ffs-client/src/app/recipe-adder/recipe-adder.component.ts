@@ -7,17 +7,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./recipe-adder.component.css']
 })
 export class RecipeAdderComponent implements OnInit {
-  numIngredients: number;
-  constructor() {
-    this.numIngredients = 0;
+  ingredients = [];
+  addIngredient(newIngredient: string) {
+    if (newIngredient) {
+      this.ingredients.push(newIngredient);
+    }
   }
-
   ngOnInit() {
   }
-
-  incrementIngredients(): void{
-    this.numIngredients++;
-    console.log(this.numIngredients);
-}
 
 }

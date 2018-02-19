@@ -11,25 +11,15 @@ Description: <br>
   </mat-form-field>
 <br>
 
-<table>
-  <tr>
-    <th>Ingredient Name</th>
-    <th>Quantity</th>
-    <th>Units</th>
-  </tr>
-  <tr>
-    <td><mat-form-field>
-      <input matInput placeholder="name">
-    </mat-form-field></td>
-    <td><mat-form-field>
-      <input matInput placeholder="quantity">
-    </mat-form-field></td>
-    <td><mat-form-field>
-      <input matInput placeholder="units">
-    </mat-form-field></td>
-  </tr>
-</table>
-<button mat-raised-button color="accent" (click)='incrementIngredients()'>Add Ingredient</button>
+<ul><li *ngFor="let ingredient of ingredients">{{ingredient}}</li></ul>
+
+<mat-form-field>
+  <input #newIngredient matInput name="ingredient" placeholder="ingredient" (keyup.enter)="addIngredient(newIngredient.value)"
+         (blur)="addIngredient(newIngredient.value); newIngredient.value='' ">
+</mat-form-field>
+
+
+<button mat-raised-button color="accent" (click)='addIngredient(newIngredient.value)'>Add Ingredient</button>
 <br> <br>
 
 <button mat-raised-button color="accent" routerLink="/recipes">Cancel</button>
