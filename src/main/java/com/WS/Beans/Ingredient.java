@@ -5,7 +5,6 @@
  */
 package com.WS.Beans;
 
-import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -23,7 +22,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "ingredients")
-public class Ingredient implements Serializable {
+public class Ingredient {
 
     @Id
     @Column(name = "ingredient_id")
