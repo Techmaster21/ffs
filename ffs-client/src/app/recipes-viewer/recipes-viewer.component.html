@@ -15,27 +15,34 @@
 </table>
 
 
-<div *ngIf="selectedRecipe">
+<mat-card *ngIf="selectedRecipe">
   <h2>{{selectedRecipe.name}} details</h2>
   <p>Description: {{selectedRecipe.description}}</p>
-  <div><table class="table">
-    <tr>
-      <th>Ingredient Name</th>
-      <th>Quantity</th>
-      <th>Units</th>
-    </tr>
-    <tr *ngFor="let ingredient of selectedRecipe.ingredients">
-      <td>
-        {{ingredient.name}}
-      </td>
-      <td>
-        {{ingredient.quantity}}
-      </td>
-      <td>
-        {{ingredient.unit}}
-      </td>
-    </tr>
-  </table></div>
+  <div class="example-container mat-elevation-z8">
+    <mat-table #table [dataSource]="selectedRecipe.ingredients">
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="name">
+      <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+      <mat-cell *matCellDef="let ingredient"> {{ingredient.name}} </mat-cell>
+      </ng-container>
+
+      <!-- Quantity Column -->
+      <ng-container matColumnDef="quantity">
+        <mat-header-cell *matHeaderCellDef> Quantity </mat-header-cell>
+        <mat-cell *matCellDef="let ingredient"> {{ingredient.quantity}} </mat-cell>
+      </ng-container>
+
+      <!-- Units Column -->
+      <ng-container matColumnDef="unit">
+        <mat-header-cell *matHeaderCellDef> Weight </mat-header-cell>
+        <mat-cell *matCellDef="let ingredient"> {{ingredient.unit}} </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+  </div>
 
   <table>
     <tr>
@@ -51,8 +58,6 @@
       </td>
     </tr>
   </table>
-</div>
+</mat-card>
 
-
-<button mat-raised-button color="accent"  routerLink="/home">Home</button>
 <button mat-raised-button color="accent"  routerLink="/addrecipe">Add Recipe</button>

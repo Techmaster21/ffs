@@ -10,6 +10,7 @@ import { Ingredient } from '../ingredient';
 export class RecipesViewerComponent implements OnInit {
   selectedRecipe: Recipe;
   recipes: Recipe[] = [];
+  displayedColumns = ['name', 'quantity', 'unit'];
   constructor() {
   }
 
