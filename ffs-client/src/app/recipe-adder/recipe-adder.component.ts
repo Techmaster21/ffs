@@ -10,14 +10,25 @@ import {Recipe} from '../recipe';
 })
 export class RecipeAdderComponent implements OnInit {
   ingredients = [];
+  steps = [];
   addIngredient(newIngredient: string, newQuantity: number, newUnits: string) {
     if (newIngredient) {
-      var ingredient: Ingredient;
-      const numQuantity = +newQuantity;
-      ingredient = {name: newIngredient, quantity: numQuantity, unit: newUnits};
+      let ingredient: Ingredient;
+      ingredient = {name: newIngredient, quantity: +newQuantity, unit: newUnits};
       this.ingredients.push(ingredient);
     }
   }
+  addStep(newStep: string) {
+    if (newStep) {
+      this.steps.push(newStep);
+    }
+  }
+  submitRecipe(name: string, description: string) {
+    let recipe: Recipe;
+    recipe = {name: name, description: description, instructions: this.steps, ingredients: this.ingredients};
+    console.log(recipe);
+  }
+
   ngOnInit() {
   }
 

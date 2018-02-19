@@ -2,12 +2,12 @@
 
 <div>Recipe Name:</div>
 <mat-form-field>
-<input matInput name="name" placeholder="name">
+<input #name matInput name="name" placeholder="name">
 </mat-form-field>
 <div>Description:</div>
 <div>
   <mat-form-field>
-    <textarea matInput name="description" placeholder= "description" rows="4" cols="50"></textarea>
+    <textarea #description matInput name="description" placeholder= "description" rows="4" cols="50"></textarea>
   </mat-form-field>
 </div>
 <table>
@@ -52,8 +52,32 @@
   Add Ingredient</button>
 </div> <br>
 
-<button mat-raised-button color="accent" routerLink="/recipes">Cancel</button>
-<button mat-raised-button color="primary" routerLink="/recipes">Submit</button>
+
+<table>
+  <tr>
+    <th>#</th>
+    <th>Step</th>
+  </tr>
+  <tr *ngFor="let step of steps; let i=index">
+    <td>
+      {{i+1}}
+    </td>
+    <td>
+      {{step}}
+    </td>
+  </tr>
+</table>
+
+<div>
+  <mat-form-field>
+    <textarea #newStep matInput name="step" placeholder= "step" rows="4" cols="50"></textarea>
+  </mat-form-field>
+  <button mat-raised-button color="accent" (click)="addStep(newStep.value); newStep.value=''" >
+    Add Step</button>
+</div>
+
+<button mat-raised-button color="accent"  routerLink="/recipes">Cancel</button>
+<button mat-raised-button color="primary" (click)="submitRecipe(name.value,description.value)" routerLink="/recipes">Submit</button>
 
 
 
