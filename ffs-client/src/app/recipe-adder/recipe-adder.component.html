@@ -45,6 +45,13 @@
          (keyup.enter)="addIngredient(newIngredient.value, newIngredientQuantity.value,
          newIngredientUnits.value); newIngredient.value=''; newIngredientQuantity.value='';newIngredientUnits.value='' ">
 </mat-form-field>
+  <select #newIngredientUnits name="Units">
+    <option value="no units">no units</option>
+    <option value="wumbo(s)">wumbo(s)</option>
+    <option value="teaspoon(s)">teaspoon(s)</option>
+    <option value="coulomb(s)">coulomb(s)</option>
+    <option value="cup(s)">cup(s)</option>
+  </select>
 
 
 <button mat-raised-button color="accent" (click)="addIngredient(newIngredient.value, newIngredientQuantity.value,
