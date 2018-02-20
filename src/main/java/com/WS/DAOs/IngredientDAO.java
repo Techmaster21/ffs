@@ -7,6 +7,8 @@ package com.WS.DAOs;
 
 import com.WS.SessionFactoryFactory;
 import com.WS.Beans.Ingredient;
+import com.WS.Beans.Recipe;
+
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -44,4 +46,15 @@ public class IngredientDAO {
         session.getTransaction().commit();
     }
     
+    public void deleteIngredient(int id){
+    	Ingredient i = (Ingredient)this.session.load(Ingredient.class, id);
+    	session.delete(i);
+    	session.flush();
+    }
+    
+    public void updateIngredient(Ingredient ingredient){
+    	int ingredientId = ingredient.getIngredientId();
+    	deleteIngredient(ingredientId);
+    	saveIngredient(ingredient);
+    }
 }
