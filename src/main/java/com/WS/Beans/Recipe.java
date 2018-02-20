@@ -55,11 +55,21 @@ public class Recipe {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "recipe")
     private Set<RecipeStep> steps = new HashSet<>();
     
-    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn (name = "creator_id")
     private Ffser ffser;
     
     public Recipe() {
+    }
+    
+    public Recipe(String recipe_name, String recipe_description, Cuisine cuisine, Time prepTime, Time cookTime, Set<Ingredient> ingredients, Set<RecipeStep> recipeSteps, Ffser ffser) {
+    	this.recipeName = recipe_name;
+    	this.recipeDescription = recipe_description;
+    	this.cuisine = cuisine;
+    	this.prepTime = prepTime;
+    	this.cookTime = cookTime;
+    	this.ingredients = ingredients;
+    	this.steps = recipeSteps;
+    	this.ffser = ffser;
     }
 
     public int getRecipeId() {

@@ -35,8 +35,6 @@ public class Ffser {
     @Column(name="password")
     private String password;
     
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "ffser")
-    private Set<Recipe> recipes = new HashSet<>();
 
     public int getFfser() {
         return ffser;
@@ -69,13 +67,7 @@ public class Ffser {
         return hash;
     }
 
-    public Set<Recipe> getRecipes() {
-        return recipes;
-    }
 
-    public void setRecipes(Set<Recipe> recipes) {
-        this.recipes = recipes;
-    }
 
     @Override
     public boolean equals(Object obj) {

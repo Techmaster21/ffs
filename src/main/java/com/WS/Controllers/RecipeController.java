@@ -5,7 +5,12 @@
  */
 package com.WS.Controllers;
 
+import com.WS.Beans.Cuisine;
+import com.WS.Beans.Ffser;
+import com.WS.Beans.Recipe;
+import com.WS.ClientBeans.ClientFfser;
 import com.WS.ClientBeans.ClientRecipe;
+import com.WS.DAOs.FfserDAO;
 import com.WS.DAOs.RecipeDAO;
 import com.corundumstudio.socketio.AckRequest;
 import com.corundumstudio.socketio.SocketIOClient;
@@ -25,12 +30,13 @@ import org.springframework.stereotype.Component;
 @Component
 public class RecipeController {
 
-    private final SocketIOServer server;
+	private final SocketIOServer server;
     private final RecipeDAO recipeDAO = new RecipeDAO();
+    private final FfserDAO ffserDAO = new FfserDAO();
     private final Logger logger = LoggerFactory.getLogger(RecipeController.class);
 
     public RecipeController() {
-        this.server = null;
+        this.server = null;        
     }
     
     @Autowired
@@ -49,4 +55,11 @@ public class RecipeController {
         List<ClientRecipe> recipe = recipeDAO.getAllRecipes();
         client.sendEvent("getAllRecipes", recipe);
     }
+    
+    @OnEvent(value = "saveRecipe")
+    public void saveRecipe(SocketIOClient client, AckRequest request, Integer data){
+//    	ClientRecipe recipe = recipeDAO.getRecipe(data);
+//    	recipeDAO.saveRecipe(rec);
+    }
+    
 }

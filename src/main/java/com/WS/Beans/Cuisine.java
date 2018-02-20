@@ -12,6 +12,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.WS.ClientBeans.ClientCuisine;
+
 /**
  *
  * @author Eric
@@ -29,6 +31,10 @@ public class Cuisine {
     private String cuisineName;
 
     public Cuisine() {
+    }
+    
+    public Cuisine(ClientCuisine cuisine){
+    	this.cuisineName = cuisine.getCuisineName();
     }
 
     public int getCuisineId() {
