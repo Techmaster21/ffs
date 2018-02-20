@@ -3,6 +3,7 @@ package com.WS;
 import com.WS.DAOs.IngredientDAO;
 import com.WS.DAOs.RecipeDAO;
 import com.corundumstudio.socketio.Configuration;
+import com.corundumstudio.socketio.SocketConfig;
 import com.corundumstudio.socketio.SocketIOServer;
 import com.corundumstudio.socketio.annotation.SpringAnnotationScanner;
 import org.springframework.boot.SpringApplication;
@@ -23,6 +24,9 @@ public class Application {
         Configuration config = new Configuration();
         config.setHostname(host);
         config.setPort(port);
+        SocketConfig sockConfig = new SocketConfig();
+        sockConfig.setReuseAddress(true);
+        config.setSocketConfig(sockConfig);
         return new SocketIOServer(config);
     }
     

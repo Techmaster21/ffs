@@ -13,6 +13,7 @@ import com.corundumstudio.socketio.SocketIOServer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
+import javax.annotation.PreDestroy;
 
 /**
  *
@@ -37,7 +38,10 @@ public class Runner implements CommandLineRunner {
         Unit unit = new Unit();
         unit.setUnitName("ounces");
         unitDAO.saveUnit(unit);
-        Thread.sleep(Integer.MAX_VALUE);
+    }
+
+    @PreDestroy
+    public void destroy() {
         server.stop();
     }
 
