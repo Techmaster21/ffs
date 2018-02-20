@@ -16,6 +16,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.WS.ClientBeans.ClientIngredient;
+
 /**
  *
  * @author Eric
@@ -53,6 +55,13 @@ public class Ingredient {
         this.unit = unit;
         this.quantity = quantity;
         this.recipe = recipe;
+    }
+    
+    public Ingredient(ClientIngredient ingredient){
+    	this.food = new Food(ingredient.getFood());
+    	this.quantity = ingredient.getQuantity();
+    	this.unit = new Unit(ingredient.getUnit());
+    	
     }
 
     public int getIngredientId() {

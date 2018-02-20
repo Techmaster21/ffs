@@ -13,6 +13,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.WS.ClientBeans.ClientFood;
+
 /**
  *
  * @author Eric
@@ -30,6 +32,10 @@ public class Food {
     private String foodName;
 
     public Food() {
+    }
+    
+    public Food(ClientFood food){
+    	this.foodName = food.getName();
     }
 
     public int getFoodId() {
