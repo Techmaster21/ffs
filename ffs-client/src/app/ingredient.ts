@@ -1,6 +1,8 @@
+import { Food } from './food';
+import { Unit } from './unit';
+
 export class Ingredient {
-  name: string;
-  quantity?: number;
-  unit?: string;
-  key?: number;
+  food: Food;
+  unit: Unit;
+  quantity: number;
 }

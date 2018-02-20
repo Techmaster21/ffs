@@ -19,13 +19,13 @@
   </tr>
   <tr *ngFor="let ingredient of ingredients">
     <td>
-      {{ingredient.name}}
+      {{ingredient.food.name}}
     </td>
     <td>
       {{ingredient.quantity}}
     </td>
     <td>
-      {{ingredient.unit}}
+      {{ingredient.unit.name}}
     </td>
   </tr>
 </table>
@@ -34,17 +34,12 @@
 <mat-form-field>
   <input #newIngredient matInput name="ingredient" placeholder="ingredient"
          (keyup.enter)="addIngredient(newIngredient.value, newIngredientQuantity.value,
-         newIngredientUnits.value); newIngredient.value=''; newIngredientQuantity.value='';newIngredientUnits.value='' ">
+         newIngredientUnits.value); newIngredient.value=''; newIngredientQuantity.value='';newIngredientUnits.value='no units' ">
 </mat-form-field>
 <mat-form-field>
   <input #newIngredientQuantity matInput name="quantity" placeholder="quantity"
          (keyup.enter)="addIngredient(newIngredient.value, newIngredientQuantity.value,
-          newIngredientUnits.value); newIngredient.value=''; newIngredientQuantity.value='';newIngredientUnits.value='' ">
-</mat-form-field>
-<mat-form-field>
-  <input #newIngredientUnits matInput name="units" placeholder="units"
-         (keyup.enter)="addIngredient(newIngredient.value, newIngredientQuantity.value,
-         newIngredientUnits.value); newIngredient.value=''; newIngredientQuantity.value='';newIngredientUnits.value='' ">
+          newIngredientUnits.value); newIngredient.value=''; newIngredientQuantity.value='';newIngredientUnits.value='no units' ">
 </mat-form-field>
   <select #newIngredientUnits name="Units">
     <option value="no units">no units</option>
@@ -56,7 +51,7 @@
 
 
 <button mat-raised-button color="accent" (click)="addIngredient(newIngredient.value, newIngredientQuantity.value,
-         newIngredientUnits.value); newIngredient.value=''; newIngredientQuantity.value='';newIngredientUnits.value='' ">
+         newIngredientUnits.value); newIngredient.value=''; newIngredientQuantity.value='';newIngredientUnits.value='no units' ">
   Add Ingredient</button>
 </div> <br>
 
@@ -70,7 +65,7 @@
       {{i+1}}
     </td>
     <td>
-      {{step}}
+      {{step.step}}
     </td>
   </tr>
 </table>

@@ -16,6 +16,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.WS.ClientBeans.ClientRecipeStep;
+
 @Entity
 @Table(name = "recipe_steps")
 public class RecipeStep {
@@ -34,6 +36,11 @@ public class RecipeStep {
 
     public RecipeStep() {
 
+    }
+    
+    public RecipeStep(ClientRecipeStep clientRecipeStep){
+    	this.step = clientRecipeStep.getStep();
+    	//TODO: Recipe id not here
     }
 
     public RecipeStep(ClientRecipeStep step) {

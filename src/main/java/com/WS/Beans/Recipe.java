@@ -20,6 +20,10 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.WS.ClientBeans.ClientIngredient;
+import com.WS.ClientBeans.ClientRecipe;
+import com.WS.ClientBeans.ClientRecipeStep;
+
 /**
  *
  * @author Eric
@@ -69,6 +73,28 @@ public class Recipe {
     	this.cookTime = cookTime;
     	this.ingredients = ingredients;
     	this.steps = recipeSteps;
+    	this.ffser = ffser;
+    }
+    
+    public Recipe(ClientRecipe recipe, Ffser ffser){
+    	Set<Ingredient> ing = new HashSet<>();
+    	Set<ClientIngredient> ci = recipe.getIngredients();
+    	Set<RecipeStep> rs = new HashSet<>();
+    	Set<ClientRecipeStep> crs = recipe.getSteps();
+    	for(ClientIngredient clin : ci){
+    		ing.add(new Ingredient(clin));
+    	}
+    	for(ClientRecipeStep cris : crs){
+    		rs.add(new RecipeStep(cris));
+    	}
+    	
+    	this.recipeName = recipe.getName();
+    	this.recipeDescription = recipe.getDescription();
+    	this.cuisine = new Cuisine(recipe.getCuisine());
+    	this.prepTime = recipe.getPrepTime();
+    	this.cookTime = recipe.getCookTime();
+    	this.ingredients = ing;
+    	this.steps = rs;
     	this.ffser = ffser;
     }
 
