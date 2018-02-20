@@ -3,6 +3,7 @@ import { Observable } from 'rxjs/Observable';
 import { Socket } from 'ng-socket-io';
 
 import { Recipe } from './recipe';
+import { Unit } from './unit';
 import {Ingredient} from './ingredient';
 import {of} from 'rxjs/observable/of';
 
@@ -29,5 +30,9 @@ export class RecipeService {
   getRecipe(key: Number): Observable<Recipe> {
     this.socket.emit('getRecipe', key);
     return this.socket.fromEvent<Recipe>('getRecipe');
+  }
+  getAllUnits(): Observable<Unit[]> {
+    this.socket.emit('getAllUnits');
+    return this.socket.fromEvent<Unit[]>('getAllUnits');
   }
 }
