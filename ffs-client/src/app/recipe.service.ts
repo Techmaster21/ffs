@@ -21,11 +21,11 @@ export class RecipeService {
     return this.socket.emit('editRecipe');
   }
 
-  getAllRecipes() {
+  getAllRecipes(): Observable<Recipe[]> {
     this.socket.emit('getAllRecipes');
-    this.socket.on('getAllRecipes', (t) => {
-    });
+    return this.socket.fromEvent<Recipe[]>('getAllRecipes');
   }
+
   getRecipe(key: Number): Observable<Recipe> {
     this.socket.emit('getRecipe', key);
     return this.socket.fromEvent<Recipe>('getRecipe');

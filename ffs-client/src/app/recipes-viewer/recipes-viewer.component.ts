@@ -11,17 +11,24 @@ import {RecipeService} from '../recipe.service';
 })
 export class RecipesViewerComponent implements OnInit {
   selectedRecipe: Recipe;
-  recipes: Recipe[] = [];
+  recipes: Recipe[];
   displayedColumns = ['name', 'quantity', 'unit'];
   constructor(private recipeService: RecipeService) {
   }
 
   ngOnInit() {
+    this.recipeService.getAllRecipes().subscribe( recipes => {
+        this.recipes = recipes;
+        console.log(recipes);
+      }
+    );
+    /*
     this.recipeService.getRecipe(1);
     const ingredients: Ingredient[] = [];
     ingredients.push({food : {name: 'name'}, unit : {name: 'apple'}, quantity: 2});
     this.recipes.push({name: 'test', ingredients: ingredients, description: 'desc',
-      steps: [ {step: 'blah'}, {step: 'blah'} ]});
+     steps: [ {step: 'blah'}, {step: 'blah'} ]});
+    */
   }
 
   recipeSelect(recipe: Recipe): void {
