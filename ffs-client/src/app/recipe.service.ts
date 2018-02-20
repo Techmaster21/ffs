@@ -4,6 +4,7 @@ import { Socket } from 'ng-socket-io';
 
 import { Recipe } from './recipe';
 import {Ingredient} from './ingredient';
+import {of} from 'rxjs/observable/of';
 
 
 @Injectable()
@@ -25,9 +26,22 @@ export class RecipeService {
     this.socket.on('getAllRecipes', (t) => {
     });
   }
-  getRecipe(key: Number) {
+  getRecipe(key: Number): Observable<Recipe> {
     this.socket.emit('getRecipe', key);
-    this.socket.on('getRecipe', (t) => {
+    return this.listen('getRecipe');
+  }
+
+  listen(event: string): Observable<any> {
+    return new Observable(observer => {
+      this.socket.on(event, (data) => {
+        observer.next(data);
+      });
+
+      // observable is disposed
+      return () => {
+        this.socket.removeAllListeners(event);
+      };
     });
+
   }
 }

@@ -58,8 +58,20 @@ public class RecipeController {
     
     @OnEvent(value = "saveRecipe")
     public void saveRecipe(SocketIOClient client, AckRequest request, Integer data){
-//    	ClientRecipe recipe = recipeDAO.getRecipe(data);
-//    	recipeDAO.saveRecipe(rec);
+    	ClientRecipe recipe = recipeDAO.getRecipe(data);
+    	Recipe rec = new Recipe(recipe, ffserDAO.getFfser(1));
+    	recipeDAO.saveRecipe(rec);
     }
     
+    @OnEvent(value = "deleteRecipe")
+    public void deleteRecipe(SocketIOClient client, AckRequest request, Integer data){
+    	recipeDAO.deleteRecipe(data);
+    }
+    
+    @OnEvent(value = "updateRecipe")
+    public void updateRecipe(SocketIOClient client, AckRequest request, Integer data){
+    	ClientRecipe recipe = recipeDAO.getRecipe(data);
+    	Recipe rec = new Recipe(recipe, ffserDAO.getFfser(1));
+    	recipeDAO.updateRecipe(rec);
+    }
 }
