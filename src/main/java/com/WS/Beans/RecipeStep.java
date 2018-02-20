@@ -43,10 +43,6 @@ public class RecipeStep {
     	//TODO: Recipe id not here
     }
 
-    public RecipeStep(ClientRecipeStep step) {
-        this.step = step.getStep();
-    }
-
     public int getStepId() {
         return stepId;
     }

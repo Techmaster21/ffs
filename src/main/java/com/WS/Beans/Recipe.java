@@ -59,6 +59,7 @@ public class Recipe {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "recipe")
     private Set<RecipeStep> steps = new HashSet<>();
     
+    @ManyToOne
     @JoinColumn (name = "creator_id")
     private Ffser ffser;
     
