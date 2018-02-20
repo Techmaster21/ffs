@@ -45,4 +45,16 @@ public class RecipeDAO {
         });
         return clientRecipes;
     }
+    
+    public void deleteRecipe(int id){
+    	Recipe r = (Recipe)this.session.load(Recipe.class, id);
+    	session.delete(r);
+    	session.flush();
+    }
+    
+    public void updateRecipe(Recipe recipe){
+    	int recipeId = recipe.getRecipeId();
+    	deleteRecipe(recipeId);
+    	saveRecipe(recipe);
+    }
 }

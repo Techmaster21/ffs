@@ -43,4 +43,5 @@ public class IngredientDAO {
         session.flush();
         session.getTransaction().commit();
     }
+    
 }
