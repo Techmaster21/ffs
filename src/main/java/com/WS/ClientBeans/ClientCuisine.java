@@ -13,22 +13,22 @@ import com.WS.Beans.Cuisine;
  */
 public class ClientCuisine {
     
-    String cuisineName;
+    String name;
 
     public ClientCuisine(String cuisineName) {
-        this.cuisineName = cuisineName;
+        this.name = cuisineName;
     }
     
     public ClientCuisine (Cuisine cuisine){
-        this.cuisineName = cuisine.getCuisineName();
+        this.name = cuisine.getCuisineName();
     }
 
-    public String getCuisineName() {
-        return cuisineName;
+    public String getName() {
+        return name;
     }
 
-    public void setCuisineName(String cuisineName) {
-        this.cuisineName = cuisineName;
+    public void setName(String name) {
+        this.name = name;
     }
     
     

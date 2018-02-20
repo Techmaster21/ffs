@@ -7,6 +7,8 @@ package com.WS.DAOs;
 
 import com.WS.Beans.Ffser;
 import com.WS.Beans.Recipe;
+import com.WS.ClientBeans.ClientFfser;
+import com.WS.ClientBeans.ClientRecipe;
 import com.WS.SessionFactoryFactory;
 import java.util.Set;
 import org.hibernate.Session;
@@ -26,7 +28,11 @@ public class FfserDAO {
         session.beginTransaction();
     }
 
-    public Set<Recipe> getAllRecipesByFfser(int id) {
-        return session.get(Ffser.class, id).getRecipes();
+    public Ffser getFfser(int id) {
+        return this.session.get(Ffser.class, id);
     }
+    
+//    public Set<Recipe> getAllRecipesByFfser(int id) {
+//        return session.get(Ffser.class, id).getRecipes();
+//    }
 }

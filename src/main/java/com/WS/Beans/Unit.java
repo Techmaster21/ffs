@@ -5,6 +5,7 @@
  */
 package com.WS.Beans;
 
+import com.WS.ClientBeans.ClientUnit;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -31,6 +32,9 @@ public class Unit {
     public Unit() {
     }
 
+    public Unit(ClientUnit unit) {
+        unitName = unit.getName();
+    }
     public int getUnitId() {
         return unitId;
     }

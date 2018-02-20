@@ -25,7 +25,13 @@ public class UnitDAO {
         session.beginTransaction();
     }
 
-    public List<Unit> getAllFoods() {
+    public List<Unit> getAllUnits() {
         return session.createCriteria(Unit.class).list();
+    }
+    
+    public void saveUnit(Unit unit){
+        session.persist(unit);
+        session.flush();
+        session.getTransaction().commit();
     }
 }

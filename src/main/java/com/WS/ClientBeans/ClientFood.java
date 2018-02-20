@@ -13,22 +13,22 @@ import com.WS.Beans.Food;
  */
 public class ClientFood {
     
-    private String foodName;
+    private String name;
 
     public ClientFood(String foodName) {
-        this.foodName = foodName;
+        this.name = foodName;
     }
     
     public ClientFood(Food food){
-        this.foodName = food.getFoodName();
+        this.name = food.getFoodName();
     }
 
-    public String getFoodName() {
-        return foodName;
+    public String getName() {
+        return name;
     }
 
-    public void setFoodName(String foodName) {
-        this.foodName = foodName;
+    public void setName(String name) {
+        this.name = name;
     }
     
     

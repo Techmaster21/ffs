@@ -18,37 +18,37 @@ import java.util.Set;
  */
 public class ClientRecipe {
 
-    private int recipeId;
-    private String recipeName;
-    private String recipeDescription;
+    private int id;
+    private String name;
+    private String description;
     private ClientCuisine cuisine;
     private Time prepTime;
     private Time cookTime;
     private Set<ClientIngredient> ingredients;
-    private Set<ClientRecipeStep> recipeSteps;
+    private Set<ClientRecipeStep> steps;
     private ClientFfser ffser;
 
     public ClientRecipe(int recipeId, String recipeName, String recipeDescription, ClientCuisine cuisine, Time prepTime, Time cookTime, Set<ClientIngredient> ingredients, Set<ClientRecipeStep> recipeSteps, ClientFfser ffser) {
-        this.recipeId = recipeId;
-        this.recipeName = recipeName;
-        this.recipeDescription = recipeDescription;
+        this.id = recipeId;
+        this.name = recipeName;
+        this.description = recipeDescription;
         this.cuisine = cuisine;
         this.prepTime = prepTime;
         this.cookTime = cookTime;
         this.ingredients = ingredients;
-        this.recipeSteps = recipeSteps;
+        this.steps = recipeSteps;
         this.ffser = ffser;
     }
     
     public ClientRecipe(Recipe recipe) {
-        this.recipeId = recipe.getRecipeId();
-        this.recipeName = recipe.getRecipeName();
-        this.recipeDescription = recipe.getRecipeDescription();
+        this.id = recipe.getRecipeId();
+        this.name = recipe.getRecipeName();
+        this.description = recipe.getRecipeDescription();
         this.cuisine = new ClientCuisine(recipe.getCuisine());
         this.prepTime = recipe.getPrepTime();
         this.cookTime = recipe.getCookTime();
         this.ingredients = getClientIngredients(recipe.getIngredients());
-        this.recipeSteps = getClientRecipeSteps(recipe.getSteps());
+        this.steps = getClientRecipeSteps(recipe.getSteps());
         this.ffser = new ClientFfser(recipe.getFfser());
     }
 
@@ -68,20 +68,20 @@ public class ClientRecipe {
         return set;
     }
 
-    public String getRecipeName() {
-        return recipeName;
+    public String getName() {
+        return name;
     }
 
-    public void setRecipeName(String recipeName) {
-        this.recipeName = recipeName;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getRecipeDescription() {
-        return recipeDescription;
+    public String getDescription() {
+        return description;
     }
 
-    public void setRecipeDescription(String recipeDescription) {
-        this.recipeDescription = recipeDescription;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public Time getPrepTime() {
@@ -108,12 +108,12 @@ public class ClientRecipe {
         this.ingredients = ingredients;
     }
 
-    public int getRecipeId() {
-        return recipeId;
+    public int getId() {
+        return id;
     }
 
-    public void setRecipeId(int recipeId) {
-        this.recipeId = recipeId;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public ClientCuisine getCuisine() {
@@ -124,12 +124,12 @@ public class ClientRecipe {
         this.cuisine = cuisine;
     }
 
-    public Set<ClientRecipeStep> getRecipeSteps() {
-        return recipeSteps;
+    public Set<ClientRecipeStep> getSteps() {
+        return steps;
     }
 
-    public void setRecipeSteps(Set<ClientRecipeStep> recipeSteps) {
-        this.recipeSteps = recipeSteps;
+    public void setSteps(Set<ClientRecipeStep> steps) {
+        this.steps = steps;
     }
 
     
@@ -144,7 +144,7 @@ public class ClientRecipe {
 
     @Override
     public String toString() {
-        return "ClientRecipe{" + "recipeId=" + recipeId + ", recipeName=" + recipeName + ", recipeDescription=" + recipeDescription + ", cuisine=" + cuisine + ", prepTime=" + prepTime + ", cookTime=" + cookTime + ", ingredients=" + ingredients + ", recipeSteps=" + recipeSteps + ", ffser=" + ffser + '}';
+        return "ClientRecipe{" + "recipeId=" + id + ", recipeName=" + name + ", recipeDescription=" + description + ", cuisine=" + cuisine + ", prepTime=" + prepTime + ", cookTime=" + cookTime + ", ingredients=" + ingredients + ", recipeSteps=" + steps + ", ffser=" + ffser + '}';
     }
 
     
