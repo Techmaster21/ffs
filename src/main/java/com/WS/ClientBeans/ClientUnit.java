@@ -13,7 +13,7 @@ import com.WS.Beans.Unit;
  */
 public class ClientUnit {
     
-    private String unitName;
+    private ClientUnit unit;
 
     public ClientUnit(String unitName) {
         this.unitName = unitName;

@@ -19,8 +19,8 @@ public class ClientFfser {
         this.username = username;
     }
 
-    public static ClientFfser fromFfser(Ffser ffser){
-        return new ClientFfser(ffser.getUsername());
+    public ClientFfser (Ffser ffser){
+        this.username = ffser.getUsername();
     } 
 
     public String getUsername() {

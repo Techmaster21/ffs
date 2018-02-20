@@ -18,6 +18,10 @@ public class ClientFood {
     public ClientFood(String foodName) {
         this.foodName = foodName;
     }
+    
+    public ClientFood(Food food){
+        this.foodName = food.getFoodName();
+    }
 
     public static ClientFood fromFood(Food food){
         return new ClientFood(food.getFoodName());

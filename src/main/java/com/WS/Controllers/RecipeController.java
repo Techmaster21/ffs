@@ -11,6 +11,7 @@ import com.corundumstudio.socketio.AckRequest;
 import com.corundumstudio.socketio.SocketIOClient;
 import com.corundumstudio.socketio.SocketIOServer;
 import com.corundumstudio.socketio.annotation.OnEvent;
+import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -43,5 +44,9 @@ public class RecipeController {
         client.sendEvent("getRecipe", recipe);
     }
     
-
+    @OnEvent(value = "getAllRecipes")
+    public void getAllRecipes(SocketIOClient client, AckRequest request, Integer data) {
+        List<ClientRecipe> recipe = recipeDAO.getAllRecipes();
+        client.sendEvent("getAllRecipes", recipe);
+    }
 }

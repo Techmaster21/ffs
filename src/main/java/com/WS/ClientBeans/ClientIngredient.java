@@ -5,6 +5,7 @@
  */
 package com.WS.ClientBeans;
 
+import com.WS.Beans.Food;
 import com.WS.Beans.Ingredient;
 
 /**
@@ -12,34 +13,39 @@ import com.WS.Beans.Ingredient;
  * @author Eric
  */
 public class ClientIngredient {
-    private String foodName;
-    private String unitName;
+    private ClientFood food;
+    private ClientUnit unit;
     private double quantity;
 
-    public ClientIngredient(String foodName, String unitName, double quantity) {
-        this.foodName = foodName;
-        this.unitName = unitName;
-        this.quantity = quantity;
+    public ClientIngredient() {
     }
     
-    public static ClientIngredient fromIngredient(Ingredient ingredient){
-        return new ClientIngredient(ingredient.getFood().getFoodName(),ingredient.getUnit().getUnitName(), ingredient.getQuantity());
+    public ClientIngredient(ClientFood food, ClientUnit unit, double quantity) {
+        this.food = food;
+        this.unit = unit;
+        this.quantity = quantity;
     }
 
-    public String getFoodName() {
-        return foodName;
+    public ClientIngredient (Ingredient ingredient){
+        this.food = new ClientFood(ingredient.getFood());
+        this.unit = new ClientUnit(ingredient.getUnit());
+        this.quantity = ingredient.getQuantity();
     }
 
-    public void setFoodName(String foodName) {
-        this.foodName = foodName;
+    public ClientFood getFood() {
+        return food;
     }
 
-    public String getUnitName() {
-        return unitName;
+    public void setFood(ClientFood food) {
+        this.food = food;
     }
 
-    public void setUnitName(String unitName) {
-        this.unitName = unitName;
+    public ClientUnit getUnit() {
+        return unit;
+    }
+
+    public void setUnit(ClientUnit unit) {
+        this.unit = unit;
     }
 
     public double getQuantity() {
@@ -49,6 +55,6 @@ public class ClientIngredient {
     public void setQuantity(double quantity) {
         this.quantity = quantity;
     }
-    
+
     
 }

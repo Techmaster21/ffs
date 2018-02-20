@@ -26,6 +26,12 @@ public class FoodDAO {
         session.beginTransaction();
     }
     
+    public void saveFood(Food food){
+        session.persist(food);
+        session.flush();
+        session.getTransaction().commit();
+    }
+    
     public List<Food> getAllFoods(){
         return session.createCriteria(Food.class).list();   
     }
