@@ -13,21 +13,21 @@ import com.WS.Beans.Unit;
  */
 public class ClientUnit {
     
-    private String unitName;
+    private String name;
 
     public ClientUnit() {
     }
            
     public ClientUnit(Unit unit) {
-        this.unitName = unit.getUnitName();
+        this.name = unit.getUnitName();
     }
 
-    public String getUnitName() {
-        return unitName;
+    public String getName() {
+        return name;
     }
 
-    public void setUnitName(String unitName) {
-        this.unitName = unitName;
+    public void setName(String name) {
+        this.name = name;
     }
     
     

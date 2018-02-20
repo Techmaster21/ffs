@@ -40,7 +40,6 @@ public class FoodController {
     @OnEvent(value = "saveFood")
     public void getIngredients(SocketIOClient client, AckRequest request, ClientFood data) {
         System.out.println(data);
-        client.sendEvent("saveFood", data);
     }
 
 }

@@ -5,9 +5,10 @@
  */
 package com.WS.Runner;
 
-import com.WS.DAOs.FoodDAO;
+import com.WS.Beans.Unit;
 import com.WS.DAOs.IngredientDAO;
 import com.WS.DAOs.RecipeDAO;
+import com.WS.DAOs.UnitDAO;
 import com.corundumstudio.socketio.SocketIOServer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -32,8 +33,10 @@ public class Runner implements CommandLineRunner {
         server.start();
         IngredientDAO ingredientDAO = new IngredientDAO();
         RecipeDAO recipeDAO = new RecipeDAO();
-        FoodDAO foodDAO = new FoodDAO();
-        System.out.println(recipeDAO.getRecipe(2));
+        UnitDAO unitDAO = new UnitDAO();
+        Unit unit = new Unit();
+        unit.setUnitName("ounces");
+        unitDAO.saveUnit(unit);
         Thread.sleep(Integer.MAX_VALUE);
         server.stop();
     }
