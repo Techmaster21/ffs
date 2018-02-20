@@ -28,20 +28,6 @@ export class RecipeService {
   }
   getRecipe(key: Number): Observable<Recipe> {
     this.socket.emit('getRecipe', key);
-    return this.listen('getRecipe');
-  }
-
-  listen(event: string): Observable<any> {
-    return new Observable(observer => {
-      this.socket.on(event, (data) => {
-        observer.next(data);
-      });
-
-      // observable is disposed
-      return () => {
-        this.socket.removeAllListeners(event);
-      };
-    });
-
+    return this.socket.fromEvent('getRecipe');
   }
 }
