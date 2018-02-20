@@ -23,7 +23,8 @@ export class RecipeService {
 
   getAllRecipes() {
     this.socket.emit('getAllRecipes');
-    this.socket.on('getAllRecipes', (t) => console.log(t));
+    this.socket.on('getAllRecipes', (t) => {
+    });
   }
   getRecipe(key: Number): Observable<Recipe> {
     this.socket.emit('getRecipe', key);
@@ -40,7 +41,6 @@ export class RecipeService {
       return () => {
         this.socket.removeAllListeners(event);
       };
-
     });
 
   }
