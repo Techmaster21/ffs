@@ -5,8 +5,13 @@
  */
 package com.WS.DAOs;
 
+import com.WS.Beans.Recipe;
 import com.WS.Beans.Unit;
+import com.WS.ClientBeans.ClientRecipe;
+import com.WS.ClientBeans.ClientUnit;
 import com.WS.SessionFactoryFactory;
+
+import java.util.ArrayList;
 import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -25,7 +30,7 @@ public class UnitDAO {
         session.beginTransaction();
     }
 
-    public List<Unit> getAllUnits() {
+    public List<ClientUnit> getAllUnits() {
         return session.createCriteria(Unit.class).list();
     }
     
