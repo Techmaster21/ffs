@@ -78,6 +78,14 @@ public class Recipe {
         this.recipeName = recipeName;
     }
 
+    public Set<RecipeStep> getSteps() {
+        return steps;
+    }
+
+    public void setSteps(Set<RecipeStep> steps) {
+        this.steps = steps;
+    }
+
     public String getRecipeDescription() {
         return recipeDescription;
     }
