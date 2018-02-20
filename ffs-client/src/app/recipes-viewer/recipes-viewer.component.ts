@@ -17,12 +17,11 @@ export class RecipesViewerComponent implements OnInit {
   }
 
   ngOnInit() {
-    // this.recipeService.getRecipe(1);
-    this.recipeService.getAllRecipes();
+    this.recipeService.getRecipe(1);
     const ingredients: Ingredient[] = [];
-    ingredients.push({name: 'name', quantity: 2, unit: 'apple'});
-    this.recipes.push({key: 1, name: 'test', description: 'desc', ingredients: ingredients,
-      instructions: ['blah', 'blah']});
+    ingredients.push({food : {name: 'name'}, unit : {name: 'apple'}, quantity: 2});
+    this.recipes.push({name: 'test', ingredients: ingredients, description: 'desc',
+      steps: [ {step: 'blah'}, {step: 'blah'} ]});
   }
 
   recipeSelect(recipe: Recipe): void {

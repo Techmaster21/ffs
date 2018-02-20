@@ -14,18 +14,18 @@ export class RecipeAdderComponent implements OnInit {
   addIngredient(newIngredient: string, newQuantity: number, newUnits: string) {
     if (newIngredient) {
       let ingredient: Ingredient;
-      ingredient = {name: newIngredient, quantity: +newQuantity, unit: newUnits};
+      ingredient = {food: {name: newIngredient}, unit: {name: newUnits}, quantity: +newQuantity};
       this.ingredients.push(ingredient);
     }
   }
   addStep(newStep: string) {
     if (newStep) {
-      this.steps.push(newStep);
+      this.steps.push({step: newStep});
     }
   }
   submitRecipe(name: string, description: string) {
     let recipe: Recipe;
-    recipe = {name: name, description: description, instructions: this.steps, ingredients: this.ingredients};
+    recipe = {name: name, ingredients: this.ingredients, description: description, steps: this.steps };
     console.log(recipe);
   }
 
