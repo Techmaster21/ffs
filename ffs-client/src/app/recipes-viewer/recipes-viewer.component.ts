@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Recipe } from '../recipe';
 import { Ingredient } from '../ingredient';
+import {RecipeService} from '../recipe.service';
+
 
 @Component({
   selector: 'app-recipes-viewer',
@@ -11,10 +13,12 @@ export class RecipesViewerComponent implements OnInit {
   selectedRecipe: Recipe;
   recipes: Recipe[] = [];
   displayedColumns = ['name', 'quantity', 'unit'];
-  constructor() {
+  constructor(private recipeService: RecipeService) {
   }
 
   ngOnInit() {
+    // this.recipeService.getRecipe(1);
+    this.recipeService.getAllRecipes();
     const ingredients: Ingredient[] = [];
     ingredients.push({name: 'name', quantity: 2, unit: 'apple'});
     this.recipes.push({key: 1, name: 'test', description: 'desc', ingredients: ingredients,
