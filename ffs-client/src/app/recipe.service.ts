@@ -28,6 +28,6 @@ export class RecipeService {
   }
   getRecipe(key: Number): Observable<Recipe> {
     this.socket.emit('getRecipe', key);
-    return this.socket.fromEvent('getRecipe');
+    return this.socket.fromEvent<Recipe>('getRecipe');
   }
 }
