@@ -46,8 +46,8 @@
   </div>
   <mat-list>
     <p>Steps</p>
-    <mat-list-item *ngFor="let step of selectedRecipe.instructions; let i=index">
-      {{i + 1}}. {{step}}
+    <mat-list-item *ngFor="let step of selectedRecipe.steps; let i=index">
+      {{i + 1}}. {{step.step}}
     </mat-list-item>
   </mat-list>
 </mat-card>
