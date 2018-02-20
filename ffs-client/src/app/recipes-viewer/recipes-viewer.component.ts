@@ -22,13 +22,6 @@ export class RecipesViewerComponent implements OnInit {
         console.log(recipes);
       }
     );
-    /*
-    this.recipeService.getRecipe(1);
-    const ingredients: Ingredient[] = [];
-    ingredients.push({food : {name: 'name'}, unit : {name: 'apple'}, quantity: 2});
-    this.recipes.push({name: 'test', ingredients: ingredients, description: 'desc',
-     steps: [ {step: 'blah'}, {step: 'blah'} ]});
-    */
   }
 
   recipeSelect(recipe: Recipe): void {

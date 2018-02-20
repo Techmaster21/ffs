@@ -3,6 +3,8 @@
   <tr>
     <th>Recipe Name</th>
     <th>Description</th>
+    <th>Owner</th>
+    <th>Cuisine</th>
   </tr>
   <tr *ngFor="let recipe of recipes" (click)="recipeSelect(recipe)">
     <td>
@@ -10,6 +12,12 @@
     </td>
     <td>
       {{recipe.description}}
+    </td>
+    <td>
+      {{recipe.ffser.username}}
+    </td>
+    <td>
+      {{recipe.cuisine.name}}
     </td>
   </tr>
 </table>
@@ -36,7 +44,7 @@
 
       <!-- Units Column -->
       <ng-container matColumnDef="unit">
-        <mat-header-cell *matHeaderCellDef> Weight </mat-header-cell>
+        <mat-header-cell *matHeaderCellDef> Unit </mat-header-cell>
         <mat-cell *matCellDef="let ingredient"> {{ingredient.unit.name}} </mat-cell>
       </ng-container>
 
