@@ -34,7 +34,7 @@ public class Cuisine {
     }
     
     public Cuisine(ClientCuisine cuisine){
-    	this.cuisineName = cuisine.getCuisineName();
+    	this.cuisineName = cuisine.getName();
     }
 
     public int getCuisineId() {
