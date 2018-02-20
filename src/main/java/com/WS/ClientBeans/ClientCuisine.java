@@ -19,8 +19,8 @@ public class ClientCuisine {
         this.cuisineName = cuisineName;
     }
     
-    public static ClientCuisine fromCuisine(Cuisine cuisine){
-        return new ClientCuisine(cuisine.getCuisineName());
+    public ClientCuisine (Cuisine cuisine){
+        this.cuisineName = cuisine.getCuisineName();
     }
 
     public String getCuisineName() {
