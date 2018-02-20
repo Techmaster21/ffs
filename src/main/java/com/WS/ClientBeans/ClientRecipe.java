@@ -7,6 +7,7 @@ package com.WS.ClientBeans;
 
 import com.WS.Beans.Ingredient;
 import com.WS.Beans.Recipe;
+import com.WS.Beans.RecipeStep;
 import java.sql.Time;
 import java.util.HashSet;
 import java.util.Set;
@@ -17,40 +18,54 @@ import java.util.Set;
  */
 public class ClientRecipe {
 
+    private int recipeId;
     private String recipeName;
     private String recipeDescription;
-    private String cuisine;
+    private ClientCuisine cuisine;
     private Time prepTime;
     private Time cookTime;
-    private Set<ClientIngredient> clientIngredients;
-    private ClientFfser clientFfser;
+    private Set<ClientIngredient> ingredients;
+    private Set<ClientRecipeStep> recipeSteps;
+    private ClientFfser ffser;
 
-    public ClientRecipe(String recipeName, String recipeDescription, String cuisine, Time prepTime, Time cookTime, Set<ClientIngredient> clientIngredients, ClientFfser clientFfser) {
+    public ClientRecipe(int recipeId, String recipeName, String recipeDescription, ClientCuisine cuisine, Time prepTime, Time cookTime, Set<ClientIngredient> ingredients, Set<ClientRecipeStep> recipeSteps, ClientFfser ffser) {
+        this.recipeId = recipeId;
         this.recipeName = recipeName;
         this.recipeDescription = recipeDescription;
         this.cuisine = cuisine;
         this.prepTime = prepTime;
         this.cookTime = cookTime;
-        this.clientIngredients = clientIngredients;
-        this.clientFfser = clientFfser;
+        this.ingredients = ingredients;
+        this.recipeSteps = recipeSteps;
+        this.ffser = ffser;
+    }
+    
+    public ClientRecipe(Recipe recipe) {
+        this.recipeId = recipe.getRecipeId();
+        this.recipeName = recipe.getRecipeName();
+        this.recipeDescription = recipe.getRecipeDescription();
+        this.cuisine = new ClientCuisine(recipe.getCuisine());
+        this.prepTime = recipe.getPrepTime();
+        this.cookTime = recipe.getCookTime();
+        this.ingredients = getClientIngredients(recipe.getIngredients());
+        this.recipeSteps = getClientRecipeSteps(recipe.getSteps());
+        this.ffser = new ClientFfser(recipe.getFfser());
     }
 
-    private static Set<ClientIngredient> getClientIngredients(Set<Ingredient> ingredients){
+    private static Set<ClientIngredient> getClientIngredients(Set<Ingredient> ingredients) {
         Set<ClientIngredient> set = new HashSet<>();
         ingredients.forEach((ingredient) -> {
-            set.add(ClientIngredient.fromIngredient(ingredient));
+            set.add(new ClientIngredient(ingredient));
         });
         return set;
     }
-    
-    public static ClientRecipe fromRecipe(Recipe recipe){
-        return new ClientRecipe(recipe.getRecipeName(), recipe.getRecipeDescription(), recipe.getCuisine().getCuisineName(), recipe.getPrepTime(), recipe.getCookTime(), 
-                getClientIngredients(recipe.getIngredients()), ClientFfser.fromFfser(recipe.getFfser()));
-    }
 
-    @Override
-    public String toString() {
-        return "ClientRecipe{" + "recipeName=" + recipeName + ", recipeDescription=" + recipeDescription + ", cuisine=" + cuisine + ", prepTime=" + prepTime + ", cookTime=" + cookTime + ", clientIngredients=" + clientIngredients + ", clientFfser=" + clientFfser + '}';
+    static Set<ClientRecipeStep> getClientRecipeSteps(Set<RecipeStep> steps) {
+        Set<ClientRecipeStep> set = new HashSet<>();
+        steps.forEach((step) -> {
+            set.add(new ClientRecipeStep(step));
+        });
+        return set;
     }
 
     public String getRecipeName() {
@@ -69,14 +84,6 @@ public class ClientRecipe {
         this.recipeDescription = recipeDescription;
     }
 
-    public String getCuisine() {
-        return cuisine;
-    }
-
-    public void setCuisine(String cuisine) {
-        this.cuisine = cuisine;
-    }
-
     public Time getPrepTime() {
         return prepTime;
     }
@@ -93,21 +100,51 @@ public class ClientRecipe {
         this.cookTime = cookTime;
     }
 
-    public Set<ClientIngredient> getClientIngredients() {
-        return clientIngredients;
+    public Set<ClientIngredient> getIngredients() {
+        return ingredients;
     }
 
-    public void setClientIngredients(Set<ClientIngredient> clientIngredients) {
-        this.clientIngredients = clientIngredients;
+    public void setIngredients(Set<ClientIngredient> ingredients) {
+        this.ingredients = ingredients;
     }
 
-    public ClientFfser getClientFfser() {
-        return clientFfser;
+    public int getRecipeId() {
+        return recipeId;
     }
 
-    public void setClientFfser(ClientFfser clientFfser) {
-        this.clientFfser = clientFfser;
+    public void setRecipeId(int recipeId) {
+        this.recipeId = recipeId;
     }
+
+    public ClientCuisine getCuisine() {
+        return cuisine;
+    }
+
+    public void setCuisine(ClientCuisine cuisine) {
+        this.cuisine = cuisine;
+    }
+
+    public Set<ClientRecipeStep> getRecipeSteps() {
+        return recipeSteps;
+    }
+
+    public void setRecipeSteps(Set<ClientRecipeStep> recipeSteps) {
+        this.recipeSteps = recipeSteps;
+    }
+
     
-    
+
+    public ClientFfser getFfser() {
+        return ffser;
+    }
+
+    public void setFfser(ClientFfser ffser) {
+        this.ffser = ffser;
+    }
+
+    @Override
+    public String toString() {
+        return "ClientRecipe{" + "recipeName=" + recipeName + ", recipeDescription=" + recipeDescription + ", cuisine=" + cuisine + ", prepTime=" + prepTime + ", cookTime=" + cookTime + ", ingredients=" + ingredients + ", recipSteps=" + recipSteps + ", ffser=" + ffser + '}';
+    }
+
 }

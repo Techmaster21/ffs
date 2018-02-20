@@ -13,14 +13,13 @@ import com.WS.Beans.Unit;
  */
 public class ClientUnit {
     
-    private ClientUnit unit;
+    private String unitName;
 
-    public ClientUnit(String unitName) {
-        this.unitName = unitName;
+    public ClientUnit() {
     }
-    
-    public ClientUnit fromUnit(Unit unit){
-        return new ClientUnit(unit.getUnitName());
+           
+    public ClientUnit(Unit unit) {
+        this.unitName = unit.getUnitName();
     }
 
     public String getUnitName() {
