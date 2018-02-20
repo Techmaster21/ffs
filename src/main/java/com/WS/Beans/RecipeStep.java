@@ -5,6 +5,7 @@
  */
 package com.WS.Beans;
 
+import com.WS.ClientBeans.ClientRecipeStep;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -23,49 +24,53 @@ public class RecipeStep {
     @Column(name = "step_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int stepId;
-    
+
     @Column(name = "step")
     private String step;
-    
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "recipe_id", nullable = false)
     private Recipe recipe;
-	
-    public RecipeStep(){
-    	
+
+    public RecipeStep() {
+
     }
 
-	public int getStepId() {
-		return stepId;
-	}
+    public RecipeStep(ClientRecipeStep step) {
+        this.step = step.getStep();
+    }
 
-	public void setStepId(int stepId) {
-		this.stepId = stepId;
-	}
+    public int getStepId() {
+        return stepId;
+    }
 
-	public String getStep() {
-		return step;
-	}
+    public void setStepId(int stepId) {
+        this.stepId = stepId;
+    }
 
-	public void setStep(String step) {
-		this.step = step;
-	}
+    public String getStep() {
+        return step;
+    }
 
-	public Recipe getRecipe() {
-		return recipe;
-	}
+    public void setStep(String step) {
+        this.step = step;
+    }
 
-	public void setRecipe(Recipe recipe) {
-		this.recipe = recipe;
-	}
-	
+    public Recipe getRecipe() {
+        return recipe;
+    }
+
+    public void setRecipe(Recipe recipe) {
+        this.recipe = recipe;
+    }
+
     @Override
     public int hashCode() {
         int hash = 5;
         hash = 37 * hash + this.stepId;
         return hash;
     }
-    
+
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -83,7 +88,7 @@ public class RecipeStep {
         }
         return true;
     }
-    
+
     @Override
     public String toString() {
         return "RecipeStep{" + "stepId=" + stepId + ", step=" + step + '}';
