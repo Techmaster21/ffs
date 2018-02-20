@@ -34,14 +34,14 @@ public class RecipeDAO {
     }
     
     public ClientRecipe getRecipe(int id) {
-        return ClientRecipe.fromRecipe(this.session.get(Recipe.class, id));
+        return new ClientRecipe(this.session.get(Recipe.class, id));
     }
 
     public List<ClientRecipe> getAllRecipes(){
         List<Recipe> recipes = session.createCriteria(Recipe.class).list();
         List<ClientRecipe> clientRecipes = new ArrayList<>();
         recipes.forEach(recipe -> {
-            clientRecipes.add(ClientRecipe.fromRecipe(recipe));
+            clientRecipes.add( new ClientRecipe(recipe));
         });
         return clientRecipes;
     }
