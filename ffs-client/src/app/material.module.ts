@@ -1,6 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {MatButtonModule, MatCardModule, MatCheckboxModule, MatInputModule, MatToolbarModule} from '@angular/material';
+import {
+  MatButtonModule, MatCardModule, MatCheckboxModule, MatInputModule, MatListModule,
+  MatToolbarModule
+} from '@angular/material';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatTableModule} from '@angular/material/table';
@@ -15,7 +18,8 @@ import {MatTableModule} from '@angular/material/table';
     BrowserAnimationsModule,
     MatTableModule,
     MatCardModule,
-    MatToolbarModule
+    MatToolbarModule,
+    MatListModule
   ],
   exports: [
     MatButtonModule,
@@ -26,7 +30,8 @@ import {MatTableModule} from '@angular/material/table';
     BrowserAnimationsModule,
     MatTableModule,
     MatCardModule,
-    MatToolbarModule
+    MatToolbarModule,
+    MatListModule
   ],
 })
 export class MaterialModule { }

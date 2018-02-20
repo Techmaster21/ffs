@@ -19,6 +19,7 @@
   <h2>{{selectedRecipe.name}} details</h2>
   <p>Description: {{selectedRecipe.description}}</p>
   <div class="example-container mat-elevation-z8">
+    <p>Ingredients </p>
     <mat-table #table [dataSource]="selectedRecipe.ingredients">
 
       <!-- Name Column -->
@@ -44,20 +45,12 @@
     </mat-table>
   </div>
 
-  <table>
-    <tr>
-      <th>#</th>
-      <th>Step</th>
-    </tr>
-    <tr *ngFor="let step of selectedRecipe.instructions; let i=index">
-      <td>
-        {{i+1}}
-      </td>
-      <td>
-        {{step}}
-      </td>
-    </tr>
-  </table>
+  <mat-list>
+    <p>Steps</p>
+    <mat-list-item *ngFor="let step of selectedRecipe.instructions; let i=index">
+      {{i + 1}}. {{step}}
+    </mat-list-item>
+  </mat-list>
 </mat-card>
 
 <button mat-raised-button color="accent"  routerLink="/addrecipe">Add Recipe</button>
