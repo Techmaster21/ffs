@@ -7,7 +7,6 @@ package com.WS.DAOs;
 
 import com.WS.SessionFactoryFactory;
 import com.WS.Beans.Ingredient;
-import com.WS.Beans.Recipe;
 
 import org.hibernate.Criteria;
 import org.hibernate.Session;
