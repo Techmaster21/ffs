@@ -144,7 +144,9 @@ public class ClientRecipe {
 
     @Override
     public String toString() {
-        return "ClientRecipe{" + "recipeName=" + recipeName + ", recipeDescription=" + recipeDescription + ", cuisine=" + cuisine + ", prepTime=" + prepTime + ", cookTime=" + cookTime + ", ingredients=" + ingredients + ", recipSteps=" + recipSteps + ", ffser=" + ffser + '}';
+        return "ClientRecipe{" + "recipeId=" + recipeId + ", recipeName=" + recipeName + ", recipeDescription=" + recipeDescription + ", cuisine=" + cuisine + ", prepTime=" + prepTime + ", cookTime=" + cookTime + ", ingredients=" + ingredients + ", recipeSteps=" + recipeSteps + ", ffser=" + ffser + '}';
     }
+
+    
 
 }
