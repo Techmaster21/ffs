@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.WS.Beans;
+package com.WS.Entity;
 
+import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,51 +13,30 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import com.WS.ClientBeans.ClientCuisine;
-
 /**
  *
  * @author Eric
  */
 @Entity
-@Table(name = "cuisines")
-public class Cuisine {
+@Table(name = "foods")
+public class Food {
     
     @Id
-    @Column(name = "cuisine_id")
+    @Column(name = "food_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int cuisineId;
+    private int id;
     
-    @Column(name = "cuisine_name")
-    private String cuisineName;
+    @Column(name = "food_name")
+    private String name;
 
-    public Cuisine() {
-    }
-    
-    public Cuisine(ClientCuisine cuisine){
-    	this.cuisineName = cuisine.getName();
-    }
-
-    public int getCuisineId() {
-        return cuisineId;
-    }
-
-    public void setCuisineId(int cuisineId) {
-        this.cuisineId = cuisineId;
-    }
-
-    public String getCuisineName() {
-        return cuisineName;
-    }
-
-    public void setCuisineName(String cuisineName) {
-        this.cuisineName = cuisineName;
+    public Food() {
     }
 
     @Override
     public int hashCode() {
         int hash = 5;
-        hash = 37 * hash + this.cuisineId;
+        hash = 97 * hash + this.id;
+        hash = 97 * hash + Objects.hashCode(this.name);
         return hash;
     }
 
@@ -71,8 +51,8 @@ public class Cuisine {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final Cuisine other = (Cuisine) obj;
-        if (this.cuisineId != other.cuisineId) {
+        final Food other = (Food) obj;
+        if (this.id != other.id) {
             return false;
         }
         return true;
@@ -80,8 +60,24 @@ public class Cuisine {
 
     @Override
     public String toString() {
-        return "Cuisine{" + "cuisineId=" + cuisineId + ", cuisineName=" + cuisineName + '}';
+        return "Food{" + "foodId=" + id + ", foodName=" + name + '}';
     }
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
     
     
 }

@@ -3,64 +3,71 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.WS.Beans;
+package com.WS.Entity;
 
-import java.util.Objects;
+import java.util.HashSet;
+import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
-
-import com.WS.ClientBeans.ClientFood;
 
 /**
  *
  * @author Eric
  */
 @Entity
-@Table(name = "foods")
-public class Food {
+@Table(name = "ffsers")
+public class Ffser {
     
     @Id
-    @Column(name = "food_id")
+    @Column(name = "ffser_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int foodId;
+    private int ffser;
     
-    @Column(name = "food_name")
-    private String foodName;
-
-    public Food() {
-    }
+    @Column(name="username")
+    private String username;
     
-    public Food(ClientFood food){
-    	this.foodName = food.getName();
+    @Column(name="password")
+    private String password;
+    
+
+    public int getFfser() {
+        return ffser;
     }
 
-    public int getFoodId() {
-        return foodId;
+    public void setFfser(int ffser) {
+        this.ffser = ffser;
     }
 
-    public void setFoodId(int foodId) {
-        this.foodId = foodId;
+    public String getUsername() {
+        return username;
     }
 
-    public String getFoodName() {
-        return foodName;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    public void setFoodName(String foodName) {
-        this.foodName = foodName;
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 97 * hash + this.foodId;
-        hash = 97 * hash + Objects.hashCode(this.foodName);
+        int hash = 3;
+        hash = 29 * hash + this.ffser;
         return hash;
     }
+
+
 
     @Override
     public boolean equals(Object obj) {
@@ -73,8 +80,8 @@ public class Food {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final Food other = (Food) obj;
-        if (this.foodId != other.foodId) {
+        final Ffser other = (Ffser) obj;
+        if (this.ffser != other.ffser) {
             return false;
         }
         return true;
@@ -82,8 +89,7 @@ public class Food {
 
     @Override
     public String toString() {
-        return "Food{" + "foodId=" + foodId + ", foodName=" + foodName + '}';
+        return "Ffser{" + "ffser=" + ffser + ", username=" + username + '}';
     }
-    
     
 }

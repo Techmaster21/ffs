@@ -5,17 +5,17 @@
  */
 package com.WS.Controllers;
 
-import com.WS.Beans.Ingredient;
-import com.WS.ClientBeans.ClientFood;
-import com.WS.DAOs.FoodDAO;
-import com.corundumstudio.socketio.AckRequest;
-import com.corundumstudio.socketio.SocketIOClient;
-import com.corundumstudio.socketio.SocketIOServer;
-import com.corundumstudio.socketio.annotation.OnEvent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import com.WS.Entity.Food;
+import com.WS.Repository.FoodRepository;
+import com.corundumstudio.socketio.AckRequest;
+import com.corundumstudio.socketio.SocketIOClient;
+import com.corundumstudio.socketio.SocketIOServer;
+import com.corundumstudio.socketio.annotation.OnEvent;
 
 /**
  *
@@ -23,9 +23,11 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class FoodController {
+	
+	@Autowired
+	private FoodRepository foodRepository;
 
     private final SocketIOServer server;
-    private final FoodDAO foodDAO = new FoodDAO();
     private final Logger logger = LoggerFactory.getLogger(RecipeController.class);
 
     public FoodController() {
@@ -38,7 +40,7 @@ public class FoodController {
     }
 
     @OnEvent(value = "saveFood")
-    public void getIngredients(SocketIOClient client, AckRequest request, ClientFood data) {
+    public void getIngredients(SocketIOClient client, AckRequest request, Food data) {
         System.out.println(data);
     }
 

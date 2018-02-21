@@ -19,14 +19,12 @@ export class RecipesViewerComponent implements OnInit {
   ngOnInit() {
     this.recipeService.getAllRecipes().subscribe( recipes => {
         this.recipes = recipes;
-        console.log(recipes);
       }
     );
   }
 
   recipeSelect(recipe: Recipe): void {
     this.selectedRecipe = recipe;
-    console.log(this.selectedRecipe);
   }
 
 }

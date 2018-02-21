@@ -3,9 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.WS.Beans;
+package com.WS.Entity;
 
-import com.WS.ClientBeans.ClientUnit;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -24,37 +23,18 @@ public class Unit {
     @Id
     @Column(name = "unit_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int unitId;
+    private int id;
     
     @Column(name = "unit_name")
-    private String unitName;
+    private String name;
 
     public Unit() {
-    }
-
-    public Unit(ClientUnit unit) {
-        unitName = unit.getName();
-    }
-    public int getUnitId() {
-        return unitId;
-    }
-
-    public void setUnitId(int unitId) {
-        this.unitId = unitId;
-    }
-
-    public String getUnitName() {
-        return unitName;
-    }
-
-    public void setUnitName(String unitName) {
-        this.unitName = unitName;
     }
 
     @Override
     public int hashCode() {
         int hash = 5;
-        hash = 97 * hash + this.unitId;
+        hash = 97 * hash + this.id;
         return hash;
     }
 
@@ -70,7 +50,7 @@ public class Unit {
             return false;
         }
         final Unit other = (Unit) obj;
-        if (this.unitId != other.unitId) {
+        if (this.id != other.id) {
             return false;
         }
         return true;
@@ -78,8 +58,24 @@ public class Unit {
 
     @Override
     public String toString() {
-        return "Unit{" + "unitId=" + unitId + ", unitName=" + unitName + '}';
+        return "Unit{" + "unitId=" + id + ", unitName=" + name + '}';
     }
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
     
     
 }

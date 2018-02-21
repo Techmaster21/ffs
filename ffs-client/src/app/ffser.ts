@@ -1,3 +1,4 @@
 export class FFSer {
-  username: string;
+  username?: string;
+  ffser: number;
 }

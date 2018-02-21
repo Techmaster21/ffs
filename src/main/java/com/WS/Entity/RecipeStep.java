@@ -3,9 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.WS.Beans;
+package com.WS.Entity;
 
-import com.WS.ClientBeans.ClientRecipeStep;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -16,7 +15,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import com.WS.ClientBeans.ClientRecipeStep;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 @Table(name = "recipe_steps")
@@ -25,52 +24,24 @@ public class RecipeStep {
     @Id
     @Column(name = "step_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int stepId;
+    private int id;
 
     @Column(name = "step")
     private String step;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "recipe_id", nullable = false)
+    @JsonBackReference
     private Recipe recipe;
 
     public RecipeStep() {
 
     }
-    
-    public RecipeStep(ClientRecipeStep clientRecipeStep){
-    	this.step = clientRecipeStep.getStep();
-    	//TODO: Recipe id not here
-    }
-
-    public int getStepId() {
-        return stepId;
-    }
-
-    public void setStepId(int stepId) {
-        this.stepId = stepId;
-    }
-
-    public String getStep() {
-        return step;
-    }
-
-    public void setStep(String step) {
-        this.step = step;
-    }
-
-    public Recipe getRecipe() {
-        return recipe;
-    }
-
-    public void setRecipe(Recipe recipe) {
-        this.recipe = recipe;
-    }
 
     @Override
     public int hashCode() {
         int hash = 5;
-        hash = 37 * hash + this.stepId;
+        hash = 37 * hash + this.id;
         return hash;
     }
 
@@ -86,7 +57,7 @@ public class RecipeStep {
             return false;
         }
         final RecipeStep other = (RecipeStep) obj;
-        if (this.stepId != other.stepId) {
+        if (this.id != other.id) {
             return false;
         }
         return true;
@@ -94,6 +65,30 @@ public class RecipeStep {
 
     @Override
     public String toString() {
-        return "RecipeStep{" + "stepId=" + stepId + ", step=" + step + '}';
+        return "RecipeStep{" + "stepId=" + id + ", step=" + step + '}';
     }
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getStep() {
+		return step;
+	}
+
+	public void setStep(String step) {
+		this.step = step;
+	}
+
+	public Recipe getRecipe() {
+		return recipe;
+	}
+
+	public void setRecipe(Recipe recipe) {
+		this.recipe = recipe;
+	}
 }

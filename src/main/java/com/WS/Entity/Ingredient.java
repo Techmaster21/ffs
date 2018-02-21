@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.WS.Beans;
+package com.WS.Entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -16,7 +16,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import com.WS.ClientBeans.ClientIngredient;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 /**
  *
@@ -29,7 +29,7 @@ public class Ingredient {
     @Id
     @Column(name = "ingredient_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int ingredientId;
+    private int id;
 
     @OneToOne
     @JoinColumn(name = "food_id", nullable = false)
@@ -44,71 +44,24 @@ public class Ingredient {
     
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "recipe_id", nullable = false)
+    @JsonBackReference
     private Recipe recipe;
 
     public Ingredient() {
     }
 
     public Ingredient(int ingredientId, Food food, Unit unit, double quantity, Recipe recipe) {
-        this.ingredientId = ingredientId;
+        this.id = ingredientId;
         this.food = food;
         this.unit = unit;
         this.quantity = quantity;
         this.recipe = recipe;
     }
-    
-    public Ingredient(ClientIngredient ingredient){
-    	this.food = new Food(ingredient.getFood());
-    	this.quantity = ingredient.getQuantity();
-    	this.unit = new Unit(ingredient.getUnit());
-    	
-    }
-
-    public int getIngredientId() {
-        return ingredientId;
-    }
-
-    public void setIngredientId(int ingredientId) {
-        this.ingredientId = ingredientId;
-    }
-
-    public Food getFood() {
-        return food;
-    }
-
-    public void setFood(Food food) {
-        this.food = food;
-    }
-
-    public Unit getUnit() {
-        return unit;
-    }
-
-    public void setUnit(Unit unit) {
-        this.unit = unit;
-    }
-
-    public double getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(double quantity) {
-        this.quantity = quantity;
-    }
-
-    public Recipe getRecipe() {
-        return recipe;
-    }
-
-    public void setRecipe(Recipe recipe) {
-        this.recipe = recipe;
-    }
-
     
     @Override
     public int hashCode() {
         int hash = 3;
-        hash = 29 * hash + this.ingredientId;
+        hash = 29 * hash + this.id;
         return hash;
     }
 
@@ -124,7 +77,7 @@ public class Ingredient {
             return false;
         }
         final Ingredient other = (Ingredient) obj;
-        if (this.ingredientId != other.ingredientId) {
+        if (this.id != other.id) {
             return false;
         }
         return true;
@@ -132,7 +85,47 @@ public class Ingredient {
 
     @Override
     public String toString() {
-        return "Ingredient{" + "ingredientId=" + ingredientId + ", food=" + food + '}';
+        return "Ingredient{" + "ingredientId=" + id + ", food=" + food + '}';
     }
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public Food getFood() {
+		return food;
+	}
+
+	public void setFood(Food food) {
+		this.food = food;
+	}
+
+	public Unit getUnit() {
+		return unit;
+	}
+
+	public void setUnit(Unit unit) {
+		this.unit = unit;
+	}
+
+	public double getQuantity() {
+		return quantity;
+	}
+
+	public void setQuantity(double quantity) {
+		this.quantity = quantity;
+	}
+
+	public Recipe getRecipe() {
+		return recipe;
+	}
+
+	public void setRecipe(Recipe recipe) {
+		this.recipe = recipe;
+	}
     
 }

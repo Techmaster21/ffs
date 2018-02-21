@@ -3,17 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.WS.Beans;
+package com.WS.Entity;
 
-import java.util.HashSet;
-import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -21,53 +17,42 @@ import javax.persistence.Table;
  * @author Eric
  */
 @Entity
-@Table(name = "ffsers")
-public class Ffser {
+@Table(name = "cuisines")
+public class Cuisine {
     
     @Id
-    @Column(name = "ffser_id")
+    @Column(name = "cuisine_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int ffser;
+    private int id;
     
-    @Column(name="username")
-    private String username;
-    
-    @Column(name="password")
-    private String password;
-    
+    @Column(name = "cuisine_name")
+    private String name;
 
-    public int getFfser() {
-        return ffser;
+    public Cuisine() {
     }
 
-    public void setFfser(int ffser) {
-        this.ffser = ffser;
+    public int getId() {
+        return id;
     }
 
-    public String getUsername() {
-        return username;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public String getName() {
+        return name;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
+    public void setName(String name) {
+        this.name = name;
     }
 
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 29 * hash + this.ffser;
+        int hash = 5;
+        hash = 37 * hash + this.id;
         return hash;
     }
-
-
 
     @Override
     public boolean equals(Object obj) {
@@ -80,8 +65,8 @@ public class Ffser {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final Ffser other = (Ffser) obj;
-        if (this.ffser != other.ffser) {
+        final Cuisine other = (Cuisine) obj;
+        if (this.id != other.id) {
             return false;
         }
         return true;
@@ -89,7 +74,8 @@ public class Ffser {
 
     @Override
     public String toString() {
-        return "Ffser{" + "ffser=" + ffser + ", username=" + username + '}';
+        return "Cuisine{" + "cuisineId=" + id + ", cuisineName=" + name + '}';
     }
+    
     
 }
