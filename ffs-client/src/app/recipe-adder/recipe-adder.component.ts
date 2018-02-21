@@ -4,6 +4,7 @@ import {Recipe} from '../recipe';
 import {RecipeService} from '../recipe.service';
 import { Cuisine} from '../cuisine';
 import {FFSer} from '../ffser';
+import {Unit} from '../unit';
 
 
 @Component({
@@ -14,12 +15,13 @@ import {FFSer} from '../ffser';
 export class RecipeAdderComponent implements OnInit {
   ingredients = [];
   steps = [];
-  constructor(private recipeService: RecipeService) {}
-
+  units: Unit[];
+  constructor(private recipeService: RecipeService) {
+  }
   addIngredient(newIngredient: string, newQuantity: number, newUnits: string) {
     if (newIngredient) {
       let ingredient: Ingredient;
-      ingredient = {food: {name: newIngredient}, unit: {name: newUnits}, quantity: +newQuantity};
+      ingredient = {food: {name: newIngredient}, unit: {unitName: newUnits}, quantity: +newQuantity};
       this.ingredients.push(ingredient);
     }
   }
@@ -39,6 +41,10 @@ export class RecipeAdderComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.recipeService.getAllUnits().subscribe( units => {
+      this.units = units;
+      console.log(units);
+    });
   }
 
 }

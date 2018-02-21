@@ -10,6 +10,9 @@ import com.corundumstudio.socketio.AckRequest;
 import com.corundumstudio.socketio.SocketIOClient;
 import com.corundumstudio.socketio.SocketIOServer;
 import com.corundumstudio.socketio.annotation.OnEvent;
+
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,8 +40,8 @@ public class UnitController {
     /*
     @OnEvent(value = "getAllUnits")
     public void getAllUnits(SocketIOClient client, AckRequest request, Integer data) {
-        Ingredient ingredient = ingredientDAO.getIngredientById(data);
-        client.sendEvent("getIngredient", ingredient);
+        List<ClientUnit> units = unitDAO.getAllUnits();
+        client.sendEvent("getAllUnits", units);
     }
     */
 }
