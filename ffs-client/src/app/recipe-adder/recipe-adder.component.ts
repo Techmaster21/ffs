@@ -31,7 +31,7 @@ export class RecipeAdderComponent implements OnInit {
   addIngredient(newIngredient: string, newQuantity: number, newUnits: string) {
     if (newIngredient) {
       let ingredient: Ingredient;
-      ingredient = {food: {name: newIngredient}, unit: {unitName: newUnits}, quantity: +newQuantity};
+      ingredient = {food: {name: newIngredient}, unit: {name: newUnits}, quantity: +newQuantity};
       this.ingredients.push(ingredient);
       this.dataSource.next(this.ingredients);
       // console.log(this.ingredients);
