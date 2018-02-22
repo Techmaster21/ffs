@@ -58,20 +58,20 @@ public class RecipeController {
 //	    		Ffser f = new Ffser();
 //	    		f.setFfser(3);
 //	    		data.setFfser(f);
-	    	System.out.println(data);
-	    	recipeRepository.save(data);
+    	System.out.println(data);
+    	recipeRepository.save(data);
     }
-    /*
+
     @OnEvent(value = "deleteRecipe")
     public void deleteRecipe(SocketIOClient client, AckRequest request, Integer data){
-    	recipeDAO.deleteRecipe(data);
+    	System.out.println(data);
+    	recipeRepository.delete(data);
     }
     
     @OnEvent(value = "updateRecipe")
-    public void updateRecipe(SocketIOClient client, AckRequest request, Integer data){
-    	ClientRecipe recipe = recipeDAO.getRecipe(data);
-    	Recipe rec = new Recipe(recipe, ffserDAO.getFfser(1));
-    	recipeDAO.updateRecipe(rec);
+    public void updateRecipe(SocketIOClient client, AckRequest request, Recipe data){
+    	recipeRepository.delete(data);
+    	recipeRepository.save(data);
     }
-    */
+
 }
