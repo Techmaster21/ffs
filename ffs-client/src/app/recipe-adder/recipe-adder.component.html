@@ -1,55 +1,72 @@
-
-<h1> Add Recipe </h1>
-
-<div>Recipe Name:</div>
-<mat-form-field>
-<input #name matInput placeholder="name">
-</mat-form-field>
-<div>Description:</div>
-<div>
-  <mat-form-field>
-    <textarea #description matInput placeholder= "description" rows="4" cols="50"></textarea>
+<mat-card>
+  <h1> Add Recipe </h1>
+  <form class="recipe-form">
+  <mat-form-field class="recipe-full-width">
+    <input #name matInput placeholder="Name">
   </mat-form-field>
-</div>
-<table class="table">
-  <tr>
-    <th>Ingredient Name</th>
-    <th>Quantity</th>
-    <th>Units</th>
-  </tr>
-  <tr *ngFor="let ingredient of ingredients">
-    <td>
-      {{ingredient.food.name}}
-    </td>
-    <td>
-      {{ingredient.quantity}}
-    </td>
-    <td>
-      {{ingredient.unit.name}}
-    </td>
-  </tr>
-</table>
+
+  <mat-form-field class="recipe-full-width">
+    <textarea #description matInput placeholder= "Description" rows="4" cols="50"></textarea>
+  </mat-form-field>
+  </form>
+  <div *ngIf="ingredients.data.length > 0">
+    <mat-table #table [dataSource]="dataSource">
+      <!-- Name Column -->
+      <ng-container matColumnDef="name">
+        <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+        <mat-cell *matCellDef="let ingredient"> {{ingredient.food.name}} </mat-cell>
+      </ng-container>
+
+      <!-- Quantity Column -->
+      <ng-container matColumnDef="quantity">
+        <mat-header-cell *matHeaderCellDef> Quantity </mat-header-cell>
+        <mat-cell *matCellDef="let ingredient"> {{ingredient.quantity}} </mat-cell>
+      </ng-container>
+
+      <!-- Units Column -->
+      <ng-container matColumnDef="unit">
+        <mat-header-cell *matHeaderCellDef> Unit </mat-header-cell>
+        <mat-cell *matCellDef="let ingredient"> {{ingredient.unit.name}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="actions">
+        <mat-header-cell *matHeaderCellDef>
+        </mat-header-cell>
+
+        <mat-cell *matCellDef="let row; let i=index;">
+          <button mat-icon-button color="accent" (click)="ingredients.removeIngredient(i)">
+            <mat-icon aria-label="Delete">delete</mat-icon>
+          </button>
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+  </div>
 
 <div>
 <mat-form-field>
-  <input #newIngredient matInput name="ingredient" placeholder="ingredient"
+  <input #newIngredient matInput placeholder="Ingredient"
          (keyup.enter)="addIngredient(newIngredient.value, newIngredientQuantity.value,
          newIngredientUnits.value); newIngredient.value=''; newIngredientQuantity.value='';newIngredientUnits.value='no units' ">
 </mat-form-field>
 <mat-form-field>
-  <input #newIngredientQuantity matInput name="quantity" placeholder="quantity"
+  <input #newIngredientQuantity matInput placeholder="Quantity"
          (keyup.enter)="addIngredient(newIngredient.value, newIngredientQuantity.value,
           newIngredientUnits.value); newIngredient.value=''; newIngredientQuantity.value='';newIngredientUnits.value='no units' ">
 </mat-form-field>
-  <select #newIngredientUnits name="Units">
-    <option *ngFor="let unit of units" value=unit>{{unit.unitName}}</option>
-  </select>
+  <mat-form-field>
+    <mat-select #newIngredientUnits name="Units">
+      <mat-option *ngFor="let unit of units" value=unit>{{unit.unitName}}</mat-option>
+    </mat-select>
+  </mat-form-field>
 
 
 <button mat-raised-button color="accent" (click)="addIngredient(newIngredient.value, newIngredientQuantity.value,
          newIngredientUnits.value); newIngredient.value=''; newIngredientQuantity.value='';newIngredientUnits.value='no units' ">
   Add Ingredient</button>
-</div> <br>
+</div>
 
 <table class="table">
   <tr>
@@ -68,7 +85,7 @@
 
 <div>
   <mat-form-field>
-    <textarea #newStep matInput name="step" placeholder= "step" rows="4" cols="50"></textarea>
+    <textarea #newStep matInput placeholder= "step" rows="4" cols="50"></textarea>
   </mat-form-field>
   <button mat-raised-button color="accent" (click)="addStep(newStep.value); newStep.value=''" >
     Add Step</button>
@@ -76,4 +93,4 @@
 
 <button mat-raised-button color="accent"  routerLink="/recipes">Cancel</button>
 <button mat-raised-button color="primary" (click)="submitRecipe(name.value,description.value)" routerLink="/recipes">Submit</button>
-
+</mat-card>
