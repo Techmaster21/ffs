@@ -21,7 +21,7 @@ import {Observable} from 'rxjs/Observable';
 })
 export class RecipeAdderComponent implements OnInit {
   ingredients = [];
-  dataSource  = new BehaviorSubject<any>(this.ingredients);;
+  dataSource  = new BehaviorSubject<any>(this.ingredients);
   displayedColumns = ['name', 'quantity', 'unit', 'actions'];
   steps = [];
   units: Unit[];

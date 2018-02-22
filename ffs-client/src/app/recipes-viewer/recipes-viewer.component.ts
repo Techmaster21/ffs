@@ -13,6 +13,7 @@ export class RecipesViewerComponent implements OnInit {
   selectedRecipe: Recipe;
   recipes: Recipe[];
   displayedColumns = ['name', 'quantity', 'unit'];
+  displayedRecipeColumns = ['name', 'description', 'user', 'cuisine'];
   constructor(private recipeService: RecipeService) {
   }
 

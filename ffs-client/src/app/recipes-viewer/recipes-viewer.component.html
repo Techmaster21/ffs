@@ -1,26 +1,38 @@
 <h1>Recipes</h1>
-<table class="table" id="selectRecipe">
-  <tr>
-    <th>Recipe Name</th>
-    <th>Description</th>
-    <th>Owner</th>
-    <th>Cuisine</th>
-  </tr>
-  <tr *ngFor="let recipe of recipes" (click)="recipeSelect(recipe)">
-    <td>
-      {{recipe.name}}
-    </td>
-    <td>
-      {{recipe.description}}
-    </td>
-    <td>
-      {{recipe.ffser.username}}
-    </td>
-    <td>
-      {{recipe.cuisine.name}}
-    </td>
-  </tr>
-</table>
+
+<mat-card>
+  <p>Recipes </p>
+  <mat-table #table [dataSource]="recipes">
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="name">
+      <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+      <mat-cell *matCellDef="let recipe"> {{recipe.name}} </mat-cell>
+    </ng-container>
+
+    <!-- Description Column -->
+    <ng-container matColumnDef="description">
+      <mat-header-cell *matHeaderCellDef> Description </mat-header-cell>
+      <mat-cell *matCellDef="let recipe"> {{recipe.description}} </mat-cell>
+    </ng-container>
+
+    <!-- User Column -->
+    <ng-container matColumnDef="user">
+      <mat-header-cell *matHeaderCellDef> User </mat-header-cell>
+      <mat-cell *matCellDef="let recipe"> {{recipe.ffser.name}} </mat-cell>
+    </ng-container>
+
+    <!-- Cuisine Column -->
+    <ng-container matColumnDef="cuisine">
+      <mat-header-cell *matHeaderCellDef> Cuisine </mat-header-cell>
+      <mat-cell *matCellDef="let recipe"> {{recipe.cuisine.name}} </mat-cell>
+    </ng-container>
+
+
+    <mat-header-row *matHeaderRowDef="displayedRecipeColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedRecipeColumns;" (click)="recipeSelect(row)"></mat-row>
+  </mat-table>
+</mat-card>
 
 
 <mat-card *ngIf="selectedRecipe">
@@ -47,6 +59,7 @@
         <mat-header-cell *matHeaderCellDef> Unit </mat-header-cell>
         <mat-cell *matCellDef="let ingredient"> {{ingredient.unit.name}} </mat-cell>
       </ng-container>
+
 
       <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
       <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
