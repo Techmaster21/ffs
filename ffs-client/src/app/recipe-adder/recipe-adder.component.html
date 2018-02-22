@@ -9,7 +9,7 @@
     <textarea #description matInput placeholder= "Description" rows="4" cols="50"></textarea>
   </mat-form-field>
   </form>
-  <div *ngIf="ingredients.data.length > 0">
+  <div *ngIf="ingredients.length > 0">
     <mat-table #table [dataSource]="dataSource">
       <!-- Name Column -->
       <ng-container matColumnDef="name">
@@ -34,7 +34,7 @@
         </mat-header-cell>
 
         <mat-cell *matCellDef="let row; let i=index;">
-          <button mat-icon-button color="accent" (click)="ingredients.removeIngredient(i)">
+          <button mat-icon-button color="accent" (click)="removeIngredient(i)">
             <mat-icon aria-label="Delete">delete</mat-icon>
           </button>
         </mat-cell>
