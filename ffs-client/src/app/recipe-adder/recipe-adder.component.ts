@@ -46,10 +46,10 @@ export class RecipeAdderComponent implements OnInit {
       this.steps.push({step: newStep});
     }
   }
-  submitRecipe(name: string, description: string) {
+  submitRecipe(name: string, strCuisine: string, description: string) {
     let recipe: Recipe;
-    let cuisine: Cuisine = {name: 'Italian', id: 2};
-    let ffser: FFSer = {ffser: 3};
+    const cuisine: Cuisine = {name: strCuisine};
+    const ffser: FFSer = {ffser: 3};
     recipe = {name: name, ingredients: this.ingredients, description: description, steps: this.steps, cuisine: cuisine,
       ffser: ffser};
     console.log(recipe);

@@ -4,7 +4,9 @@
   <mat-form-field class="recipe-full-width">
     <input #name matInput placeholder="Name">
   </mat-form-field>
-
+    <mat-form-field class="recipe-full-width">
+      <input #cuisine matInput placeholder="Cuisine">
+    </mat-form-field>
   <mat-form-field class="recipe-full-width">
     <textarea #description matInput placeholder= "Description" rows="4" cols="50"></textarea>
   </mat-form-field>
@@ -93,5 +95,5 @@
   </div>
 
   <button mat-raised-button color="accent"  routerLink="/recipes">Cancel</button>
-  <button mat-raised-button color="primary" (click)="submitRecipe(name.value,description.value)" routerLink="/recipes">Submit</button>
+  <button mat-raised-button color="primary" (click)="submitRecipe(name.value,cuisine.value,description.value)" routerLink="/recipes">Submit</button>
 </mat-card>
