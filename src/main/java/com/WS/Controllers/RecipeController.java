@@ -12,8 +12,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.WS.Entity.Ffser;
 import com.WS.Entity.Recipe;
+import com.WS.Repository.CuisineRepository;
 import com.WS.Repository.RecipeRepository;
 import com.corundumstudio.socketio.AckRequest;
 import com.corundumstudio.socketio.SocketIOClient;
@@ -29,6 +29,8 @@ public class RecipeController {
 
     @Autowired
     private RecipeRepository recipeRepository;
+    @Autowired
+    private CuisineRepository cuisineRepository;
 
     private final SocketIOServer server;
     private final Logger logger = LoggerFactory.getLogger(RecipeController.class);
@@ -58,8 +60,11 @@ public class RecipeController {
 //	    		Ffser f = new Ffser();
 //	    		f.setFfser(3);
 //	    		data.setFfser(f);
+        if (!cuisineRepository.findByName().isPresent()) {
+            cuisineRepository.save(data.getCuisine());
+        }
         recipeRepository.save(data);
-        System.out.println(data);
+
     }
 
     @OnEvent(value = "deleteRecipe")
