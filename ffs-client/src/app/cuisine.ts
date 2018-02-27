@@ -1,4 +1,6 @@
 export class Cuisine {
-  name: string;
-  id: number;
+  constructor(
+    public name: string,
+    public id?: number
+  ) {}
 }

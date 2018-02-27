@@ -44,7 +44,7 @@ public class Recipe {
     @Column(name = "recipe_description")
     private String description;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "cuisine_id")
     private Cuisine cuisine;
 
@@ -180,5 +180,15 @@ public class Recipe {
     public void setFfser(Ffser ffser) {
         this.ffser = ffser;
     }
+    
+    public void addStep(RecipeStep rs){
+	  rs.setRecipe(this);
+	  this.steps.add(rs);
+	}
+
+	public void addIngredient(Ingredient ing){
+	  ing.setRecipe(this);
+	  this.ingredients.add(ing);
+	}
 
 }
