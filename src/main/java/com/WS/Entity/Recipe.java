@@ -182,12 +182,12 @@ public class Recipe {
         this.ffser = ffser;
     }
     
-    public void addToSteps(RecipeStep rs){
+    public void addStep(RecipeStep rs){
 	  rs.setRecipe(this);
 	  this.steps.add(rs);
 	}
 
-	public void addToIngredients(Ingredient ing){
+	public void addIngredient(Ingredient ing){
 	  ing.setRecipe(this);
 	  this.ingredients.add(ing);
 	}

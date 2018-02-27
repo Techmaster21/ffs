@@ -86,7 +86,8 @@ public class Ingredient {
 
     @Override
     public String toString() {
-        return "Ingredient{" + "ingredientId=" + id + ", food=" + food + '}';
+        return "Ingredient{" + "ingredientId=" + id + ", food=" + food + 
+        		", unit=" + unit + ", quantity=" + quantity + ", recipeId=" + recipe.getId() + '}';
     }
 
 	public int getId() {
