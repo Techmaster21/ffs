@@ -5,6 +5,5 @@
     <button mat-button routerLink="/recipes">Recipes</button>
   </mat-toolbar-row>
 </mat-toolbar>
-<router-outlet *ngIf="loginStatus"></router-outlet>
-<app-login *ngIf="!loginStatus" (loggedIn)="loggedIn($event)"></app-login>
+<router-outlet></router-outlet>
 <app-testing></app-testing>
