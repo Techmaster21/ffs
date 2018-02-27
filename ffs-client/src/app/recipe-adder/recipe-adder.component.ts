@@ -1,10 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import {Ingredient} from '../ingredient';
 import {Recipe} from '../recipe';
 import {RecipeService} from '../recipe.service';
 import { Cuisine} from '../cuisine';
 import {FFSer} from '../ffser';
 import {Unit} from '../unit';
+import {MatTableDataSource, MatPaginator} from '@angular/material';
+import {DataSource} from '@angular/cdk/collections';
+import {of} from 'rxjs/observable/of';
+import {from} from 'rxjs/observable/from';
+import {BehaviorSubject} from 'rxjs/BehaviorSubject';
+import {Subject} from 'rxjs/Subject';
+import {Observable} from 'rxjs/Observable';
 
 
 @Component({
@@ -14,16 +21,25 @@ import {Unit} from '../unit';
 })
 export class RecipeAdderComponent implements OnInit {
   ingredients = [];
+  dataSource  = new BehaviorSubject<any>(this.ingredients);
+  displayedColumns = ['name', 'quantity', 'unit', 'actions'];
   steps = [];
   units: Unit[];
+
   constructor(private recipeService: RecipeService) {
   }
   addIngredient(newIngredient: string, newQuantity: number, newUnits: string) {
     if (newIngredient) {
       let ingredient: Ingredient;
-      ingredient = {food: {name: newIngredient}, unit: {unitName: newUnits}, quantity: +newQuantity};
+      ingredient = {food: {name: newIngredient}, unit: {name: newUnits}, quantity: +newQuantity};
       this.ingredients.push(ingredient);
+      this.dataSource.next(this.ingredients);
+      // console.log(this.ingredients);
     }
+  }
+  removeIngredient(index: number) {
+    this.ingredients.splice(index,1);
+    this.dataSource.next(this.ingredients);
   }
   addStep(newStep: string) {
     if (newStep) {

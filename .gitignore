@@ -21,6 +21,7 @@ ffs-client/node
 *.launch
 .settings/
 *.sublime-workspace
+/.metadata
 
 # IDE - VSCode
 .vscode/*

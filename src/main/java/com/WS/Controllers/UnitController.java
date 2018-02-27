@@ -5,12 +5,6 @@
  */
 package com.WS.Controllers;
 
-import com.WS.Entity.Ingredient;
-import com.corundumstudio.socketio.AckRequest;
-import com.corundumstudio.socketio.SocketIOClient;
-import com.corundumstudio.socketio.SocketIOServer;
-import com.corundumstudio.socketio.annotation.OnEvent;
-
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -18,12 +12,22 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.WS.Entity.Unit;
+import com.WS.Repository.UnitRepository;
+import com.corundumstudio.socketio.AckRequest;
+import com.corundumstudio.socketio.SocketIOClient;
+import com.corundumstudio.socketio.SocketIOServer;
+import com.corundumstudio.socketio.annotation.OnEvent;
+
 /**
  *
  * @author Eric
  */
 @Component
 public class UnitController {
+	
+	@Autowired
+	private UnitRepository unitRepository;
 
     private final SocketIOServer server;
     private final Logger logger = LoggerFactory.getLogger(RecipeController.class);
@@ -37,11 +41,12 @@ public class UnitController {
         this.server = server;
     }
 
-    /*
     @OnEvent(value = "getAllUnits")
     public void getAllUnits(SocketIOClient client, AckRequest request, Integer data) {
-        List<ClientUnit> units = unitDAO.getAllUnits();
+        List<Unit> units = (List<Unit>)unitRepository.findAll();
         client.sendEvent("getAllUnits", units);
     }
-    */
+
+
+
 }
