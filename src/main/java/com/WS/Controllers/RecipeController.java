@@ -27,51 +27,51 @@ import com.corundumstudio.socketio.annotation.OnEvent;
 @Component
 public class RecipeController {
 
-	@Autowired
-	private RecipeRepository recipeRepository;
-	
-	private final SocketIOServer server;
+    @Autowired
+    private RecipeRepository recipeRepository;
+
+    private final SocketIOServer server;
     private final Logger logger = LoggerFactory.getLogger(RecipeController.class);
 
     public RecipeController() {
-        this.server = null;        
+        this.server = null;
     }
-    
+
     @Autowired
     public RecipeController(SocketIOServer server) {
-        this.server = server;  
+        this.server = server;
     }
 
     @OnEvent(value = "getRecipe")
     public void getRecipe(SocketIOClient client, AckRequest request, Integer data) {
         client.sendEvent("getRecipe", recipeRepository.findOne(data));
     }
-    
+
     @OnEvent(value = "getAllRecipes")
     public void getAllRecipes(SocketIOClient client, AckRequest request, Integer data) {
-    		List<Recipe> recipes = (List<Recipe>)recipeRepository.findAll();
+        List<Recipe> recipes = (List<Recipe>) recipeRepository.findAll();
         client.sendEvent("getAllRecipes", recipes);
     }
-    
+
     @OnEvent(value = "saveRecipe")
-    public void saveRecipe(SocketIOClient client, AckRequest request, Recipe data){
+    public void saveRecipe(SocketIOClient client, AckRequest request, Recipe data) {
 //	    		Ffser f = new Ffser();
 //	    		f.setFfser(3);
 //	    		data.setFfser(f);
-    	System.out.println(data);
-    	recipeRepository.save(data);
+        recipeRepository.save(data);
+        System.out.println(data);
     }
 
     @OnEvent(value = "deleteRecipe")
-    public void deleteRecipe(SocketIOClient client, AckRequest request, Integer data){
-    	System.out.println(data);
-    	recipeRepository.delete(data);
+    public void deleteRecipe(SocketIOClient client, AckRequest request, Integer data) {
+        System.out.println(data);
+        recipeRepository.delete(data);
     }
-    
+
     @OnEvent(value = "updateRecipe")
-    public void updateRecipe(SocketIOClient client, AckRequest request, Recipe data){
-    	recipeRepository.delete(data);
-    	recipeRepository.save(data);
+    public void updateRecipe(SocketIOClient client, AckRequest request, Recipe data) {
+        recipeRepository.delete(data);
+        recipeRepository.save(data);
     }
 
 }

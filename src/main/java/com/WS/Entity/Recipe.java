@@ -6,7 +6,6 @@
 package com.WS.Entity;
 
 import java.sql.Time;
-import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -22,6 +21,9 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import java.util.ArrayList;
+import java.util.List;
+import javax.persistence.CascadeType;
 
 /**
  *
@@ -40,42 +42,42 @@ public class Recipe {
     private String name;
 
     @Column(name = "recipe_description")
-    private String description; 
-    
-    @OneToOne
+    private String description;
+
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "cuisine_id")
     private Cuisine cuisine;
-    
+
     @Column(name = "prep_time")
     private Time prepTime;
-    
+
     @Column(name = "cook_time")
     private Time cookTime;
-    
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "recipe")
+
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "recipe")
     @JsonManagedReference
-    private Set<Ingredient> ingredients = new HashSet<>();
-    
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "recipe")
+    private List<Ingredient> ingredients = new ArrayList<>();
+
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "recipe")
     @JsonManagedReference
-    private Set<RecipeStep> steps = new HashSet<>();;
+    private List<RecipeStep> steps = new ArrayList<>();
+    ;
     
     @ManyToOne
-    @JoinColumn (name = "creator_id")
+    @JoinColumn(name = "creator_id")
     private Ffser ffser;
-    
+
     public Recipe() {
     }
-    
-    public Recipe(String recipe_name, String recipe_description, Cuisine cuisine, Time prepTime, Time cookTime, Set<Ingredient> ingredients, Set<RecipeStep> recipeSteps, Ffser ffser) {
-	    	this.name = recipe_name;
-	    	this.description = recipe_description;
-	    	this.cuisine = cuisine;
-	    	this.prepTime = prepTime;
-	    	this.cookTime = cookTime;
-	    	this.ingredients = ingredients;
-	    	this.steps = recipeSteps;
-	    	this.ffser = ffser;
+
+    public Recipe(int id, String name, String description, Cuisine cuisine, Time prepTime, Time cookTime, Ffser ffser) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.cuisine = cuisine;
+        this.prepTime = prepTime;
+        this.cookTime = cookTime;
+        this.ffser = ffser;
     }
 
     @Override
@@ -108,76 +110,86 @@ public class Recipe {
         return "Recipe{" + "recipeId=" + id + ", recipeName=" + name + ", recipeDescription=" + description + ", cuisine=" + cuisine + ", prepTime=" + prepTime + ", cookTime=" + cookTime + ", ingredients=" + ingredients + '}';
     }
 
-	public int getId() {
-		return id;
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public Cuisine getCuisine() {
+        return cuisine;
+    }
+
+    public void setCuisine(Cuisine cuisine) {
+        this.cuisine = cuisine;
+    }
+
+    public Time getPrepTime() {
+        return prepTime;
+    }
+
+    public void setPrepTime(Time prepTime) {
+        this.prepTime = prepTime;
+    }
+
+    public Time getCookTime() {
+        return cookTime;
+    }
+
+    public void setCookTime(Time cookTime) {
+        this.cookTime = cookTime;
+    }
+
+    public List<Ingredient> getIngredients() {
+        return ingredients;
+    }
+
+    public void setIngredients(List<Ingredient> ingredients) {
+        this.ingredients = ingredients;
+    }
+
+    public List<RecipeStep> getSteps() {
+        return steps;
+    }
+
+    public void setSteps(List<RecipeStep> steps) {
+        this.steps = steps;
+    }
+
+    public Ffser getFfser() {
+        return ffser;
+    }
+
+    public void setFfser(Ffser ffser) {
+        this.ffser = ffser;
+    }
+    
+    public void addStep(RecipeStep rs){
+	  rs.setRecipe(this);
+	  this.steps.add(rs);
 	}
 
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
-	public Cuisine getCuisine() {
-		return cuisine;
-	}
-
-	public void setCuisine(Cuisine cuisine) {
-		this.cuisine = cuisine;
-	}
-
-	public Time getPrepTime() {
-		return prepTime;
-	}
-
-	public void setPrepTime(Time prepTime) {
-		this.prepTime = prepTime;
-	}
-
-	public Time getCookTime() {
-		return cookTime;
-	}
-
-	public void setCookTime(Time cookTime) {
-		this.cookTime = cookTime;
-	}
-
-	public Set<Ingredient> getIngredients() {
-		return ingredients;
-	}
-
-	public void setIngredients(Set<Ingredient> ingredients) {
-		this.ingredients = ingredients;
-	}
-
-	public Set<RecipeStep> getSteps() {
-		return steps;
-	}
-
-	public void setSteps(Set<RecipeStep> steps) {
-		this.steps = steps;
-	}
-
-	public Ffser getFfser() {
-		return ffser;
-	}
-
-	public void setFfser(Ffser ffser) {
-		this.ffser = ffser;
+	public void addIngredient(Ingredient ing){
+	  ing.setRecipe(this);
+	  this.ingredients.add(ing);
 	}
 
 }

@@ -28,10 +28,10 @@ export class RecipeAdderComponent implements OnInit {
 
   constructor(private recipeService: RecipeService) {
   }
-  addIngredient(newIngredient: string, newQuantity: number, newUnits: string) {
+  addIngredient(newIngredient: string, newQuantity: number, newUnits: Unit) {
     if (newIngredient) {
       let ingredient: Ingredient;
-      ingredient = {food: {name: newIngredient}, unit: {name: newUnits}, quantity: +newQuantity};
+      ingredient = {food: {name: newIngredient}, unit: newUnits, quantity: +newQuantity};
       this.ingredients.push(ingredient);
       this.dataSource.next(this.ingredients);
       // console.log(this.ingredients);
@@ -59,7 +59,6 @@ export class RecipeAdderComponent implements OnInit {
   ngOnInit() {
     this.recipeService.getAllUnits().subscribe( units => {
       this.units = units;
-      console.log(units);
     });
   }
 
