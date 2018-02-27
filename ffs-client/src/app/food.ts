@@ -1,3 +1,5 @@
 export class Food {
-  name: string;
+  constructor(
+    public name: string
+  ) {}
 }

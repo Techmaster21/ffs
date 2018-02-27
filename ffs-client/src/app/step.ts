@@ -1,3 +1,5 @@
 export class Step {
-  step: string;
+  constructor(
+    public step: string
+  ) {}
 }
