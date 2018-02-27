@@ -1,2 +1,13 @@
-<button mat-button mat-raised-button color="primary" routerLink="/home">Login</button>
-<button mat-button mat-raised-button color="accent" routerLink="/createaccount">Create Account</button>
+<mat-card>
+  <h1> Login </h1>
+  <form class="create-account-form">
+    <mat-form-field class="createaccount-full-width">
+      <input #username matInput placeholder="Username">
+    </mat-form-field>
+    <mat-form-field class="createaccount-full-width">
+      <input #password matInput type="password" name="password" placeholder= "Password">
+    </mat-form-field>
+    <button mat-button color="primary" onclick="createAccount(username.value,password.value)" routerLink="/home">Create Account</button>
+    <button mat-button color="accent" routerLink="/login">Cancel</button>
+  </form>
+</mat-card>

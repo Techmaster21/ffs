@@ -4,6 +4,7 @@ import { Socket } from 'ng-socket-io';
 
 import { Recipe } from './recipe';
 import { Unit } from './unit';
+import {FFSer} from './ffser';
 import {Ingredient} from './ingredient';
 import {of} from 'rxjs/observable/of';
 
@@ -36,5 +37,10 @@ export class RecipeService {
   getAllUnits(): Observable<Unit[]> {
     this.socket.emit('getAllUnits');
     return this.socket.fromEvent<Unit[]>('getAllUnits');
+  }
+
+  createAccount(user: FFSer, password: string ){
+    const userInfo: [FFSer, string] = [user, password];
+    this.socket.emit('createUser', userInfo);
   }
 }

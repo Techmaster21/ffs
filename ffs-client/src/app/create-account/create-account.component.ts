@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {FFSer} from '../ffser';
+import {RecipeService} from '../recipe.service';
 
 @Component({
   selector: 'app-create-account',
@@ -7,9 +9,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CreateAccountComponent implements OnInit {
 
-  constructor() { }
+  constructor(private recipeService: RecipeService) { }
 
   ngOnInit() {
+  }
+  createAccount(username: string, password: string) {
+    let user: FFSer;
+    user = {username: username};
+    this.recipeService.createAccount(user, password);
   }
 
 }
