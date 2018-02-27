@@ -7,4 +7,8 @@ import { Component, Input } from '@angular/core';
 })
 export class AppComponent {
   title = 'app';
+  loginStatus = false;
+  loggedIn(loggedIn: boolean) {
+    this.loginStatus = loggedIn;
+  }
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import {FFSer} from '../ffser';
 import {RecipeService} from '../recipe.service';
 
@@ -18,5 +18,6 @@ export class CreateAccountComponent implements OnInit {
     user = {username: username};
     this.recipeService.createAccount(user, password);
   }
+
 
 }

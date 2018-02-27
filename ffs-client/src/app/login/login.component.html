@@ -1,13 +1,13 @@
 <mat-card>
   <h1> Login </h1>
-  <form class="create-account-form">
+  <form class="create-account-form" (ngSubmit)="login()">
     <mat-form-field class="createaccount-full-width">
       <input #username matInput placeholder="Username">
     </mat-form-field>
     <mat-form-field class="createaccount-full-width">
       <input #password matInput type="password" name="password" placeholder= "Password">
     </mat-form-field>
-    <button mat-button color="primary" onclick="createAccount(username.value,password.value)" routerLink="/home">Create Account</button>
-    <button mat-button color="accent" routerLink="/login">Cancel</button>
+    <button mat-button color="primary" type="submit" routerLink="/home">Login</button>
+    <button mat-button color="accent" type="button" routerLink="/login">Cancel</button>
   </form>
 </mat-card>
