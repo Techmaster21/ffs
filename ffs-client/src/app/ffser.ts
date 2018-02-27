@@ -1,4 +1,6 @@
 export class FFSer {
-  username?: string;
-  ffser?: number;
+  constructor(
+    public ffser: number,
+    public username?: string
+  ) {}
 }

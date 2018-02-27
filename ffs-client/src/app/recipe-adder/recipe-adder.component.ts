@@ -1,18 +1,15 @@
-import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {BehaviorSubject} from 'rxjs/BehaviorSubject';
+import {Router} from '@angular/router';
+
 import {Ingredient} from '../ingredient';
 import {Recipe} from '../recipe';
 import {RecipeService} from '../recipe.service';
 import { Cuisine} from '../cuisine';
 import {FFSer} from '../ffser';
 import {Unit} from '../unit';
-import {MatTableDataSource, MatPaginator} from '@angular/material';
-import {DataSource} from '@angular/cdk/collections';
-import {of} from 'rxjs/observable/of';
-import {from} from 'rxjs/observable/from';
-import {BehaviorSubject} from 'rxjs/BehaviorSubject';
-import {Subject} from 'rxjs/Subject';
-import {Observable} from 'rxjs/Observable';
-
+import {Food} from '../food';
+import {Step} from '../step';
 
 @Component({
   selector: 'app-recipe-adder',
@@ -20,40 +17,40 @@ import {Observable} from 'rxjs/Observable';
   styleUrls: ['./recipe-adder.component.css']
 })
 export class RecipeAdderComponent implements OnInit {
-  ingredients = [];
-  dataSource  = new BehaviorSubject<any>(this.ingredients);
+  dataSource;
   displayedColumns = ['name', 'quantity', 'unit', 'actions'];
-  steps = [];
   units: Unit[];
+  recipe;
+  newIngredient;
+  newStep;
 
-  constructor(private recipeService: RecipeService) {
+  constructor(private router: Router, private recipeService: RecipeService) {
+    this.recipe = new Recipe('', '', [], [], new Cuisine(''));
+    this.newIngredient = new Ingredient(new Food(''), new Unit(''), null);
+    this.newStep = new Step('');
+    this.dataSource = new BehaviorSubject<any>(this.recipe.ingredients);
   }
-  addIngredient(newIngredient: string, newQuantity: number, newUnits: Unit) {
-    if (newIngredient) {
-      let ingredient: Ingredient;
-      ingredient = {food: {name: newIngredient}, unit: newUnits, quantity: +newQuantity};
-      this.ingredients.push(ingredient);
-      this.dataSource.next(this.ingredients);
-      // console.log(this.ingredients);
-    }
+
+  addIngredient() {
+    this.recipe.ingredients.push(this.newIngredient);
+    this.dataSource.next(this.recipe.ingredients);
+    this.newIngredient = new Ingredient(new Food(''), new Unit(''), null);
   }
+
   removeIngredient(index: number) {
-    this.ingredients.splice(index,1);
-    this.dataSource.next(this.ingredients);
+    this.recipe.ingredients.splice(index, 1);
+    this.dataSource.next(this.recipe.ingredients);
   }
-  addStep(newStep: string) {
-    if (newStep) {
-      this.steps.push({step: newStep});
-    }
+
+  addStep() {
+    this.recipe.steps.push(this.newStep);
+    this.newStep = new Step('');
   }
-  submitRecipe(name: string, strCuisine: string, description: string) {
-    let recipe: Recipe;
-    const cuisine: Cuisine = {name: strCuisine};
-    const ffser: FFSer = {ffser: 3};
-    recipe = {name: name, ingredients: this.ingredients, description: description, steps: this.steps, cuisine: cuisine,
-      ffser: ffser};
-    console.log(recipe);
-    this.recipeService.saveRecipe(recipe);
+
+  submitRecipe() {
+    this.recipe.ffser = new FFSer(3);
+    this.recipeService.saveRecipe(this.recipe);
+    this.router.navigate(['/recipes']);
   }
 
   ngOnInit() {
