@@ -1,7 +1,19 @@
+<mat-card>
+  <h1> Create Account </h1>
+  <form class="create-account-form">
+    <mat-form-field class="createaccount-full-width">
+      <input #firstName matInput placeholder= "First Name">
+    </mat-form-field>
+    <mat-form-field class="createaccount-full-width">
+      <input #lastName matInput placeholder= "Last Name">
+    </mat-form-field>
 <mat-form-field class="createaccount-full-width">
-  <input #cuisine matInput placeholder="Username">
+  <input #username matInput placeholder="Username">
 </mat-form-field>
 <mat-form-field class="createaccount-full-width">
-  <textarea #password matInput placeholder= "Password"></textarea>
+  <input #password matInput type="password" name="password" placeholder= "Password">
 </mat-form-field>
-<button mat-button routerLink="/home">Create Account</button>
+<button mat-button color="primary" routerLink="/home">Create Account</button>
+    <button mat-button color="accent" routerLink="/login">Cancel</button>
+  </form>
+</mat-card>
