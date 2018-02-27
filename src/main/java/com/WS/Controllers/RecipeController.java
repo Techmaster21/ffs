@@ -58,7 +58,7 @@ public class RecipeController {
 //	    		Ffser f = new Ffser();
 //	    		f.setFfser(3);
 //	    		data.setFfser(f);
-	    	System.out.println(data);
+	    	System.out.println(data.getSteps());
 	    	recipeRepository.save(data);
     }
     /*
