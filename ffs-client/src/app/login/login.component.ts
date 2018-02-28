@@ -1,4 +1,6 @@
 import { Component, OnInit , Output, EventEmitter} from '@angular/core';
+import {LoginService} from '../login.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -7,13 +9,14 @@ import { Component, OnInit , Output, EventEmitter} from '@angular/core';
 })
 export class LoginComponent implements OnInit {
   @Output() loggedIn = new EventEmitter<boolean>();
-  constructor() { }
+  constructor(private loginService: LoginService, private router: Router) { }
 
   ngOnInit() {
-    this.loggedIn.emit(false);
+    this.loginService.setLoginStatus(false);
   }
 
   login() {
-    this.loggedIn.emit(true);
+   this.loginService.setLoginStatus(true);
+   this.router.navigate(['/home']);
   }
 }

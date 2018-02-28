@@ -15,7 +15,7 @@ import { MaterialModule } from './material.module';
 import {RecipeService} from "./recipe.service";
 import { LoginComponent } from './login/login.component';
 import { CreateAccountComponent } from './create-account/create-account.component';
-
+import {LoginService} from './login.service';
 
 const config: SocketIoConfig = { url: environment.socketUrl, options: {} };
 
@@ -38,7 +38,8 @@ const config: SocketIoConfig = { url: environment.socketUrl, options: {} };
   ],
   providers: [
     ConnectionTestService,
-    RecipeService
+    RecipeService,
+    LoginService
   ],
   bootstrap: [AppComponent]
 })

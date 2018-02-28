@@ -36,10 +36,8 @@
         </ng-container>
 
         <ng-container matColumnDef="actions">
-          <mat-header-cell *matHeaderCellDef>
-          </mat-header-cell>
-
-          <mat-cell *matCellDef="let row; let i=index;">
+          <mat-header-cell *matHeaderCellDef></mat-header-cell>
+          <mat-cell *matCellDef="let i=index;">
             <button mat-icon-button color="accent" (click)="removeIngredient(i)">
               <mat-icon aria-label="Delete">delete</mat-icon>
             </button>

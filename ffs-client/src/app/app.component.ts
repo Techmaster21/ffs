@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import {LoginService} from './login.service';
 
 @Component({
   selector: 'app-root',
@@ -7,8 +8,8 @@ import { Component, Input } from '@angular/core';
 })
 export class AppComponent {
   title = 'app';
-  loginStatus = false;
-  loggedIn(loggedIn: boolean) {
-    this.loginStatus = loggedIn;
+  constructor(private loginService: LoginService) {}
+  getLoginStatus(): boolean {
+    return this.loginService.getLoginStatus();
   }
 }
