@@ -5,12 +5,15 @@
  */
 package com.WS.Controllers;
 
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.WS.Entity.Food;
+import com.WS.Entity.Recipe;
 import com.WS.Repository.FoodRepository;
 import com.corundumstudio.socketio.AckRequest;
 import com.corundumstudio.socketio.SocketIOClient;
@@ -39,9 +42,18 @@ public class FoodController {
         this.server = server;
     }
 
-    @OnEvent(value = "saveFood")
-    public void getIngredients(SocketIOClient client, AckRequest request, Food data) {
-        System.out.println(data);
-    }
+//    @OnEvent(value = "saveFood")
+//    public void getFoods(SocketIOClient client, AckRequest request, Food data) {
+//        System.out.println(data);
+//    }
 
+    @OnEvent(value = "getFoodsByName")
+    public void getFoods(SocketIOClient client, AckRequest request, String data) {
+    	
+    }
+    
+    public void getAllFoods(SocketIOClient client, AckRequest request, Integer data){
+        List<Food> foods = (List<Food>) foodRepository.findAll();
+        client.sendEvent("getAllFoods", foods);
+    }
 }
