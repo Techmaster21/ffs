@@ -1,12 +1,22 @@
 <mat-card>
   <h1> Create Account </h1>
-  <form class="create-account-form">
+  <form  #createAccountForm="ngForm" class="create-account-form">
 <mat-form-field class="createaccount-full-width">
-  <input #username matInput placeholder="Username">
+  <input #username="ngModel" matInput id="username" name="username" [(ngModel)]="userName" placeholder="Username" required>
 </mat-form-field>
 <mat-form-field class="createaccount-full-width">
-  <input #password matInput type="password" name="password" placeholder= "Password">
+  <input #password="ngModel" matInput type="password" id="password" name="password" [(ngModel)]="newPassword" placeholder= "Password" required>
 </mat-form-field>
+    <mat-form-field class="createaccount-full-width">
+      <input #confirmedPassword="ngModel" matInput type="password" id="confirmPassword" name="confirmedPassword" [(ngModel)]="confirmedNewPassword" placeholder="Confirm Password" required>
+      <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
+      <div [hidden]="confirmedPassword.valid || confirmedPassword.pristine" class="alert alert-danger">
+        confirm your password
+      </div>
+      <div [hidden]="matchingPasswords() || confirmedPassword.pristine" class="alert alert-danger">
+        Passwords Do Not Match
+      </div>
+    </mat-form-field>
 <button mat-button color="primary" onclick="createAccount(username.value,password.value)" routerLink="/home">Create Account</button>
     <button mat-button color="accent" routerLink="/login">Cancel</button>
   </form>
