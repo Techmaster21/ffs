@@ -11,11 +11,12 @@ import { RecipesViewerComponent } from './recipes-viewer/recipes-viewer.componen
 import { AppRoutingModule } from './app-routing.module';
 import { environment } from '../environments/environment';
 import { RecipeAdderComponent } from './recipe-adder/recipe-adder.component';
-import { MaterialModule } from './material.module';
-import {RecipeService} from "./recipe.service";
+import { MaterialModule } from './material/material.module';
+import {RecipeService} from './recipe.service';
 import { LoginComponent } from './login/login.component';
 import { CreateAccountComponent } from './create-account/create-account.component';
 import {LoginService} from './login.service';
+import { IngredientsViewerComponent } from './ingredients-viewer/ingredients-viewer.component';
 
 const config: SocketIoConfig = { url: environment.socketUrl, options: {} };
 
@@ -27,7 +28,8 @@ const config: SocketIoConfig = { url: environment.socketUrl, options: {} };
     RecipesViewerComponent,
     RecipeAdderComponent,
     LoginComponent,
-    CreateAccountComponent
+    CreateAccountComponent,
+    IngredientsViewerComponent
   ],
   imports: [
     BrowserModule,

@@ -34,6 +34,11 @@ export class RecipeService {
     return this.socket.fromEvent<Recipe>('saveRecipe');
   }
 
+  deleteRecipe(index: number): Observable<Recipe> {
+    this.socket.emit('deleteRecipe', index);
+    return this.socket.fromEvent<Recipe>('deleteRecipe');
+  }
+
   getAllUnits(): Observable<Unit[]> {
     this.socket.emit('getAllUnits');
     return this.socket.fromEvent<Unit[]>('getAllUnits');

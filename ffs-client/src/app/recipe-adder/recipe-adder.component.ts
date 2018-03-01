@@ -17,29 +17,20 @@ import {Step} from '../step';
   styleUrls: ['./recipe-adder.component.css']
 })
 export class RecipeAdderComponent implements OnInit {
-  dataSource;
-  displayedColumns = ['name', 'quantity', 'unit', 'actions'];
   units: Unit[];
-  recipe;
-  newIngredient;
-  newStep;
+  recipe: Recipe;
+  newIngredient: Ingredient;
+  newStep: Step;
 
   constructor(private router: Router, private recipeService: RecipeService) {
     this.recipe = new Recipe('', '', [], [], new Cuisine(''));
     this.newIngredient = new Ingredient(new Food(''), new Unit(''), null);
     this.newStep = new Step('');
-    this.dataSource = new BehaviorSubject<any>(this.recipe.ingredients);
   }
 
   addIngredient() {
     this.recipe.ingredients.push(this.newIngredient);
-    this.dataSource.next(this.recipe.ingredients);
     this.newIngredient = new Ingredient(new Food(''), new Unit(''), null);
-  }
-
-  removeIngredient(index: number) {
-    this.recipe.ingredients.splice(index, 1);
-    this.dataSource.next(this.recipe.ingredients);
   }
 
   addStep() {

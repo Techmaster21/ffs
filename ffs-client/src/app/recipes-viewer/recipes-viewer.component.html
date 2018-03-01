@@ -2,7 +2,7 @@
 
 <mat-card>
   <p>Recipes </p>
-  <mat-table #table [dataSource]="recipes">
+  <mat-table #table [dataSource]="dataSource">
 
     <!-- Name Column -->
     <ng-container matColumnDef="name">
@@ -28,6 +28,15 @@
       <mat-cell *matCellDef="let recipe"> {{recipe.cuisine.name}} </mat-cell>
     </ng-container>
 
+    <ng-container matColumnDef="actions">
+      <mat-header-cell *matHeaderCellDef></mat-header-cell>
+      <mat-cell *matCellDef="let i=index; let recipe">
+        <button mat-icon-button color="accent" (click)="removeRecipe(recipe)">
+          <mat-icon aria-label="Delete">delete</mat-icon>
+        </button>
+      </mat-cell>
+    </ng-container>
+
 
     <mat-header-row *matHeaderRowDef="displayedRecipeColumns"></mat-header-row>
     <mat-row *matRowDef="let row; columns: displayedRecipeColumns;" (click)="recipeSelect(row)"></mat-row>
@@ -38,33 +47,7 @@
 <mat-card *ngIf="selectedRecipe">
   <h2>{{selectedRecipe.name}} details</h2>
   <p>Description: {{selectedRecipe.description}}</p>
-  <div class="example-container mat-elevation-z8">
-    <p>Ingredients </p>
-    <mat-table #table [dataSource]="selectedRecipe.ingredients">
-
-      <!-- Name Column -->
-      <ng-container matColumnDef="name">
-        <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
-        <mat-cell *matCellDef="let ingredient"> {{ingredient.food.name}} </mat-cell>
-      </ng-container>
-
-      <!-- Quantity Column -->
-      <ng-container matColumnDef="quantity">
-        <mat-header-cell *matHeaderCellDef> Quantity </mat-header-cell>
-        <mat-cell *matCellDef="let ingredient"> {{ingredient.quantity}} </mat-cell>
-      </ng-container>
-
-      <!-- Units Column -->
-      <ng-container matColumnDef="unit">
-        <mat-header-cell *matHeaderCellDef> Unit </mat-header-cell>
-        <mat-cell *matCellDef="let ingredient"> {{ingredient.unit.name}} </mat-cell>
-      </ng-container>
-
-
-      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-    </mat-table>
-  </div>
+  <app-ingredients-viewer [(ingredients)]="selectedRecipe.ingredients" [canEdit]="false"></app-ingredients-viewer>
   <mat-list>
     <p>Steps</p>
     <mat-list-item *ngFor="let step of selectedRecipe.steps; let i=index">
