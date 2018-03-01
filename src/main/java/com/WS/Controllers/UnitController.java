@@ -46,7 +46,20 @@ public class UnitController {
         List<Unit> units = (List<Unit>)unitRepository.findAll();
         client.sendEvent("getAllUnits", units);
     }
-
-
+    
+    @OnEvent(value = "getUnit")
+    public void getUnit(SocketIOClient client, AckRequest request, Integer data){
+    	client.sendEvent("getUnit", unitRepository.findOne(data));
+    }
+    
+    @OnEvent(value = "saveUnit")
+    public void saveUnit(SocketIOClient client, AckRequest request, Unit data){
+    	unitRepository.save(data);
+    }
+    
+    @OnEvent(value = "deleteUnit")
+    public void deleteUnit(SocketIOClient client, AckRequest request, Integer data){
+    	unitRepository.delete(data);
+    }
 
 }

@@ -55,23 +55,12 @@ public class RecipeController {
 
     @OnEvent(value = "saveRecipe")
     public void saveRecipe(SocketIOClient client, AckRequest request, Recipe data) {
-//	    		Ffser f = new Ffser();
-//	    		f.setFfser(3);
-//	    		data.setFfser(f);
         recipeRepository.save(data);
-        System.out.println(data);
     }
 
     @OnEvent(value = "deleteRecipe")
     public void deleteRecipe(SocketIOClient client, AckRequest request, Integer data) {
-        System.out.println(data);
         recipeRepository.delete(data);
-    }
-
-    @OnEvent(value = "updateRecipe")
-    public void updateRecipe(SocketIOClient client, AckRequest request, Recipe data) {
-        recipeRepository.delete(data);
-        recipeRepository.save(data);
     }
 
 }
