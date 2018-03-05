@@ -15,7 +15,7 @@ export class CreateAccountComponent implements OnInit {
 
   ngOnInit() {
   }
-  
+
   createAccount(username: string, password: string) {
     let user: FFSer;
     user = {username: username};
