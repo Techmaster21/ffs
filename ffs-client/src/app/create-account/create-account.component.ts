@@ -8,7 +8,6 @@ import {RecipeService} from '../recipe.service';
   styleUrls: ['./create-account.component.css']
 })
 export class CreateAccountComponent implements OnInit {
-  submitted = false;
   userName = '';
   newPassword = '';
   confirmedNewPassword = '';
@@ -16,13 +15,17 @@ export class CreateAccountComponent implements OnInit {
 
   ngOnInit() {
   }
+  
   createAccount(username: string, password: string) {
     let user: FFSer;
     user = {username: username};
     this.recipeService.createAccount(user, password);
   }
-  matchingPasswords(){
+  matchingPasswords() {
     return this.newPassword === this.confirmedNewPassword;
+  }
+  validSubmission(){
+    return this.matchingPasswords() && this.confirmedNewPassword && this.userName;
   }
 
 }
