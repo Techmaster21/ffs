@@ -1,6 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import {Router} from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
+import { Location } from '@angular/common';
+
 
 import {Ingredient} from '../ingredient';
 import {Recipe} from '../recipe';
@@ -22,7 +25,10 @@ export class RecipeAdderComponent implements OnInit {
   newIngredient: Ingredient;
   newStep: Step;
 
-  constructor(private router: Router, private recipeService: RecipeService) {
+  constructor(private router: Router,
+              private recipeService: RecipeService,
+              private route: ActivatedRoute,
+              private location: Location) {
     this.recipe = new Recipe('', '', [], [], new Cuisine(''));
     this.newIngredient = new Ingredient(new Food(''), new Unit(''), null);
     this.newStep = new Step('');
@@ -41,13 +47,21 @@ export class RecipeAdderComponent implements OnInit {
   submitRecipe() {
     this.recipe.ffser = new FFSer(3);
     this.recipeService.saveRecipe(this.recipe);
-    this.router.navigate(['/recipes']);
+    this.location.back();
+  }
+
+  goBack() {
+    this.location.back();
   }
 
   ngOnInit() {
     this.recipeService.getAllUnits().subscribe( units => {
       this.units = units;
     });
+    const param = this.route.snapshot.paramMap.get('id');
+    if (param) {
+      this.recipeService.getRecipe(+param).subscribe(recipe => this.recipe = recipe);
+    }
   }
 
 }

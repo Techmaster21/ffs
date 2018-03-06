@@ -4,8 +4,6 @@ import { FormsModule } from '@angular/forms';
 import { SocketIoModule, SocketIoConfig } from 'ng-socket-io';
 
 import { AppComponent } from './app.component';
-import { TestingComponent } from './testing/testing.component';
-import { ConnectionTestService } from './connection-test.service';
 import { HomeComponent } from './home/home.component';
 import { RecipesViewerComponent } from './recipes-viewer/recipes-viewer.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -23,7 +21,6 @@ const config: SocketIoConfig = { url: environment.socketUrl, options: {} };
 @NgModule({
   declarations: [
     AppComponent,
-    TestingComponent,
     HomeComponent,
     RecipesViewerComponent,
     RecipeAdderComponent,
@@ -39,7 +36,6 @@ const config: SocketIoConfig = { url: environment.socketUrl, options: {} };
     MaterialModule
   ],
   providers: [
-    ConnectionTestService,
     RecipeService,
     LoginService
   ],
