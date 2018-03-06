@@ -9,10 +9,11 @@ import {CreateAccountComponent} from './create-account/create-account.component'
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
-  { path: 'recipes', component: RecipesViewerComponent},
-  { path: 'addrecipe', component: RecipeAdderComponent},
-  {path: 'login', component: LoginComponent},
-  {path: 'createaccount', component: CreateAccountComponent}
+  { path: 'recipes', component: RecipesViewerComponent },
+  { path: 'addrecipe/:id', component: RecipeAdderComponent },
+  { path: 'addrecipe', component: RecipeAdderComponent },
+  { path: 'login', component: LoginComponent },
+  { path: 'createaccount', component: CreateAccountComponent }
 ];
 
 @NgModule({

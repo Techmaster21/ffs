@@ -6,8 +6,6 @@ import { CalendarModule } from 'angular-calendar';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppComponent } from './app.component';
-import { TestingComponent } from './testing/testing.component';
-import { ConnectionTestService } from './connection-test.service';
 import { HomeComponent } from './home/home.component';
 import { RecipesViewerComponent } from './recipes-viewer/recipes-viewer.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -29,7 +27,6 @@ const config: SocketIoConfig = { url: environment.socketUrl, options: {} };
 @NgModule({
   declarations: [
     AppComponent,
-    TestingComponent,
     HomeComponent,
     RecipesViewerComponent,
     RecipeAdderComponent,
@@ -49,7 +46,6 @@ const config: SocketIoConfig = { url: environment.socketUrl, options: {} };
     BrowserAnimationsModule
   ],
   providers: [
-    ConnectionTestService,
     RecipeService,
     LoginService,
     AccountService
