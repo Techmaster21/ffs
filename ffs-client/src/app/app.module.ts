@@ -2,6 +2,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { SocketIoModule, SocketIoConfig } from 'ng-socket-io';
+import { CalendarModule } from 'angular-calendar';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppComponent } from './app.component';
 import { TestingComponent } from './testing/testing.component';
@@ -16,7 +18,11 @@ import { RecipeService } from './recipe.service';
 import { LoginComponent } from './login/login.component';
 import { CreateAccountComponent } from './create-account/create-account.component';
 import { LoginService } from './login.service';
+import { AccountService } from './account.service';
 import { IngredientsViewerComponent } from './ingredients-viewer/ingredients-viewer.component';
+import { SchedulerComponent } from './scheduler/scheduler.component';
+import { CalendarComponent } from './calendar/calendar.component';
+
 
 const config: SocketIoConfig = { url: environment.socketUrl, options: {} };
 
@@ -29,19 +35,24 @@ const config: SocketIoConfig = { url: environment.socketUrl, options: {} };
     RecipeAdderComponent,
     LoginComponent,
     CreateAccountComponent,
-    IngredientsViewerComponent
+    IngredientsViewerComponent,
+    SchedulerComponent,
+    CalendarComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     AppRoutingModule,
     SocketIoModule.forRoot(config),
-    MaterialModule
+    MaterialModule,
+    CalendarModule.forRoot(),
+    BrowserAnimationsModule
   ],
   providers: [
     ConnectionTestService,
     RecipeService,
-    LoginService
+    LoginService,
+    AccountService
   ],
   bootstrap: [AppComponent]
 })

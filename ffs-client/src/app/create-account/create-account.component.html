@@ -13,7 +13,7 @@
     <div [hidden]="matchingPasswords() || confirmedPassword.pristine" class="alert alert-danger">
       <p class="errorMessage">Passwords Do Not Match</p>
     </div>
-    <button [disabled]="!validSubmission()" mat-button color="primary" onclick="createAccount(username.value,password.value)" routerLink="/home">Create Account</button>
+    <button [disabled]="!validSubmission()" mat-button color="primary" (click)="createAccount(username.value,password.value)" routerLink="/login">Create Account</button>
     <button mat-button color="accent" routerLink="/login">Cancel</button>
   </form>
 </mat-card>
