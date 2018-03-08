@@ -12,7 +12,7 @@ export class RecipesViewerComponent implements OnInit {
   selectedRecipe: Recipe;
   recipes: Array<Recipe>;
   dataSource: BehaviorSubject<any>;
-  displayedRecipeColumns = ['name', 'description', 'user', 'cuisine', 'actions'];
+  displayedRecipeColumns = ['name', 'description', 'user', 'cuisine', 'delete', 'select'];
 
   constructor(private recipeService: RecipeService) {
     this.dataSource = new BehaviorSubject<any>(this.recipes);
