@@ -37,7 +37,6 @@
       </mat-cell>
     </ng-container>
 
-
     <mat-header-row *matHeaderRowDef="displayedRecipeColumns"></mat-header-row>
     <mat-row *matRowDef="let row; columns: displayedRecipeColumns;" (click)="recipeSelect(row)"></mat-row>
   </mat-table>

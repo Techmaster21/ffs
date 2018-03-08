@@ -5,6 +5,7 @@ import { Socket } from 'ng-socket-io';
 import { Recipe } from '../models/recipe';
 import { Unit } from '../models/unit';
 import { FFSer } from '../models/ffser';
+import { Cuisine } from '../models/cuisine';
 
 @Injectable()
 export class RecipeService {
@@ -39,6 +40,12 @@ export class RecipeService {
     this.socket.emit('getAllUnits');
 
     return this.socket.fromEvent<Array<Unit>>('getAllUnits');
+  }
+
+  getAllCuisines(): Observable<Array<Cuisine>> {
+    this.socket.emit('getAllCuisines');
+
+    return this.socket.fromEvent<Array<Cuisine>>('getAllCuisines');
   }
 
   createAccount(user: FFSer, password: string): void {

@@ -4,8 +4,10 @@
     <mat-form-field class="recipe-full-width">
       <input matInput placeholder="Name" [(ngModel)]="recipe.name" name="name">
     </mat-form-field>
-      <mat-form-field class="recipe-full-width">
-        <input matInput placeholder="Cuisine" [(ngModel)]="recipe.cuisine.name" name="cuisine">
+      <mat-form-field>
+        <mat-select placeholder="Cuisine" [(ngModel)]="recipe.cuisine" name="unit">
+          <mat-option *ngFor="let cuisine of cuisines" [value]="cuisine">{{cuisine.name}}</mat-option>
+        </mat-select>
       </mat-form-field>
     <mat-form-field class="recipe-full-width">
       <textarea matInput placeholder="Description" rows="4" cols="50"

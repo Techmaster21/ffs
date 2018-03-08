@@ -25,7 +25,10 @@ import com.corundumstudio.socketio.annotation.OnEvent;
  */
 @Component
 public class CuisineController {
+
+    @Autowired
 	private CuisineRepository cuisineRepository;
+
     private final SocketIOServer server;
     private final Logger logger = LoggerFactory.getLogger(RecipeController.class);
 
