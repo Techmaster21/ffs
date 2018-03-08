@@ -44,7 +44,7 @@ public class Recipe {
     @Column(name = "recipe_description")
     private String description;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     @JoinColumn(name = "cuisine_id")
     private Cuisine cuisine;
 
