@@ -1,22 +1,23 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { HomeComponent } from './home/home.component';
-import { RecipesViewerComponent } from './recipes-viewer/recipes-viewer.component';
-import { RecipeAdderComponent } from './recipe-adder/recipe-adder.component';
-import { LoginComponent } from './login/login.component';
-import { CreateAccountComponent } from './create-account/create-account.component';
-import {CalendarComponent} from './calendar/calendar.component';
+import { HomeComponent } from './components/home/home.component';
+import { RecipesViewerComponent } from './components/recipes-viewer/recipes-viewer.component';
+import { RecipeAdderComponent } from './components/recipe-adder/recipe-adder.component';
+import { LoginComponent } from './components/login/login.component';
+import { CreateAccountComponent } from './components/create-account/create-account.component';
+import { CalendarComponent } from './components/calendar/calendar.component';
+import { RegisterGuard } from './guards/register.guard';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
-  { path: 'home', component: HomeComponent },
-  { path: 'recipes', component: RecipesViewerComponent },
-  { path: 'addrecipe/:id', component: RecipeAdderComponent },
-  { path: 'addrecipe', component: RecipeAdderComponent },
+  { path: 'home', component: HomeComponent,  canActivate: [RegisterGuard] },
+  { path: 'recipes', component: RecipesViewerComponent, canActivate: [RegisterGuard] },
+  { path: 'addrecipe/:id', component: RecipeAdderComponent, canActivate: [RegisterGuard] },
+  { path: 'addrecipe', component: RecipeAdderComponent, canActivate: [RegisterGuard] },
   { path: 'login', component: LoginComponent },
   { path: 'createaccount', component: CreateAccountComponent },
-  { path: 'calendar', component: CalendarComponent }
+  { path: 'calendar', component: CalendarComponent, canActivate: [RegisterGuard] }
 ];
 
 @NgModule({

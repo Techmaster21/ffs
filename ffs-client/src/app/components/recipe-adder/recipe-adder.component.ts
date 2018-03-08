@@ -2,12 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
 
-import { Ingredient } from '../ingredient';
-import { Recipe } from '../recipe';
-import { RecipeService } from '../recipe.service';
-import { FFSer } from '../ffser';
-import { Unit } from '../unit';
-import { Step } from '../step';
+import { Ingredient } from '../../models/ingredient';
+import { Recipe } from '../../models/recipe';
+import { RecipeService } from '../../services/recipe.service';
+import { FFSer } from '../../models/ffser';
+import { Unit } from '../../models/unit';
+import { Step } from '../../models/step';
 
 @Component({
   selector: 'app-recipe-adder',

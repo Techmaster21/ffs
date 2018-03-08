@@ -2,9 +2,9 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Socket } from 'ng-socket-io';
 
-import { Recipe } from './recipe';
-import { Unit } from './unit';
-import { FFSer } from './ffser';
+import { Recipe } from '../models/recipe';
+import { Unit } from '../models/unit';
+import { FFSer } from '../models/ffser';
 
 @Injectable()
 export class RecipeService {

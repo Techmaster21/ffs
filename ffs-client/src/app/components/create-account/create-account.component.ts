@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { FFSer } from '../ffser';
-import { AccountService } from '../account.service';
+import { FFSer } from '../../models/ffser';
+import { AccountService } from '../../services/account.service';
 
 @Component({
   selector: 'app-create-account',

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Socket } from 'ng-socket-io';
 
-import { FFSer } from './ffser';
+import { FFSer } from '../models/ffser';
 
 @Injectable()
 export class AccountService {

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Recipe } from '../recipe';
-import { RecipeService } from '../recipe.service';
+import { Recipe } from '../../models/recipe';
+import { RecipeService } from '../../services/recipe.service';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 @Component({

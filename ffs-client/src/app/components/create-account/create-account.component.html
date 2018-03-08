@@ -11,9 +11,9 @@
     </mat-form-field>
     <mat-form-field class="createaccount-full-width">
       <input #confirmedPassword="ngModel" matInput type="password" id="confirmPassword" name="confirmedPassword"
-             [(ngModel)]="confirmedNewPassword" placeholder="Confirm Password" appMatchingPasswords="password" required>
+             [(ngModel)]="confirmedNewPassword" placeholder="Confirm Password" appValidateEqual="password" required>
     </mat-form-field>
-    <mat-error *ngIf="confirmedPassword.errors?.matchingPasswords">
+    <mat-error *ngIf="confirmedPassword.errors?.validateEqual">
       Passwords must match
     </mat-error>
     <button [disabled]="createAccountForm.invalid" mat-button color="primary"
