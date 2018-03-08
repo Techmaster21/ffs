@@ -5,10 +5,8 @@ import { Location } from '@angular/common';
 import { Ingredient } from '../ingredient';
 import { Recipe } from '../recipe';
 import { RecipeService } from '../recipe.service';
-import { Cuisine } from '../cuisine';
 import { FFSer } from '../ffser';
 import { Unit } from '../unit';
-import { Food } from '../food';
 import { Step } from '../step';
 
 @Component({
@@ -26,19 +24,19 @@ export class RecipeAdderComponent implements OnInit {
               private recipeService: RecipeService,
               private route: ActivatedRoute,
               private location: Location) {
-    this.recipe = new Recipe('', '', [], [], new Cuisine(''));
-    this.newIngredient = new Ingredient(new Food(''), new Unit(''), undefined);
-    this.newStep = new Step('');
+    this.recipe = new Recipe();
+    this.newIngredient = new Ingredient();
+    this.newStep = new Step();
   }
 
   addIngredient(): void {
     this.recipe.ingredients.push(this.newIngredient);
-    this.newIngredient = new Ingredient(new Food(''), new Unit(''), undefined);
+    this.newIngredient = new Ingredient();
   }
 
   addStep(): void {
     this.recipe.steps.push(this.newStep);
-    this.newStep = new Step('');
+    this.newStep = new Step();
   }
 
   submitRecipe(): void {
