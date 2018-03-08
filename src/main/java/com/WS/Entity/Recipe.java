@@ -61,7 +61,6 @@ public class Recipe {
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "recipe")
     @JsonManagedReference
     private List<RecipeStep> steps = new ArrayList<>();
-    ;
     
     @ManyToOne
     @JoinColumn(name = "creator_id")

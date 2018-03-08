@@ -5,16 +5,16 @@
  */
 package com.WS.Entity;
 
-import java.util.HashSet;
-import java.util.Set;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import org.springframework.data.annotation.Transient;
 
 /**
  *
@@ -27,22 +27,36 @@ public class Ffser {
     @Id
     @Column(name = "ffser_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int ffser;
+    private int id;
     
     @Column(name="username")
     private String username;
     
     @Column(name="password")
+    @JsonIgnore
     private String password;
     
+    @OneToOne
+    @JoinColumn(name = "ffser_id", nullable = false)
+    private Permission permission;
 
-    public int getFfser() {
-        return ffser;
+    public int getId() {
+        return id;
     }
 
-    public void setFfser(int ffser) {
-        this.ffser = ffser;
+    public void setId(int id) {
+        this.id = id;
     }
+
+    public Permission getPermission() {
+        return permission;
+    }
+
+    public void setPermission(Permission permission) {
+        this.permission = permission;
+    }
+
+    
 
     public String getUsername() {
         return username;
@@ -63,7 +77,7 @@ public class Ffser {
     @Override
     public int hashCode() {
         int hash = 3;
-        hash = 29 * hash + this.ffser;
+        hash = 29 * hash + this.id;
         return hash;
     }
 
@@ -81,7 +95,7 @@ public class Ffser {
             return false;
         }
         final Ffser other = (Ffser) obj;
-        if (this.ffser != other.ffser) {
+        if (this.id != other.id) {
             return false;
         }
         return true;
@@ -89,7 +103,7 @@ public class Ffser {
 
     @Override
     public String toString() {
-        return "Ffser{" + "ffser=" + ffser + ", username=" + username + '}';
+        return "Ffser{" + "id=" + id + ", username=" + username + '}';
     }
     
 }
