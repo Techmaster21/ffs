@@ -57,12 +57,6 @@ public class RecipeController {
 
     @OnEvent(value = "saveRecipe")
     public void saveRecipe(SocketIOClient client, AckRequest request, Recipe data) {
-//	    		Ffser f = new Ffser();
-//	    		f.setFfser(3);
-//	    		data.setFfser(f);
-        if (!cuisineRepository.findByName().isPresent()) {
-            cuisineRepository.save(data.getCuisine());
-        }
         recipeRepository.save(data);
 
     }
