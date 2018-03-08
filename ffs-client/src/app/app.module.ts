@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { SocketIoModule, SocketIoConfig } from 'ng-socket-io';
+import { SocketIoConfig, SocketIoModule } from 'ng-socket-io';
 import { CalendarModule } from 'angular-calendar';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -20,7 +20,7 @@ import { AccountService } from './account.service';
 import { IngredientsViewerComponent } from './ingredients-viewer/ingredients-viewer.component';
 import { SchedulerComponent } from './scheduler/scheduler.component';
 import { CalendarComponent } from './calendar/calendar.component';
-
+import { MatchingPasswordsDirective } from './matching-passwords.directive';
 
 const config: SocketIoConfig = { url: environment.socketUrl, options: {} };
 
@@ -34,7 +34,8 @@ const config: SocketIoConfig = { url: environment.socketUrl, options: {} };
     CreateAccountComponent,
     IngredientsViewerComponent,
     SchedulerComponent,
-    CalendarComponent
+    CalendarComponent,
+    MatchingPasswordsDirective
   ],
   imports: [
     BrowserModule,

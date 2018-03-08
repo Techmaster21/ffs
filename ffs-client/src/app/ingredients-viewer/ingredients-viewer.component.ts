@@ -1,4 +1,4 @@
-import {Component, DoCheck, Input, IterableDiffers, OnInit} from '@angular/core';
+import { Component, DoCheck, Input, IterableDiffers, OnInit } from '@angular/core';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 @Component({
@@ -12,30 +12,26 @@ export class IngredientsViewerComponent implements DoCheck, OnInit {
   dataSource: BehaviorSubject<any>;
   differ: any;
 
-  displayedColumns: String[];
+  displayedColumns: Array<String>;
 
   constructor(private differs: IterableDiffers) {
-    this.differ = differs.find([]).create(null);
+    this.differ = differs.find([])
+      .create(undefined);
     this.dataSource = new BehaviorSubject<any>(this.ingredients);
   }
 
-  removeIngredient(index: number) {
+  removeIngredient(index: number): void {
     this.ingredients.splice(index, 1);
   }
 
-  ngDoCheck() {
+  ngDoCheck(): void {
     const changes = this.differ.diff(this.ingredients);
-    if (changes) {
+    if (changes)
       this.dataSource.next(this.ingredients);
-    }
   }
 
-  ngOnInit() {
-    if (this.canEdit) {
-      this.displayedColumns = ['name', 'quantity', 'unit', 'actions'];
-    } else {
-      this.displayedColumns = ['name', 'quantity', 'unit'];
-    }
+  ngOnInit(): void {
+    this.displayedColumns = (this.canEdit) ? ['name', 'quantity', 'unit', 'actions'] : ['name', 'quantity', 'unit'];
   }
 
 }

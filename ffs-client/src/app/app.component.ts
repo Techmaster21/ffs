@@ -1,5 +1,5 @@
-import { Component, Input } from '@angular/core';
-import {LoginService} from './login.service';
+import { Component } from '@angular/core';
+import { LoginService } from './login.service';
 
 @Component({
   selector: 'app-root',
@@ -7,8 +7,10 @@ import {LoginService} from './login.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'app';
-  constructor(private loginService: LoginService) {}
+
+  constructor(private loginService: LoginService) {
+  }
+
   getLoginStatus(): boolean {
     return this.loginService.getLoginStatus();
   }

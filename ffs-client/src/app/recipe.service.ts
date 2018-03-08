@@ -4,47 +4,44 @@ import { Socket } from 'ng-socket-io';
 
 import { Recipe } from './recipe';
 import { Unit } from './unit';
-import {FFSer} from './ffser';
-import {Ingredient} from './ingredient';
-import {of} from 'rxjs/observable/of';
-
+import { FFSer } from './ffser';
 
 @Injectable()
 export class RecipeService {
 
   constructor(private socket: Socket) { }
 
-  getAllRecipes(): Observable<Recipe[]> {
+  getAllRecipes(): Observable<Array<Recipe>> {
     this.socket.emit('getAllRecipes');
-    return this.socket.fromEvent<Recipe[]>('getAllRecipes');
+
+    return this.socket.fromEvent<Array<Recipe>>('getAllRecipes');
   }
 
   getRecipe(key: Number): Observable<Recipe> {
     this.socket.emit('getRecipe', key);
+
     return this.socket.fromEvent<Recipe>('getRecipe');
   }
 
-  /**
-   * Adds a recipe - note that recipe is added if its id = null. Otherwise, it's updated.
-   * @param {Number} key
-   * @returns {Observable<Recipe>}
-   */
   saveRecipe(recipe: Recipe): Observable<Recipe> {
     this.socket.emit('saveRecipe', recipe);
+
     return this.socket.fromEvent<Recipe>('saveRecipe');
   }
 
   deleteRecipe(index: number): Observable<Recipe> {
     this.socket.emit('deleteRecipe', index);
+
     return this.socket.fromEvent<Recipe>('deleteRecipe');
   }
 
-  getAllUnits(): Observable<Unit[]> {
+  getAllUnits(): Observable<Array<Unit>> {
     this.socket.emit('getAllUnits');
-    return this.socket.fromEvent<Unit[]>('getAllUnits');
+
+    return this.socket.fromEvent<Array<Unit>>('getAllUnits');
   }
 
-  createAccount(user: FFSer, password: string ){
+  createAccount(user: FFSer, password: string): void {
     const userInfo: [FFSer, string] = [user, password];
     this.socket.emit('createUser', userInfo);
   }

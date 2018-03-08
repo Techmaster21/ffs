@@ -1,13 +1,18 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import {
-  MatButtonModule, MatCardModule, MatCheckboxModule, MatIconModule, MatInputModule, MatListModule, MatPaginatorModule,
+  MatButtonModule,
+  MatCardModule,
+  MatCheckboxModule,
+  MatIconModule,
+  MatInputModule,
+  MatListModule,
+  MatPaginatorModule,
   MatSelectModule,
   MatToolbarModule
 } from '@angular/material';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {MatTableModule} from '@angular/material/table';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatTableModule } from '@angular/material/table';
 
 @NgModule({
   imports: [
@@ -39,6 +44,7 @@ import {MatTableModule} from '@angular/material/table';
     MatSelectModule,
     MatPaginatorModule,
     MatIconModule
-  ],
+  ]
 })
-export class MaterialModule { }
+export class MaterialModule {
+}

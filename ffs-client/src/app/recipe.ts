@@ -3,13 +3,12 @@ import { Cuisine } from './cuisine';
 import { FFSer } from './ffser';
 import { Step } from './step';
 
-
 export class Recipe {
   constructor(
     public name: string,
     public description: string,
-    public ingredients: Ingredient[],
-    public steps: Step[],
+    public ingredients: Array<Ingredient>,
+    public steps: Array<Step>,
     public cuisine?: Cuisine,
     public prepTime?: string,
     public cookTime?: string,

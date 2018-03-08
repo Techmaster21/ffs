@@ -1,5 +1,5 @@
 export class Unit {
-  constructor (
+  constructor(
     public name: string,
     public id?: number
   ) {}

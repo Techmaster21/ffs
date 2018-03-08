@@ -10,13 +10,9 @@
   flex-direction: column;
 }
 
-
 .createaccount-full-width > * {
   width: 100%;
 }
 
-.errorMessage {
-  color: rgb(200,0,100);
-  font-size: 10px;
-}
+
 
