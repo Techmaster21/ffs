@@ -1,0 +1,19 @@
+<table *ngIf="steps.length > 0" class="table">
+  <tr>
+    <th>#</th>
+    <th>Step</th>
+  </tr>
+  <tr *ngFor="let step of steps; let i=index">
+    <td>
+      {{i+1}}
+    </td>
+    <td>
+      {{step.step}}
+    </td>
+    <td *ngIf="canEdit">
+      <button type="button" mat-icon-button color="accent" (click)="removeStep(i)">
+        <mat-icon aria-label="Delete">delete</mat-icon>
+      </button>
+    </td>
+  </tr>
+</table>

@@ -34,20 +34,7 @@
       </div>
     </form>
 
-    <table class="table">
-      <tr>
-        <th>#</th>
-        <th>Step</th>
-      </tr>
-      <tr *ngFor="let step of recipe.steps; let i=index">
-        <td>
-          {{i+1}}
-        </td>
-        <td>
-          {{step.step}}
-        </td>
-      </tr>
-    </table>
+    <app-steps-viewer [(steps)]="recipe.steps" [canEdit]="true"></app-steps-viewer>
 
     <form class="step-form" (ngSubmit)="addStep()" #stepForm="ngForm">
       <div>

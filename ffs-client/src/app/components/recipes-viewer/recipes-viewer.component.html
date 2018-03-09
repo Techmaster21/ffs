@@ -58,12 +58,7 @@
   <h2>{{ selectedRecipe.name }} details</h2>
   <p>Description: {{ selectedRecipe.description }}</p>
   <app-ingredients-viewer [(ingredients)]="selectedRecipe.ingredients" [canEdit]="false"></app-ingredients-viewer>
-  <mat-list>
-    <p>Steps</p>
-    <mat-list-item *ngFor="let step of selectedRecipe.steps; let i=index">
-      {{ i + 1 }}. {{ step.step }}
-    </mat-list-item>
-  </mat-list>
+  <app-steps-viewer [steps]="selectedRecipe.steps"></app-steps-viewer>
   <button mat-raised-button color="accent" routerLink="/addrecipe/{{selectedRecipe.id}}">Edit Recipe</button>
 </mat-card>
 

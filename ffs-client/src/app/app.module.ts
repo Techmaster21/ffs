@@ -22,6 +22,7 @@ import { CalendarComponent } from './components/calendar/calendar.component';
 import { ValidateEqualDirective } from './directives/validate-equal.directive';
 import { RegisterGuard } from './guards/register.guard';
 import { HttpClientModule } from '@angular/common/http';
+import { StepsViewerComponent } from './components/steps-viewer/steps-viewer.component';
 
 const config: SocketIoConfig = { url: environment.socketUrl, options: {} };
 
@@ -36,7 +37,8 @@ const config: SocketIoConfig = { url: environment.socketUrl, options: {} };
     IngredientsViewerComponent,
     SchedulerComponent,
     CalendarComponent,
-    ValidateEqualDirective
+    ValidateEqualDirective,
+    StepsViewerComponent
   ],
   imports: [
     BrowserModule,
