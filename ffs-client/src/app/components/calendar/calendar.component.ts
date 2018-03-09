@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { CalendarEvent } from 'angular-calendar';
 
 @Component({
   selector: 'app-calendar',
@@ -6,5 +7,6 @@ import { Component } from '@angular/core';
   styleUrls: ['./calendar.component.css']
 })
 export class CalendarComponent {
-
+  viewDate: Date = new Date();
+  events: Array<CalendarEvent> = [];
 }
