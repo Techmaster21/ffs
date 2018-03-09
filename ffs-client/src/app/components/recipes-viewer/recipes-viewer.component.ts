@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Recipe } from '../../models/recipe';
 import { RecipeService } from '../../services/recipe.service';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-recipes-viewer',
@@ -10,11 +11,12 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 })
 export class RecipesViewerComponent implements OnInit {
   selectedRecipe: Recipe;
+  selectedRecipeForUse: Recipe;
   recipes: Array<Recipe>;
   dataSource: BehaviorSubject<any>;
-  displayedRecipeColumns = ['name', 'description', 'user', 'cuisine', 'delete', 'select'];
+  displayedRecipeColumns: Array<string>;
 
-  constructor(private recipeService: RecipeService) {
+  constructor(private recipeService: RecipeService, private route: ActivatedRoute) {
     this.dataSource = new BehaviorSubject<any>(this.recipes);
   }
 
@@ -25,10 +27,17 @@ export class RecipesViewerComponent implements OnInit {
         this.dataSource.next(this.recipes);
       }
     );
+    const param = this.route.snapshot.paramMap.get('select');
+    this.displayedRecipeColumns = param ? ['name', 'description', 'user', 'cuisine', 'select'] :
+      ['name', 'description', 'user', 'cuisine', 'delete'];
   }
 
   recipeSelect(recipe: Recipe): void {
     this.selectedRecipe = recipe;
+  }
+
+  selectForUse(recipe: Recipe): void {
+    this.selectedRecipeForUse = recipe;
   }
 
   removeRecipe(recipe: Recipe): void {

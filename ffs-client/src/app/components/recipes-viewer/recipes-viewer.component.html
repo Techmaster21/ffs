@@ -7,25 +7,25 @@
     <!-- Name Column -->
     <ng-container matColumnDef="name">
       <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
-      <mat-cell *matCellDef="let recipe"> {{recipe.name}} </mat-cell>
+      <mat-cell *matCellDef="let recipe"> {{ recipe.name }} </mat-cell>
     </ng-container>
 
     <!-- Description Column -->
     <ng-container matColumnDef="description">
       <mat-header-cell *matHeaderCellDef> Description </mat-header-cell>
-      <mat-cell *matCellDef="let recipe"> {{recipe.description}} </mat-cell>
+      <mat-cell *matCellDef="let recipe"> {{ recipe.description }} </mat-cell>
     </ng-container>
 
     <!-- User Column -->
     <ng-container matColumnDef="user">
       <mat-header-cell *matHeaderCellDef> User </mat-header-cell>
-      <mat-cell *matCellDef="let recipe"> {{recipe.ffser.name}} </mat-cell>
+      <mat-cell *matCellDef="let recipe"> {{ recipe.id.name }}</mat-cell>
     </ng-container>
 
     <!-- Cuisine Column -->
     <ng-container matColumnDef="cuisine">
       <mat-header-cell *matHeaderCellDef> Cuisine </mat-header-cell>
-      <mat-cell *matCellDef="let recipe"> {{recipe.cuisine.name}} </mat-cell>
+      <mat-cell *matCellDef="let recipe"> {{ recipe.cuisine.name }} </mat-cell>
     </ng-container>
 
     <!-- Delete Column -->
@@ -42,12 +42,11 @@
     <ng-container matColumnDef="select">
       <mat-header-cell *matHeaderCellDef></mat-header-cell>
       <mat-cell *matCellDef="let i=index; let recipe">
-        <button mat-icon-button color="accent" (click)="removeRecipe(recipe)">
-          <mat-icon aria-label="Pregnant-Woman">pregnant-woman</mat-icon>
+        <button mat-icon-button color="accent" (click)="selectForUse(recipe)">
+          Select
         </button>
       </mat-cell>
     </ng-container>
-
 
     <mat-header-row *matHeaderRowDef="displayedRecipeColumns"></mat-header-row>
     <mat-row *matRowDef="let row; columns: displayedRecipeColumns;" (click)="recipeSelect(row)"></mat-row>
@@ -56,13 +55,13 @@
 
 
 <mat-card *ngIf="selectedRecipe">
-  <h2>{{selectedRecipe.name}} details</h2>
-  <p>Description: {{selectedRecipe.description}}</p>
+  <h2>{{ selectedRecipe.name }} details</h2>
+  <p>Description: {{ selectedRecipe.description }}</p>
   <app-ingredients-viewer [(ingredients)]="selectedRecipe.ingredients" [canEdit]="false"></app-ingredients-viewer>
   <mat-list>
     <p>Steps</p>
     <mat-list-item *ngFor="let step of selectedRecipe.steps; let i=index">
-      {{i + 1}}. {{step.step}}
+      {{ i + 1 }}. {{ step.step }}
     </mat-list-item>
   </mat-list>
   <button mat-raised-button color="accent" routerLink="/addrecipe/{{selectedRecipe.id}}">Edit Recipe</button>

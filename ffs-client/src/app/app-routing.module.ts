@@ -14,6 +14,7 @@ const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'home', component: HomeComponent,  canActivate: [RegisterGuard] },
   { path: 'recipes', component: RecipesViewerComponent, canActivate: [RegisterGuard] },
+  { path: 'recipes/:select', component: RecipesViewerComponent, canActivate: [RegisterGuard] },
   { path: 'addrecipe/:id', component: RecipeAdderComponent, canActivate: [RegisterGuard] },
   { path: 'addrecipe', component: RecipeAdderComponent, canActivate: [RegisterGuard] },
   { path: 'login', component: LoginComponent },

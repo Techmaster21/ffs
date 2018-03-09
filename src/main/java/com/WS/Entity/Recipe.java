@@ -61,7 +61,6 @@ public class Recipe {
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "recipe")
     @JsonManagedReference
     private List<RecipeStep> steps = new ArrayList<>();
-    ;
     
     @ManyToOne
     @JoinColumn(name = "creator_id")
@@ -107,7 +106,9 @@ public class Recipe {
 
     @Override
     public String toString() {
-        return "Recipe{" + "recipeId=" + id + ", recipeName=" + name + ", recipeDescription=" + description + ", cuisine=" + cuisine + ", prepTime=" + prepTime + ", cookTime=" + cookTime + ", ingredients=" + ingredients + '}';
+        return "Recipe{" + "recipeId=" + id + ", recipeName=" + name + ", recipeDescription=" + description +
+        ", cuisine=" + cuisine + ", prepTime=" + prepTime + ", cookTime=" + cookTime + ", ingredients=" + ingredients +
+         ", ffser=" + ffser + '}';
     }
 
     public int getId() {

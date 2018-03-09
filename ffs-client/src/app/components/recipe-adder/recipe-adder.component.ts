@@ -8,6 +8,7 @@ import { RecipeService } from '../../services/recipe.service';
 import { FFSer } from '../../models/ffser';
 import { Unit } from '../../models/unit';
 import { Step } from '../../models/step';
+import { Cuisine } from '../../models/cuisine';
 
 @Component({
   selector: 'app-recipe-adder',
@@ -16,6 +17,7 @@ import { Step } from '../../models/step';
 })
 export class RecipeAdderComponent implements OnInit {
   units: Array<Unit>;
+  cuisines: Array<Cuisine>;
   recipe: Recipe;
   newIngredient: Ingredient;
   newStep: Step;
@@ -53,7 +55,11 @@ export class RecipeAdderComponent implements OnInit {
     this.recipeService.getAllUnits()
       .subscribe(units => {
       this.units = units;
-    });
+      });
+    this.recipeService.getAllCuisines()
+      .subscribe(cuisines => {
+        this.cuisines = cuisines;
+      });
     const param = this.route.snapshot.paramMap.get('id');
     if (param)
       this.recipeService.getRecipe(+param)
