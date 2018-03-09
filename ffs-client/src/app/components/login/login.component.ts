@@ -1,5 +1,4 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { LoginService } from '../../services/login.service';
 import { Router } from '@angular/router';
 import { AccountService } from '../../services/account.service';
 
@@ -13,16 +12,17 @@ export class LoginComponent implements OnInit {
   userName: string;
   userPassword: string;
 
-  constructor(private loginService: LoginService, private router: Router, private accountService: AccountService) {
+  constructor(private router: Router, private accountService: AccountService) {
   }
 
   ngOnInit(): void {
-    this.loginService.setLoginStatus(false);
+    //
   }
 
   login(): void {
     this.accountService.login(this.userName, this.userPassword);
-    this.loginService.setLoginStatus(true);
+    // TODO remove after token is actually gotten from server;
+    this.accountService.setToken('token');
     this.router.navigate(['/home']);
   }
 }

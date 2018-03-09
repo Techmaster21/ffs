@@ -15,13 +15,13 @@ import { MaterialModule } from './material/material.module';
 import { RecipeService } from './services/recipe.service';
 import { LoginComponent } from './components/login/login.component';
 import { CreateAccountComponent } from './components/create-account/create-account.component';
-import { LoginService } from './services/login.service';
 import { AccountService } from './services/account.service';
 import { IngredientsViewerComponent } from './components/ingredients-viewer/ingredients-viewer.component';
 import { SchedulerComponent } from './components/scheduler/scheduler.component';
 import { CalendarComponent } from './components/calendar/calendar.component';
 import { ValidateEqualDirective } from './directives/validate-equal.directive';
 import { RegisterGuard } from './guards/register.guard';
+import { HttpClientModule } from '@angular/common/http';
 
 const config: SocketIoConfig = { url: environment.socketUrl, options: {} };
 
@@ -45,11 +45,11 @@ const config: SocketIoConfig = { url: environment.socketUrl, options: {} };
     SocketIoModule.forRoot(config),
     MaterialModule,
     CalendarModule.forRoot(),
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    HttpClientModule
   ],
   providers: [
     RecipeService,
-    LoginService,
     AccountService,
     RegisterGuard
   ],

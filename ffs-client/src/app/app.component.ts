@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { LoginService } from './services/login.service';
+import { AccountService } from './services/account.service';
 
 @Component({
   selector: 'app-root',
@@ -8,10 +8,12 @@ import { LoginService } from './services/login.service';
 })
 export class AppComponent {
 
-  constructor(private loginService: LoginService) {
+  constructor(private accountService: AccountService) {
   }
 
   getLoginStatus(): boolean {
-    return this.loginService.getLoginStatus();
+    // TODO use cookies to make refresh not make buttons disappear; until then will just return true
+    // return this.accountService.getLoginStatus();
+    return true;
   }
 }

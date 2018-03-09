@@ -1,24 +1,67 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import { Socket } from 'ng-socket-io';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { FFSer } from '../models/ffser';
+import { of } from 'rxjs/observable/of';
+import { catchError } from 'rxjs/operators';
+
+const httpOptions = {
+  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+};
 
 @Injectable()
 export class AccountService {
+  private accountURL = 'api/account';  // URL to web api
+  private loginURL = 'api/login';  // URL to web api
 
-  constructor(private socket: Socket) {
+  private token: string;
+
+  constructor(private http: HttpClient) {
   }
 
-  createAccount(user: FFSer, password: string): void {
-    const userInfo: [FFSer, string] = [user, password];
-    this.socket.emit('createUser', userInfo);
+  getLoginStatus(): boolean {
+    return this.token ? true : false;
   }
 
-  login(userName: string, password: string): Observable<boolean> {
-    const userInfo: [string, string] = [userName, password];
-    this.socket.emit('login', userInfo);
+  setToken(token: string): void {
+    this.token = token;
+  }
 
-    return this.socket.fromEvent<boolean>('loggedIn');
+  createAccount(user: FFSer, password: string): Observable<FFSer> {
+    const userInfo = { username: user.username, password };
+
+    return this.http.post<FFSer>(this.accountURL, userInfo, httpOptions)
+      .pipe(
+        catchError(this.handleError<FFSer>('createAccount'))
+      );
+  }
+
+  login(username: string, password: string): Observable<FFSer> {
+    const userInfo = { username, password };
+
+    return this.http.post<FFSer>(this.loginURL, userInfo, httpOptions)
+      .pipe(
+        catchError(this.handleError<FFSer>('createAccount'))
+      );
+  }
+
+  /**
+   * Handle Http operation that failed.
+   * Let the app continue.
+   * @param operation - name of the operation that failed
+   * @param result - optional value to return as the observable result
+   */
+  // what does it return if result is not specified? Does it still know what
+  // T is somehow?
+  private handleError<T>(operation = 'operation', result?: T) {
+    return (error: any): Observable<T> => {
+
+      // TODO: send the error to remote logging infrastructure
+      console.error(error); // log to console instead
+
+      // Let the app keep running by returning an empty result.
+      return of(result as T);
+    };
   }
 }
