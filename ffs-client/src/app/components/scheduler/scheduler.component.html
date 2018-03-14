@@ -1,1 +1,5 @@
-<app-recipes-viewer [selector]=true></app-recipes-viewer>
+<div *ngIf="selectedRecipe">
+  <h1>Selected Recipe</h1>
+  <p>{{selectedRecipe.name}}</p>
+</div>
+<app-recipes-viewer [selector]=true (selectRecipe)="recipeSelect($event)"></app-recipes-viewer>

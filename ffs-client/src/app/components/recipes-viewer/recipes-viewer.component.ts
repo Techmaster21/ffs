@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Recipe } from '../../models/recipe';
 import { RecipeService } from '../../services/recipe.service';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
@@ -11,6 +11,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class RecipesViewerComponent implements OnInit {
   @Input() selector: boolean;
+  @Output() selectRecipe: EventEmitter<Recipe> = new EventEmitter();
   selectedRecipe: Recipe;
   selectedRecipeForUse: Recipe;
   recipes: Array<Recipe>;
@@ -38,6 +39,7 @@ export class RecipesViewerComponent implements OnInit {
 
   selectForUse(recipe: Recipe): void {
     this.selectedRecipeForUse = recipe;
+    this.selectRecipe.emit(recipe);
   }
 
   removeRecipe(recipe: Recipe): void {

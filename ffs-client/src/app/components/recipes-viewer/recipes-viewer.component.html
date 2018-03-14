@@ -13,13 +13,13 @@
     <!-- Description Column -->
     <ng-container matColumnDef="description">
       <mat-header-cell *matHeaderCellDef> Description</mat-header-cell>
-      <mat-cell *matCellDef="let recipe"> {{recipe.description}}</mat-cell>
+      <mat-cell *matCellDef="let recipe"> {{ recipe.description }}</mat-cell>
     </ng-container>
 
     <!-- User Column -->
     <ng-container matColumnDef="user">
       <mat-header-cell *matHeaderCellDef> User</mat-header-cell>
-      <mat-cell *matCellDef="let recipe"> {{recipe.id.name}}</mat-cell>
+      <mat-cell *matCellDef="let recipe"> {{ recipe.id.name }}</mat-cell>
     </ng-container>
 
     <!-- Cuisine Column -->
