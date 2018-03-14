@@ -59,8 +59,8 @@
   <p>Description: {{ selectedRecipe.description }}</p>
   <app-ingredients-viewer [(ingredients)]="selectedRecipe.ingredients" [canEdit]="false"></app-ingredients-viewer>
   <app-steps-viewer [steps]="selectedRecipe.steps"></app-steps-viewer>
-  <button mat-raised-button color="accent" routerLink="/addrecipe/{{selectedRecipe.id}}">Edit Recipe</button>
+  <button *ngIf="!selector" mat-raised-button color="accent" routerLink="/addrecipe/{{selectedRecipe.id}}">Edit Recipe</button>
 </mat-card>
 
-<button mat-raised-button color="accent" routerLink="/addrecipe">Add Recipe</button>
+<button *ngIf="!selector" mat-raised-button color="accent" routerLink="/addrecipe">Add Recipe</button>
 

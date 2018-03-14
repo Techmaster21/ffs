@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Recipe } from '../../models/recipe';
 import { RecipeService } from '../../services/recipe.service';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
@@ -10,6 +10,7 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./recipes-viewer.component.css']
 })
 export class RecipesViewerComponent implements OnInit {
+  @Input() selector: boolean;
   selectedRecipe: Recipe;
   selectedRecipeForUse: Recipe;
   recipes: Array<Recipe>;
@@ -27,8 +28,7 @@ export class RecipesViewerComponent implements OnInit {
         this.dataSource.next(this.recipes);
       }
     );
-    const param = this.route.snapshot.paramMap.get('select');
-    this.displayedRecipeColumns = param ? ['name', 'description', 'user', 'cuisine', 'select'] :
+    this.displayedRecipeColumns = this.selector ? ['name', 'description', 'user', 'cuisine', 'select'] :
       ['name', 'description', 'user', 'cuisine', 'delete'];
   }
 
