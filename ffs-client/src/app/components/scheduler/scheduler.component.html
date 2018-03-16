@@ -1,5 +1,22 @@
+<form class="scheduler-form" (ngSubmit)="addEvent()" #schedulerForm="ngForm">
+  <h1>Schedule a Recipe</h1>
+  <mat-card>
+    <div>
+  <mat-form-field>
+    <input matInput [matDatepicker]="picker" placeholder="Choose a date">
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+    </div>
+    <mat-form-field>
+      <mat-select placeholder="Select">
+        <mat-option value="option">Option</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </mat-card>
 <div *ngIf="selectedRecipe">
-  <h1>Selected Recipe</h1>
+  <h2>Selected Recipe</h2>
   <p>{{selectedRecipe.name}}</p>
 </div>
 <app-recipes-viewer [selector]=true (selectRecipe)="recipeSelect($event)"></app-recipes-viewer>
+</form>
