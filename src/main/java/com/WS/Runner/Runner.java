@@ -5,11 +5,14 @@
  */
 package com.WS.Runner;
 
-import com.corundumstudio.socketio.SocketIOServer;
+import javax.annotation.PreDestroy;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
-import javax.annotation.PreDestroy;
+
+import com.WS.Controllers.RecipeController;
+import com.corundumstudio.socketio.SocketIOServer;
 
 /**
  *
@@ -19,14 +22,21 @@ import javax.annotation.PreDestroy;
 public class Runner implements CommandLineRunner {
 
     private final SocketIOServer server;
+    private RecipeController recipeController;
 
     @Autowired
-    public Runner(SocketIOServer server) {
+    public Runner(SocketIOServer server, RecipeController recipeController) {
         this.server = server;
+        this.recipeController = recipeController;
     }
 
     @Override
     public void run(String... args) throws Exception {
+    		server.getNamespace("/users").addListeners(recipeController);
+    		server.getNamespace("/users").addConnectListener(client -> {
+    			//System.out.println("test");
+    			//client.disconnect();
+        	});
         server.start();
     }
 

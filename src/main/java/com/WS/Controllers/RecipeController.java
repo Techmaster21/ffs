@@ -17,8 +17,10 @@ import com.WS.Repository.CuisineRepository;
 import com.WS.Repository.RecipeRepository;
 import com.corundumstudio.socketio.AckRequest;
 import com.corundumstudio.socketio.SocketIOClient;
+import com.corundumstudio.socketio.SocketIONamespace;
 import com.corundumstudio.socketio.SocketIOServer;
 import com.corundumstudio.socketio.annotation.OnEvent;
+import com.corundumstudio.socketio.listener.ConnectListener;
 
 /**
  *
@@ -31,7 +33,7 @@ public class RecipeController {
     private RecipeRepository recipeRepository;
     @Autowired
     private CuisineRepository cuisineRepository;
-
+    
     private final SocketIOServer server;
     private final Logger logger = LoggerFactory.getLogger(RecipeController.class);
 
@@ -41,9 +43,9 @@ public class RecipeController {
 
     @Autowired
     public RecipeController(SocketIOServer server) {
-        this.server = server;
+    		this.server = server;
     }
-
+    
     @OnEvent(value = "getRecipe")
     public void getRecipe(SocketIOClient client, AckRequest request, Integer data) {
         client.sendEvent("getRecipe", recipeRepository.findOne(data));

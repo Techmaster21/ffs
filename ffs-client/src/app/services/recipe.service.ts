@@ -1,16 +1,19 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import { Socket } from 'ng-socket-io';
 
 import { Recipe } from '../models/recipe';
 import { Unit } from '../models/unit';
 import { FFSer } from '../models/ffser';
 import { Cuisine } from '../models/cuisine';
+import { NgSocket, SocketService } from './socket.service';
 
 @Injectable()
 export class RecipeService {
+  socket: NgSocket;
 
-  constructor(private socket: Socket) { }
+  constructor(private socketService: SocketService) {
+    this.socket = socketService.getSocket('/users');
+  }
 
   getAllRecipes(): Observable<Array<Recipe>> {
     this.socket.emit('getAllRecipes');

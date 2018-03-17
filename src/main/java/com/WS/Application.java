@@ -1,15 +1,17 @@
 package com.WS;
 
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+
 import com.corundumstudio.socketio.Configuration;
 import com.corundumstudio.socketio.SocketConfig;
 import com.corundumstudio.socketio.SocketIOServer;
 import com.corundumstudio.socketio.annotation.SpringAnnotationScanner;
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Bean;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Controller;
 
 @SpringBootApplication
 @Controller
@@ -34,7 +36,9 @@ public class Application {
         SocketConfig sockConfig = new SocketConfig();
         sockConfig.setReuseAddress(true);
         config.setSocketConfig(sockConfig);
-        return new SocketIOServer(config);
+        SocketIOServer server = new SocketIOServer(config);
+        server.addNamespace("/users");
+        return server;
     }
     
     @Bean

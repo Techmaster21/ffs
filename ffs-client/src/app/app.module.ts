@@ -1,7 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { SocketIoConfig, SocketIoModule } from 'ng-socket-io';
 import { CalendarModule } from 'angular-calendar';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -9,7 +8,6 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
 import { RecipesViewerComponent } from './components/recipes-viewer/recipes-viewer.component';
 import { AppRoutingModule } from './app-routing.module';
-import { environment } from '../environments/environment';
 import { RecipeAdderComponent } from './components/recipe-adder/recipe-adder.component';
 import { MaterialModule } from './material/material.module';
 import { RecipeService } from './services/recipe.service';
@@ -23,8 +21,7 @@ import { ValidateEqualDirective } from './directives/validate-equal.directive';
 import { RegisterGuard } from './guards/register.guard';
 import { HttpClientModule } from '@angular/common/http';
 import { StepsViewerComponent } from './components/steps-viewer/steps-viewer.component';
-
-const config: SocketIoConfig = { url: environment.socketUrl, options: {} };
+import { SocketService } from './services/socket.service';
 
 @NgModule({
   declarations: [
@@ -44,7 +41,6 @@ const config: SocketIoConfig = { url: environment.socketUrl, options: {} };
     BrowserModule,
     FormsModule,
     AppRoutingModule,
-    SocketIoModule.forRoot(config),
     MaterialModule,
     CalendarModule.forRoot(),
     BrowserAnimationsModule,
@@ -53,7 +49,8 @@ const config: SocketIoConfig = { url: environment.socketUrl, options: {} };
   providers: [
     RecipeService,
     AccountService,
-    RegisterGuard
+    RegisterGuard,
+    SocketService
   ],
   bootstrap: [AppComponent]
 })
