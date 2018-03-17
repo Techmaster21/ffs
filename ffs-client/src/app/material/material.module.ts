@@ -3,9 +3,11 @@ import {
   MatButtonModule,
   MatCardModule,
   MatCheckboxModule,
+  MatDatepickerModule,
   MatIconModule,
   MatInputModule,
   MatListModule,
+  MatNativeDateModule,
   MatPaginatorModule,
   MatSelectModule,
   MatToolbarModule
@@ -28,7 +30,9 @@ import { MatTableModule } from '@angular/material/table';
     MatListModule,
     MatSelectModule,
     MatPaginatorModule,
-    MatIconModule
+    MatIconModule,
+    MatDatepickerModule,
+    MatNativeDateModule
   ],
   exports: [
     MatButtonModule,
@@ -43,7 +47,9 @@ import { MatTableModule } from '@angular/material/table';
     MatListModule,
     MatSelectModule,
     MatPaginatorModule,
-    MatIconModule
+    MatIconModule,
+    MatDatepickerModule,
+    MatNativeDateModule
   ]
 })
 export class MaterialModule {
