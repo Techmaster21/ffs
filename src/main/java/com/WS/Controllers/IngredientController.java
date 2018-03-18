@@ -24,7 +24,7 @@ import org.springframework.stereotype.Component;
  * @author Eric
  */
 @Component
-public class IngredientController {
+public class IngredientController implements SocketIOController {
 
 	private IngredientRepository ingredientRepository;
     private final SocketIOServer server;
@@ -38,25 +38,29 @@ public class IngredientController {
     public IngredientController(SocketIOServer server) {
         this.server = server;
     }
+    
+    public String getNamespace() {
+		return "/users";
+    }
 
     @OnEvent(value = "getIngredient")
     public void getIngredient(SocketIOClient client, AckRequest request, Integer data) {
-    	client.sendEvent("getIngredient", ingredientRepository.findOne(data));
+    		client.sendEvent("getIngredient", ingredientRepository.findOne(data));
     }
     
     @OnEvent(value = "getAllIngredients")
-    public void getAllIngredients(SocketIOClient client, AckRequest request, Integer data){
+    public void getAllIngredients(SocketIOClient client, AckRequest request, Integer data) {
         List<Ingredient> ingredients = (List<Ingredient>) ingredientRepository.findAll();
         client.sendEvent("getAllIngredients", ingredients);
     }
     
     @OnEvent(value = "deleteIngredient")
-    public void deleteIngredient (SocketIOClient client, AckRequest request, Integer data){
-    	ingredientRepository.delete(data);
+    public void deleteIngredient (SocketIOClient client, AckRequest request, Integer data) {
+    		ingredientRepository.delete(data);
     }
     
     @OnEvent(value = "createIngredient")
-    public void createIngredient (SocketIOClient client, AckRequest request, Ingredient data){
-    	ingredientRepository.save(data);
+    public void createIngredient (SocketIOClient client, AckRequest request, Ingredient data) {
+    		ingredientRepository.save(data);
     }
 }

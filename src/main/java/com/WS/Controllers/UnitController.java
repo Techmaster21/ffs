@@ -24,7 +24,7 @@ import com.corundumstudio.socketio.annotation.OnEvent;
  * @author Eric
  */
 @Component
-public class UnitController {
+public class UnitController implements SocketIOController {
 	
 	@Autowired
 	private UnitRepository unitRepository;
@@ -41,6 +41,10 @@ public class UnitController {
         this.server = server;
     }
 
+    public String getNamespace() {
+		return "/users";
+    }
+    
     @OnEvent(value = "getAllUnits")
     public void getAllUnits(SocketIOClient client, AckRequest request, Integer data) {
         List<Unit> units = (List<Unit>)unitRepository.findAll();
@@ -48,18 +52,18 @@ public class UnitController {
     }
     
     @OnEvent(value = "getUnit")
-    public void getUnit(SocketIOClient client, AckRequest request, Integer data){
-    	client.sendEvent("getUnit", unitRepository.findOne(data));
+    public void getUnit(SocketIOClient client, AckRequest request, Integer data) {
+    		client.sendEvent("getUnit", unitRepository.findOne(data));
     }
     
     @OnEvent(value = "saveUnit")
-    public void saveUnit(SocketIOClient client, AckRequest request, Unit data){
-    	unitRepository.save(data);
+    public void saveUnit(SocketIOClient client, AckRequest request, Unit data) {
+    		unitRepository.save(data);
     }
     
     @OnEvent(value = "deleteUnit")
-    public void deleteUnit(SocketIOClient client, AckRequest request, Integer data){
-    	unitRepository.delete(data);
+    public void deleteUnit(SocketIOClient client, AckRequest request, Integer data) {
+    		unitRepository.delete(data);
     }
 
 }

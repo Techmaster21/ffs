@@ -22,7 +22,7 @@ import com.corundumstudio.socketio.annotation.OnEvent;
  * @author Eric
  */
 @Component
-public class FfserController {   
+public class FfserController implements SocketIOController {   
 	private FfserRepository ffserRepository;
     private final SocketIOServer server;
     private final Logger logger = LoggerFactory.getLogger(RecipeController.class);
@@ -36,15 +36,19 @@ public class FfserController {
         this.server = server;
     }
     
+    public String getNamespace() {
+		return "/users";
+    }
+    
     @OnEvent(value = "saveFfser")
     public void saveFfser(SocketIOClient client, AckRequest request, Ffser data){
-    	//TODO: Encrypt and such
-    	ffserRepository.save(data);
+	    	//TODO: Encrypt and such
+	    	ffserRepository.save(data);
     }
     
     @OnEvent(value = "deleteFfser")
     public void deleteFfser(SocketIOClient client, AckRequest request, Integer data){
-    	ffserRepository.delete(data);
+    		ffserRepository.delete(data);
     }
     
 }

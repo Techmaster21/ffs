@@ -27,7 +27,7 @@ import com.corundumstudio.socketio.listener.ConnectListener;
  * @author Eric
  */
 @Component
-public class RecipeController {
+public class RecipeController implements SocketIOController {
 
     @Autowired
     private RecipeRepository recipeRepository;
@@ -44,6 +44,10 @@ public class RecipeController {
     @Autowired
     public RecipeController(SocketIOServer server) {
     		this.server = server;
+    }
+    
+    public String getNamespace() {
+		return "/users";
     }
     
     @OnEvent(value = "getRecipe")

@@ -25,7 +25,7 @@ import com.corundumstudio.socketio.annotation.OnEvent;
  * @author Eric
  */
 @Component
-public class FoodController {
+public class FoodController implements SocketIOController {
 	
 	@Autowired
 	private FoodRepository foodRepository;
@@ -40,6 +40,10 @@ public class FoodController {
     @Autowired
     public FoodController(SocketIOServer server) {
         this.server = server;
+    }
+    
+    public String getNamespace() {
+		return "/users";
     }
 
 //    @OnEvent(value = "saveFood")

@@ -5,6 +5,8 @@
  */
 package com.WS.Runner;
 
+import java.util.List;
+
 import javax.annotation.PreDestroy;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +14,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
 import com.WS.Controllers.RecipeController;
+import com.WS.Controllers.SocketIOController;
 import com.corundumstudio.socketio.SocketIOServer;
 
 /**
@@ -22,20 +25,30 @@ import com.corundumstudio.socketio.SocketIOServer;
 public class Runner implements CommandLineRunner {
 
     private final SocketIOServer server;
-    private RecipeController recipeController;
+    @Autowired
+    private List<SocketIOController> controllers;
 
     @Autowired
-    public Runner(SocketIOServer server, RecipeController recipeController) {
+    public Runner(SocketIOServer server) {
         this.server = server;
-        this.recipeController = recipeController;
     }
 
     @Override
     public void run(String... args) throws Exception {
-    		server.getNamespace("/users").addListeners(recipeController);
+    		// This could probably all go (except server.start() of course) in the socketio config/server creation
+    		server.addNamespace("/users");
+    		// Scan for Socketio annotations
+    		for( SocketIOController c : controllers) {
+    			String namespace = c.getNamespace();
+    			if (!namespace.isEmpty()) {
+    				server.getNamespace(namespace).addListeners(c);
+    			} else {
+    				server.addListeners(c);
+    			}
+    		}
     		server.getNamespace("/users").addConnectListener(client -> {
-    			//System.out.println("test");
-    			//client.disconnect();
+    			// Authentication hooplah goes here
+    			System.out.println("You connected to the users namespace. Gratz m8!");
         	});
         server.start();
     }

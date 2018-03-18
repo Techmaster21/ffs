@@ -24,7 +24,7 @@ import com.corundumstudio.socketio.annotation.OnEvent;
  * @author Eric
  */
 @Component
-public class CuisineController {
+public class CuisineController implements SocketIOController {
 
     @Autowired
 	private CuisineRepository cuisineRepository;
@@ -41,6 +41,10 @@ public class CuisineController {
         this.server = server;
     }
     
+    public String getNamespace() {
+    		return "/users";
+    }
+    
     @OnEvent(value = "getAllCuisines")
     public void getAllCuisines(SocketIOClient client, AckRequest request, Integer data) {
         List<Cuisine> cuisines = (List<Cuisine>) cuisineRepository.findAll();
@@ -49,12 +53,12 @@ public class CuisineController {
     
     @OnEvent(value = "getCuisine")
     public void getCuisine(SocketIOClient client, AckRequest request, Integer data) {
-    	client.sendEvent("getCuisine", cuisineRepository.findOne(data));
+    		client.sendEvent("getCuisine", cuisineRepository.findOne(data));
     }
     
     @OnEvent(value = "deleteCuisine")
     public void deleteCuisine(SocketIOClient client, AckRequest request, Integer data){
-    	cuisineRepository.delete(data);
+    		cuisineRepository.delete(data);
     }
     
     @OnEvent(value = "saveCuisine")

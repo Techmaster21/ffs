@@ -24,7 +24,7 @@ import com.corundumstudio.socketio.annotation.OnEvent;
 
 
 @Component
-public class RecipeStepController {
+public class RecipeStepController implements SocketIOController {
 	
 	@Autowired
 	private RecipeStepRepository recipeStepRepository;
@@ -41,24 +41,28 @@ public class RecipeStepController {
         this.server = server;
     }
     
+    public String getNamespace() {
+		return "/users";
+    }
+    
     @OnEvent(value = "getRecipeStep")
     public void getRecipeStep(SocketIOClient client, AckRequest request, Integer data) {
-    	client.sendEvent("getRecipeStep", recipeStepRepository.findOne(data));
+    		client.sendEvent("getRecipeStep", recipeStepRepository.findOne(data));
     }
     
     @OnEvent(value = "getAllRecipeSteps")
-    public void getAllRecipeSteps(SocketIOClient client, AckRequest request, Integer data){
+    public void getAllRecipeSteps(SocketIOClient client, AckRequest request, Integer data) {
         List<RecipeStep> recipeSteps = (List<RecipeStep>) recipeStepRepository.findAll();
         client.sendEvent("getAllRecipeSteps", recipeSteps);
     }
     
     @OnEvent(value = "deleteRecipeStep")
-    public void deleteRecipeStep(SocketIOClient client, AckRequest request, Integer data){
-    	recipeStepRepository.delete(data);
+    public void deleteRecipeStep(SocketIOClient client, AckRequest request, Integer data) {
+    		recipeStepRepository.delete(data);
     }
     
     @OnEvent(value = "saveRecipeStep")
-    public void saveRecipeStep(SocketIOClient client, AckRequest request, RecipeStep data){
-    	recipeStepRepository.save(data);
+    public void saveRecipeStep(SocketIOClient client, AckRequest request, RecipeStep data) {
+    		recipeStepRepository.save(data);
     }
 }
