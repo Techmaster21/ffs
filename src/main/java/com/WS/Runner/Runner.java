@@ -13,7 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
-import com.WS.Controllers.RecipeController;
 import com.WS.Controllers.SocketIOController;
 import com.corundumstudio.socketio.SocketIOServer;
 
@@ -35,21 +34,23 @@ public class Runner implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-    		// This could probably all go (except server.start() of course) in the socketio config/server creation
+        // namespace stuff. It's here and not in the server creation because the controllers need the server to be
+    		// created already in order to be instantiated.
     		server.addNamespace("/users");
-    		// Scan for Socketio annotations
-    		for( SocketIOController c : controllers) {
-    			String namespace = c.getNamespace();
-    			if (!namespace.isEmpty()) {
-    				server.getNamespace(namespace).addListeners(c);
-    			} else {
-    				server.addListeners(c);
-    			}
-    		}
-    		server.getNamespace("/users").addConnectListener(client -> {
-    			// Authentication hooplah goes here
-    			System.out.println("You connected to the users namespace. Gratz m8!");
-        	});
+		// Scan for Socketio annotations
+		for( SocketIOController c : controllers) {
+			String namespace = c.getNamespace();
+			if (!namespace.isEmpty()) {
+				server.getNamespace(namespace).addListeners(c);
+			} else {
+				server.addListeners(c);
+			}
+		}
+		server.getNamespace("/users").addConnectListener(client -> {
+			// Authentication hooplah goes here
+			System.out.println("You connected to the users namespace. Gratz m8!");
+    		});
+		
         server.start();
     }
 

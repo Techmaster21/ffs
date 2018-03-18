@@ -24,6 +24,7 @@ import com.corundumstudio.socketio.annotation.OnEvent;
 @Component
 public class FfserController implements SocketIOController {   
 	private FfserRepository ffserRepository;
+	
     private final SocketIOServer server;
     private final Logger logger = LoggerFactory.getLogger(RecipeController.class);
 

@@ -13,6 +13,9 @@ On command line (in project root):
 To not build frontend on command line:
 ./mvnw clean install
 
+Note that you only have to build the frontend once if you are only testing the server. You can then build without
+-Pfront to your heart's desire.
+
 If you want Angular to constantly rebuild for dev purposes, you can still do that.
 Just go into the angular directory, and run "npm start". If you want to 
 be able to make calls to the backend, you will need to be running the server as well.
@@ -20,3 +23,6 @@ be able to make calls to the backend, you will need to be running the server as 
 Update:
 Added a new profile "prod" to maven build to use when building on the server. It will properly
 set socketio.
+
+Client-side socket.io version is 1.4.8 because according to an open issue on the netty-socket-io github page
+(and confirmed through personal tests), the connect event doesn't fire server-side for newer versions.

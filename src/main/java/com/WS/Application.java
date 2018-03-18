@@ -2,7 +2,6 @@ package com.WS;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Controller;
@@ -11,7 +10,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import com.corundumstudio.socketio.Configuration;
 import com.corundumstudio.socketio.SocketConfig;
 import com.corundumstudio.socketio.SocketIOServer;
-import com.corundumstudio.socketio.annotation.SpringAnnotationScanner;
 
 @SpringBootApplication
 @Controller
@@ -22,7 +20,7 @@ public class Application {
     public Application(@Value("${socketio.host}") final String host) {
         this.host = host;
     }
-
+    
     /**
      * Because Angular is a single page application and Apache Tomcat didn't get the memo, this forwards all non-static
      * (html, css, js, etc) paths to the root path (/) so that Angular can take it from there.
@@ -33,8 +31,13 @@ public class Application {
         return "forward:/";
     }
 
+    /**
+     * Creates and configures the socket.io server. 
+     * @return
+     */
     @Bean
     public SocketIOServer socketIOServer() {
+    		// configuration stuff
         Configuration config = new Configuration();
         config.setHostname(host);
         config.setPort(port);
@@ -42,6 +45,7 @@ public class Application {
         sockConfig.setReuseAddress(true);
         config.setSocketConfig(sockConfig);
         SocketIOServer server = new SocketIOServer(config);
+        
         return server;
     }
     

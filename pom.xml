@@ -80,8 +80,10 @@
         <dependency>
             <groupId>com.corundumstudio.socketio</groupId>
             <artifactId>netty-socketio</artifactId>
-            <version>1.7.7</version>
+            <version>1.7.14</version>
         </dependency>
+        <!-- Random dependencies for Josh's computer - because of Java 9 not including them by default anymore
+        even though no one else had problems-->
         <dependency>
             <groupId>javax.xml.bind</groupId>
             <artifactId>jaxb-api</artifactId>
@@ -106,6 +108,8 @@
     <build>
         <plugins>
             <plugin>
+                <!-- enforces maven version so that netbeans will download version 3.1.0 or newer with the right setting
+                selected. Necessary as one of the other plugins requires a maven version >= 3.1.0 -->
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-enforcer-plugin</artifactId>
                 <version>3.0.0-M1</version>
@@ -138,6 +142,7 @@
                 </configuration>
             </plugin>
             <plugin>
+                <!-- Builds the frontend -->
                 <groupId>com.github.eirslett</groupId>
                 <artifactId>frontend-maven-plugin</artifactId>
                 <version>1.6</version>
@@ -172,6 +177,7 @@
                 </executions>
             </plugin>
             <plugin>
+                <!-- copies the built frontend files into the resulting jar so the webserver can serve them -->
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-resources-plugin</artifactId>
                 <configuration>
