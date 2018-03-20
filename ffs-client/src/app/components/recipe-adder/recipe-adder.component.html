@@ -5,7 +5,7 @@
       <input matInput placeholder="Name" [(ngModel)]="recipe.name" name="name">
     </mat-form-field>
       <mat-form-field>
-        <mat-select placeholder="Cuisine" [(ngModel)]="recipe.cuisine" name="unit">
+        <mat-select placeholder="Cuisine" [(ngModel)]="recipe.cuisine" name="cuisine">
           <mat-option *ngFor="let cuisine of cuisines" [value]="cuisine">{{cuisine.name}}</mat-option>
         </mat-select>
       </mat-form-field>
