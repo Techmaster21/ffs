@@ -13,6 +13,12 @@
       <textarea matInput placeholder="Description" rows="4" cols="50"
                 [(ngModel)]="recipe.description" name="description"></textarea>
     </mat-form-field>
+    <mat-form-field class="recipe-full-width">
+      <input matInput placeholder="Prep Time" [(ngModel)]="recipe.prepTime" name="prepTime">
+    </mat-form-field>
+    <mat-form-field class="recipe-full-width">
+      <input matInput placeholder="Cook Time" [(ngModel)]="recipe.cookTime" name="cookTime">
+    </mat-form-field>
 
     <app-ingredients-viewer [(ingredients)]="recipe.ingredients" [canEdit]="true"></app-ingredients-viewer>
 
