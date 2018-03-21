@@ -6,18 +6,12 @@
     </mat-form-field>
       <mat-form-field>
         <mat-select placeholder="Cuisine" [compareWith]="compareCuisineFn" [(ngModel)]="recipe.cuisine" name="cuisine">
-          <mat-option *ngFor="let cuisine of cuisines" [value]="cuisine">{{cuisine.name}}</mat-option>
+          <mat-option *ngFor="let cuisine of cuisines" [value]="cuisine">{{ cuisine.name }}</mat-option>
         </mat-select>
       </mat-form-field>
     <mat-form-field class="recipe-full-width">
       <textarea matInput placeholder="Description" rows="4" cols="50"
                 [(ngModel)]="recipe.description" name="description"></textarea>
-    </mat-form-field>
-    <mat-form-field class="recipe-full-width">
-      <input matInput placeholder="Prep Time" [(ngModel)]="recipe.prepTime" name="prepTime">
-    </mat-form-field>
-    <mat-form-field class="recipe-full-width">
-      <input matInput placeholder="Cook Time" [(ngModel)]="recipe.cookTime" name="cookTime">
     </mat-form-field>
 
     <app-ingredients-viewer [(ingredients)]="recipe.ingredients" [canEdit]="true"></app-ingredients-viewer>
@@ -25,18 +19,18 @@
     <form class="ingredient-form" (ngSubmit)="addIngredient()" #ingredientForm="ngForm">
       <div>
         <mat-form-field>
-          <input matInput placeholder="Ingredient" [(ngModel)]="newIngredient.food.name" name="ingredient">
+          <input matInput placeholder="Ingredient" [(ngModel)]="newIngredient.food.name" name="ingredient" required>
         </mat-form-field>
         <mat-form-field>
-          <input matInput placeholder="Quantity" [(ngModel)]="newIngredient.quantity" name="quantity">
+          <input matInput placeholder="Quantity" [(ngModel)]="newIngredient.quantity" name="quantity" required>
         </mat-form-field>
         <mat-form-field>
-          <mat-select placeholder="Units" [(ngModel)]="newIngredient.unit" name="unit">
-            <mat-option *ngFor="let unit of units" [value]="unit">{{unit.name}}</mat-option>
+          <mat-select placeholder="Units" [(ngModel)]="newIngredient.unit" name="unit" required>
+            <mat-option *ngFor="let unit of units" [value]="unit">{{ unit.name }}</mat-option>
           </mat-select>
         </mat-form-field>
 
-        <button type="submit" mat-raised-button color="accent">Add Ingredient</button>
+        <button type="submit" [disabled]="ingredientForm.invalid || !checkValidUnits()" mat-raised-button color="accent">Add Ingredient</button>
       </div>
     </form>
 

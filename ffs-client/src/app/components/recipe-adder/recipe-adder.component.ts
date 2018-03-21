@@ -47,6 +47,10 @@ export class RecipeAdderComponent implements OnInit {
     this.location.back();
   }
 
+  checkValidUnits(): boolean {
+    return this.newIngredient.unit.name !== '';
+  }
+
   goBack(): void {
     this.location.back();
   }
@@ -69,6 +73,5 @@ export class RecipeAdderComponent implements OnInit {
       this.recipeService.getRecipe(+param)
         .subscribe(recipe => this.recipe = recipe);
   }
-
 
 }
