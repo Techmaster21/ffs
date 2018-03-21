@@ -5,7 +5,7 @@
       <input matInput placeholder="Name" [(ngModel)]="recipe.name" name="name">
     </mat-form-field>
       <mat-form-field>
-        <mat-select placeholder="Cuisine" [(ngModel)]="recipe.cuisine" name="cuisine">
+        <mat-select placeholder="Cuisine" [compareWith]="compareCuisineFn" [(ngModel)]="recipe.cuisine" name="cuisine">
           <mat-option *ngFor="let cuisine of cuisines" [value]="cuisine">{{cuisine.name}}</mat-option>
         </mat-select>
       </mat-form-field>
@@ -48,5 +48,6 @@
 
     <button type="button" mat-raised-button color="accent" (click)="goBack()">Cancel</button>
     <button type="submit" mat-raised-button color="primary">Submit</button>
+
   </form>
 </mat-card>

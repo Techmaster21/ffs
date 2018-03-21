@@ -51,6 +51,10 @@ export class RecipeAdderComponent implements OnInit {
     this.location.back();
   }
 
+  compareCuisineFn(c1: Cuisine, c2: Cuisine): boolean {
+    return c1.name === c2.name;
+  }
+
   ngOnInit(): void {
     this.recipeService.getAllUnits()
       .subscribe(units => {
@@ -65,4 +69,6 @@ export class RecipeAdderComponent implements OnInit {
       this.recipeService.getRecipe(+param)
         .subscribe(recipe => this.recipe = recipe);
   }
+
+
 }
