@@ -5,53 +5,57 @@
  */
 package com.WS.Controllers;
 
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.WS.Entity.Ffser;
-import com.WS.Repository.FfserRepository;
+import com.WS.Entity.Food;
+import com.WS.Entity.FoodDatabase;
+import com.WS.Entity.Recipe;
+import com.WS.Repository.FoodRepository;
 import com.corundumstudio.socketio.AckRequest;
 import com.corundumstudio.socketio.SocketIOClient;
 import com.corundumstudio.socketio.SocketIOServer;
 import com.corundumstudio.socketio.annotation.OnEvent;
-import org.springframework.web.client.RestTemplate;
 
 /**
  *
- * @author Eric
+ * @author Samuel
  */
 @Component
-public class FfserController implements SocketIOController {   
-	private FfserRepository ffserRepository;
+public class FoodDatabaseController implements SocketIOController {
 	
+	@Autowired
+	private FoodRepository foodDatabaseRepository;
+
     private final SocketIOServer server;
     private final Logger logger = LoggerFactory.getLogger(RecipeController.class);
 
-    public FfserController() {
+    public FoodDatabaseController() {
         this.server = null;
     }
-    
+
     @Autowired
-    public FfserController(SocketIOServer server) {
+    public FoodDatabaseController(SocketIOServer server) {
         this.server = server;
     }
     
     public String getNamespace() {
 		return "/users";
     }
-    
-    @OnEvent(value = "saveFfser")
-    public void saveFfser(SocketIOClient client, AckRequest request, Ffser data){
-	    	//TODO: Create Account
-	    	ffserRepository.save(data);
+
+
+    @OnEvent(value = "getFoodItemsByName")
+    public void getFoods(SocketIOClient client, AckRequest request, String data) {
+    	
     }
     
-    @OnEvent(value = "deleteFfser")
-    public void deleteFfser(SocketIOClient client, AckRequest request, Integer data){
-    		ffserRepository.delete(data);
+    @OnEvent(value = "getAllFoodItems")
+    public void getAllFoodItems(SocketIOClient client, AckRequest request, Integer data){
+//        List<FoodDatabase> foodItems = (List<FoodDatabase>) foodDatabaseRepository.findAll();
+//        client.sendEvent("getAllFoodItems", foodItems);
     }
-    
-    
 }
