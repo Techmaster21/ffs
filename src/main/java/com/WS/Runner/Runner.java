@@ -53,15 +53,18 @@ public class Runner implements CommandLineRunner {
         }
         server.getNamespace("/users").addConnectListener(client -> {
             String token = client.getHandshakeData().getSingleUrlParam("token");
-            String user = Jwts.parser()
-                    .setSigningKey(secret.getBytes())
-                    .parseClaimsJws(token)
-                    .getBody()
-                    .getSubject();
-            if(user == null){
+            if (token == null) {
                 client.disconnect();
+            } else {
+                String user = Jwts.parser()
+                        .setSigningKey(secret.getBytes())
+                        .parseClaimsJws(token)
+                        .getBody()
+                        .getSubject();
+                if (user == null) {
+                    client.disconnect();
+                }
             }
-            System.out.println("You connected to the users namespace. Gratz m8!");
         });
 
         server.start();
