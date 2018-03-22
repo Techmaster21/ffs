@@ -7,8 +7,12 @@
     <td>
       {{i+1}}
     </td>
-    <td>
+    <td *ngIf="!canEdit">
       {{step.step}}
+    </td>
+    <td *ngIf="canEdit">
+      <textarea matInput placeholder="Step" rows="2" cols="50"
+                [(ngModel)]="step.step" name="step"></textarea>
     </td>
     <td *ngIf="canEdit">
       <button type="button" mat-icon-button color="accent" (click)="removeStep(i)">

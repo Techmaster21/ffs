@@ -5,9 +5,10 @@
  */
 package com.WS.Entity;
 
-import java.sql.Time;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -21,9 +22,6 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import java.util.ArrayList;
-import java.util.List;
-import javax.persistence.CascadeType;
 
 /**
  *
@@ -49,10 +47,10 @@ public class Recipe {
     private Cuisine cuisine;
 
     @Column(name = "prep_time")
-    private Time prepTime;
+    private String prepTime;
 
     @Column(name = "cook_time")
-    private Time cookTime;
+    private String cookTime;
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "recipe")
     @JsonManagedReference
@@ -69,7 +67,7 @@ public class Recipe {
     public Recipe() {
     }
 
-    public Recipe(int id, String name, String description, Cuisine cuisine, Time prepTime, Time cookTime, Ffser ffser) {
+    public Recipe(int id, String name, String description, Cuisine cuisine, String prepTime, String cookTime, Ffser ffser) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -143,19 +141,19 @@ public class Recipe {
         this.cuisine = cuisine;
     }
 
-    public Time getPrepTime() {
+    public String getPrepTime() {
         return prepTime;
     }
 
-    public void setPrepTime(Time prepTime) {
+    public void setPrepTime(String prepTime) {
         this.prepTime = prepTime;
     }
 
-    public Time getCookTime() {
+    public String getCookTime() {
         return cookTime;
     }
 
-    public void setCookTime(Time cookTime) {
+    public void setCookTime(String cookTime) {
         this.cookTime = cookTime;
     }
 
