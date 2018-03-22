@@ -15,6 +15,8 @@ import org.springframework.stereotype.Component;
 
 import com.WS.Controllers.SocketIOController;
 import com.corundumstudio.socketio.SocketIOServer;
+import io.jsonwebtoken.Jwts;
+import org.springframework.beans.factory.annotation.Value;
 
 /**
  *
@@ -22,6 +24,9 @@ import com.corundumstudio.socketio.SocketIOServer;
  */
 @Component
 public class Runner implements CommandLineRunner {
+
+    @Value("${SECRET}")
+    private String secret;
 
     private final SocketIOServer server;
     @Autowired
@@ -35,22 +40,30 @@ public class Runner implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         // namespace stuff. It's here and not in the server creation because the controllers need the server to be
-    		// created already in order to be instantiated.
-    		server.addNamespace("/users");
-		// Scan for Socketio annotations
-		for( SocketIOController c : controllers) {
-			String namespace = c.getNamespace();
-			if (!namespace.isEmpty()) {
-				server.getNamespace(namespace).addListeners(c);
-			} else {
-				server.addListeners(c);
-			}
-		}
-		server.getNamespace("/users").addConnectListener(client -> {
-			// Authentication hooplah goes here
-			System.out.println("You connected to the users namespace. Gratz m8!");
-    		});
-		
+        // created already in order to be instantiated.
+        server.addNamespace("/users");
+        // Scan for Socketio annotations
+        for (SocketIOController c : controllers) {
+            String namespace = c.getNamespace();
+            if (!namespace.isEmpty()) {
+                server.getNamespace(namespace).addListeners(c);
+            } else {
+                server.addListeners(c);
+            }
+        }
+        server.getNamespace("/users").addConnectListener(client -> {
+            String token = client.getHandshakeData().getSingleUrlParam("token");
+            String user = Jwts.parser()
+                    .setSigningKey(secret.getBytes())
+                    .parseClaimsJws(token)
+                    .getBody()
+                    .getSubject();
+            if(user == null){
+                client.disconnect();
+            }
+            System.out.println("You connected to the users namespace. Gratz m8!");
+        });
+
         server.start();
     }
 

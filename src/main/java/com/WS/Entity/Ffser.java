@@ -14,7 +14,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import org.springframework.data.annotation.Transient;
 
 /**
  *
@@ -80,8 +79,6 @@ public class Ffser {
         hash = 29 * hash + this.id;
         return hash;
     }
-
-
 
     @Override
     public boolean equals(Object obj) {
