@@ -56,12 +56,16 @@ public class Runner implements CommandLineRunner {
             if (token == null) {
                 client.disconnect();
             } else {
-                String user = Jwts.parser()
-                        .setSigningKey(secret.getBytes())
-                        .parseClaimsJws(token)
-                        .getBody()
-                        .getSubject();
-                if (user == null) {
+                try {
+                    String user = Jwts.parser()
+                            .setSigningKey(secret.getBytes())
+                            .parseClaimsJws(token)
+                            .getBody()
+                            .getSubject();
+                    if (user == null) {
+                        client.disconnect();
+                    }
+                } catch (Exception e) {
                     client.disconnect();
                 }
             }
