@@ -26,11 +26,12 @@ public class Application {
      * (html, css, js, etc) paths to the root path (/) so that Angular can take it from there.
      * @return
      */
+    /*
     @GetMapping(value = "/{path:[^\\.]*}")
     public String redirect() {
         return "forward:/";
     }
-
+*/
     /**
      * Creates and configures the socket.io server. 
      * @return

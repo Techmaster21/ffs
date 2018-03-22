@@ -9,17 +9,20 @@ import com.WS.Entity.Ffser;
 import com.WS.Repository.FfserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import java.util.Date;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  *
  * @author Eric
  */
-@RequestMapping("/api/account")
+@RestController
+@RequestMapping(path = "/api/account")
 public class LoginController {
     @Value("${SECRET}")
     private String secret;
@@ -27,7 +30,7 @@ public class LoginController {
     
     @Autowired
     FfserRepository ffserRepository;
-    @RequestMapping(name = "/login", method = RequestMethod.POST)
+    @PostMapping("/login")
     public String login(Ffser ffser){
         Ffser ffserWithName = ffserRepository.findByUsername(ffser.getUsername());
         if (ffserWithName != null && ffserWithName.getPassword().equals(ffser.getPassword())){ 
@@ -40,8 +43,8 @@ public class LoginController {
         return "";
     }
     
-    @RequestMapping(name = "/singUp", method = RequestMethod.POST)
-    public boolean signUp(Ffser ffser){
+    @PostMapping("/signUp")
+    public boolean signUp(@RequestBody Ffser ffser){
         Ffser ffserWithName = ffserRepository.findByUsername(ffser.getUsername());
         if (ffserWithName == null) {
             ffserRepository.save(ffser);
