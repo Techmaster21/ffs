@@ -2,16 +2,22 @@
   <h1> Add Recipe </h1>
   <form class="recipe-form" (ngSubmit)="submitRecipe()" #recipeForm="ngForm">
     <mat-form-field class="recipe-full-width">
-      <input matInput placeholder="Name" [(ngModel)]="recipe.name" name="name">
+      <input matInput placeholder="Name" [(ngModel)]="recipe.name" name="name" required>
     </mat-form-field>
       <mat-form-field>
-        <mat-select placeholder="Cuisine" [(ngModel)]="recipe.cuisine" name="unit">
+        <mat-select placeholder="Cuisine" [(ngModel)]="recipe.cuisine" name="unit" required>
           <mat-option *ngFor="let cuisine of cuisines" [value]="cuisine">{{cuisine.name}}</mat-option>
         </mat-select>
       </mat-form-field>
     <mat-form-field class="recipe-full-width">
       <textarea matInput placeholder="Description" rows="4" cols="50"
                 [(ngModel)]="recipe.description" name="description"></textarea>
+    </mat-form-field>
+    <mat-form-field class="recipe-full-width">
+      <input matInput placeholder="Prep Time" [(ngModel)]="recipe.prepTime" name="prepTime">
+    </mat-form-field>
+    <mat-form-field class="recipe-full-width">
+      <input matInput placeholder="Cook Time" [(ngModel)]="recipe.cookTime" name="cookTime">
     </mat-form-field>
 
     <app-ingredients-viewer [(ingredients)]="recipe.ingredients" [canEdit]="true"></app-ingredients-viewer>
@@ -47,6 +53,6 @@
     </form>
 
     <button type="button" mat-raised-button color="accent" (click)="goBack()">Cancel</button>
-    <button type="submit" mat-raised-button color="primary">Submit</button>
+    <button [disabled]="recipeForm.invalid || recipe.cuisine.name === ''" type="submit" mat-raised-button color="primary">Submit</button>
   </form>
 </mat-card>
