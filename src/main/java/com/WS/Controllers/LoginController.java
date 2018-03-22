@@ -19,13 +19,15 @@ import org.springframework.beans.factory.annotation.Value;
  *
  * @author Eric
  */
+@RequestMapping("/api/account")
 public class LoginController {
     @Value("${SECRET}")
     private String secret;
     
+    
     @Autowired
     FfserRepository ffserRepository;
-    @RequestMapping(method = RequestMethod.POST)
+    @RequestMapping(name = "/login", method = RequestMethod.POST)
     public String login(Ffser ffser){
         Ffser ffserWithName = ffserRepository.findByUsername(ffser.getUsername());
         if (ffserWithName != null && ffserWithName.getPassword().equals(ffser.getPassword())){ 
@@ -38,7 +40,7 @@ public class LoginController {
         return "";
     }
     
-    @RequestMapping(method = RequestMethod.POST)
+    @RequestMapping(name = "/singUp", method = RequestMethod.POST)
     public boolean signUp(Ffser ffser){
         Ffser ffserWithName = ffserRepository.findByUsername(ffser.getUsername());
         if (ffserWithName == null) {
