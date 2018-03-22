@@ -22,6 +22,7 @@ import { RegisterGuard } from './guards/register.guard';
 import { HttpClientModule } from '@angular/common/http';
 import { StepsViewerComponent } from './components/steps-viewer/steps-viewer.component';
 import { SocketService } from './services/socket.service';
+import { PantryComponent } from './components/pantry/pantry.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { SocketService } from './services/socket.service';
     SchedulerComponent,
     CalendarComponent,
     ValidateEqualDirective,
-    StepsViewerComponent
+    StepsViewerComponent,
+    PantryComponent
   ],
   imports: [
     BrowserModule,

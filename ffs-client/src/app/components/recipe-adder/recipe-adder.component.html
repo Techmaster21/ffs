@@ -5,8 +5,9 @@
       <input matInput placeholder="Name" [(ngModel)]="recipe.name" name="name" required>
     </mat-form-field>
       <mat-form-field>
-        <mat-select placeholder="Cuisine" [(ngModel)]="recipe.cuisine" name="unit" required>
-          <mat-option *ngFor="let cuisine of cuisines" [value]="cuisine">{{cuisine.name}}</mat-option>
+        <mat-select placeholder="Cuisine" [compareWith]="compareCuisineFn" [(ngModel)]="recipe.cuisine"
+                    name="cuisine" required>
+          <mat-option *ngFor="let cuisine of cuisines" [value]="cuisine">{{ cuisine.name }}</mat-option>
         </mat-select>
       </mat-form-field>
     <mat-form-field class="recipe-full-width">
@@ -25,18 +26,19 @@
     <form class="ingredient-form" (ngSubmit)="addIngredient()" #ingredientForm="ngForm">
       <div>
         <mat-form-field>
-          <input matInput placeholder="Ingredient" [(ngModel)]="newIngredient.food.name" name="ingredient">
+          <input matInput placeholder="Ingredient" [(ngModel)]="newIngredient.food.name" name="ingredient" required>
         </mat-form-field>
         <mat-form-field>
-          <input matInput placeholder="Quantity" [(ngModel)]="newIngredient.quantity" name="quantity">
+          <input matInput placeholder="Quantity" [(ngModel)]="newIngredient.quantity" name="quantity" required>
         </mat-form-field>
         <mat-form-field>
-          <mat-select placeholder="Units" [(ngModel)]="newIngredient.unit" name="unit">
-            <mat-option *ngFor="let unit of units" [value]="unit">{{unit.name}}</mat-option>
+          <mat-select placeholder="Units" [(ngModel)]="newIngredient.unit" name="unit" required>
+            <mat-option *ngFor="let unit of units" [value]="unit">{{ unit.name }}</mat-option>
           </mat-select>
         </mat-form-field>
 
-        <button type="submit" mat-raised-button color="accent">Add Ingredient</button>
+        <button type="submit" [disabled]="ingredientForm.invalid || !checkValidUnits()"
+                mat-raised-button color="accent">Add Ingredient</button>
       </div>
     </form>
 
@@ -53,6 +55,7 @@
     </form>
 
     <button type="button" mat-raised-button color="accent" (click)="goBack()">Cancel</button>
-    <button [disabled]="recipeForm.invalid || recipe.cuisine.name === ''" type="submit" mat-raised-button color="primary">Submit</button>
+    <button [disabled]="recipeForm.invalid || recipe.cuisine.name === ''" type="submit"
+            mat-raised-button color="primary">Submit</button>
   </form>
 </mat-card>
