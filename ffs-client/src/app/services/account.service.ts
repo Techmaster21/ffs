@@ -5,6 +5,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { FFSer } from '../models/ffser';
 import { of } from 'rxjs/observable/of';
 import { catchError } from 'rxjs/operators';
+import { Token } from '../models/token';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -12,8 +13,8 @@ const httpOptions = {
 
 @Injectable()
 export class AccountService {
-  private accountURL = 'api/account';  // URL to web api
-  private loginURL = 'api/login';  // URL to web api
+  private accountURL = 'api/account/signUp';  // URL to web api
+  private loginURL = 'api/account/login';  // URL to web api
 
   private token: string;
 
@@ -28,6 +29,10 @@ export class AccountService {
     this.token = token;
   }
 
+  getToken(): string {
+    return this.token;
+  }
+
   createAccount(user: FFSer, password: string): Observable<FFSer> {
     const userInfo = { username: user.username, password };
 
@@ -37,12 +42,12 @@ export class AccountService {
       );
   }
 
-  login(username: string, password: string): Observable<FFSer> {
+  login(username: string, password: string): Observable<Token> {
     const userInfo = { username, password };
 
-    return this.http.post<FFSer>(this.loginURL, userInfo, httpOptions)
+    return this.http.post<Token>(this.loginURL, userInfo, httpOptions)
       .pipe(
-        catchError(this.handleError<FFSer>('createAccount'))
+        catchError(this.handleError<Token>('createAccount'))
       );
   }
 

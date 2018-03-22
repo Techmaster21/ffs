@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+
+import java.io.UnsupportedEncodingException;
 import java.util.Date;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -31,16 +33,18 @@ public class LoginController {
     @Autowired
     FfserRepository ffserRepository;
     @PostMapping("/login")
-    public String login(Ffser ffser){
+    public Token login(@RequestBody Ffser ffser) throws UnsupportedEncodingException {
         Ffser ffserWithName = ffserRepository.findByUsername(ffser.getUsername());
-        if (ffserWithName != null && ffserWithName.getPassword().equals(ffser.getPassword())){ 
-                return Jwts.builder()
-                .setSubject(ffser.getUsername())
-                .setExpiration(new Date(System.currentTimeMillis() + 3600000))
-                .signWith(SignatureAlgorithm.HS512, secret)
-                .compact();
+        if (ffserWithName != null && ffserWithName.getPassword().equals(ffser.getPassword())){
+                Date expiration = new Date(System.currentTimeMillis() + 3600000);
+                String text = Jwts.builder()
+                        .setSubject(ffser.getUsername())
+                        .setExpiration(expiration)
+                        .signWith(SignatureAlgorithm.HS512, secret.getBytes("UTF-8"))
+                        .compact();
+                return new Token(text, expiration);
         }
-        return "";
+        return null;
     }
     
     @PostMapping("/signUp")

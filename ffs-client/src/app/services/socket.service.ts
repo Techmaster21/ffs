@@ -4,6 +4,7 @@ import { environment } from '../../environments/environment';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/share';
 import Socket = SocketIOClient.Socket;
+import { AccountService } from './account.service';
 
 // TODO make it use types for socket.io-client stuff
 // TODO it's possible this whole service is mostly unnecessary, since socketio might reuse by default. It would then
@@ -13,14 +14,17 @@ export class SocketService {
   defaultSocket: NgSocket;
   namespaces = {};
 
-  constructor() {
-    this.defaultSocket = new NgSocket(io(environment.socketUrl));
+  constructor(private accountService: AccountService) {
+    // TODO this is probably bad programming design since it depends on accountService being called before this, without
+    // really requiring it or checking
+    this.defaultSocket = new NgSocket(io(environment.socketUrl, { query: `token=${this.accountService.getToken()}` }));
   }
 
   getSocket(namespace?: string): NgSocket {
     if (namespace) {
       if (!this.namespaces[namespace])
-        this.namespaces[namespace] = new NgSocket(io(`${environment.socketUrl}${namespace}`));
+        this.namespaces[namespace] = new NgSocket(io(`${environment.socketUrl}${namespace}`,
+          { query: `token=${this.accountService.getToken()}` }));
 
       return this.namespaces[namespace];
     } else
