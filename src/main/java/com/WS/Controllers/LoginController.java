@@ -27,11 +27,10 @@ public class LoginController {
     @Value("${SECRET}")
     private String secret;
     
-    
     @Autowired
     FfserRepository ffserRepository;
     @PostMapping("/login")
-    public String login(Ffser ffser){
+    public String login(@RequestBody Ffser ffser){
         Ffser ffserWithName = ffserRepository.findByUsername(ffser.getUsername());
         if (ffserWithName != null && ffserWithName.getPassword().equals(ffser.getPassword())){ 
                 return Jwts.builder()
