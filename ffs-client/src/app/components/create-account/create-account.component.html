@@ -1,6 +1,6 @@
 <mat-card>
   <h1> Create Account </h1>
-  <form  #createAccountForm="ngForm" class="create-account-form">
+  <form  #createAccountForm="ngForm" (ngSubmit)="createAccount(username.value, password.value)" class="create-account-form">
     <mat-form-field class="createaccount-full-width">
       <input #username="ngModel" matInput id="username" name="username" [(ngModel)]="userName" placeholder="Username"
              required>
@@ -16,8 +16,7 @@
     <mat-error *ngIf="confirmedPassword.errors?.validateEqual">
       Passwords must match
     </mat-error>
-    <button [disabled]="createAccountForm.invalid" mat-button color="primary"
-            (click)="createAccount(username.value, password.value)" routerLink="/login">Create Account</button>
-    <button mat-button color="accent" routerLink="/login">Cancel</button>
+    <button [disabled]="createAccountForm.invalid" type="submit" mat-button color="primary">Create Account</button>
+    <button mat-button color="accent" type="button" routerLink="/login">Cancel</button>
   </form>
 </mat-card>

@@ -15,8 +15,10 @@ const httpOptions = {
 export class AccountService {
   private accountURL = 'api/account/signUp';  // URL to web api
   private loginURL = 'api/account/login';  // URL to web api
+  private user: string;
 
   private token: string;
+  private userName: string;
 
   constructor(private http: HttpClient) {
   }
@@ -33,12 +35,12 @@ export class AccountService {
     return this.token;
   }
 
-  createAccount(user: FFSer, password: string): Observable<FFSer> {
+  createAccount(user: FFSer, password: string): Observable<boolean> {
     const userInfo = { username: user.username, password };
-
-    return this.http.post<FFSer>(this.accountURL, userInfo, httpOptions)
+    console.log('test');
+    return this.http.post<boolean>(this.accountURL, userInfo, httpOptions)
       .pipe(
-        catchError(this.handleError<FFSer>('createAccount'))
+        catchError(this.handleError<boolean>('createAccount'))
       );
   }
 
@@ -49,6 +51,14 @@ export class AccountService {
       .pipe(
         catchError(this.handleError<Token>('createAccount'))
       );
+  }
+
+  setUser(username: string): void {
+    this.userName = username;
+  }
+
+  getUser(): string {
+    return this.userName;
   }
 
   /**

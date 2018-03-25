@@ -6,6 +6,7 @@
 package com.WS.Controllers;
 
 import com.WS.Entity.Ffser;
+import com.WS.Entity.Permission;
 import com.WS.Repository.FfserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -49,6 +50,10 @@ public class LoginController {
     
     @PostMapping("/signUp")
     public boolean signUp(@RequestBody Ffser ffser){
+        Permission p = new Permission();
+        p.setId(2);
+        p.setTitle("basic");
+        ffser.setPermission(p);
         Ffser ffserWithName = ffserRepository.findByUsername(ffser.getUsername());
         if (ffserWithName == null) {
             ffserRepository.save(ffser);
