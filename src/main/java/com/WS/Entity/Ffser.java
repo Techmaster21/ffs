@@ -6,6 +6,8 @@
 package com.WS.Entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -32,7 +34,6 @@ public class Ffser {
     private String username;
     
     @Column(name="password")
-    @JsonIgnore
     private String password;
     
     @OneToOne
@@ -55,8 +56,6 @@ public class Ffser {
         this.permission = permission;
     }
 
-    
-
     public String getUsername() {
         return username;
     }
@@ -65,10 +64,12 @@ public class Ffser {
         this.username = username;
     }
 
+    @JsonIgnore
     public String getPassword() {
         return password;
     }
 
+    @JsonProperty
     public void setPassword(String password) {
         this.password = password;
     }

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FFSer } from '../../models/ffser';
 import { AccountService } from '../../services/account.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-create-account',
@@ -12,13 +13,20 @@ export class CreateAccountComponent {
   newPassword: string;
   confirmedNewPassword: string;
 
-  constructor(private accountService: AccountService) {
+  constructor(private router: Router, private accountService: AccountService) {
   }
 
-  createAccount(username: string, password: string): void {
+  createAccount(): void {
     let user: FFSer;
-    user = {username};
-    this.accountService.createAccount(user, password);
+    user = {username: this.userName}; // todo server should do this
+    this.accountService.createAccount(user, this.newPassword)
+      .subscribe(success => {
+        if (success)
+          this.router.navigate(['/login']);
+        else
+          console.log('fail');
+        }
+      );
   }
 
 }

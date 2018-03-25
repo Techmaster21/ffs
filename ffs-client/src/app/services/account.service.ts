@@ -5,6 +5,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { FFSer } from '../models/ffser';
 import { of } from 'rxjs/observable/of';
 import { catchError } from 'rxjs/operators';
+import { Token } from '../models/token';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -12,10 +13,12 @@ const httpOptions = {
 
 @Injectable()
 export class AccountService {
-  private accountURL = 'api/account';  // URL to web api
-  private loginURL = 'api/login';  // URL to web api
+  private accountURL = 'api/account/signUp';  // URL to web api
+  private loginURL = 'api/account/login';  // URL to web api
+  private user: string;
 
   private token: string;
+  private userName: string;
 
   constructor(private http: HttpClient) {
   }
@@ -28,22 +31,34 @@ export class AccountService {
     this.token = token;
   }
 
-  createAccount(user: FFSer, password: string): Observable<FFSer> {
-    const userInfo = { username: user.username, password };
+  getToken(): string {
+    return this.token;
+  }
 
-    return this.http.post<FFSer>(this.accountURL, userInfo, httpOptions)
+  createAccount(user: FFSer, password: string): Observable<boolean> {
+    const userInfo = { username: user.username, password };
+    console.log('test');
+    return this.http.post<boolean>(this.accountURL, userInfo, httpOptions)
       .pipe(
-        catchError(this.handleError<FFSer>('createAccount'))
+        catchError(this.handleError<boolean>('createAccount'))
       );
   }
 
-  login(username: string, password: string): Observable<FFSer> {
+  login(username: string, password: string): Observable<Token> {
     const userInfo = { username, password };
 
-    return this.http.post<FFSer>(this.loginURL, userInfo, httpOptions)
+    return this.http.post<Token>(this.loginURL, userInfo, httpOptions)
       .pipe(
-        catchError(this.handleError<FFSer>('createAccount'))
+        catchError(this.handleError<Token>('createAccount'))
       );
+  }
+
+  setUser(username: string): void {
+    this.userName = username;
+  }
+
+  getUser(): string {
+    return this.userName;
   }
 
   /**

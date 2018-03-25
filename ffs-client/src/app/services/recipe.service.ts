@@ -3,6 +3,7 @@ import { Observable } from 'rxjs/Observable';
 
 import { Recipe } from '../models/recipe';
 import { Unit } from '../models/unit';
+import { Ingredient } from '../models/ingredient';
 import { FFSer } from '../models/ffser';
 import { Cuisine } from '../models/cuisine';
 import { NgSocket, SocketService } from './socket.service';
@@ -54,5 +55,11 @@ export class RecipeService {
   createAccount(user: FFSer, password: string): void {
     const userInfo: [FFSer, string] = [user, password];
     this.socket.emit('createUser', userInfo);
+  }
+
+  getAllPantry(): Observable<Array<Ingredient>> {
+    this.socket.emit('getAllRecipes');
+
+    return this.socket.fromEvent<Array<Ingredient>>('getAllPantry');
   }
 }

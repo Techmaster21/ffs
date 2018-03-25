@@ -66,6 +66,7 @@ public class Runner implements CommandLineRunner {
                         client.disconnect();
                     }
                 } catch (Exception e) {
+                    System.out.println(e);
                     client.disconnect();
                 }
             }
