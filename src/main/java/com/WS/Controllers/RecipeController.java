@@ -63,6 +63,7 @@ public class RecipeController implements SocketIOController {
 
     @OnEvent(value = "saveRecipe")
     public void saveRecipe(SocketIOClient client, AckRequest request, Recipe data) {
+        recipeRepository.delete(data);
         recipeRepository.save(data);
     }
 

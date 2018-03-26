@@ -52,7 +52,7 @@ public class PantryController implements SocketIOController {
     }
 
     @OnEvent(value = "getPantry")
-    public void getRecipe(SocketIOClient client, AckRequest request, Integer data) {
+    public void getPantry(SocketIOClient client, AckRequest request, Integer data) {
         client.sendEvent("getPantry", pantryRepository.findByFfser(
                 this.getFfser(client.getHandshakeData().getSingleUrlParam("token"))));
     }

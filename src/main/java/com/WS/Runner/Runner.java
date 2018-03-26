@@ -14,6 +14,8 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
 import com.WS.Controllers.SocketIOController;
+import com.WS.Entity.FoodDatabase;
+import com.WS.Repository.FoodDatabaseRepository;
 import com.corundumstudio.socketio.SocketIOServer;
 import io.jsonwebtoken.Jwts;
 import org.springframework.beans.factory.annotation.Value;
@@ -36,6 +38,9 @@ public class Runner implements CommandLineRunner {
     public Runner(SocketIOServer server) {
         this.server = server;
     }
+    
+    @Autowired 
+    FoodDatabaseRepository databaseRepository;
 
     @Override
     public void run(String... args) throws Exception {
@@ -71,7 +76,9 @@ public class Runner implements CommandLineRunner {
                 }
             }
         });
-
+        for(FoodDatabase h: databaseRepository.findByNameContaining("butter")){
+            System.out.println(h.getName());
+        }
         server.start();
     }
 
