@@ -62,4 +62,12 @@ export class RecipeService {
 
     return this.socket.fromEvent<Array<Ingredient>>('getAllPantry');
   }
+  searchPantry(ingredientName: String): Observable<Array<Ingredient>> {
+    this.socket.emit('searchIngredient', ingredientName);
+
+    return this.socket.fromEvent<Array<Ingredient>>('searchIngredient');
+  }
+  addToPantry(ingredient: Ingredient): void {
+    this.socket.emit('addPantryEntry', ingredient);
+  }
 }
