@@ -28,6 +28,8 @@ public class PantryController implements SocketIOController {
     private PantryRepository pantryRepository;
     @Autowired 
     private FfserRepository ffserRepository;
+    @Autowired
+    private LoginController loginController;
     
     private final SocketIOServer server;
     private final Logger logger = LoggerFactory.getLogger(RecipeController.class);
@@ -49,7 +51,6 @@ public class PantryController implements SocketIOController {
     @OnEvent(value = "getPantry")
     public void getRecipe(SocketIOClient client, AckRequest request, Integer data) {
         client.sendEvent("getPantry", pantryRepository.findByFfser(
-                LoginController.getFfser(client.getHandshakeData().getSingleUrlParam("token"))));
+                loginController.getFfser(client.getHandshakeData().getSingleUrlParam("token"))));
     }
-
 }

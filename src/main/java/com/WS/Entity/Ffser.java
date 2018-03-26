@@ -37,7 +37,7 @@ public class Ffser {
     private String password;
     
     @OneToOne
-    @JoinColumn(name = "ffser_id", nullable = false)
+    @JoinColumn(name = "permission_id", nullable = false)
     private Permission permission;
 
     public int getId() {

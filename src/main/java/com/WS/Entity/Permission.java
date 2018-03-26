@@ -22,7 +22,7 @@ public class Permission {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Column(name = "permission_id")
     private int id;
     
     @Column(name = "title")

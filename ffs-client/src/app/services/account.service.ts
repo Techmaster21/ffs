@@ -13,7 +13,7 @@ const httpOptions = {
 
 @Injectable()
 export class AccountService {
-  private accountURL = 'api/account/signUp';  // URL to web api
+  private accountURL = 'api/account/signup';  // URL to web api
   private loginURL = 'api/account/login';  // URL to web api
   private user: string;
 
