@@ -28,10 +28,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(path = "/api/account")
 public class LoginController {
     @Value("${SECRET}")
-    private static String secret;
+    private String secret;
     
     @Autowired
-    private static FfserRepository ffserRepository;
+    private FfserRepository ffserRepository;
     @PostMapping("/login")
     public Token login(@RequestBody Ffser ffser) throws UnsupportedEncodingException {
         Ffser ffserWithName = ffserRepository.findByUsername(ffser.getUsername());
@@ -61,13 +61,5 @@ public class LoginController {
         return false;
         
     }
-    
-    public static Ffser getFfser(String token){
-        return ffserRepository.findByUsername(
-                            Jwts.parser()
-                            .setSigningKey(secret.getBytes())
-                            .parseClaimsJws(token)
-                            .getBody()
-                            .getSubject());
-    }
+
 }

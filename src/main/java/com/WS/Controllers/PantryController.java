@@ -5,6 +5,7 @@
  */
 package com.WS.Controllers;
 
+import com.WS.Entity.Ffser;
 import com.WS.Repository.FfserRepository;
 import com.WS.Repository.PantryRepository;
 import com.corundumstudio.socketio.AckRequest;
@@ -15,6 +16,7 @@ import io.jsonwebtoken.Jwts;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 /**
@@ -32,6 +34,9 @@ public class PantryController implements SocketIOController {
     private final SocketIOServer server;
     private final Logger logger = LoggerFactory.getLogger(RecipeController.class);
 
+    @Value("${SECRET}")
+    private String secret;
+    
     @Override
     public String getNamespace() {
         return "/users";
@@ -49,7 +54,16 @@ public class PantryController implements SocketIOController {
     @OnEvent(value = "getPantry")
     public void getRecipe(SocketIOClient client, AckRequest request, Integer data) {
         client.sendEvent("getPantry", pantryRepository.findByFfser(
-                LoginController.getFfser(client.getHandshakeData().getSingleUrlParam("token"))));
+                this.getFfser(client.getHandshakeData().getSingleUrlParam("token"))));
     }
 
+        
+    public Ffser getFfser(String token){
+        return ffserRepository.findByUsername(
+                            Jwts.parser()
+                            .setSigningKey(secret.getBytes())
+                            .parseClaimsJws(token)
+                            .getBody()
+                            .getSubject());
+    }
 }

@@ -27,7 +27,7 @@ import javax.persistence.Table;
 @Table(name = "pantry_items")
 public class PantryItem {
       @Id
-    @Column(name = "ingredient_id")
+    @Column(name = "pantry_item_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 

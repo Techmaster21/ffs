@@ -32,7 +32,7 @@ public class Pantry {
         
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Column(name = "pantry_id")
     private int id;
     
     @OneToOne
