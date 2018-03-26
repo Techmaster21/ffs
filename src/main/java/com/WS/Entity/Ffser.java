@@ -56,8 +56,6 @@ public class Ffser {
         this.permission = permission;
     }
 
-    
-
     public String getUsername() {
         return username;
     }
