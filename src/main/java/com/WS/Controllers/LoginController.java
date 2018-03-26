@@ -30,7 +30,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(path = "/api/account")
 public class LoginController {
     @Value("${SECRET}")
-    private static String secret;
+    private String secret;
     
     @Autowired
     private FfserRepository ffserRepository;
