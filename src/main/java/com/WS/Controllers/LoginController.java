@@ -9,6 +9,7 @@ import com.WS.Entity.Ffser;
 import com.WS.Entity.Permission;
 import com.WS.Repository.FfserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestMapping;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -24,6 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
  *
  * @author Eric
  */
+@Component
 @RestController
 @RequestMapping(path = "/api/account")
 public class LoginController {
@@ -47,7 +49,7 @@ public class LoginController {
         return null;
     }
     
-    @PostMapping("/signUp")
+    @PostMapping("/signup")
     public boolean signUp(@RequestBody Ffser ffser){
         Permission p = new Permission();
         p.setId(2);
@@ -61,5 +63,4 @@ public class LoginController {
         return false;
         
     }
-
 }
