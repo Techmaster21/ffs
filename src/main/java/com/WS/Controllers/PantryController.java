@@ -28,15 +28,17 @@ public class PantryController implements SocketIOController {
 
     @Autowired
     private PantryRepository pantryRepository;
-    @Autowired 
+    @Autowired
     private FfserRepository ffserRepository;
-    
+    @Autowired
+    LoginController loginController;
+
     private final SocketIOServer server;
     private final Logger logger = LoggerFactory.getLogger(RecipeController.class);
 
     @Value("${SECRET}")
     private String secret;
-    
+
     @Override
     public String getNamespace() {
         return "/users";
@@ -54,16 +56,7 @@ public class PantryController implements SocketIOController {
     @OnEvent(value = "getPantry")
     public void getPantry(SocketIOClient client, AckRequest request, Integer data) {
         client.sendEvent("getPantry", pantryRepository.findByFfser(
-                this.getFfser(client.getHandshakeData().getSingleUrlParam("token"))));
+                loginController.getFfser(client.getHandshakeData().getSingleUrlParam("token"))));
     }
 
-        
-    public Ffser getFfser(String token){
-        return ffserRepository.findByUsername(
-                            Jwts.parser()
-                            .setSigningKey(secret.getBytes())
-                            .parseClaimsJws(token)
-                            .getBody()
-                            .getSubject());
-    }
 }

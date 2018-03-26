@@ -63,4 +63,13 @@ public class LoginController {
         return false;
         
     }
+            
+    public Ffser getFfser(String token){
+        return ffserRepository.findByUsername(
+                            Jwts.parser()
+                            .setSigningKey(secret.getBytes())
+                            .parseClaimsJws(token)
+                            .getBody()
+                            .getSubject());
+    }
 }
