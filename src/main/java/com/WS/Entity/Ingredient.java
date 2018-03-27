@@ -32,7 +32,8 @@ public class Ingredient {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    // foods don't cascade now because that made it work and maybe that makes sense?
+    @OneToOne
     @JoinColumn(name = "food_id", referencedColumnName = "NDB_No", nullable = false)
     private Food food;
     

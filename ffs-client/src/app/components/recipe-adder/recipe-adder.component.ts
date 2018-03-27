@@ -9,6 +9,8 @@ import { FFSer } from '../../models/ffser';
 import { Unit } from '../../models/unit';
 import { Step } from '../../models/step';
 import { Cuisine } from '../../models/cuisine';
+import { Food } from '../../models/food';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 @Component({
   selector: 'app-recipe-adder',
@@ -21,6 +23,10 @@ export class RecipeAdderComponent implements OnInit {
   recipe: Recipe;
   newIngredient: Ingredient;
   newStep: Step;
+  potentialIngredient: string;
+  searchResults: Array<Food>;
+  searchedFoodDataSource: BehaviorSubject<any>;
+  displayedSearchFoodsColumn: Array<string>;
 
   constructor(private router: Router,
               private recipeService: RecipeService,
@@ -29,6 +35,8 @@ export class RecipeAdderComponent implements OnInit {
     this.recipe = new Recipe();
     this.newIngredient = new Ingredient();
     this.newStep = new Step();
+    this.searchedFoodDataSource = new BehaviorSubject<any>(this.searchResults);
+    this.displayedSearchFoodsColumn = ['name', 'select'];
   }
 
   addIngredient(): void {
@@ -57,6 +65,23 @@ export class RecipeAdderComponent implements OnInit {
 
   compareCuisineFn(c1: Cuisine, c2: Cuisine): boolean {
     return c1.name === c2.name;
+  }
+
+  searchIngredient(): void {
+    console.log(this.potentialIngredient);
+    this.recipeService.searchFoods(this.potentialIngredient)
+      .subscribe(searchResults => {
+        this.searchResults = searchResults;
+        console.log(searchResults);
+        this.searchedFoodDataSource.next(this.searchResults);
+      });
+  }
+
+  selectForUse(food: Food): void {
+    this.newIngredient.food = food;
+    this.potentialIngredient = food.name;
+    this.searchResults = [];
+    this.searchedFoodDataSource.next(this.searchResults);
   }
 
   ngOnInit(): void {

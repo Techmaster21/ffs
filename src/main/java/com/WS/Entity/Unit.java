@@ -31,6 +31,10 @@ public class Unit {
     public Unit() {
     }
 
+    public Unit(String name) {
+        this.name = name;
+    }
+
     @Override
     public int hashCode() {
         int hash = 5;

@@ -5,7 +5,6 @@
  */
 package com.WS.Runner;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PreDestroy;
@@ -17,7 +16,6 @@ import org.springframework.stereotype.Component;
 import com.WS.Controllers.SocketIOController;
 import com.WS.Repository.FfserRepository;
 import com.WS.Repository.PantryItemsRepository;
-import com.WS.Repository.PantryRepository;
 import com.corundumstudio.socketio.SocketIOServer;
 import io.jsonwebtoken.Jwts;
 import org.springframework.beans.factory.annotation.Value;
@@ -40,6 +38,11 @@ public class Runner implements CommandLineRunner {
     public Runner(SocketIOServer server) {
         this.server = server;
     }
+    
+    @Autowired
+    private PantryItemsRepository pantryRepository;
+    @Autowired
+    private FfserRepository ffserRepository;
 
     @Override
     public void run(String... args) throws Exception {
@@ -75,6 +78,7 @@ public class Runner implements CommandLineRunner {
                 }
             }
         });
+        System.out.println(pantryRepository.findAll());
         server.start();
     }
 

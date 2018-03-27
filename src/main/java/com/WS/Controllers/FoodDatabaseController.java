@@ -81,16 +81,17 @@ public class FoodDatabaseController implements SocketIOController {
             }
             else{
             	int ind = foodItem.indexOf(data);
-            	if(!Character.isLetter(foodItem.charAt(ind - 1))){
-            		if(ind + dataLength < foodItem.length() && !Character.isLetter(foodItem.charAt(ind + dataLength))){
-            			foodsWithSingularWord.add(h);
-            			foods.remove(h);
-            		}
-            		else if(ind + dataLength == foodItem.length()){
-            			foodsWithSingularWord.add(h);
-            			foods.remove(h);
-            		}
-            	}
+            	if (ind != -1) {
+                    if (!Character.isLetter(foodItem.charAt(ind - 1))) {
+                        if (ind + dataLength < foodItem.length() && !Character.isLetter(foodItem.charAt(ind + dataLength))) {
+                            foodsWithSingularWord.add(h);
+                            foods.remove(h);
+                        } else if (ind + dataLength == foodItem.length()) {
+                            foodsWithSingularWord.add(h);
+                            foods.remove(h);
+                        }
+                    }
+                }
             }
         }
         foodDatabaseComparator fdc = new foodDatabaseComparator();
