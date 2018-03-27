@@ -23,6 +23,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { StepsViewerComponent } from './components/steps-viewer/steps-viewer.component';
 import { SocketService } from './services/socket.service';
 import { PantryComponent } from './components/pantry/pantry.component';
+import { LogoutComponent } from './components/logout/logout.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { PantryComponent } from './components/pantry/pantry.component';
     CalendarComponent,
     ValidateEqualDirective,
     StepsViewerComponent,
-    PantryComponent
+    PantryComponent,
+    LogoutComponent
   ],
   imports: [
     BrowserModule,

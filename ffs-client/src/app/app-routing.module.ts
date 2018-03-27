@@ -10,6 +10,7 @@ import { PantryComponent} from './components/pantry/pantry.component';
 import { CalendarComponent } from './components/calendar/calendar.component';
 import { RegisterGuard } from './guards/register.guard';
 import { SchedulerComponent } from './components/scheduler/scheduler.component';
+import { LogoutComponent } from './components/logout/logout.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -18,6 +19,7 @@ const routes: Routes = [
   { path: 'addrecipe/:id', component: RecipeAdderComponent, canActivate: [RegisterGuard] },
   { path: 'addrecipe', component: RecipeAdderComponent, canActivate: [RegisterGuard] },
   { path: 'login', component: LoginComponent },
+  { path: 'logout', component: LogoutComponent },
   { path: 'createaccount', component: CreateAccountComponent },
   { path: 'calendar', component: CalendarComponent, canActivate: [RegisterGuard] },
   {path: 'scheduler', component: SchedulerComponent, canActivate: [RegisterGuard]},

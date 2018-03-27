@@ -12,8 +12,6 @@ export class AppComponent {
   }
 
   getLoginStatus(): boolean {
-    // TODO use cookies to make refresh not make buttons disappear; until then will just return true
-    // return this.accountService.getLoginStatus();
-    return true;
+    return this.accountService.getLoginStatus();
   }
 }

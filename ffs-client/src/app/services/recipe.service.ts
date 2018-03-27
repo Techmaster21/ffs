@@ -59,7 +59,6 @@ export class RecipeService {
   }
 
   getAllPantry(): Observable<Pantry> {
-    console.log('calling pantry');
     this.socket.emit('getPantry');
 
     return this.socket.fromEvent<Pantry>('getPantry');

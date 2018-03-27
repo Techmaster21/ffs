@@ -24,7 +24,7 @@ export class AccountService {
   }
 
   getLoginStatus(): boolean {
-    return this.token ? true : false;
+    return this.getToken() ? true : false;
   }
 
   setToken(token: string): void {
