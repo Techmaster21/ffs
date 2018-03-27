@@ -58,6 +58,7 @@ public class FoodDatabaseController implements SocketIOController {
         List<Food> foodsStartingWith = new ArrayList<Food>();
         List<Food> foodsWithStrictlyWord = new ArrayList<Food>();
         List<Food> foodsWithSingularWord = new ArrayList<Food>();
+        data = data.toLowerCase();
         int dataLength = data.length();
         for(Food h: foodMaster){
         	String fi = h.getName();
@@ -81,15 +82,13 @@ public class FoodDatabaseController implements SocketIOController {
             }
             else{
             	int ind = foodItem.indexOf(data);
-            	if (ind != -1) {
-                    if (!Character.isLetter(foodItem.charAt(ind - 1))) {
-                        if (ind + dataLength < foodItem.length() && !Character.isLetter(foodItem.charAt(ind + dataLength))) {
-                            foodsWithSingularWord.add(h);
-                            foods.remove(h);
-                        } else if (ind + dataLength == foodItem.length()) {
-                            foodsWithSingularWord.add(h);
-                            foods.remove(h);
-                        }
+                if (!Character.isLetter(foodItem.charAt(ind - 1))) {
+                    if (ind + dataLength < foodItem.length() && !Character.isLetter(foodItem.charAt(ind + dataLength))) {
+                        foodsWithSingularWord.add(h);
+                        foods.remove(h);
+                    } else if (ind + dataLength == foodItem.length()) {
+                        foodsWithSingularWord.add(h);
+                        foods.remove(h);
                     }
                 }
             }
