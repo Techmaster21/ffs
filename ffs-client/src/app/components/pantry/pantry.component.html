@@ -18,7 +18,7 @@
 
     <!-- Unit Column -->
     <ng-container matColumnDef="units">
-      <mat-header-cell *matHeaderCellDef> Quantity</mat-header-cell>
+      <mat-header-cell *matHeaderCellDef> Units</mat-header-cell>
       <mat-cell *matCellDef="let pantryItem"> {{ pantryItem.unit.name }}</mat-cell>
     </ng-container>
 
@@ -42,20 +42,21 @@
   <p>Add Item</p>
   <input matInput placeholder="Ingredient" [(ngModel)]="ingredientName" name="Ingredient" required>
   <button mat-icon-button color="accent" (click)="searchIngredient()">Search</button>
-  <mat-table #table [dataSource]="searchedIngredientDataSource">
+  <mat-table #table [dataSource]="searchedFoodDataSource">
     <ng-container matColumnDef="name">
       <mat-header-cell *matHeaderCellDef> Name</mat-header-cell>
-      <mat-cell *matCellDef="let ingredient"> {{ ingredient.name }}</mat-cell>
+      <mat-cell *matCellDef="let food"> {{ food.name }}</mat-cell>
     </ng-container>
     <!-- Select Column -->
     <ng-container matColumnDef="select">
       <mat-header-cell *matHeaderCellDef></mat-header-cell>
-      <mat-cell *matCellDef="let i=index; let ingredient">
-        <button mat-icon-button color="accent" (click)="selectForUse(ingredient)">
+      <mat-cell *matCellDef="let i=index; let food">
+        <button mat-icon-button color="accent" (click)="selectForUse(food)">
           Select
         </button>
       </mat-cell>
     </ng-container>
-    <mat-header-row *matHeaderRowDef="displayedSearchIngredientsColumn"></mat-header-row>
+    <mat-header-row *matHeaderRowDef="displayedSearchFoodsColumn"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedSearchFoodsColumn;"></mat-row>
   </mat-table>
 </mat-card>
