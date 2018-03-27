@@ -54,7 +54,7 @@ public class PantryController implements SocketIOController {
     }
 
     @OnEvent(value = "getPantry")
-    public void getPantry(SocketIOClient client, AckRequest request, Integer data) {
+    public void getPantry(SocketIOClient client, AckRequest request) {
         client.sendEvent("getPantry", pantryRepository.findByFfser(
                 loginController.getFfser(client.getHandshakeData().getSingleUrlParam("token"))));
     }

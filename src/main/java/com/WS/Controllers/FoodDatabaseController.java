@@ -13,7 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.WS.Entity.Food;
-import com.WS.Entity.FoodDatabase;
+import com.WS.Entity.Food;
 import com.WS.Entity.Recipe;
 import com.WS.Repository.FoodRepository;
 import com.corundumstudio.socketio.AckRequest;
