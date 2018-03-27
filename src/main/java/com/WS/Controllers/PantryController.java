@@ -63,6 +63,7 @@ public class PantryController implements SocketIOController {
     
     @OnEvent(value = "savePantry")
     public void updatePantry(SocketIOClient client, AckRequest request, Pantry data){
+        System.out.println("cheeeeeeeeeeeseburger");
     	data.setFfser(loginController.getFfser(client.getHandshakeData().getSingleUrlParam("token")));
     	pantryRepository.delete(data);
     	pantryRepository.save(data);
