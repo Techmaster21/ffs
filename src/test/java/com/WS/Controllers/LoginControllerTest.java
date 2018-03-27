@@ -2,6 +2,7 @@ package com.WS.Controllers;
 
 import com.WS.Entity.Ffser;
 import com.WS.Entity.Permission;
+import com.corundumstudio.socketio.SocketIOClient;
 import com.corundumstudio.socketio.SocketIOServer;
 import org.junit.*;
 import org.junit.runner.*;

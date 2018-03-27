@@ -23,7 +23,9 @@ import org.springframework.web.client.RestTemplate;
  * @author Eric
  */
 @Component
-public class FfserController implements SocketIOController {   
+public class FfserController implements SocketIOController {
+
+    @Autowired
 	private FfserRepository ffserRepository;
 	
     private final SocketIOServer server;

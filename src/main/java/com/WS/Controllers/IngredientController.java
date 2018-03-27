@@ -26,7 +26,9 @@ import org.springframework.stereotype.Component;
 @Component
 public class IngredientController implements SocketIOController {
 
+    @Autowired
     private IngredientRepository ingredientRepository;
+
     private final SocketIOServer server;
     private final Logger logger = LoggerFactory.getLogger(RecipeController.class);
 
