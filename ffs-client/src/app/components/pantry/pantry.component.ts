@@ -5,6 +5,7 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Ingredient } from '../../models/ingredient';
 import { Pantry } from '../../models/pantry';
 import { Pantryitem } from '../../models/pantryitem';
+import { Food } from '../../models/food';
 
 @Component({
   selector: 'app-pantry',
@@ -13,16 +14,17 @@ import { Pantryitem } from '../../models/pantryitem';
 })
 export class PantryComponent implements OnInit {
   dataSource: BehaviorSubject<any>;
-  searchedIngredientDataSource: BehaviorSubject<any>;
+  searchedFoodDataSource: BehaviorSubject<any>;
   displayedPantryColumns: Array<string>;
-  displayedSearchIngredientsColumn: Array<string>;
+  displayedSearchFoodsColumn: Array<string>;
   pantry: Pantry;
   pantryItems: Array<Pantryitem>;
   ingredientName: String;
-  searchResults: Array<Ingredient>;
+  searchResults: Array<Food>;
 
   constructor(private recipeService: RecipeService, private route: ActivatedRoute) {
     this.dataSource = new BehaviorSubject<any>(this.pantryItems);
+    this.searchedFoodDataSource = new BehaviorSubject<any>(this.searchResults);
   }
 
   ngOnInit(): void {
@@ -34,19 +36,22 @@ export class PantryComponent implements OnInit {
         }
       );
     this.displayedPantryColumns = ['name', 'quantity', 'units', 'delete'];
-    this.displayedSearchIngredientsColumn = ['name', 'select'];
+    this.displayedSearchFoodsColumn = ['name', 'select'];
   }
 
   searchIngredient(): void {
-    this.recipeService.searchPantry(this.ingredientName)
+    this.recipeService.searchFoods(this.ingredientName)
       .subscribe(searchResults => {
         this.searchResults = searchResults;
-        this.searchedIngredientDataSource.next(this.searchResults);
+        this.searchedFoodDataSource.next(this.searchResults);
       });
+    console.log(this.searchedFoodDataSource);
   }
 
   selectForUse(ingredient: Ingredient): void {
     this.recipeService.addToPantry(ingredient);
   }
-  removePantryItem(pantryItem: Pantryitem): void {}
+  removePantryItem(pantryItem: Pantryitem): void {
+    this.recipeService.removePantryItem(pantryItem);
+  }
 }

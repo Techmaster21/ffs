@@ -8,6 +8,8 @@ import { FFSer } from '../models/ffser';
 import { Cuisine } from '../models/cuisine';
 import { NgSocket, SocketService } from './socket.service';
 import { Pantry } from '../models/pantry';
+import { Pantryitem } from '../models/pantryitem';
+import { Food } from '../models/food';
 
 @Injectable()
 export class RecipeService {
@@ -64,12 +66,15 @@ export class RecipeService {
 
     return this.socket.fromEvent<Pantry>('getPantry');
   }
-  searchPantry(ingredientName: String): Observable<Array<Ingredient>> {
-    this.socket.emit('searchIngredient', ingredientName);
+  searchFoods(ingredientName: String): Observable<Array<Food>> {
+    this.socket.emit('getFoodItemsByName', ingredientName);
 
-    return this.socket.fromEvent<Array<Ingredient>>('searchIngredient');
+    return this.socket.fromEvent<Array<Food>>('getFoodItemsByName');
   }
   addToPantry(ingredient: Ingredient): void {
     this.socket.emit('addPantryEntry', ingredient);
+  }
+  removePantryItem(pantryItem: Pantryitem): void {
+    this.socket.emit('removeFromPantry', pantryItem);
   }
 }
