@@ -67,18 +67,15 @@ public class FoodDatabaseController implements SocketIOController {
             		if(Character.isSpaceChar(followingChar) || followingChar == ','){
             			foodsWithStrictlyWord.add(h);
             			foods.remove(h);
-            			continue;
             		}
             		else{
             			foodsStartingWith.add(h);
             			foods.remove(h);
-            			continue;
             		}
             	}
             	else{
             		foodsWithStrictlyWord.add(h);
             		foods.remove(h);
-            		continue;
             	}
             }
             else{
@@ -87,12 +84,10 @@ public class FoodDatabaseController implements SocketIOController {
             		if(ind + dataLength < foodItem.length() && !Character.isLetter(foodItem.charAt(ind + dataLength))){
             			foodsWithSingularWord.add(h);
             			foods.remove(h);
-            			continue;
             		}
             		else if(ind + dataLength == foodItem.length()){
             			foodsWithSingularWord.add(h);
             			foods.remove(h);
-            			continue;
             		}
             	}
             }
