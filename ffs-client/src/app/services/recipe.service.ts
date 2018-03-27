@@ -70,8 +70,8 @@ export class RecipeService {
 
     return this.socket.fromEvent<Array<Food>>('getFoodItemsByName');
   }
-  addToPantry(ingredient: Ingredient): void {
-    this.socket.emit('addPantryEntry', ingredient);
+  addPantry(pantry: Pantry): void {
+    this.socket.emit('savePantry', pantry);
   }
   removePantryItem(pantryItem: Pantryitem): void {
     this.socket.emit('removeFromPantry', pantryItem);

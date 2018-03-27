@@ -21,6 +21,7 @@ export class PantryComponent implements OnInit {
   pantryItems: Array<Pantryitem>;
   ingredientName: String;
   searchResults: Array<Food>;
+  pantryItem: Pantryitem;
 
   constructor(private recipeService: RecipeService, private route: ActivatedRoute) {
     this.dataSource = new BehaviorSubject<any>(this.pantryItems);
@@ -45,11 +46,14 @@ export class PantryComponent implements OnInit {
         this.searchResults = searchResults;
         this.searchedFoodDataSource.next(this.searchResults);
       });
-    console.log(this.searchedFoodDataSource);
   }
 
-  selectForUse(ingredient: Ingredient): void {
-    this.recipeService.addToPantry(ingredient);
+  selectForUse(food: Food): void {
+    this.pantryItem = {food, unit: {name: 'no unit', id: 3}, quantity: 0 };
+    this.pantry.items.push(this.pantryItem);
+    this.dataSource.next(this.pantryItems);
+    console.log(this.pantry);
+    this.recipeService.addPantry(this.pantry);
   }
   removePantryItem(pantryItem: Pantryitem): void {
     this.recipeService.removePantryItem(pantryItem);
