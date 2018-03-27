@@ -31,7 +31,7 @@ public class PantryItem {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne()
     @JoinColumn(name = "food_id", referencedColumnName = "NDB_No", nullable = false)
     private Food food;
     
@@ -122,9 +122,6 @@ public class PantryItem {
         }
         return true;
     }
-    
-    
-
     
     
 }
