@@ -31,7 +31,7 @@ public class Application {
     public String redirect() {
         return "forward:/";
     }
-    
+
     /**
      * Creates and configures the socket.io server. 
      * @return
