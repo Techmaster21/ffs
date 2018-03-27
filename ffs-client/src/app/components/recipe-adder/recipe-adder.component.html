@@ -26,7 +26,7 @@
     <form class="ingredient-form" (ngSubmit)="addIngredient()" #ingredientForm="ngForm">
       <div>
         <mat-form-field>
-          <input matInput placeholder="Ingredient" [(ngModel)]="newIngredient.food.name" name="ingredient" required>
+          <input matInput placeholder="Ingredient" [(ngModel)]="potentialIngredient" name="ingredient" required>
         </mat-form-field>
         <mat-form-field>
           <input matInput placeholder="Quantity" [(ngModel)]="newIngredient.quantity" name="quantity" required>
@@ -39,6 +39,26 @@
 
         <button type="submit" [disabled]="ingredientForm.invalid || !checkValidUnits()"
                 mat-raised-button color="accent">Add Ingredient</button>
+        <div>
+          <button mat-button type="button" color="accent" (click)="searchIngredient()">Search</button>
+          <mat-table #table [dataSource]="searchedFoodDataSource">
+            <ng-container matColumnDef="name">
+              <mat-header-cell *matHeaderCellDef> Name</mat-header-cell>
+              <mat-cell *matCellDef="let food"> {{ food.name }}</mat-cell>
+            </ng-container>
+            <!-- Select Column -->
+            <ng-container matColumnDef="select">
+              <mat-header-cell *matHeaderCellDef></mat-header-cell>
+              <mat-cell *matCellDef="let i=index; let food">
+                <button type="button" mat-button color="accent" (click)="selectForUse(food)">
+                  Select
+                </button>
+              </mat-cell>
+            </ng-container>
+            <mat-header-row *matHeaderRowDef="displayedSearchFoodsColumn"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedSearchFoodsColumn;"></mat-row>
+          </mat-table>
+        </div>
       </div>
     </form>
 

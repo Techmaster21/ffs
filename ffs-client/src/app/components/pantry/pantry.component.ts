@@ -45,7 +45,6 @@ export class PantryComponent implements OnInit {
         this.searchResults = searchResults;
         this.searchedFoodDataSource.next(this.searchResults);
       });
-    console.log(this.searchedFoodDataSource);
   }
 
   selectForUse(ingredient: Ingredient): void {
