@@ -26,7 +26,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "pantry_items")
 public class PantryItem {
-      @Id
+    @Id
     @Column(name = "pantry_item_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;

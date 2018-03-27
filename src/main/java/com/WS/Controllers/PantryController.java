@@ -6,6 +6,8 @@
 package com.WS.Controllers;
 
 import com.WS.Entity.Ffser;
+import com.WS.Entity.Pantry;
+import com.WS.Entity.PantryItem;
 import com.WS.Repository.FfserRepository;
 import com.WS.Repository.PantryRepository;
 import com.corundumstudio.socketio.AckRequest;
@@ -54,9 +56,16 @@ public class PantryController implements SocketIOController {
     }
 
     @OnEvent(value = "getPantry")
-    public void getPantry(SocketIOClient client, AckRequest request, Integer data) {
+    public void getPantry(SocketIOClient client, AckRequest request) {
         client.sendEvent("getPantry", pantryRepository.findByFfser(
                 loginController.getFfser(client.getHandshakeData().getSingleUrlParam("token"))));
+    }
+    
+    @OnEvent(value = "savePantry")
+    public void updatePantry(SocketIOClient client, AckRequest request, Pantry data){
+    	data.setFfser(loginController.getFfser(client.getHandshakeData().getSingleUrlParam("token")));
+    	pantryRepository.delete(data);
+    	pantryRepository.save(data);
     }
 
 }

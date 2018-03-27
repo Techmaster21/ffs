@@ -1,5 +1,4 @@
 import { Pantryitem } from './pantryitem';
-import { Ingredient } from './ingredient';
 import { FFSer } from './ffser';
 
 export class Pantry {

@@ -15,8 +15,9 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
 import com.WS.Controllers.SocketIOController;
-import com.WS.Entity.FoodDatabase;
-import com.WS.Repository.FoodDatabaseRepository;
+import com.WS.Repository.FfserRepository;
+import com.WS.Repository.PantryItemsRepository;
+import com.WS.Repository.PantryRepository;
 import com.corundumstudio.socketio.SocketIOServer;
 import io.jsonwebtoken.Jwts;
 import org.springframework.beans.factory.annotation.Value;

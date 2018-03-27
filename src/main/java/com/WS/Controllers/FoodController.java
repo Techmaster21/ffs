@@ -26,9 +26,9 @@ import com.corundumstudio.socketio.annotation.OnEvent;
  */
 @Component
 public class FoodController implements SocketIOController {
-	
-	@Autowired
-	private FoodRepository foodRepository;
+
+    @Autowired
+    private FoodRepository foodRepository;
 
     private final SocketIOServer server;
     private final Logger logger = LoggerFactory.getLogger(RecipeController.class);
@@ -41,22 +41,21 @@ public class FoodController implements SocketIOController {
     public FoodController(SocketIOServer server) {
         this.server = server;
     }
-    
+
     public String getNamespace() {
-		return "/users";
+        return "/users";
     }
 
 //    @OnEvent(value = "saveFood")
 //    public void getFoods(SocketIOClient client, AckRequest request, Food data) {
 //        System.out.println(data);
 //    }
-
     @OnEvent(value = "getFoodsByName")
     public void getFoods(SocketIOClient client, AckRequest request, String data) {
-    	
+
     }
-    
-    public void getAllFoods(SocketIOClient client, AckRequest request, Integer data){
+
+    public void getAllFoods(SocketIOClient client, AckRequest request, Integer data) {
         List<Food> foods = (List<Food>) foodRepository.findAll();
         client.sendEvent("getAllFoods", foods);
     }
