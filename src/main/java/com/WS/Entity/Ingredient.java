@@ -33,7 +33,7 @@ public class Ingredient {
     private int id;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "food_id", nullable = false)
+    @JoinColumn(name = "food_id", referencedColumnName = "NDB_No", nullable = false)
     private Food food;
     
     @OneToOne
