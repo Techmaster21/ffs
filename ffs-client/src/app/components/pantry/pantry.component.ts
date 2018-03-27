@@ -3,6 +3,8 @@ import { RecipeService } from '../../services/recipe.service';
 import { ActivatedRoute } from '@angular/router';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Ingredient } from '../../models/ingredient';
+import { Pantry } from '../../models/pantry';
+import { Pantryitem } from '../../models/pantryitem';
 
 @Component({
   selector: 'app-pantry',
@@ -13,22 +15,26 @@ export class PantryComponent implements OnInit {
   dataSource: BehaviorSubject<any>;
   searchedIngredientDataSource: BehaviorSubject<any>;
   displayedPantryColumns: Array<string>;
-  ingredients: Array<Ingredient>;
+  displayedSearchIngredientsColumn: Array<string>;
+  pantry: Pantry;
+  pantryItems: Array<Pantryitem>;
   ingredientName: String;
   searchResults: Array<Ingredient>;
 
   constructor(private recipeService: RecipeService, private route: ActivatedRoute) {
-    this.dataSource = new BehaviorSubject<any>(this.ingredients);
+    this.dataSource = new BehaviorSubject<any>(this.pantryItems);
   }
 
   ngOnInit(): void {
     this.recipeService.getAllPantry()
-      .subscribe(ingredients => {
-          this.ingredients = ingredients;
-          this.dataSource.next(this.ingredients);
+      .subscribe(pantry => {
+        this.pantry = pantry;
+        this.pantryItems = pantry.items;
+        this.dataSource.next(this.pantryItems);
         }
       );
-    this.displayedPantryColumns = ['name', 'quantity', 'delete'];
+    this.displayedPantryColumns = ['name', 'quantity', 'units', 'delete'];
+    this.displayedSearchIngredientsColumn = ['name', 'select'];
   }
 
   searchIngredient(): void {
@@ -42,5 +48,5 @@ export class PantryComponent implements OnInit {
   selectForUse(ingredient: Ingredient): void {
     this.recipeService.addToPantry(ingredient);
   }
-
+  removePantryItem(pantryItem: Pantryitem): void {}
 }
