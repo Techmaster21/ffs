@@ -1,9 +1,9 @@
-import { PantryItem } from './pantryitem';
+import { Pantryitem } from './pantryitem';
 import { FFSer } from './ffser';
 
 export class Pantry {
   constructor(
-    public items: Array<PantryItem> = [],
-    public ffser?: FFSer
+  public items: Array<Pantryitem> = [],
+  public ffser: FFSer
   ) {}
 }

@@ -1,7 +1,7 @@
 import { Food } from './food';
 import { Unit } from './unit';
 
-export class PantryItem {
+export class Pantryitem {
   constructor(
     public food: Food = new Food(),
     public unit: Unit = new Unit(),
