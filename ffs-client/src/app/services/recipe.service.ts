@@ -7,6 +7,7 @@ import { Ingredient } from '../models/ingredient';
 import { FFSer } from '../models/ffser';
 import { Cuisine } from '../models/cuisine';
 import { NgSocket, SocketService } from './socket.service';
+import { Pantry } from '../models/pantry';
 
 @Injectable()
 export class RecipeService {
@@ -57,10 +58,11 @@ export class RecipeService {
     this.socket.emit('createUser', userInfo);
   }
 
-  getAllPantry(): Observable<Array<Ingredient>> {
-    this.socket.emit('getAllRecipes');
+  getAllPantry(): Observable<Pantry> {
+    console.log('calling pantry');
+    this.socket.emit('getPantry');
 
-    return this.socket.fromEvent<Array<Ingredient>>('getAllPantry');
+    return this.socket.fromEvent<Pantry>('getPantry');
   }
   searchPantry(ingredientName: String): Observable<Array<Ingredient>> {
     this.socket.emit('searchIngredient', ingredientName);

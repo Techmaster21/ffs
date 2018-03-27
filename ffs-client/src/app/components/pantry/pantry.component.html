@@ -7,26 +7,33 @@
     <!-- Name Column -->
     <ng-container matColumnDef="name">
       <mat-header-cell *matHeaderCellDef> Name</mat-header-cell>
-      <mat-cell *matCellDef="let ingredient"> {{ ingredient.name }}</mat-cell>
+      <mat-cell *matCellDef="let pantryItem"> {{ pantryItem.food.name }}</mat-cell>
     </ng-container>
 
     <!-- Quantity Column -->
     <ng-container matColumnDef="quantity">
       <mat-header-cell *matHeaderCellDef> Quantity</mat-header-cell>
-      <mat-cell *matCellDef="let ingredient"> {{ ingredient.description }}</mat-cell>
+      <mat-cell *matCellDef="let pantryItem"> {{ pantryItem.quantity }}</mat-cell>
+    </ng-container>
+
+    <!-- Unit Column -->
+    <ng-container matColumnDef="units">
+      <mat-header-cell *matHeaderCellDef> Quantity</mat-header-cell>
+      <mat-cell *matCellDef="let pantryItem"> {{ pantryItem.unit.name }}</mat-cell>
     </ng-container>
 
     <!-- Delete Column -->
     <ng-container matColumnDef="delete">
       <mat-header-cell *matHeaderCellDef><mat-icon aria-label="Delete">delete</mat-icon></mat-header-cell>
-      <mat-cell *matCellDef="let i=index; let recipe">
-        <button mat-icon-button color="accent" (click)="removeRecipe(recipe)">
+      <mat-cell *matCellDef="let i=index; let pantryItem">
+        <button mat-icon-button color="accent" (click)="removePantryItem(pantryItem)">
           <mat-icon aria-label="Delete">delete</mat-icon>
         </button>
       </mat-cell>
     </ng-container>
 
     <mat-header-row *matHeaderRowDef="displayedPantryColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedPantryColumns;"></mat-row>
   </mat-table>
 
 </mat-card>
@@ -49,6 +56,6 @@
         </button>
       </mat-cell>
     </ng-container>
-
+    <mat-header-row *matHeaderRowDef="displayedSearchIngredientsColumn"></mat-header-row>
   </mat-table>
 </mat-card>
