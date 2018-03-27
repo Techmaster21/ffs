@@ -5,6 +5,7 @@
  */
 package com.WS.Runner;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PreDestroy;
@@ -38,9 +39,6 @@ public class Runner implements CommandLineRunner {
     public Runner(SocketIOServer server) {
         this.server = server;
     }
-    
-    @Autowired 
-    FoodDatabaseRepository databaseRepository;
 
     @Override
     public void run(String... args) throws Exception {
@@ -76,9 +74,6 @@ public class Runner implements CommandLineRunner {
                 }
             }
         });
-        for(FoodDatabase h: databaseRepository.findByNameContaining("butter")){
-            System.out.println(h.getName());
-        }
         server.start();
     }
 
