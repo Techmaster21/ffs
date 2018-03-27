@@ -110,7 +110,7 @@ public class FoodDatabaseController implements SocketIOController {
         for(FoodDatabase e : finalList){
         	System.out.println(e.getName());
         }
-    	client.sendEvent("getFoodItemsByName", data);
+    	client.sendEvent("getFoodItemsByName", finalList);
     }
     
     @OnEvent(value = "getAllFoodItems")
