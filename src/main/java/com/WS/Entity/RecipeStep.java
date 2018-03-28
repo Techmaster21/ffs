@@ -27,7 +27,11 @@ public class RecipeStep {
     private Recipe recipe;
 
     public RecipeStep() {
+    }
 
+    public RecipeStep(String step, Recipe recipe) {
+        this.step = step;
+        this.recipe = recipe;
     }
 
     @Override

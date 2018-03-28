@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @Component
 @RestController
-@RequestMapping("/api/users")
+@RequestMapping("/api/ffser")
 public class FfserController {
 
     private final Logger logger = LoggerFactory.getLogger(FfserController.class);
@@ -27,13 +27,12 @@ public class FfserController {
     public FfserController() {
     }
 
-    @RequestMapping("/saveFfser")
-    public void saveFfser(@RequestBody Ffser ffser) {
-        ffserRepository.save(ffser);
-        // TODO should probably return something
+    @RequestMapping("/save")
+    public Ffser saveFfser(@RequestBody Ffser ffser) {
+        return ffserRepository.save(ffser);
     }
 
-    @RequestMapping("/deleteFfser")
+    @RequestMapping("/delete")
     public void deleteFfser(@RequestBody Integer id) {
         ffserRepository.deleteById(id);
         // TODO should probably return something

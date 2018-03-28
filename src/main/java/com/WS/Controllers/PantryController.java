@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @Component
 @RestController
-@RequestMapping("/api/users")
+@RequestMapping("/api/pantry")
 public class PantryController {
 
     private final Logger logger = LoggerFactory.getLogger(PantryController.class);
@@ -30,13 +30,13 @@ public class PantryController {
     }
 
     //TODO Maybe include token in headers and use to get user?
-    @RequestMapping("/getPantry")
+    @RequestMapping("/get")
     public void getPantry() {
 //        client.sendEvent("getPantry", pantryRepository.findByFfser(
 //                loginController.getFfser(client.getHandshakeData().getSingleUrlParam("token"))));
     }
 
-    @RequestMapping("/savePantry")
+    @RequestMapping("/save")
     public void updatePantry(@RequestBody Pantry pantry) {
 //    	data.setFfser(loginController.getFfser(client.getHandshakeData().getSingleUrlParam("token")));
 //    	pantryRepository.delete(data);

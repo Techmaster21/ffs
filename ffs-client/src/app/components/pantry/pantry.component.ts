@@ -29,7 +29,7 @@ export class PantryComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.recipeService.getAllPantry()
+    this.recipeService.getPantry()
       .subscribe(pantry => {
         this.pantry = pantry;
         this.pantryItems = pantry.items;
@@ -52,8 +52,7 @@ export class PantryComponent implements OnInit {
     this.pantryItem = {food, unit: {name: 'no unit', id: 3}, quantity: 0 };
     this.pantry.items.push(this.pantryItem);
     this.dataSource.next(this.pantryItems);
-    console.log(this.pantry);
-    this.recipeService.addPantry(this.pantry);
+    this.recipeService.savePantry(this.pantry);
   }
   removePantryItem(pantryItem: Pantryitem): void {
     this.recipeService.removePantryItem(pantryItem);

@@ -22,6 +22,10 @@ public class Permission {
     public Permission() {
     }
 
+    public Permission(String title) {
+        this.title = title;
+    }
+
     public int getId() {
         return id;
     }

@@ -19,7 +19,7 @@ import java.util.List;
 
 @Component
 @RestController
-@RequestMapping("/api/users")
+@RequestMapping("/api/ingredient")
 public class IngredientController {
 
     private final Logger logger = LoggerFactory.getLogger(IngredientController.class);
@@ -29,26 +29,25 @@ public class IngredientController {
     public IngredientController() {
     }
 
-    @RequestMapping("/getIngredient")
+    @RequestMapping("/get")
     public Ingredient getIngredient(@RequestBody Integer id) {
         return ingredientRepository.findById(id).get();
     }
 
-    @RequestMapping("/getAllIngredients")
+    @RequestMapping("/getAll")
     public List<Ingredient> getAllIngredients() {
         List<Ingredient> ingredients = (List<Ingredient>) ingredientRepository.findAll();
         return ingredients;
     }
 
-    @RequestMapping("/deleteIngredient")
+    @RequestMapping("/delete")
     public void deleteIngredient(@RequestBody Integer id) {
         ingredientRepository.deleteById(id);
         // TODO should probably return something
     }
 
-    @RequestMapping("/createIngredient")
-    public void createIngredient(@RequestBody Ingredient ingredient) {
-        ingredientRepository.save(ingredient);
-        // TODO should probably return something
+    @RequestMapping("/save")
+    public Ingredient createIngredient(@RequestBody Ingredient ingredient) {
+        return ingredientRepository.save(ingredient);
     }
 }

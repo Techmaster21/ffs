@@ -19,7 +19,7 @@ import java.util.List;
 
 @Component
 @RestController
-@RequestMapping("/api/users")
+@RequestMapping("/api/unit")
 public class UnitController {
 
     private final Logger logger = LoggerFactory.getLogger(UnitController.class);
@@ -29,24 +29,23 @@ public class UnitController {
     public UnitController() {
     }
 
-    @RequestMapping("/getAllUnits")
+    @RequestMapping("/getAll")
     public List<Unit> getAllUnits() {
         List<Unit> units = (List<Unit>) unitRepository.findAll();
         return units;
     }
 
-    @RequestMapping("/getUnit")
+    @RequestMapping("/get")
     public Unit getUnit(@RequestBody Integer id) {
         return unitRepository.findById(id).get();
     }
 
-    @RequestMapping("/saveUnit")
-    public void saveUnit(@RequestBody Unit data) {
-        unitRepository.save(data);
-        // TODO should probably return something
+    @RequestMapping("/save")
+    public Unit saveUnit(@RequestBody Unit data) {
+        return unitRepository.save(data);
     }
 
-    @RequestMapping("/deleteUnit")
+    @RequestMapping("/delete")
     public void deleteUnit(@RequestBody Integer id) {
         unitRepository.deleteById(id);
         // TODO should probably return something

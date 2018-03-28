@@ -20,7 +20,7 @@ import java.util.List;
 
 @Component
 @RestController
-@RequestMapping("/api/users")
+@RequestMapping("/api/recipe")
 public class RecipeController {
 
     private final Logger logger = LoggerFactory.getLogger(RecipeController.class);
@@ -32,25 +32,24 @@ public class RecipeController {
     public RecipeController() {
     }
 
-    @RequestMapping("/getRecipe")
+    @RequestMapping("/get")
     public Recipe getRecipe(@RequestBody Integer id) {
         return recipeRepository.findById(id).get();
     }
 
-    @RequestMapping("/getAllRecipes")
+    @RequestMapping("/getAll")
     public List<Recipe> getAllRecipes() {
         List<Recipe> recipes = (List<Recipe>) recipeRepository.findAll();
         return recipes;
     }
 
-    @RequestMapping("/saveRecipe")
-    public void saveRecipe(@RequestBody Recipe recipe) {
+    @RequestMapping("/save")
+    public Recipe saveRecipe(@RequestBody Recipe recipe) {
         recipeRepository.delete(recipe);
-        recipeRepository.save(recipe);
-        // TODO should probably return something
+        return recipeRepository.save(recipe);
     }
 
-    @RequestMapping("/deleteRecipe")
+    @RequestMapping("/delete")
     public void deleteRecipe(@RequestBody Integer id) {
         recipeRepository.deleteById(id);
         // TODO should probably return something

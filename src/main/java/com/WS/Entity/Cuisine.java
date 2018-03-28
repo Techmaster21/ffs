@@ -19,6 +19,10 @@ public class Cuisine {
     @Column(name = "cuisine_name")
     private String name;
 
+    public Cuisine(String name) {
+        this.name = name;
+    }
+
     public Cuisine() {
     }
 

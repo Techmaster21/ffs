@@ -10,14 +10,11 @@ import { Token } from '../models/token';
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
-export const TOKEN_NAME: string = 'jwt_token';
+export const TOKEN_NAME = 'jwt_token';
 @Injectable()
 export class AccountService {
   private accountURL = 'api/account/signup';  // URL to web api
   private loginURL = 'api/account/login';  // URL to web api
-  private user: string;
-
-  private token: string;
   private userName: string;
 
   constructor(private http: HttpClient) {
@@ -37,6 +34,7 @@ export class AccountService {
 
   createAccount(user: FFSer, password: string): Observable<boolean> {
     const userInfo = { username: user.username, password };
+
     return this.http.post<boolean>(this.accountURL, userInfo, httpOptions)
       .pipe(
         catchError(this.handleError<boolean>('createAccount'))
@@ -52,6 +50,7 @@ export class AccountService {
       );
   }
 
+  // TODO fix using tokens
   setUser(username: string): void {
     this.userName = username;
   }

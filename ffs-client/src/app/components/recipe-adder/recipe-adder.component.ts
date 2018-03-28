@@ -68,11 +68,9 @@ export class RecipeAdderComponent implements OnInit {
   }
 
   searchIngredient(): void {
-    console.log(this.potentialIngredient);
     this.recipeService.searchFoods(this.potentialIngredient)
       .subscribe(searchResults => {
         this.searchResults = searchResults;
-        console.log(searchResults);
         this.searchedFoodDataSource.next(this.searchResults);
       });
   }

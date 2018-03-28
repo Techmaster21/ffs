@@ -37,6 +37,11 @@ public class Pantry {
     public Pantry() {
     }
 
+    public Pantry(Ffser ffser, List<PantryItem> items) {
+        this.ffser = ffser;
+        this.items = items;
+    }
+
     public int getId() {
         return id;
     }

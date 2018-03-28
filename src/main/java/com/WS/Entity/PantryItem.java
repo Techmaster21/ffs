@@ -33,15 +33,14 @@ public class PantryItem {
     @JsonBackReference
     private Pantry pantry;
 
-    public PantryItem(int id, Food food, Unit unit, double quantity, Pantry pantry) {
-        this.id = id;
+    public PantryItem() {
+    }
+
+    public PantryItem(Food food, Unit unit, double quantity, Pantry pantry) {
         this.food = food;
         this.unit = unit;
         this.quantity = quantity;
         this.pantry = pantry;
-    }
-
-    public PantryItem() {
     }
 
     public int getId() {

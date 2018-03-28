@@ -38,8 +38,7 @@ public class Ingredient {
     public Ingredient() {
     }
 
-    public Ingredient(int ingredientId, Food food, Unit unit, double quantity, Recipe recipe) {
-        this.id = ingredientId;
+    public Ingredient(Food food, Unit unit, double quantity, Recipe recipe) {
         this.food = food;
         this.unit = unit;
         this.quantity = quantity;

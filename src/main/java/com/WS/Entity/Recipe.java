@@ -51,13 +51,15 @@ public class Recipe {
     public Recipe() {
     }
 
-    public Recipe(int id, String name, String description, Cuisine cuisine, String prepTime, String cookTime, Ffser ffser) {
-        this.id = id;
+    public Recipe(String name, String description, Cuisine cuisine, String prepTime, String cookTime,
+                  List<Ingredient> ingredients, List<RecipeStep> steps, Ffser ffser) {
         this.name = name;
         this.description = description;
         this.cuisine = cuisine;
         this.prepTime = prepTime;
         this.cookTime = cookTime;
+        this.ingredients = ingredients;
+        this.steps = steps;
         this.ffser = ffser;
     }
 

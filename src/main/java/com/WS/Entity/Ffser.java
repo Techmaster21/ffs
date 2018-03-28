@@ -29,6 +29,15 @@ public class Ffser {
     @JoinColumn(name = "permission_id", nullable = false)
     private Permission permission;
 
+    public Ffser() {
+    }
+
+    public Ffser(String username, String password, Permission permission) {
+        this.username = username;
+        this.password = password;
+        this.permission = permission;
+    }
+
     public int getId() {
         return id;
     }

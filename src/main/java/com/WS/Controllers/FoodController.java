@@ -20,7 +20,7 @@ import java.util.List;
 
 @Component
 @RestController
-@RequestMapping("/api/users")
+@RequestMapping("/api/food")
 public class FoodController {
 
     private final Logger logger = LoggerFactory.getLogger(FoodController.class);
@@ -30,7 +30,7 @@ public class FoodController {
     public FoodController() {
     }
 
-    @RequestMapping("/getFoodsByName")
+    @RequestMapping("/searchByName")
     public List<Food> getFoods(@RequestBody String name) {
         List<Food> foodMaster = foodRepository.findByNameContaining(name);
         List<Food> foods = new ArrayList<>(foodMaster);
