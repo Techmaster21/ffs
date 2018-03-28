@@ -5,68 +5,42 @@
  */
 package com.WS.Controllers;
 
-import com.WS.Entity.Ffser;
 import com.WS.Entity.Pantry;
-import com.WS.Entity.PantryItem;
-import com.WS.Repository.FfserRepository;
 import com.WS.Repository.PantryRepository;
-import com.corundumstudio.socketio.AckRequest;
-import com.corundumstudio.socketio.SocketIOClient;
-import com.corundumstudio.socketio.SocketIOServer;
-import com.corundumstudio.socketio.annotation.OnEvent;
-import io.jsonwebtoken.Jwts;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-/**
- *
- * @author Eric
- */
 @Component
-public class PantryController implements SocketIOController {
+@RestController
+@RequestMapping("/api/users")
+public class PantryController {
 
-    @Autowired
-    private PantryRepository pantryRepository;
-    @Autowired
-    private FfserRepository ffserRepository;
+    private final Logger logger = LoggerFactory.getLogger(PantryController.class);
     @Autowired
     LoginController loginController;
-
-    private final SocketIOServer server;
-    private final Logger logger = LoggerFactory.getLogger(RecipeController.class);
-
-    @Value("${SECRET}")
-    private String secret;
-
-    @Override
-    public String getNamespace() {
-        return "/users";
-    }
+    @Autowired
+    private PantryRepository pantryRepository;
 
     public PantryController() {
-        this.server = null;
     }
 
-    @Autowired
-    public PantryController(SocketIOServer server) {
-        this.server = server;
+    //TODO Maybe include token in headers and use to get user?
+    @RequestMapping("/getPantry")
+    public void getPantry() {
+//        client.sendEvent("getPantry", pantryRepository.findByFfser(
+//                loginController.getFfser(client.getHandshakeData().getSingleUrlParam("token"))));
     }
 
-    @OnEvent(value = "getPantry")
-    public void getPantry(SocketIOClient client, AckRequest request) {
-        client.sendEvent("getPantry", pantryRepository.findByFfser(
-                loginController.getFfser(client.getHandshakeData().getSingleUrlParam("token"))));
-    }
-    
-    @OnEvent(value = "savePantry")
-    public void updatePantry(SocketIOClient client, AckRequest request, Pantry data){
-        System.out.println("cheeeeeeeeeeeseburger");
-    	data.setFfser(loginController.getFfser(client.getHandshakeData().getSingleUrlParam("token")));
-    	pantryRepository.delete(data);
-    	pantryRepository.save(data);
+    @RequestMapping("/savePantry")
+    public void updatePantry(@RequestBody Pantry pantry) {
+//    	data.setFfser(loginController.getFfser(client.getHandshakeData().getSingleUrlParam("token")));
+//    	pantryRepository.delete(data);
+//    	pantryRepository.save(data);
     }
 
 }

@@ -7,62 +7,48 @@ package com.WS.Controllers;
 
 import com.WS.Entity.Ingredient;
 import com.WS.Repository.IngredientRepository;
-import com.corundumstudio.socketio.AckRequest;
-import com.corundumstudio.socketio.SocketIOClient;
-import com.corundumstudio.socketio.SocketIOServer;
-import com.corundumstudio.socketio.annotation.OnEvent;
-
-import java.util.List;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-/**
- *
- * @author Eric
- */
+import java.util.List;
+
 @Component
-public class IngredientController implements SocketIOController {
+@RestController
+@RequestMapping("/api/users")
+public class IngredientController {
 
+    private final Logger logger = LoggerFactory.getLogger(IngredientController.class);
     @Autowired
     private IngredientRepository ingredientRepository;
 
-    private final SocketIOServer server;
-    private final Logger logger = LoggerFactory.getLogger(RecipeController.class);
-
     public IngredientController() {
-        this.server = null;
     }
 
-    @Autowired
-    public IngredientController(SocketIOServer server) {
-        this.server = server;
+    @RequestMapping("/getIngredient")
+    public Ingredient getIngredient(@RequestBody Integer id) {
+        return ingredientRepository.findById(id).get();
     }
 
-    public String getNamespace() {
-        return "/users";
-    }
-
-    @OnEvent(value = "getIngredient")
-    public void getIngredient(SocketIOClient client, AckRequest request, Integer data) {
-        client.sendEvent("getIngredient", ingredientRepository.findOne(data));
-    }
-
-    @OnEvent(value = "getAllIngredients")
-    public void getAllIngredients(SocketIOClient client, AckRequest request, Integer data) {
+    @RequestMapping("/getAllIngredients")
+    public List<Ingredient> getAllIngredients() {
         List<Ingredient> ingredients = (List<Ingredient>) ingredientRepository.findAll();
-        client.sendEvent("getAllIngredients", ingredients);
+        return ingredients;
     }
 
-    @OnEvent(value = "deleteIngredient")
-    public void deleteIngredient(SocketIOClient client, AckRequest request, Integer data) {
-        ingredientRepository.delete(data);
+    @RequestMapping("/deleteIngredient")
+    public void deleteIngredient(@RequestBody Integer id) {
+        ingredientRepository.deleteById(id);
+        // TODO should probably return something
     }
 
-    @OnEvent(value = "createIngredient")
-    public void createIngredient(SocketIOClient client, AckRequest request, Ingredient data) {
-        ingredientRepository.save(data);
+    @RequestMapping("/createIngredient")
+    public void createIngredient(@RequestBody Ingredient ingredient) {
+        ingredientRepository.save(ingredient);
+        // TODO should probably return something
     }
 }

@@ -5,65 +5,51 @@
  */
 package com.WS.Controllers;
 
-import java.util.List;
-
+import com.WS.Entity.Unit;
+import com.WS.Repository.UnitRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-import com.WS.Entity.Unit;
-import com.WS.Repository.UnitRepository;
-import com.corundumstudio.socketio.AckRequest;
-import com.corundumstudio.socketio.SocketIOClient;
-import com.corundumstudio.socketio.SocketIOServer;
-import com.corundumstudio.socketio.annotation.OnEvent;
+import java.util.List;
 
-/**
- *
- * @author Eric
- */
 @Component
-public class UnitController implements SocketIOController {
-	
-	@Autowired
-	private UnitRepository unitRepository;
+@RestController
+@RequestMapping("/api/users")
+public class UnitController {
 
-    private final SocketIOServer server;
-    private final Logger logger = LoggerFactory.getLogger(RecipeController.class);
+    private final Logger logger = LoggerFactory.getLogger(UnitController.class);
+    @Autowired
+    private UnitRepository unitRepository;
 
     public UnitController() {
-        this.server = null;
     }
 
-    @Autowired
-    public UnitController(SocketIOServer server) {
-        this.server = server;
+    @RequestMapping("/getAllUnits")
+    public List<Unit> getAllUnits() {
+        List<Unit> units = (List<Unit>) unitRepository.findAll();
+        return units;
     }
 
-    public String getNamespace() {
-		return "/users";
+    @RequestMapping("/getUnit")
+    public Unit getUnit(@RequestBody Integer id) {
+        return unitRepository.findById(id).get();
     }
-    
-    @OnEvent(value = "getAllUnits")
-    public void getAllUnits(SocketIOClient client, AckRequest request, Integer data) {
-        List<Unit> units = (List<Unit>)unitRepository.findAll();
-        client.sendEvent("getAllUnits", units);
+
+    @RequestMapping("/saveUnit")
+    public void saveUnit(@RequestBody Unit data) {
+        unitRepository.save(data);
+        // TODO should probably return something
     }
-    
-    @OnEvent(value = "getUnit")
-    public void getUnit(SocketIOClient client, AckRequest request, Integer data) {
-    		client.sendEvent("getUnit", unitRepository.findOne(data));
-    }
-    
-    @OnEvent(value = "saveUnit")
-    public void saveUnit(SocketIOClient client, AckRequest request, Unit data) {
-    		unitRepository.save(data);
-    }
-    
-    @OnEvent(value = "deleteUnit")
-    public void deleteUnit(SocketIOClient client, AckRequest request, Integer data) {
-    		unitRepository.delete(data);
+
+    @RequestMapping("/deleteUnit")
+    public void deleteUnit(@RequestBody Integer id) {
+        unitRepository.deleteById(id);
+        // TODO should probably return something
     }
 
 }

@@ -5,64 +5,50 @@
  */
 package com.WS.Controllers;
 
-import java.util.List;
-
+import com.WS.Entity.RecipeStep;
+import com.WS.Repository.RecipeStepRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-import com.WS.Entity.Ingredient;
-import com.WS.Entity.RecipeStep;
-import com.WS.Entity.Unit;
-import com.WS.Repository.RecipeStepRepository;
-import com.WS.Repository.UnitRepository;
-import com.corundumstudio.socketio.AckRequest;
-import com.corundumstudio.socketio.SocketIOClient;
-import com.corundumstudio.socketio.SocketIOServer;
-import com.corundumstudio.socketio.annotation.OnEvent;
-
+import java.util.List;
 
 @Component
-public class RecipeStepController implements SocketIOController {
-	
-	@Autowired
-	private RecipeStepRepository recipeStepRepository;
+@RestController
+@RequestMapping("/api/users")
+public class RecipeStepController {
 
-    private final SocketIOServer server;
-    private final Logger logger = LoggerFactory.getLogger(RecipeController.class);
+    private final Logger logger = LoggerFactory.getLogger(RecipeStepController.class);
+    @Autowired
+    private RecipeStepRepository recipeStepRepository;
 
     public RecipeStepController() {
-        this.server = null;
     }
 
-    @Autowired
-    public RecipeStepController(SocketIOServer server) {
-        this.server = server;
+    @RequestMapping("/getRecipeStep")
+    public RecipeStep getRecipeStep(@RequestBody Integer id) {
+        return recipeStepRepository.findById(id).get();
     }
-    
-    public String getNamespace() {
-		return "/users";
-    }
-    
-    @OnEvent(value = "getRecipeStep")
-    public void getRecipeStep(SocketIOClient client, AckRequest request, Integer data) {
-    		client.sendEvent("getRecipeStep", recipeStepRepository.findOne(data));
-    }
-    
-    @OnEvent(value = "getAllRecipeSteps")
-    public void getAllRecipeSteps(SocketIOClient client, AckRequest request, Integer data) {
+
+    @RequestMapping("/getAllRecipeSteps")
+    public List<RecipeStep> getAllRecipeSteps() {
         List<RecipeStep> recipeSteps = (List<RecipeStep>) recipeStepRepository.findAll();
-        client.sendEvent("getAllRecipeSteps", recipeSteps);
+        return recipeSteps;
     }
-    
-    @OnEvent(value = "deleteRecipeStep")
-    public void deleteRecipeStep(SocketIOClient client, AckRequest request, Integer data) {
-    		recipeStepRepository.delete(data);
+
+    @RequestMapping("/deleteRecipeStep")
+    public void deleteRecipeStep(@RequestBody Integer id) {
+        recipeStepRepository.deleteById(id);
+        // TODO should probably return something
     }
-    
-    @OnEvent(value = "saveRecipeStep")
-    public void saveRecipeStep(SocketIOClient client, AckRequest request, RecipeStep data) {
-    		recipeStepRepository.save(data);
+
+    @RequestMapping("/saveRecipeStep")
+    public void saveRecipeStep(@RequestBody RecipeStep recipeStep) {
+        recipeStepRepository.save(recipeStep);
+        // TODO should probably return something
     }
 }

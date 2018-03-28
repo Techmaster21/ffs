@@ -5,17 +5,9 @@
  */
 package com.WS.Entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-
 import com.fasterxml.jackson.annotation.JsonBackReference;
+
+import javax.persistence.*;
 
 @Entity
 @Table(name = "recipe_steps")
@@ -63,32 +55,36 @@ public class RecipeStep {
         return true;
     }
 
-    @Override
-    public String toString() {
-        return "RecipeStep{" + "stepId=" + id + ", step=" + step + '}';
+    public int getId() {
+        return id;
     }
 
-	public int getId() {
-		return id;
-	}
+    public void setId(int id) {
+        this.id = id;
+    }
 
-	public void setId(int id) {
-		this.id = id;
-	}
+    public String getStep() {
+        return step;
+    }
 
-	public String getStep() {
-		return step;
-	}
+    public void setStep(String step) {
+        this.step = step;
+    }
 
-	public void setStep(String step) {
-		this.step = step;
-	}
+    public Recipe getRecipe() {
+        return recipe;
+    }
 
-	public Recipe getRecipe() {
-		return recipe;
-	}
+    public void setRecipe(Recipe recipe) {
+        this.recipe = recipe;
+    }
 
-	public void setRecipe(Recipe recipe) {
-		this.recipe = recipe;
-	}
+    @Override
+    public String toString() {
+        return "RecipeStep{" +
+                "id=" + id +
+                ", step='" + step + '\'' +
+                ", recipe=" + recipe +
+                '}';
+    }
 }

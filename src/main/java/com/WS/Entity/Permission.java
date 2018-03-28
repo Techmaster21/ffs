@@ -5,26 +5,17 @@
  */
 package com.WS.Entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
-/**
- *
- * @author Eric
- */
 @Entity
 @Table(name = "permissions")
 public class Permission {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "permission_id")
     private int id;
-    
+
     @Column(name = "title")
     private String title;
 
@@ -46,6 +37,13 @@ public class Permission {
     public void setTitle(String title) {
         this.title = title;
     }
-       
-    
+
+
+    @Override
+    public String toString() {
+        return "Permission{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                '}';
+    }
 }

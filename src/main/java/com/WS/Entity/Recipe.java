@@ -5,28 +5,12 @@
  */
 package com.WS.Entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
-
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
-/**
- *
- * @author Eric
- */
 @Entity
 @Table(name = "recipes")
 public class Recipe {
@@ -59,7 +43,7 @@ public class Recipe {
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "recipe")
     @JsonManagedReference
     private List<RecipeStep> steps = new ArrayList<>();
-    
+
     @ManyToOne
     @JoinColumn(name = "creator_id")
     private Ffser ffser;
@@ -75,6 +59,21 @@ public class Recipe {
         this.prepTime = prepTime;
         this.cookTime = cookTime;
         this.ffser = ffser;
+    }
+
+    @Override
+    public String toString() {
+        return "Recipe{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", cuisine=" + cuisine +
+                ", prepTime='" + prepTime + '\'' +
+                ", cookTime='" + cookTime + '\'' +
+                ", ingredients=" + ingredients +
+                ", steps=" + steps +
+                ", ffser=" + ffser +
+                '}';
     }
 
     @Override
@@ -100,13 +99,6 @@ public class Recipe {
             return false;
         }
         return true;
-    }
-
-    @Override
-    public String toString() {
-        return "Recipe{" + "recipeId=" + id + ", recipeName=" + name + ", recipeDescription=" + description +
-        ", cuisine=" + cuisine + ", prepTime=" + prepTime + ", cookTime=" + cookTime + ", ingredients=" + ingredients +
-         ", ffser=" + ffser + '}';
     }
 
     public int getId() {
@@ -180,15 +172,15 @@ public class Recipe {
     public void setFfser(Ffser ffser) {
         this.ffser = ffser;
     }
-    
-    public void addStep(RecipeStep rs){
-	  rs.setRecipe(this);
-	  this.steps.add(rs);
-	}
 
-	public void addIngredient(Ingredient ing){
-	  ing.setRecipe(this);
-	  this.ingredients.add(ing);
-	}
+    public void addStep(RecipeStep rs) {
+        rs.setRecipe(this);
+        this.steps.add(rs);
+    }
+
+    public void addIngredient(Ingredient ing) {
+        ing.setRecipe(this);
+        this.ingredients.add(ing);
+    }
 
 }

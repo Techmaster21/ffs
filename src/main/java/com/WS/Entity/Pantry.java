@@ -6,39 +6,25 @@
 package com.WS.Entity;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
-
-/**
- *
- * @author Eric
- */
 
 @Entity
 @Table(name = "pantry")
 public class Pantry {
-        
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "pantry_id")
     private int id;
-    
+
     @OneToOne
     @JoinColumn(name = "ffser_id")
     private Ffser ffser;
-    
+
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "pantry")
     @JsonManagedReference
     private List<PantryItem> items = new ArrayList<>();
@@ -105,7 +91,14 @@ public class Pantry {
         }
         return true;
     }
-    
-    
-    
+
+
+    @Override
+    public String toString() {
+        return "Pantry{" +
+                "id=" + id +
+                ", ffser=" + ffser +
+                ", items=" + items +
+                '}';
+    }
 }

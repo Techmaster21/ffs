@@ -8,49 +8,46 @@ package com.WS.Controllers;
 import com.WS.Entity.Ffser;
 import com.WS.Entity.Permission;
 import com.WS.Repository.FfserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.RequestMapping;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.io.UnsupportedEncodingException;
 import java.util.Date;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
 
-/**
- *
- * @author Eric
- */
 @Component
 @RestController
 @RequestMapping(path = "/api/account")
 public class LoginController {
     @Value("${SECRET}")
     private String secret;
-    
+
     @Autowired
     private FfserRepository ffserRepository;
+
     @PostMapping("/login")
     public Token login(@RequestBody Ffser ffser) throws UnsupportedEncodingException {
         Ffser ffserWithName = ffserRepository.findByUsername(ffser.getUsername());
-        if (ffserWithName != null && ffserWithName.getPassword().equals(ffser.getPassword())){
-                Date expiration = new Date(System.currentTimeMillis() + 3600000);
-                String text = Jwts.builder()
-                        .setSubject(ffser.getUsername())
-                        .setExpiration(expiration)
-                        .signWith(SignatureAlgorithm.HS512, secret.getBytes("UTF-8"))
-                        .compact();
-                return new Token(text, expiration);
+        if (ffserWithName != null && ffserWithName.getPassword().equals(ffser.getPassword())) {
+            Date expiration = new Date(System.currentTimeMillis() + 3600000);
+            String text = Jwts.builder()
+                    .setSubject(ffser.getUsername())
+                    .setExpiration(expiration)
+                    .signWith(SignatureAlgorithm.HS512, secret.getBytes("UTF-8"))
+                    .compact();
+            return new Token(text, expiration);
         }
         return null;
     }
-    
+
     @PostMapping("/signup")
-    public boolean signUp(@RequestBody Ffser ffser){
+    public boolean signUp(@RequestBody Ffser ffser) {
         Permission p = new Permission();
         p.setId(2);
         p.setTitle("basic");
@@ -61,15 +58,15 @@ public class LoginController {
             return true;
         }
         return false;
-        
+
     }
-            
-    public Ffser getFfser(String token){
+
+    public Ffser getFfser(String token) {
         return ffserRepository.findByUsername(
-                            Jwts.parser()
-                            .setSigningKey(secret.getBytes())
-                            .parseClaimsJws(token)
-                            .getBody()
-                            .getSubject());
+                Jwts.parser()
+                        .setSigningKey(secret.getBytes())
+                        .parseClaimsJws(token)
+                        .getBody()
+                        .getSubject());
     }
 }

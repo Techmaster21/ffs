@@ -5,24 +5,10 @@
  */
 package com.WS.Entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
-
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import javax.persistence.CascadeType;
 
-/**
- *
- * @author Eric
- */
+import javax.persistence.*;
+
 @Entity
 @Table(name = "ingredients")
 public class Ingredient {
@@ -36,14 +22,14 @@ public class Ingredient {
     @OneToOne
     @JoinColumn(name = "food_id", referencedColumnName = "NDB_No", nullable = false)
     private Food food;
-    
+
     @OneToOne
     @JoinColumn(name = "unit_id", nullable = false)
     private Unit unit;
-    
+
     @Column(name = "quantity")
     private double quantity;
-    
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "recipe_id", nullable = false)
     @JsonBackReference
@@ -59,7 +45,7 @@ public class Ingredient {
         this.quantity = quantity;
         this.recipe = recipe;
     }
-    
+
     @Override
     public int hashCode() {
         int hash = 3;
@@ -85,50 +71,54 @@ public class Ingredient {
         return true;
     }
 
-    @Override
-    public String toString() {
-        return "Ingredient{" + "ingredientId=" + id + ", food=" + food + 
-        		", unit=" + unit + ", quantity=" + quantity + ", recipeId=" + recipe.getId() + '}';
+    public int getId() {
+        return id;
     }
 
-	public int getId() {
-		return id;
-	}
+    public void setId(int id) {
+        this.id = id;
+    }
 
-	public void setId(int id) {
-		this.id = id;
-	}
+    public Food getFood() {
+        return food;
+    }
 
-	public Food getFood() {
-		return food;
-	}
+    public void setFood(Food food) {
+        this.food = food;
+    }
 
-	public void setFood(Food food) {
-		this.food = food;
-	}
+    public Unit getUnit() {
+        return unit;
+    }
 
-	public Unit getUnit() {
-		return unit;
-	}
+    public void setUnit(Unit unit) {
+        this.unit = unit;
+    }
 
-	public void setUnit(Unit unit) {
-		this.unit = unit;
-	}
+    public double getQuantity() {
+        return quantity;
+    }
 
-	public double getQuantity() {
-		return quantity;
-	}
+    public void setQuantity(double quantity) {
+        this.quantity = quantity;
+    }
 
-	public void setQuantity(double quantity) {
-		this.quantity = quantity;
-	}
+    public Recipe getRecipe() {
+        return recipe;
+    }
 
-	public Recipe getRecipe() {
-		return recipe;
-	}
+    public void setRecipe(Recipe recipe) {
+        this.recipe = recipe;
+    }
 
-	public void setRecipe(Recipe recipe) {
-		this.recipe = recipe;
-	}
-    
+    @Override
+    public String toString() {
+        return "Ingredient{" +
+                "id=" + id +
+                ", food=" + food +
+                ", unit=" + unit +
+                ", quantity=" + quantity +
+                ", recipe=" + recipe +
+                '}';
+    }
 }

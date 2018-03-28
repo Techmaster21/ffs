@@ -5,33 +5,30 @@
  */
 package com.WS.Entity;
 
-import java.util.Objects;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
-/**
- *
- * @author Eric
- */
 @Entity
 @Table(name = "food_des")
 public class Food {
-    
+
     @Id
     @Column(name = "NDB_No")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    
+
     @Column(name = "Long_Desc")
     private String name;
 
     public Food() {
     }
 
+    @Override
+    public String toString() {
+        return "Food{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                '}';
+    }
 //    @Override
 //    public int hashCode() {
 //        int hash = 5;
@@ -58,26 +55,21 @@ public class Food {
 //        return true;
 //    }
 
-    @Override
-    public String toString() {
-        return "";
+    public int getId() {
+        return id;
     }
 
-	public int getId() {
-		return id;
-	}
+    public void setId(int id) {
+        this.id = id;
+    }
 
-	public void setId(int id) {
-		this.id = id;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public String getName() {
-		return name;
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
-    
-    
+
 }

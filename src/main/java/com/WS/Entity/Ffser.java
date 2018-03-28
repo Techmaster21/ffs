@@ -8,34 +8,23 @@ package com.WS.Entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
-/**
- *
- * @author Eric
- */
 @Entity
 @Table(name = "ffsers")
 public class Ffser {
-    
+
     @Id
     @Column(name = "ffser_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    
-    @Column(name="username")
+
+    @Column(name = "username")
     private String username;
-    
-    @Column(name="password")
+
+    @Column(name = "password")
     private String password;
-    
+
     @OneToOne
     @JoinColumn(name = "permission_id", nullable = false)
     private Permission permission;
@@ -82,6 +71,16 @@ public class Ffser {
     }
 
     @Override
+    public String toString() {
+        return "Ffser{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", permission=" + permission +
+                '}';
+    }
+
+    @Override
     public boolean equals(Object obj) {
         if (this == obj) {
             return true;
@@ -99,9 +98,4 @@ public class Ffser {
         return true;
     }
 
-    @Override
-    public String toString() {
-        return "Ffser{" + "id=" + id + ", username=" + username + '}';
-    }
-    
 }

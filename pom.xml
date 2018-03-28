@@ -13,7 +13,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>1.5.10.RELEASE</version>
+        <version>2.0.0.RELEASE</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
@@ -23,7 +23,6 @@
         <java.version>1.8</java.version>
         <build.nofront>true</build.nofront>
         <front.buildType>run build</front.buildType>
-        <socketio.host>localhost</socketio.host>
 
         <commons-io.version>2.6</commons-io.version>
         <maven-release-plugin.version>2.5.3</maven-release-plugin.version>
@@ -44,7 +43,6 @@
             <properties>
                 <build.nofront>false</build.nofront>
                 <front.buildType>run buildprod</front.buildType>
-                <socketio.host>proj-309-yt-6.cs.iastate.edu</socketio.host>
             </properties>
         </profile>
     </profiles>
@@ -52,11 +50,11 @@
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
+            <artifactId>spring-boot-starter</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter</artifactId>
+            <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -76,11 +74,6 @@
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <scope>runtime</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.corundumstudio.socketio</groupId>
-            <artifactId>netty-socketio</artifactId>
-            <version>1.7.14</version>
         </dependency>
         <!-- Random dependencies for Josh's computer - because of Java 9 not including them by default anymore
         even though no one else had problems-->
@@ -211,37 +204,6 @@
                     </execution>
                 </executions>
             </plugin>
-            <!-- Uncomment this if you want maven to complain about your terrible Java code. Warning: will cause
-            maven to refuse to build until you fix them. -->
-            <!--
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-checkstyle-plugin</artifactId>
-                <version>${maven-checkstyle-plugin.version}</version>
-                <dependencies>
-                    <dependency>
-                        <groupId>com.puppycrawl.tools</groupId>
-                        <artifactId>checkstyle</artifactId>
-                        <version>${checkstyle.version}</version>
-                    </dependency>
-                </dependencies>
-                <executions>
-                    <execution>
-                        <id>validate</id>
-                        <phase>validate</phase>
-                        <configuration>
-                            <configLocation>${maven-checkstyle-plugin.configLocation}</configLocation>
-                            <encoding>UTF-8</encoding>
-                            <consoleOutput>true</consoleOutput>
-                            <failsOnError>true</failsOnError>
-                        </configuration>
-                        <goals>
-                            <goal>check</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-            -->
         </plugins>
     </build>
 </project>

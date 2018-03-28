@@ -5,55 +5,39 @@
  */
 package com.WS.Controllers;
 
+import com.WS.Entity.Ffser;
+import com.WS.Repository.FfserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-import com.WS.Entity.Ffser;
-import com.WS.Repository.FfserRepository;
-import com.corundumstudio.socketio.AckRequest;
-import com.corundumstudio.socketio.SocketIOClient;
-import com.corundumstudio.socketio.SocketIOServer;
-import com.corundumstudio.socketio.annotation.OnEvent;
-import org.springframework.web.client.RestTemplate;
-
-/**
- *
- * @author Eric
- */
 @Component
-public class FfserController implements SocketIOController {
+@RestController
+@RequestMapping("/api/users")
+public class FfserController {
 
+    private final Logger logger = LoggerFactory.getLogger(FfserController.class);
     @Autowired
-	private FfserRepository ffserRepository;
-	
-    private final SocketIOServer server;
-    private final Logger logger = LoggerFactory.getLogger(RecipeController.class);
+    private FfserRepository ffserRepository;
 
     public FfserController() {
-        this.server = null;
     }
-    
-    @Autowired
-    public FfserController(SocketIOServer server) {
-        this.server = server;
+
+    @RequestMapping("/saveFfser")
+    public void saveFfser(@RequestBody Ffser ffser) {
+        ffserRepository.save(ffser);
+        // TODO should probably return something
     }
-    
-    public String getNamespace() {
-		return "/users";
+
+    @RequestMapping("/deleteFfser")
+    public void deleteFfser(@RequestBody Integer id) {
+        ffserRepository.deleteById(id);
+        // TODO should probably return something
     }
-    
-    @OnEvent(value = "saveFfser")
-    public void saveFfser(SocketIOClient client, AckRequest request, Ffser data){
-	    	//TODO: Create Account
-	    	ffserRepository.save(data);
-    }
-    
-    @OnEvent(value = "deleteFfser")
-    public void deleteFfser(SocketIOClient client, AckRequest request, Integer data){
-    		ffserRepository.delete(data);
-    }
-    
-    
+
+
 }
