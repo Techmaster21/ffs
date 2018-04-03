@@ -55,10 +55,11 @@ export class PantryComponent implements OnInit {
     this.recipeService.savePantry(this.pantry)
       .subscribe();
   }
+
   removePantryItem(pantryItem: Pantryitem): void {
-    this.pantryItems = this.pantryItems.filter(obj => obj !== pantryItem);
-    this.pantry.items = this.pantryItems;
-    console.log(this.pantry);
-    this.recipeService.addPantry(this.pantry);
+    this.pantry.items = this.pantry.items.filter(obj => obj !== pantryItem);
+    this.pantry.items = this.pantry.items;
+
+    this.recipeService.savePantry(this.pantry);
   }
 }

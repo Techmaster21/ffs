@@ -83,7 +83,6 @@ export class RecipeService {
   }
 
   savePantry(pantry: Pantry): Observable<Pantry> {
-    console.log(pantry);
     return this.http.post<Pantry>(URI.PANTRY.SAVE, pantry, httpOptions)
       .pipe(
         catchError(this.handleError<Pantry>('savePantry'))
