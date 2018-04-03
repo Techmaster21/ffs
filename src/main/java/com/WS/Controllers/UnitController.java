@@ -23,10 +23,11 @@ import java.util.List;
 public class UnitController {
 
     private final Logger logger = LoggerFactory.getLogger(UnitController.class);
-    @Autowired
-    private UnitRepository unitRepository;
+    private final UnitRepository unitRepository;
 
-    public UnitController() {
+    @Autowired
+    public UnitController(UnitRepository unitRepository) {
+        this.unitRepository = unitRepository;
     }
 
     @RequestMapping("/getAll")

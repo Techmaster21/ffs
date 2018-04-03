@@ -12,7 +12,7 @@ export class Recipe {
     public cuisine: Cuisine = new Cuisine(),
     public prepTime?: string,
     public cookTime?: string,
-    public ffser?: User,
+    public user?: User,
     public id?: number
   ) {}
 }

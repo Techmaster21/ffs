@@ -6,16 +6,17 @@
 package com.WS.Controllers;
 
 import com.WS.Entity.Recipe;
-import com.WS.Repository.CuisineRepository;
+import com.WS.Entity.User;
 import com.WS.Repository.RecipeRepository;
+import com.WS.Service.SecurityContextService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
 import java.util.List;
 
 @Component
@@ -23,12 +24,14 @@ import java.util.List;
 @RequestMapping("/api/recipe")
 public class RecipeController {
     private final Logger logger = LoggerFactory.getLogger(RecipeController.class);
-    @Autowired
-    private RecipeRepository recipeRepository;
-    @Autowired
-    private CuisineRepository cuisineRepository;
 
-    public RecipeController() {
+    private final RecipeRepository recipeRepository;
+    private final SecurityContextService securityContext;
+
+    @Autowired
+    public RecipeController(RecipeRepository recipeRepository, SecurityContextService securityContext) {
+        this.recipeRepository = recipeRepository;
+        this.securityContext = securityContext;
     }
 
     @RequestMapping("/get")
@@ -36,7 +39,6 @@ public class RecipeController {
         return recipeRepository.findById(id).get();
     }
 
-    @PreAuthorize("hasAuthority('basic')")
     @RequestMapping("/getAll")
     public List<Recipe> getAllRecipes() {
         List<Recipe> recipes = (List<Recipe>) recipeRepository.findAll();
@@ -45,6 +47,8 @@ public class RecipeController {
 
     @RequestMapping("/save")
     public Recipe saveRecipe(@RequestBody Recipe recipe) {
+        User currentUser = securityContext.currentUser().get();
+        recipe.setUser(currentUser);
         recipeRepository.delete(recipe);
         return recipeRepository.save(recipe);
     }

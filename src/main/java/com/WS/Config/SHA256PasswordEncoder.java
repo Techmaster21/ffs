@@ -1,3 +1,7 @@
+/**
+ * Code courtesy of Jakub Remenec (https://blog.davincisoftware.sk/blog-angular-and-spring-security-integration-part1)
+ * with modifications by Adrian Bolt
+ */
 package com.WS.Config;
 
 import org.h2.util.StringUtils;

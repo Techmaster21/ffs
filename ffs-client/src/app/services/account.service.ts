@@ -6,6 +6,7 @@ import { User } from '../models/user';
 import { of } from 'rxjs/observable/of';
 import { catchError } from 'rxjs/operators';
 import { Token } from '../models/token';
+import { URI } from '../uri';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -13,8 +14,6 @@ const httpOptions = {
 export const TOKEN_NAME = 'jwt_token';
 @Injectable()
 export class AccountService {
-  private accountURL = 'api/account/signup';  // URL to web api
-  private loginURL = 'api/account/login';  // URL to web api
   private userName: string;
 
   constructor(private http: HttpClient) {
@@ -35,7 +34,7 @@ export class AccountService {
   createAccount(user: User, password: string): Observable<boolean> {
     const userInfo = { username: user.username, password };
 
-    return this.http.post<boolean>(this.accountURL, userInfo, httpOptions)
+    return this.http.post<boolean>(URI.ACCOUNT.SIGNUP, userInfo, httpOptions)
       .pipe(
         catchError(this.handleError<boolean>('createAccount'))
       );
@@ -44,7 +43,7 @@ export class AccountService {
   login(username: string, password: string): Observable<Token> {
     const userInfo = { username, password };
 
-    return this.http.post<Token>(this.loginURL, userInfo, httpOptions)
+    return this.http.post<Token>(URI.ACCOUNT.LOGIN, userInfo, httpOptions)
       .pipe(
         catchError(this.handleError<Token>('createAccount'))
       );

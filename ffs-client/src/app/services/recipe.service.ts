@@ -11,7 +11,6 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { of } from 'rxjs/observable/of';
 import { catchError } from 'rxjs/operators';
 import { URI } from '../uri';
-import { AccountService } from './account.service';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -40,6 +39,8 @@ export class RecipeService {
   }
 
   saveRecipe(recipe: Recipe): Observable<Recipe> {
+    console.log(URI.RECIPE.SAVE);
+
     return this.http.post<Recipe>(URI.RECIPE.SAVE, recipe, httpOptions)
       .pipe(
         catchError(this.handleError<Recipe>('saveRecipe'))
@@ -68,7 +69,7 @@ export class RecipeService {
   }
 
   getPantry(): Observable<Pantry> {
-    return this.http.get<Pantry>(URI.UNIT.GET_ALL, httpOptions)
+    return this.http.get<Pantry>(URI.PANTRY.GET, httpOptions)
       .pipe(
         catchError(this.handleError<Pantry>('getPantry'))
       );
@@ -82,6 +83,7 @@ export class RecipeService {
   }
 
   savePantry(pantry: Pantry): Observable<Pantry> {
+    console.log(pantry);
     return this.http.post<Pantry>(URI.PANTRY.SAVE, pantry, httpOptions)
       .pipe(
         catchError(this.handleError<Pantry>('savePantry'))

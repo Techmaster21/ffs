@@ -116,7 +116,7 @@ public class PantryItem {
                 ", food=" + food +
                 ", unit=" + unit +
                 ", quantity=" + quantity +
-                ", pantry=" + pantry +
+                ", pantry=" + pantry.getId() +
                 '}';
     }
 }

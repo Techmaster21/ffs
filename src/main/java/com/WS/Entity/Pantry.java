@@ -29,12 +29,11 @@ public class Pantry {
     @JsonManagedReference
     private List<PantryItem> items = new ArrayList<>();
 
-    public Pantry(int id, User user) {
-        this.id = id;
-        this.user = user;
+    public Pantry() {
     }
 
-    public Pantry() {
+    public Pantry(User user) {
+        this.user = user;
     }
 
     public Pantry(User user, List<PantryItem> items) {

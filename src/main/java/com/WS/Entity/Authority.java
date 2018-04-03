@@ -11,7 +11,7 @@ import javax.persistence.*;
 import java.util.Set;
 
 @Entity
-@Table(name = "authoritys")
+@Table(name = "authorities")
 public class Authority {
 
     @Id
@@ -20,12 +20,14 @@ public class Authority {
     @Column(name = "authority_id")
     private int id;
 
+    // not sure what this is for
     @Column(name = "username")
     private String username;
 
     @Column(name = "name")
     private String authority;
 
+    // not sure what this does exactly - might be key to more than one authority per user
     @OneToMany(mappedBy = "authority")
     @JsonIgnore
     private Set<User> users;

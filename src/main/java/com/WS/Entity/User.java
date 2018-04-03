@@ -13,11 +13,11 @@ import org.springframework.security.core.userdetails.UserDetails;
 import javax.persistence.*;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Set;
 
 @Entity
 @Table(name = "ffsers")
 public class User implements UserDetails {
-
     @Id
     @Column(name = "ffser_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,9 +29,16 @@ public class User implements UserDetails {
     @Column(name = "password")
     private String password;
 
+    // not sure what this does exactly - might be key to more than one authority per user
     @ManyToOne
     @JoinColumn(name = "authority_id", nullable = false)
     private Authority authority;
+
+    // needed because hibernate infers authorities instance variable from getAuthorities method, and we need to not
+    // send that to the user or put it in the database.
+    @Transient
+    @JsonIgnore
+    private Set<Authority> authorities;
 
     public User() {
     }
@@ -114,7 +121,7 @@ public class User implements UserDetails {
                 "id=" + id +
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
-                ", authority=" + authority +
+                ", authority=" + authority.getAuthority() +
                 '}';
     }
 

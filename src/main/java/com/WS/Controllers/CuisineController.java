@@ -23,10 +23,11 @@ import java.util.List;
 public class CuisineController {
 
     private final Logger logger = LoggerFactory.getLogger(CuisineController.class);
-    @Autowired
-    private CuisineRepository cuisineRepository;
+    private final CuisineRepository cuisineRepository;
 
-    public CuisineController() {
+    @Autowired
+    public CuisineController(CuisineRepository cuisineRepository) {
+        this.cuisineRepository = cuisineRepository;
     }
 
     @RequestMapping("/getAll")

@@ -6,7 +6,9 @@
 package com.WS.Controllers;
 
 import com.WS.Entity.Pantry;
+import com.WS.Entity.User;
 import com.WS.Repository.PantryRepository;
+import com.WS.Service.SecurityContextService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,28 +21,35 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/pantry")
 public class PantryController {
-
     private final Logger logger = LoggerFactory.getLogger(PantryController.class);
-    @Autowired
-    LoginController loginController;
-    @Autowired
-    private PantryRepository pantryRepository;
+    private final PantryRepository pantryRepository;
+    private final SecurityContextService securityContext;
 
-    public PantryController() {
+    @Autowired
+    public PantryController(PantryRepository pantryRepository, SecurityContextService securityContext) {
+        this.pantryRepository = pantryRepository;
+        this.securityContext = securityContext;
     }
 
-    //TODO Maybe include token in headers and use to get user?
     @RequestMapping("/get")
-    public void getPantry() {
-//        client.sendEvent("getPantry", pantryRepository.findByFfser(
-//                loginController.getUser(client.getHandshakeData().getSingleUrlParam("token"))));
+    public Pantry getPantry() {
+        User currentUser = securityContext.currentUser().get();
+        Pantry currentUserPantry = pantryRepository.findByUser(currentUser);
+        if (currentUserPantry == null) {
+            // create new empty pantry
+            Pantry newPantry = new Pantry(currentUser);
+            pantryRepository.save(newPantry);
+            return newPantry;
+        }
+        return pantryRepository.findByUser(currentUser);
     }
 
     @RequestMapping("/save")
-    public void updatePantry(@RequestBody Pantry pantry) {
-//    	data.setUser(loginController.getUser(client.getHandshakeData().getSingleUrlParam("token")));
-//    	pantryRepository.delete(data);
-//    	pantryRepository.save(data);
+    public void savePantry(@RequestBody Pantry pantry) {
+        User currentUser = securityContext.currentUser().get();
+        pantry.setUser(currentUser);
+        pantryRepository.delete(pantry);
+        pantryRepository.save(pantry);
     }
 
 }

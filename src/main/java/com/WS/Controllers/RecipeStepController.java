@@ -23,10 +23,11 @@ import java.util.List;
 public class RecipeStepController {
 
     private final Logger logger = LoggerFactory.getLogger(RecipeStepController.class);
-    @Autowired
-    private RecipeStepRepository recipeStepRepository;
+    private final RecipeStepRepository recipeStepRepository;
 
-    public RecipeStepController() {
+    @Autowired
+    public RecipeStepController(RecipeStepRepository recipeStepRepository) {
+        this.recipeStepRepository = recipeStepRepository;
     }
 
     @RequestMapping("/get")

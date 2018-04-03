@@ -50,9 +50,10 @@ export class RecipeAdderComponent implements OnInit {
   }
 
   submitRecipe(): void {
-    this.recipe.ffser = new User(3);
-    this.recipeService.saveRecipe(this.recipe);
-    this.location.back();
+    this.recipeService.saveRecipe(this.recipe)
+      .subscribe(() =>
+      this.location.back()
+    );
   }
 
   checkValidUnits(): boolean {

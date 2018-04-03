@@ -23,10 +23,11 @@ import java.util.List;
 public class IngredientController {
 
     private final Logger logger = LoggerFactory.getLogger(IngredientController.class);
-    @Autowired
-    private IngredientRepository ingredientRepository;
+    private final IngredientRepository ingredientRepository;
 
-    public IngredientController() {
+    @Autowired
+    public IngredientController(IngredientRepository ingredientRepository) {
+        this.ingredientRepository = ingredientRepository;
     }
 
     @RequestMapping("/get")

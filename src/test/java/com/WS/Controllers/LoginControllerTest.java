@@ -1,24 +1,24 @@
-package com.WS.Controllers;
-
-import com.WS.Entity.Authority;
-import com.WS.Entity.User;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
-
-import java.io.UnsupportedEncodingException;
-
-import static org.assertj.core.api.Assertions.assertThat;
-
-@RunWith(SpringRunner.class)
-@SpringBootTest
-public class LoginControllerTest {
-
-    @Autowired
-    private LoginController loginController;
-
+//package com.WS.Controllers;
+//
+//import com.WS.Entity.Authority;
+//import com.WS.Entity.User;
+//import org.junit.Test;
+//import org.junit.runner.RunWith;
+//import org.springframework.beans.factory.annotation.Autowired;
+//import org.springframework.boot.test.context.SpringBootTest;
+//import org.springframework.test.context.junit4.SpringRunner;
+//
+//import java.io.UnsupportedEncodingException;
+//
+//import static org.assertj.core.api.Assertions.assertThat;
+//
+//@RunWith(SpringRunner.class)
+//@SpringBootTest
+//public class LoginControllerTest {
+//
+//    @Autowired
+//    private LoginController loginController;
+//
 //    @Test
 //    public void testLoginNonExistentUser() throws UnsupportedEncodingException {
 //        // RemoteService has been injected into the reverser bean
@@ -48,6 +48,6 @@ public class LoginControllerTest {
 //        test.setAuthority(p);
 //        assertThat(loginController.login(test)).isNotEqualTo(null);
 //    }
-
-
-}
+//
+//
+//}

@@ -6,11 +6,11 @@
 package com.WS.Controllers;
 
 import com.WS.Auth.TokenHandler;
+import com.WS.Config.SHA256PasswordEncoder;
 import com.WS.Entity.Authority;
 import com.WS.Entity.User;
 import com.WS.Repository.UserRepository;
 import com.WS.Service.SecurityContextService;
-import com.WS.Service.SecurityContextServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -30,17 +30,20 @@ public class LoginController {
     private final AuthenticationManager authenticationManager;
     private final TokenHandler tokenHandler;
     private final SecurityContextService securityContextService;
+    private final UserRepository userRepository;
+    private SHA256PasswordEncoder sha256PasswordEncoder;
 
     @Autowired
-    private UserRepository userRepository;
-
-    @Autowired
-    LoginController(AuthenticationManager authenticationManager,
-                    TokenHandler tokenHandler,
-                    SecurityContextService securityContextService) {
+    public LoginController(AuthenticationManager authenticationManager,
+                           TokenHandler tokenHandler,
+                           SecurityContextService securityContextService,
+                           UserRepository userRepository,
+                           SHA256PasswordEncoder sha256PasswordEncoder) {
         this.authenticationManager = authenticationManager;
         this.tokenHandler = tokenHandler;
         this.securityContextService = securityContextService;
+        this.userRepository = userRepository;
+        this.sha256PasswordEncoder = sha256PasswordEncoder;
     }
 
     @PostMapping("/login")
@@ -56,14 +59,14 @@ public class LoginController {
     }
 
     @PostMapping("/signup")
-    public boolean signUp(@RequestBody User user){
-        Authority p = new Authority();
-        p.setId(2);
-        p.setAuthority("basic");
-        user.setAuthority(p);
-        User userWithName = userRepository.findByUsername(user.getUsername());
+    public boolean signUp(@RequestBody SignupParams signupParams) {
+        Authority authority = new Authority();
+        authority.setId(1);
+        authority.setAuthority("basic");
+        User newUser = new User(signupParams.username, sha256PasswordEncoder.encode(signupParams.password), authority);
+        User userWithName = userRepository.findByUsername(newUser.getUsername());
         if (userWithName == null) {
-            userRepository.save(user);
+            userRepository.save(newUser);
             return true;
         }
         return false;
@@ -119,6 +122,35 @@ public class LoginController {
 
         public void setToken(String token) {
             this.token = token;
+        }
+    }
+
+    private static final class SignupParams {
+        private String username;
+        private String password;
+
+        public SignupParams() {
+        }
+
+        public SignupParams(String username, String password) {
+            this.username = username;
+            this.password = password;
+        }
+
+        public String getUsername() {
+            return username;
+        }
+
+        public void setUsername(String username) {
+            this.username = username;
+        }
+
+        public String getPassword() {
+            return password;
+        }
+
+        public void setPassword(String password) {
+            this.password = password;
         }
     }
 

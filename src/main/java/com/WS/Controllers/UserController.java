@@ -17,18 +17,19 @@ import org.springframework.web.bind.annotation.RestController;
 
 @Component
 @RestController
-@RequestMapping("/api/ffser")
+@RequestMapping("/api/user")
 public class UserController {
 
     private final Logger logger = LoggerFactory.getLogger(UserController.class);
-    @Autowired
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
 
-    public UserController() {
+    @Autowired
+    public UserController(UserRepository userRepository) {
+        this.userRepository = userRepository;
     }
 
     @RequestMapping("/save")
-    public User saveFfser(@RequestBody User user) {
+    public User saveUser(@RequestBody User user) {
         return userRepository.save(user);
     }
 

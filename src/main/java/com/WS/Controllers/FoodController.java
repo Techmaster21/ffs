@@ -24,10 +24,11 @@ import java.util.List;
 public class FoodController {
 
     private final Logger logger = LoggerFactory.getLogger(FoodController.class);
-    @Autowired
-    private FoodRepository foodRepository;
+    private final FoodRepository foodRepository;
 
-    public FoodController() {
+    @Autowired
+    public FoodController(FoodRepository foodRepository) {
+        this.foodRepository = foodRepository;
     }
 
     @RequestMapping("/searchByName")
