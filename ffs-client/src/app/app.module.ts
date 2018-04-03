@@ -19,12 +19,12 @@ import { SchedulerComponent } from './components/scheduler/scheduler.component';
 import { CalendarComponent } from './components/calendar/calendar.component';
 import { ValidateEqualDirective } from './directives/validate-equal.directive';
 import { RegisterGuard } from './guards/register.guard';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { StepsViewerComponent } from './components/steps-viewer/steps-viewer.component';
-import { SocketService } from './services/socket.service';
 import { PantryComponent } from './components/pantry/pantry.component';
 import { LogoutComponent } from './components/logout/logout.component';
 import { FriendsterComponent } from './components/friendster/friendster.component';
+import { AuthInterceptor } from './interceptors/auth-interceptor.service';
 
 @NgModule({
   declarations: [
@@ -56,7 +56,11 @@ import { FriendsterComponent } from './components/friendster/friendster.componen
     RecipeService,
     AccountService,
     RegisterGuard,
-    SocketService
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    }
   ],
   bootstrap: [AppComponent]
 })

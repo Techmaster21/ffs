@@ -8,10 +8,6 @@ package com.WS.Repository;
 import com.WS.Entity.PantryItem;
 import org.springframework.data.repository.CrudRepository;
 
-/**
- *
- * @author Eric
- */
-public interface PantryItemsRepository extends CrudRepository<PantryItem, Integer>{
-    
+public interface PantryItemsRepository extends CrudRepository<PantryItem, Integer> {
+
 }

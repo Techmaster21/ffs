@@ -5,65 +5,51 @@
  */
 package com.WS.Controllers;
 
-import java.util.List;
-
+import com.WS.Entity.Cuisine;
+import com.WS.Repository.CuisineRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-import com.WS.Entity.Cuisine;
-import com.WS.Repository.CuisineRepository;
-import com.corundumstudio.socketio.AckRequest;
-import com.corundumstudio.socketio.SocketIOClient;
-import com.corundumstudio.socketio.SocketIOServer;
-import com.corundumstudio.socketio.annotation.OnEvent;
+import java.util.List;
 
-/**
- *
- * @author Eric
- */
 @Component
-public class CuisineController implements SocketIOController {
+@RestController
+@RequestMapping("/api/cuisine")
+public class CuisineController {
+
+    private final Logger logger = LoggerFactory.getLogger(CuisineController.class);
+    private final CuisineRepository cuisineRepository;
 
     @Autowired
-	private CuisineRepository cuisineRepository;
-
-    private final SocketIOServer server;
-    private final Logger logger = LoggerFactory.getLogger(RecipeController.class);
-
-    public CuisineController() {
-        this.server = null;
+    public CuisineController(CuisineRepository cuisineRepository) {
+        this.cuisineRepository = cuisineRepository;
     }
 
-    @Autowired
-    public CuisineController(SocketIOServer server) {
-        this.server = server;
-    }
-    
-    public String getNamespace() {
-    		return "/users";
-    }
-    
-    @OnEvent(value = "getAllCuisines")
-    public void getAllCuisines(SocketIOClient client, AckRequest request, Integer data) {
+    @RequestMapping("/getAll")
+    public List<Cuisine> getAllCuisines() {
         List<Cuisine> cuisines = (List<Cuisine>) cuisineRepository.findAll();
-        client.sendEvent("getAllCuisines", cuisines);
+        return cuisines;
     }
-    
-    @OnEvent(value = "getCuisine")
-    public void getCuisine(SocketIOClient client, AckRequest request, Integer data) {
-    		client.sendEvent("getCuisine", cuisineRepository.findOne(data));
+
+    @RequestMapping("/get")
+    public Cuisine getCuisine(@RequestBody Integer id) {
+        return cuisineRepository.findById(id).get();
     }
-    
-    @OnEvent(value = "deleteCuisine")
-    public void deleteCuisine(SocketIOClient client, AckRequest request, Integer data){
-    		cuisineRepository.delete(data);
+
+    @RequestMapping("/delete")
+    public void deleteCuisine(@RequestBody Integer id) {
+        cuisineRepository.deleteById(id);
+        // TODO should probably return something
     }
-    
-    @OnEvent(value = "saveCuisine")
-    public void saveCuisine(SocketIOClient client, AckRequest request, Cuisine data){
-        cuisineRepository.save(data);
+
+    @RequestMapping("/save")
+    public Cuisine saveCuisine(@RequestBody Cuisine data) {
+        return cuisineRepository.save(data);
     }
 }
 

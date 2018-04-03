@@ -1,6 +1,6 @@
 import { Ingredient } from './ingredient';
 import { Cuisine } from './cuisine';
-import { FFSer } from './ffser';
+import { User } from './user';
 import { Step } from './step';
 
 export class Recipe {
@@ -12,7 +12,7 @@ export class Recipe {
     public cuisine: Cuisine = new Cuisine(),
     public prepTime?: string,
     public cookTime?: string,
-    public ffser?: FFSer,
+    public user?: User,
     public id?: number
   ) {}
 }

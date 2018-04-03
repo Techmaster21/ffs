@@ -5,71 +5,58 @@
  */
 package com.WS.Controllers;
 
-import java.util.List;
-
+import com.WS.Entity.Recipe;
+import com.WS.Entity.User;
+import com.WS.Repository.RecipeRepository;
+import com.WS.Service.SecurityContextService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-import com.WS.Entity.Recipe;
-import com.WS.Repository.CuisineRepository;
-import com.WS.Repository.RecipeRepository;
-import com.corundumstudio.socketio.AckRequest;
-import com.corundumstudio.socketio.SocketIOClient;
-import com.corundumstudio.socketio.SocketIONamespace;
-import com.corundumstudio.socketio.SocketIOServer;
-import com.corundumstudio.socketio.annotation.OnEvent;
-import com.corundumstudio.socketio.listener.ConnectListener;
+import java.util.List;
 
-/**
- *
- * @author Eric
- */
 @Component
-public class RecipeController implements SocketIOController {
-
-    @Autowired
-    private RecipeRepository recipeRepository;
-    @Autowired
-    private CuisineRepository cuisineRepository;
-    
-    private final SocketIOServer server;
+@RestController
+@RequestMapping("/api/recipe")
+public class RecipeController {
     private final Logger logger = LoggerFactory.getLogger(RecipeController.class);
 
-    public RecipeController() {
-        this.server = null;
-    }
+    private final RecipeRepository recipeRepository;
+    private final SecurityContextService securityContext;
 
     @Autowired
-    public RecipeController(SocketIOServer server) {
-    		this.server = server;
-    }
-    
-    public String getNamespace() {
-		return "/users";
-    }
-    
-    @OnEvent(value = "getRecipe")
-    public void getRecipe(SocketIOClient client, AckRequest request, Integer data) {
-        client.sendEvent("getRecipe", recipeRepository.findOne(data));
+    public RecipeController(RecipeRepository recipeRepository, SecurityContextService securityContext) {
+        this.recipeRepository = recipeRepository;
+        this.securityContext = securityContext;
     }
 
-    @OnEvent(value = "getAllRecipes")
-    public void getAllRecipes(SocketIOClient client, AckRequest request, Integer data) {
+    @RequestMapping("/get")
+    public Recipe getRecipe(@RequestBody Integer id) {
+        return recipeRepository.findById(id).get();
+    }
+
+    @RequestMapping("/getAll")
+    public List<Recipe> getAllRecipes() {
         List<Recipe> recipes = (List<Recipe>) recipeRepository.findAll();
-        client.sendEvent("getAllRecipes", recipes);
+        return recipes;
     }
 
-    @OnEvent(value = "saveRecipe")
-    public void saveRecipe(SocketIOClient client, AckRequest request, Recipe data) {
-        recipeRepository.delete(data);
-        recipeRepository.save(data);
+    @RequestMapping("/save")
+    public Recipe saveRecipe(@RequestBody Recipe recipe) {
+        User currentUser = securityContext.currentUser().get();
+        recipe.setUser(currentUser);
+        recipeRepository.delete(recipe);
+        return recipeRepository.save(recipe);
     }
 
-    @OnEvent(value = "deleteRecipe")
-    public void deleteRecipe(SocketIOClient client, AckRequest request, Integer data) {
-        recipeRepository.delete(data);
+    @RequestMapping("/delete")
+    public void deleteRecipe(@RequestBody Integer id) {
+        recipeRepository.deleteById(id);
+        // TODO should probably return something
     }
 
 }

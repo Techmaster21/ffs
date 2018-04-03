@@ -1,15 +1,11 @@
 package com.WS.Repository;
 
-import com.WS.Entity.Ffser;
 import com.WS.Entity.Pantry;
+import com.WS.Entity.User;
 import org.springframework.data.repository.CrudRepository;
 
-/**
- *
- * @author Eric
- */
 public interface PantryRepository extends CrudRepository<Pantry, Integer> {
-    
-    public Pantry findByFfser(Ffser ffser);
-    
+
+    public Pantry findByUser(User user);
+
 }

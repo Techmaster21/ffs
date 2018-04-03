@@ -5,7 +5,7 @@ import { Location } from '@angular/common';
 import { Ingredient } from '../../models/ingredient';
 import { Recipe } from '../../models/recipe';
 import { RecipeService } from '../../services/recipe.service';
-import { FFSer } from '../../models/ffser';
+import { User } from '../../models/user';
 import { Unit } from '../../models/unit';
 import { Step } from '../../models/step';
 import { Cuisine } from '../../models/cuisine';
@@ -50,9 +50,10 @@ export class RecipeAdderComponent implements OnInit {
   }
 
   submitRecipe(): void {
-    this.recipe.ffser = new FFSer(3);
-    this.recipeService.saveRecipe(this.recipe);
-    this.location.back();
+    this.recipeService.saveRecipe(this.recipe)
+      .subscribe(() =>
+      this.location.back()
+    );
   }
 
   checkValidUnits(): boolean {
@@ -68,11 +69,9 @@ export class RecipeAdderComponent implements OnInit {
   }
 
   searchIngredient(): void {
-    console.log(this.potentialIngredient);
     this.recipeService.searchFoods(this.potentialIngredient)
       .subscribe(searchResults => {
         this.searchResults = searchResults;
-        console.log(searchResults);
         this.searchedFoodDataSource.next(this.searchResults);
       });
   }
