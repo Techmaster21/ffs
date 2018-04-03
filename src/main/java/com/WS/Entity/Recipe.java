@@ -46,13 +46,13 @@ public class Recipe {
 
     @ManyToOne
     @JoinColumn(name = "creator_id")
-    private Ffser ffser;
+    private User user;
 
     public Recipe() {
     }
 
     public Recipe(String name, String description, Cuisine cuisine, String prepTime, String cookTime,
-                  List<Ingredient> ingredients, List<RecipeStep> steps, Ffser ffser) {
+                  List<Ingredient> ingredients, List<RecipeStep> steps, User user) {
         this.name = name;
         this.description = description;
         this.cuisine = cuisine;
@@ -60,7 +60,7 @@ public class Recipe {
         this.cookTime = cookTime;
         this.ingredients = ingredients;
         this.steps = steps;
-        this.ffser = ffser;
+        this.user = user;
     }
 
     @Override
@@ -74,7 +74,7 @@ public class Recipe {
                 ", cookTime='" + cookTime + '\'' +
                 ", ingredients=" + ingredients +
                 ", steps=" + steps +
-                ", ffser=" + ffser +
+                ", user=" + user +
                 '}';
     }
 
@@ -167,12 +167,12 @@ public class Recipe {
         this.steps = steps;
     }
 
-    public Ffser getFfser() {
-        return ffser;
+    public User getUser() {
+        return user;
     }
 
-    public void setFfser(Ffser ffser) {
-        this.ffser = ffser;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public void addStep(RecipeStep rs) {

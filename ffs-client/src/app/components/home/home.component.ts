@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AccountService } from '../../services/account.service';
 import { Router } from '@angular/router';
-import { FFSer } from '../../models/ffser';
+import { User } from '../../models/user';
 
 @Component({
   selector: 'app-home',

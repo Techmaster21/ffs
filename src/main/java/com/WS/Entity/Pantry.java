@@ -23,22 +23,22 @@ public class Pantry {
 
     @OneToOne
     @JoinColumn(name = "ffser_id")
-    private Ffser ffser;
+    private User user;
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "pantry")
     @JsonManagedReference
     private List<PantryItem> items = new ArrayList<>();
 
-    public Pantry(int id, Ffser ffser) {
+    public Pantry(int id, User user) {
         this.id = id;
-        this.ffser = ffser;
+        this.user = user;
     }
 
     public Pantry() {
     }
 
-    public Pantry(Ffser ffser, List<PantryItem> items) {
-        this.ffser = ffser;
+    public Pantry(User user, List<PantryItem> items) {
+        this.user = user;
         this.items = items;
     }
 
@@ -50,12 +50,12 @@ public class Pantry {
         this.id = id;
     }
 
-    public Ffser getFfser() {
-        return ffser;
+    public User getUser() {
+        return user;
     }
 
-    public void setFfser(Ffser ffser) {
-        this.ffser = ffser;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public List<PantryItem> getItems() {
@@ -88,7 +88,7 @@ public class Pantry {
         if (this.id != other.id) {
             return false;
         }
-        if (!Objects.equals(this.ffser, other.ffser)) {
+        if (!Objects.equals(this.user, other.user)) {
             return false;
         }
         if (!Objects.equals(this.items, other.items)) {
@@ -102,7 +102,7 @@ public class Pantry {
     public String toString() {
         return "Pantry{" +
                 "id=" + id +
-                ", ffser=" + ffser +
+                ", user=" + user +
                 ", items=" + items +
                 '}';
     }

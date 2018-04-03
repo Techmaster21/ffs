@@ -33,12 +33,12 @@ public class PantryController {
     @RequestMapping("/get")
     public void getPantry() {
 //        client.sendEvent("getPantry", pantryRepository.findByFfser(
-//                loginController.getFfser(client.getHandshakeData().getSingleUrlParam("token"))));
+//                loginController.getUser(client.getHandshakeData().getSingleUrlParam("token"))));
     }
 
     @RequestMapping("/save")
     public void updatePantry(@RequestBody Pantry pantry) {
-//    	data.setFfser(loginController.getFfser(client.getHandshakeData().getSingleUrlParam("token")));
+//    	data.setUser(loginController.getUser(client.getHandshakeData().getSingleUrlParam("token")));
 //    	pantryRepository.delete(data);
 //    	pantryRepository.save(data);
     }

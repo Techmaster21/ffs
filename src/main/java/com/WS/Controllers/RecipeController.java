@@ -11,18 +11,17 @@ import com.WS.Repository.RecipeRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import java.util.List;
 
 @Component
 @RestController
 @RequestMapping("/api/recipe")
 public class RecipeController {
-
     private final Logger logger = LoggerFactory.getLogger(RecipeController.class);
     @Autowired
     private RecipeRepository recipeRepository;
@@ -37,6 +36,7 @@ public class RecipeController {
         return recipeRepository.findById(id).get();
     }
 
+    @PreAuthorize("hasAuthority('basic')")
     @RequestMapping("/getAll")
     public List<Recipe> getAllRecipes() {
         List<Recipe> recipes = (List<Recipe>) recipeRepository.findAll();

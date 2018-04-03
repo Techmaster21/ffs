@@ -5,8 +5,8 @@
  */
 package com.WS.Controllers;
 
-import com.WS.Entity.Ffser;
-import com.WS.Repository.FfserRepository;
+import com.WS.Entity.User;
+import com.WS.Repository.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,23 +18,23 @@ import org.springframework.web.bind.annotation.RestController;
 @Component
 @RestController
 @RequestMapping("/api/ffser")
-public class FfserController {
+public class UserController {
 
-    private final Logger logger = LoggerFactory.getLogger(FfserController.class);
+    private final Logger logger = LoggerFactory.getLogger(UserController.class);
     @Autowired
-    private FfserRepository ffserRepository;
+    private UserRepository userRepository;
 
-    public FfserController() {
+    public UserController() {
     }
 
     @RequestMapping("/save")
-    public Ffser saveFfser(@RequestBody Ffser ffser) {
-        return ffserRepository.save(ffser);
+    public User saveFfser(@RequestBody User user) {
+        return userRepository.save(user);
     }
 
     @RequestMapping("/delete")
     public void deleteFfser(@RequestBody Integer id) {
-        ffserRepository.deleteById(id);
+        userRepository.deleteById(id);
         // TODO should probably return something
     }
 

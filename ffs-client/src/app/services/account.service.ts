@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
-import { FFSer } from '../models/ffser';
+import { User } from '../models/user';
 import { of } from 'rxjs/observable/of';
 import { catchError } from 'rxjs/operators';
 import { Token } from '../models/token';
@@ -32,7 +32,7 @@ export class AccountService {
     return localStorage.getItem(TOKEN_NAME);
   }
 
-  createAccount(user: FFSer, password: string): Observable<boolean> {
+  createAccount(user: User, password: string): Observable<boolean> {
     const userInfo = { username: user.username, password };
 
     return this.http.post<boolean>(this.accountURL, userInfo, httpOptions)

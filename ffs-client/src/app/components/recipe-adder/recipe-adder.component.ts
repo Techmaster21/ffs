@@ -5,7 +5,7 @@ import { Location } from '@angular/common';
 import { Ingredient } from '../../models/ingredient';
 import { Recipe } from '../../models/recipe';
 import { RecipeService } from '../../services/recipe.service';
-import { FFSer } from '../../models/ffser';
+import { User } from '../../models/user';
 import { Unit } from '../../models/unit';
 import { Step } from '../../models/step';
 import { Cuisine } from '../../models/cuisine';
@@ -50,7 +50,7 @@ export class RecipeAdderComponent implements OnInit {
   }
 
   submitRecipe(): void {
-    this.recipe.ffser = new FFSer(3);
+    this.recipe.ffser = new User(3);
     this.recipeService.saveRecipe(this.recipe);
     this.location.back();
   }

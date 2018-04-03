@@ -13,7 +13,7 @@
 //import org.springframework.boot.CommandLineRunner;
 //import org.springframework.stereotype.Component;
 //
-//import com.WS.Repository.FfserRepository;
+//import com.WS.Repository.UserRepository;
 //import com.WS.Repository.PantryItemsRepository;
 //import com.corundumstudio.socketio.SocketIOServer;
 //import io.jsonwebtoken.Jwts;
@@ -41,7 +41,7 @@
 //    @Autowired
 //    private PantryItemsRepository pantryRepository;
 //    @Autowired
-//    private FfserRepository ffserRepository;
+//    private UserRepository ffserRepository;
 //
 //    @Override
 //    public void run(String... args) throws Exception {
