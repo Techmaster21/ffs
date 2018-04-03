@@ -24,6 +24,7 @@ import { StepsViewerComponent } from './components/steps-viewer/steps-viewer.com
 import { SocketService } from './services/socket.service';
 import { PantryComponent } from './components/pantry/pantry.component';
 import { LogoutComponent } from './components/logout/logout.component';
+import { FriendsterComponent } from './components/friendster/friendster.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { LogoutComponent } from './components/logout/logout.component';
     ValidateEqualDirective,
     StepsViewerComponent,
     PantryComponent,
-    LogoutComponent
+    LogoutComponent,
+    FriendsterComponent
   ],
   imports: [
     BrowserModule,

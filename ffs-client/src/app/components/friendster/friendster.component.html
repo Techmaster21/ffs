@@ -1,0 +1,51 @@
+<h1>Friends</h1>
+
+<mat-card>
+  <p>Friends </p>
+  <mat-table #table [dataSource]="dataSource">
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="name">
+      <mat-header-cell *matHeaderCellDef> Name</mat-header-cell>
+      <mat-cell *matCellDef="let pantryItem"> {{ pantryItem.food.name }}</mat-cell>
+    </ng-container>
+
+    <!-- Delete Column -->
+    <ng-container matColumnDef="delete">
+      <mat-header-cell *matHeaderCellDef><mat-icon aria-label="Delete">delete</mat-icon></mat-header-cell>
+      <mat-cell *matCellDef="let i=index; let pantryItem">
+        <button mat-icon-button color="accent" (click)="removePantryItem(pantryItem)">
+          <mat-icon aria-label="Delete">delete</mat-icon>
+        </button>
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedFriendsColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedFriendsColumns;"></mat-row>
+  </mat-table>
+
+</mat-card>
+
+<mat-card>
+  <p>Add Friends</p>
+  <input matInput placeholder="Friends" [(ngModel)]="friendName" name="Friend" required>
+  <button mat-icon-button color="accent" (click)="searchFriend()">Search</button>
+  <mat-table #table [dataSource]="searchedFriendDataSource">
+    <ng-container matColumnDef="name">
+      <mat-header-cell *matHeaderCellDef> Name</mat-header-cell>
+      <mat-cell *matCellDef="let ffser"> {{ ffser.name }}</mat-cell>
+    </ng-container>
+    <!-- Select Column -->
+    <ng-container matColumnDef="select">
+      <mat-header-cell *matHeaderCellDef></mat-header-cell>
+      <mat-cell *matCellDef="let i=index; let ffser">
+        <button mat-icon-button color="accent" (click)="addFriend(ffser)">
+          Select
+        </button>
+      </mat-cell>
+    </ng-container>
+    <mat-header-row *matHeaderRowDef="displayedSearchFriendsColumn"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedSearchFriendsColumn;"></mat-row>
+  </mat-table>
+</mat-card>
+
