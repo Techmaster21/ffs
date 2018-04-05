@@ -6,6 +6,7 @@
 package com.WS.Controllers;
 
 import com.WS.Entity.Pantry;
+import com.WS.Repository.PantryRepository;
 import com.WS.Entity.User;
 import com.WS.Repository.PantryRepository;
 import com.WS.Service.SecurityContextService;
@@ -43,12 +44,12 @@ public class PantryController {
         }
         return pantryRepository.findByUser(currentUser);
     }
-
+    
     @RequestMapping("/save")
     public void savePantry(@RequestBody Pantry pantry) {
         User currentUser = securityContext.currentUser().get();
         pantry.setUser(currentUser);
-        pantryRepository.delete(pantry);
+        pantryRepository.deleteByUser(currentUser);
         pantryRepository.save(pantry);
     }
 
