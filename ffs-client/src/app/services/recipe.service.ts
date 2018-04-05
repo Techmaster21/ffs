@@ -17,13 +17,19 @@ const httpOptions = {
 };
 
 @Injectable()
+/**
+ * communicates to the server relating to recipes, ingredients, and pantries
+ */
 export class RecipeService {
 
   constructor(private http: HttpClient) {
 
   }
   // TODO delete methods don't return anything - they probably should.
-
+  /**
+   *gets a list of all of the recipes
+   * @returns All recipes from the database
+   */
   getAllRecipes(): Observable<Array<Recipe>> {
     return this.http.get<Array<Recipe>>(URI.RECIPE.GET_ALL, httpOptions)
       .pipe(
@@ -31,6 +37,11 @@ export class RecipeService {
       );
   }
 
+  /**
+   * gets a certain recipe
+   * @param id id of the recipe we want to get
+   * @returns the recipe corresponding to the
+   */
   getRecipe(id: Number): Observable<Recipe> {
     return this.http.post<Recipe>(URI.RECIPE.GET, id, httpOptions)
       .pipe(
@@ -38,6 +49,11 @@ export class RecipeService {
       );
   }
 
+  /**
+   * saves a recipe to the database
+   * @param recipe recipe to be saved
+   * @returns the updated recipe
+   */
   saveRecipe(recipe: Recipe): Observable<Recipe> {
     return this.http.post<Recipe>(URI.RECIPE.SAVE, recipe, httpOptions)
       .pipe(
@@ -45,6 +61,11 @@ export class RecipeService {
       );
   }
 
+  /**
+   * deletes a recipe from the database
+   * @param id id of the recipe to be deleted
+   * @returns nothing
+   */
   deleteRecipe(id: number): Observable<Recipe> {
     return this.http.post<Recipe>(URI.RECIPE.SAVE, id, httpOptions)
       .pipe(
@@ -52,6 +73,10 @@ export class RecipeService {
       );
   }
 
+  /**
+   * gets a list of all of the units
+   * @returns a list of all of the units in the database
+   */
   getAllUnits(): Observable<Array<Unit>> {
     return this.http.get<Array<Unit>>(URI.UNIT.GET_ALL, httpOptions)
       .pipe(
@@ -59,6 +84,10 @@ export class RecipeService {
       );
   }
 
+  /**
+   * gets a list of all of the cuisines
+   * @returns a list of all of the cuisines in the database
+   */
   getAllCuisines(): Observable<Array<Cuisine>> {
     return this.http.get<Array<Cuisine>>(URI.CUISINE.GET_ALL, httpOptions)
       .pipe(
@@ -66,6 +95,10 @@ export class RecipeService {
       );
   }
 
+  /**
+   * gets the pantry associated with the user
+   * @returns the pantry associated with the logged in user
+   */
   getPantry(): Observable<Pantry> {
     return this.http.get<Pantry>(URI.PANTRY.GET, httpOptions)
       .pipe(
@@ -73,6 +106,11 @@ export class RecipeService {
       );
   }
 
+  /**
+   * searches the list of foods by a keyword
+   * @param name the name of the food to be searched
+   * @returns a list of the possible foods the user could be referring to
+   */
   searchFoods(name: String): Observable<Array<Food>> {
     return this.http.post<Array<Food>>(URI.FOOD.SEARCH_BY_NAME, name, httpOptions)
       .pipe(
@@ -80,6 +118,11 @@ export class RecipeService {
       );
   }
 
+  /**
+   * saves a given pantry to the users pantry
+   * @param pantry the pantry to be saved
+   * @returns the updated pantry
+   */
   savePantry(pantry: Pantry): Observable<Pantry> {
     return this.http.post<Pantry>(URI.PANTRY.SAVE, pantry, httpOptions)
       .pipe(
@@ -87,6 +130,10 @@ export class RecipeService {
       );
   }
 
+  /**
+   * removes a pantry item from the pantry
+   * @param pantryItem the pantryItem to be deleted
+   */
   // TODO this has no server side implementation
   removePantryItem(pantryItem: Pantryitem): void {
     // this.socket.emit('removeFromPantry', pantryItem);
