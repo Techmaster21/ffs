@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { CalendarEvent } from 'angular-calendar';
 
+/**
+ * View for Calendar
+ */
 @Component({
   selector: 'app-calendar',
   templateUrl: './calendar.component.html',

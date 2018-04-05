@@ -55,8 +55,6 @@ export class RecipeService {
    * @returns the updated recipe
    */
   saveRecipe(recipe: Recipe): Observable<Recipe> {
-    console.log(URI.RECIPE.SAVE);
-
     return this.http.post<Recipe>(URI.RECIPE.SAVE, recipe, httpOptions)
       .pipe(
         catchError(this.handleError<Recipe>('saveRecipe'))

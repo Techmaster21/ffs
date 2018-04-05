@@ -10,12 +10,33 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./recipes-viewer.component.css']
 })
 export class RecipesViewerComponent implements OnInit {
+  /**
+   * Whether this is being used as a selector for events
+   */
   @Input() selector: boolean;
+  /**
+   * Emits the selected recipe
+   */
   @Output() selectRecipe: EventEmitter<Recipe> = new EventEmitter();
+  /**
+   * The selected recipe from which to display details
+   */
   selectedRecipe: Recipe;
+  /**
+   * The recipe selected to be used
+   */
   selectedRecipeForUse: Recipe;
+  /**
+   * The list of recipes
+   */
   recipes: Array<Recipe>;
+  /**
+   * The data source for the recipe table
+   */
   dataSource: BehaviorSubject<any>;
+  /**
+   * The list of columns to display in the recipe table
+   */
   displayedRecipeColumns: Array<string>;
 
   constructor(private recipeService: RecipeService, private route: ActivatedRoute) {
@@ -33,15 +54,27 @@ export class RecipesViewerComponent implements OnInit {
       ['name', 'description', 'user', 'cuisine', 'delete'];
   }
 
+  /**
+   * Selects the given recipe
+   * @param recipe The recipe to select
+   */
   recipeSelect(recipe: Recipe): void {
     this.selectedRecipe = recipe;
   }
 
+  /**
+   * Selects the recipe to use (for scheduling)
+   * @param recipe The recipe to use
+   */
   selectForUse(recipe: Recipe): void {
     this.selectedRecipeForUse = recipe;
     this.selectRecipe.emit(recipe);
   }
 
+  /**
+   * Remove the given recipe
+   * @param recipe The recipe to remove
+   */
   removeRecipe(recipe: Recipe): void {
     this.recipeService.deleteRecipe(recipe.id);
     this.recipes.splice(this.recipes.indexOf(recipe), 1);
