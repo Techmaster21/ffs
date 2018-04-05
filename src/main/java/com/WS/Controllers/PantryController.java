@@ -49,7 +49,7 @@ public class PantryController {
     public void savePantry(@RequestBody Pantry pantry) {
         User currentUser = securityContext.currentUser().get();
         pantry.setUser(currentUser);
-        pantryRepository.delete(pantry);
+        pantryRepository.deleteByUser(currentUser);
         pantryRepository.save(pantry);
     }
 
