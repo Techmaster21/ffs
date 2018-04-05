@@ -18,14 +18,41 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
   styleUrls: ['./recipe-adder.component.css']
 })
 export class RecipeAdderComponent implements OnInit {
+  /**
+   * A list of potential units for ingredients
+   */
   units: Array<Unit>;
+  /**
+   * A list of potential cuisines for recipes
+   */
   cuisines: Array<Cuisine>;
+  /**
+   * The recipe being edited
+   */
   recipe: Recipe;
+  /**
+   * The ingredient currently being added
+   */
   newIngredient: Ingredient;
+  /**
+   * The step currently being added
+   */
   newStep: Step;
+  /**
+   * A potential ingredient as selected from the result of a search
+   */
   potentialIngredient: string;
+  /**
+   * Search results returned from backend
+   */
   searchResults: Array<Food>;
+  /**
+   * Data source for the searched foods table
+   */
   searchedFoodDataSource: BehaviorSubject<any>;
+  /**
+   * Columns to display for searched foods table
+   */
   displayedSearchFoodsColumn: Array<string>;
 
   constructor(private router: Router,
@@ -39,16 +66,25 @@ export class RecipeAdderComponent implements OnInit {
     this.displayedSearchFoodsColumn = ['name', 'select'];
   }
 
+  /**
+   * Adds ingredient to the recipe
+   */
   addIngredient(): void {
     this.recipe.ingredients.push(this.newIngredient);
     this.newIngredient = new Ingredient();
   }
 
+  /**
+   * Adds a step to the recipe
+   */
   addStep(): void {
     this.recipe.steps.push(this.newStep);
     this.newStep = new Step();
   }
 
+  /**
+   * Sends a request to save the recipe to the backend
+   */
   submitRecipe(): void {
     this.recipeService.saveRecipe(this.recipe)
       .subscribe(() =>
@@ -56,18 +92,34 @@ export class RecipeAdderComponent implements OnInit {
     );
   }
 
+  /**
+   * Checks if the selected unit is valid
+   * @returns True if valid, false otherwise
+   */
   checkValidUnits(): boolean {
     return this.newIngredient.unit.name !== '';
   }
 
+  /**
+   * Returns to the previous page
+   */
   goBack(): void {
     this.location.back();
   }
 
+  /**
+   * Compares two cuisines
+   * @param c1 Cuisine one
+   * @param c2 Cuisine two
+   * @returns True if they are the same, false otherwise
+   */
   compareCuisineFn(c1: Cuisine, c2: Cuisine): boolean {
     return c1.name === c2.name;
   }
 
+  /**
+   * Searches the food database for an ingredient
+   */
   searchIngredient(): void {
     this.recipeService.searchFoods(this.potentialIngredient)
       .subscribe(searchResults => {
@@ -76,6 +128,10 @@ export class RecipeAdderComponent implements OnInit {
       });
   }
 
+  /**
+   * Selects the food as the ingredient to add
+   * @param food The food that is selected
+   */
   selectForUse(food: Food): void {
     this.newIngredient.food = food;
     this.potentialIngredient = food.name;

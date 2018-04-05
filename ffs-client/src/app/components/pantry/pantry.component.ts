@@ -13,13 +13,37 @@ import { Food } from '../../models/food';
   styleUrls: ['./pantry.component.css']
 })
 export class PantryComponent implements OnInit {
+  /**
+   * Data source for the displayed user pantry table
+   */
   dataSource: BehaviorSubject<any>;
+  /**
+   * Data source for the searched food table
+   */
   searchedFoodDataSource: BehaviorSubject<any>;
+  /**
+   * List of columns to display for pantry table
+   */
   displayedPantryColumns: Array<string>;
+  /**
+   * List of columns to display for searched foods table
+   */
   displayedSearchFoodsColumn: Array<string>;
+  /**
+   * The user's pantry
+   */
   pantry: Pantry;
+  /**
+   * The ingredient to search for
+   */
   ingredientName: String;
+  /**
+   * A list of foods to display after searching
+   */
   searchResults: Array<Food>;
+  /**
+   * An item to add
+   */
   pantryItem: Pantryitem;
 
   constructor(private recipeService: RecipeService, private route: ActivatedRoute) {
@@ -40,6 +64,9 @@ export class PantryComponent implements OnInit {
     this.displayedSearchFoodsColumn = ['name', 'select'];
   }
 
+  /**
+   * Searchs for an ingredient via recipe service
+   */
   searchIngredient(): void {
     this.recipeService.searchFoods(this.ingredientName)
       .subscribe(searchResults => {
@@ -48,6 +75,10 @@ export class PantryComponent implements OnInit {
       });
   }
 
+  /**
+   * Adds the selected food to the pantry
+   * @param food The food to be added
+   */
   selectForUse(food: Food): void {
     this.pantryItem = {food, unit: {name: 'no unit', id: 3}, quantity: 0 };
     this.pantry.items.push(this.pantryItem);
@@ -56,6 +87,10 @@ export class PantryComponent implements OnInit {
       .subscribe();
   }
 
+  /**
+   * Removes the selected food from the pantry
+   * @param pantryItem The food to be removed
+   */
   removePantryItem(pantryItem: Pantryitem): void {
     this.pantry.items = this.pantry.items.filter(obj => obj !== pantryItem);
     this.pantry.items = this.pantry.items;
