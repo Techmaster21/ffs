@@ -18,22 +18,22 @@ export class PantryComponent implements OnInit {
   displayedPantryColumns: Array<string>;
   displayedSearchFoodsColumn: Array<string>;
   pantry: Pantry;
-  pantryItems: Array<Pantryitem>;
   ingredientName: String;
   searchResults: Array<Food>;
   pantryItem: Pantryitem;
 
   constructor(private recipeService: RecipeService, private route: ActivatedRoute) {
-    this.dataSource = new BehaviorSubject<any>(this.pantryItems);
+    // creating empty pantry so that we can create a behaviorSubject to observe its items
+    this.pantry = new Pantry();
+    this.dataSource = new BehaviorSubject<any>(this.pantry.items);
     this.searchedFoodDataSource = new BehaviorSubject<any>(this.searchResults);
   }
 
   ngOnInit(): void {
-    this.recipeService.getAllPantry()
+    this.recipeService.getPantry()
       .subscribe(pantry => {
         this.pantry = pantry;
-        this.pantryItems = pantry.items;
-        this.dataSource.next(this.pantryItems);
+        this.dataSource.next(this.pantry.items);
         }
       );
     this.displayedPantryColumns = ['name', 'quantity', 'units', 'delete'];
@@ -51,11 +51,15 @@ export class PantryComponent implements OnInit {
   selectForUse(food: Food): void {
     this.pantryItem = {food, unit: {name: 'no unit', id: 3}, quantity: 0 };
     this.pantry.items.push(this.pantryItem);
-    this.dataSource.next(this.pantryItems);
-    console.log(this.pantry);
-    this.recipeService.addPantry(this.pantry);
+    this.dataSource.next(this.pantry.items);
+    this.recipeService.savePantry(this.pantry)
+      .subscribe();
   }
+
   removePantryItem(pantryItem: Pantryitem): void {
-    this.recipeService.removePantryItem(pantryItem);
+    this.pantry.items = this.pantry.items.filter(obj => obj !== pantryItem);
+    console.log(this.pantry);
+    this.recipeService.savePantry(this.pantry)
+      .subscribe();
   }
 }

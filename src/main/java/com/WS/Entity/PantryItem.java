@@ -6,22 +6,8 @@
 package com.WS.Entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
 
-/**
- *
- * @author Eric
- */
+import javax.persistence.*;
 
 @Entity
 @Table(name = "pantry_items")
@@ -34,28 +20,27 @@ public class PantryItem {
     @OneToOne()
     @JoinColumn(name = "food_id", referencedColumnName = "NDB_No", nullable = false)
     private Food food;
-    
+
     @OneToOne
     @JoinColumn(name = "unit_id", nullable = false)
     private Unit unit;
-    
+
     @Column(name = "quantity")
     private double quantity;
-    
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "pantry_id", nullable = false)
     @JsonBackReference
     private Pantry pantry;
 
-    public PantryItem(int id, Food food, Unit unit, double quantity, Pantry pantry) {
-        this.id = id;
+    public PantryItem() {
+    }
+
+    public PantryItem(Food food, Unit unit, double quantity, Pantry pantry) {
         this.food = food;
         this.unit = unit;
         this.quantity = quantity;
         this.pantry = pantry;
-    }
-
-    public PantryItem() {
     }
 
     public int getId() {
@@ -122,6 +107,16 @@ public class PantryItem {
         }
         return true;
     }
-    
-    
+
+
+    @Override
+    public String toString() {
+        return "PantryItem{" +
+                "id=" + id +
+                ", food=" + food +
+                ", unit=" + unit +
+                ", quantity=" + quantity +
+                ", pantry=" + pantry.getId() +
+                '}';
+    }
 }

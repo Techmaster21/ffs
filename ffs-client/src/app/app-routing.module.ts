@@ -11,6 +11,7 @@ import { CalendarComponent } from './components/calendar/calendar.component';
 import { RegisterGuard } from './guards/register.guard';
 import { SchedulerComponent } from './components/scheduler/scheduler.component';
 import { LogoutComponent } from './components/logout/logout.component';
+import { FriendsterComponent } from './components/friendster/friendster.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -23,7 +24,8 @@ const routes: Routes = [
   { path: 'createaccount', component: CreateAccountComponent },
   { path: 'calendar', component: CalendarComponent, canActivate: [RegisterGuard] },
   {path: 'scheduler', component: SchedulerComponent, canActivate: [RegisterGuard]},
-  {path: 'pantry', component: PantryComponent, canActivate: [RegisterGuard]}
+  {path: 'pantry', component: PantryComponent, canActivate: [RegisterGuard]},
+  {path: 'friends', component: FriendsterComponent, canActivate: [RegisterGuard]}
 ];
 
 @NgModule({

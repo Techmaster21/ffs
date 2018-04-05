@@ -12,5 +12,8 @@ export class SchedulerComponent {
   recipeSelect(recipe: Recipe): void {
     this.selectedRecipe = recipe;
   }
+  addEvent(): void {
+    
+  }
 
 }

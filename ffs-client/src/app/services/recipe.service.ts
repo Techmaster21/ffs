@@ -3,77 +3,160 @@ import { Observable } from 'rxjs/Observable';
 
 import { Recipe } from '../models/recipe';
 import { Unit } from '../models/unit';
-import { Ingredient } from '../models/ingredient';
-import { FFSer } from '../models/ffser';
 import { Cuisine } from '../models/cuisine';
-import { NgSocket, SocketService } from './socket.service';
 import { Pantry } from '../models/pantry';
 import { Pantryitem } from '../models/pantryitem';
 import { Food } from '../models/food';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { of } from 'rxjs/observable/of';
+import { catchError } from 'rxjs/operators';
+import { URI } from '../uri';
+
+const httpOptions = {
+  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+};
 
 @Injectable()
+/**
+ * communicates to the server relating to recipes, ingredients, and pantries
+ */
 export class RecipeService {
-  socket: NgSocket;
 
-  constructor(private socketService: SocketService) {
-    this.socket = socketService.getSocket('/users');
+  constructor(private http: HttpClient) {
+
   }
-
+  // TODO delete methods don't return anything - they probably should.
+  /**
+   *gets a list of all of the recipes
+   * @returns All recipes from the database
+   */
   getAllRecipes(): Observable<Array<Recipe>> {
-    this.socket.emit('getAllRecipes');
-
-    return this.socket.fromEvent<Array<Recipe>>('getAllRecipes');
+    return this.http.get<Array<Recipe>>(URI.RECIPE.GET_ALL, httpOptions)
+      .pipe(
+        catchError(this.handleError<Array<Recipe>>('getAllRecipes'))
+      );
   }
 
-  getRecipe(key: Number): Observable<Recipe> {
-    this.socket.emit('getRecipe', key);
-
-    return this.socket.fromEvent<Recipe>('getRecipe');
+  /**
+   * gets a certain recipe
+   * @param id id of the recipe we want to get
+   * @returns the recipe corresponding to the
+   */
+  getRecipe(id: Number): Observable<Recipe> {
+    return this.http.post<Recipe>(URI.RECIPE.GET, id, httpOptions)
+      .pipe(
+        catchError(this.handleError<Recipe>('getRecipe'))
+      );
   }
 
+  /**
+   * saves a recipe to the database
+   * @param recipe recipe to be saved
+   * @returns the updated recipe
+   */
   saveRecipe(recipe: Recipe): Observable<Recipe> {
-    this.socket.emit('saveRecipe', recipe);
+    console.log(URI.RECIPE.SAVE);
 
-    return this.socket.fromEvent<Recipe>('saveRecipe');
+    return this.http.post<Recipe>(URI.RECIPE.SAVE, recipe, httpOptions)
+      .pipe(
+        catchError(this.handleError<Recipe>('saveRecipe'))
+      );
   }
 
-  deleteRecipe(index: number): Observable<Recipe> {
-    this.socket.emit('deleteRecipe', index);
-
-    return this.socket.fromEvent<Recipe>('deleteRecipe');
+  /**
+   * deletes a recipe from the database
+   * @param id id of the recipe to be deleted
+   * @returns nothing
+   */
+  deleteRecipe(id: number): Observable<Recipe> {
+    return this.http.post<Recipe>(URI.RECIPE.SAVE, id, httpOptions)
+      .pipe(
+        catchError(this.handleError<Recipe>('deleteRecipe'))
+      );
   }
 
+  /**
+   * gets a list of all of the units
+   * @returns a list of all of the units in the database
+   */
   getAllUnits(): Observable<Array<Unit>> {
-    this.socket.emit('getAllUnits');
-
-    return this.socket.fromEvent<Array<Unit>>('getAllUnits');
+    return this.http.get<Array<Unit>>(URI.UNIT.GET_ALL, httpOptions)
+      .pipe(
+        catchError(this.handleError<Array<Unit>>('getAllUnits'))
+      );
   }
 
+  /**
+   * gets a list of all of the cuisines
+   * @returns a list of all of the cuisines in the database
+   */
   getAllCuisines(): Observable<Array<Cuisine>> {
-    this.socket.emit('getAllCuisines');
-
-    return this.socket.fromEvent<Array<Cuisine>>('getAllCuisines');
+    return this.http.get<Array<Cuisine>>(URI.CUISINE.GET_ALL, httpOptions)
+      .pipe(
+        catchError(this.handleError<Array<Cuisine>>('getAllCuisines'))
+      );
   }
 
-  createAccount(user: FFSer, password: string): void {
-    const userInfo: [FFSer, string] = [user, password];
-    this.socket.emit('createUser', userInfo);
+  /**
+   * gets the pantry associated with the user
+   * @returns the pantry associated with the logged in user
+   */
+  getPantry(): Observable<Pantry> {
+    return this.http.get<Pantry>(URI.PANTRY.GET, httpOptions)
+      .pipe(
+        catchError(this.handleError<Pantry>('getPantry'))
+      );
   }
 
-  getAllPantry(): Observable<Pantry> {
-    this.socket.emit('getPantry');
+  /**
+   * searches the list of foods by a keyword
+   * @param name the name of the food to be searched
+   * @returns a list of the possible foods the user could be referring to
+   */
+  searchFoods(name: String): Observable<Array<Food>> {
+    return this.http.post<Array<Food>>(URI.FOOD.SEARCH_BY_NAME, name, httpOptions)
+      .pipe(
+        catchError(this.handleError<Array<Food>>('searchFoods'))
+      );
+  }
 
-    return this.socket.fromEvent<Pantry>('getPantry');
+  /**
+   * saves a given pantry to the users pantry
+   * @param pantry the pantry to be saved
+   * @returns the updated pantry
+   */
+  savePantry(pantry: Pantry): Observable<Pantry> {
+    return this.http.post<Pantry>(URI.PANTRY.SAVE, pantry, httpOptions)
+      .pipe(
+        catchError(this.handleError<Pantry>('savePantry'))
+      );
   }
-  searchFoods(ingredientName: String): Observable<Array<Food>> {
-    this.socket.emit('getFoodItemsByName', ingredientName);
 
-    return this.socket.fromEvent<Array<Food>>('getFoodItemsByName');
-  }
-  addPantry(pantry: Pantry): void {
-    this.socket.emit('savePantry', pantry);
-  }
+  /**
+   * removes a pantry item from the pantry
+   * @param pantryItem the pantryItem to be deleted
+   */
+  // TODO this has no server side implementation
   removePantryItem(pantryItem: Pantryitem): void {
-    this.socket.emit('removeFromPantry', pantryItem);
+    // this.socket.emit('removeFromPantry', pantryItem);
+  }
+
+  /**
+   * Handle Http operation that failed.
+   * Let the app continue.
+   * @param operation - name of the operation that failed
+   * @param result - optional value to return as the observable result
+   */
+  // what does it return if result is not specified? Does it still know what
+  // T is somehow?
+  private handleError<T>(operation = 'operation', result?: T) {
+    return (error: any): Observable<T> => {
+
+      // TODO: send the error to remote logging infrastructure
+      console.error(error); // log to console instead
+
+      // Let the app keep running by returning an empty result.
+      return of(result as T);
+    };
   }
 }

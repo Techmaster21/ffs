@@ -1,8 +1,7 @@
-import { Permission } from './permission';
-
-export class FFSer {
+export class Authority {
   constructor(
     public id?: number,
     public username?: string,
+    public authority?: string
   ) {}
 }

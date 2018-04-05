@@ -1,6 +1,6 @@
 <mat-card>
   <h1> Create Account </h1>
-  <form  #createAccountForm="ngForm" (ngSubmit)="createAccount(username.value, password.value)" class="create-account-form">
+  <form  #createAccountForm="ngForm" (ngSubmit)="createAccount()" class="create-account-form">
     <mat-form-field class="createaccount-full-width">
       <input #username="ngModel" matInput id="username" name="username" [(ngModel)]="userName" placeholder="Username"
              required>

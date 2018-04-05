@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FFSer } from '../../models/ffser';
+import { User } from '../../models/user';
 import { AccountService } from '../../services/account.service';
 import { Router } from '@angular/router';
 
@@ -17,7 +17,7 @@ export class CreateAccountComponent {
   }
 
   createAccount(): void {
-    let user: FFSer;
+    let user: User;
     user = {username: this.userName}; // todo server should do this
     this.accountService.createAccount(user, this.newPassword)
       .subscribe(success => {

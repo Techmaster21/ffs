@@ -6,49 +6,39 @@
 package com.WS.Entity;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
-
-/**
- *
- * @author Eric
- */
 
 @Entity
 @Table(name = "pantry")
 public class Pantry {
-        
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "pantry_id")
     private int id;
-    
+
     @OneToOne
     @JoinColumn(name = "ffser_id")
-    private Ffser ffser;
-    
+    private User user;
+
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "pantry")
     @JsonManagedReference
     private List<PantryItem> items = new ArrayList<>();
 
-    public Pantry(int id, Ffser ffser) {
-        this.id = id;
-        this.ffser = ffser;
+    public Pantry() {
     }
 
-    public Pantry() {
+    public Pantry(User user) {
+        this.user = user;
+    }
+
+    public Pantry(User user, List<PantryItem> items) {
+        this.user = user;
+        this.items = items;
     }
 
     public int getId() {
@@ -59,12 +49,12 @@ public class Pantry {
         this.id = id;
     }
 
-    public Ffser getFfser() {
-        return ffser;
+    public User getUser() {
+        return user;
     }
 
-    public void setFfser(Ffser ffser) {
-        this.ffser = ffser;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public List<PantryItem> getItems() {
@@ -97,7 +87,7 @@ public class Pantry {
         if (this.id != other.id) {
             return false;
         }
-        if (!Objects.equals(this.ffser, other.ffser)) {
+        if (!Objects.equals(this.user, other.user)) {
             return false;
         }
         if (!Objects.equals(this.items, other.items)) {
@@ -105,7 +95,14 @@ public class Pantry {
         }
         return true;
     }
-    
-    
-    
+
+
+    @Override
+    public String toString() {
+        return "Pantry{" +
+                "id=" + id +
+                ", user=" + user +
+                ", items=" + items +
+                '}';
+    }
 }
