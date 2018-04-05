@@ -21,6 +21,11 @@ import javax.persistence.TemporalType;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
+/**
+ * This entity is not yet finished so no javadoc comments will be provided
+ * @author Samuel
+ *
+ */
 @Entity
 @Table(name = "events")
 public class Event {
@@ -33,5 +38,7 @@ public class Event {
     @Column(name = "dateandtime", columnDefinition="DATETIME")
     @Temporal(TemporalType.TIMESTAMP)
     private Date startTime;
+    
+    
 	
 }
