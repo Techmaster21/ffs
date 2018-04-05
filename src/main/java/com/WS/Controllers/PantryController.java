@@ -5,16 +5,13 @@
  */
 package com.WS.Controllers;
 
-import com.WS.Entity.Ffser;
 import com.WS.Entity.Pantry;
-import com.WS.Entity.PantryItem;
 import com.WS.Repository.FfserRepository;
 import com.WS.Repository.PantryRepository;
 import com.corundumstudio.socketio.AckRequest;
 import com.corundumstudio.socketio.SocketIOClient;
 import com.corundumstudio.socketio.SocketIOServer;
 import com.corundumstudio.socketio.annotation.OnEvent;
-import io.jsonwebtoken.Jwts;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -65,7 +62,7 @@ public class PantryController implements SocketIOController {
     public void updatePantry(SocketIOClient client, AckRequest request, Pantry data){
         System.out.println("cheeeeeeeeeeeseburger");
     	data.setFfser(loginController.getFfser(client.getHandshakeData().getSingleUrlParam("token")));
-    	pantryRepository.delete(data);
+    	pantryRepository.delete(data.getId());
     	pantryRepository.save(data);
     }
 

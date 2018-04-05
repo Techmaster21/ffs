@@ -78,7 +78,6 @@ public class Runner implements CommandLineRunner {
                 }
             }
         });
-        System.out.println(pantryRepository.findAll());
         server.start();
     }
 
