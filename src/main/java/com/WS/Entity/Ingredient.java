@@ -9,6 +9,11 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import javax.persistence.*;
 
+/**
+ * Class representing a Ingredient object in the database with proper links to it.
+ * @author YT_6
+ *
+ */
 @Entity
 @Table(name = "ingredients")
 public class Ingredient {
@@ -51,8 +56,6 @@ public class Ingredient {
 
     /**
      * Representation of an Ingredient object in database.
-
-     * 
      */
     public Ingredient() {
     }
