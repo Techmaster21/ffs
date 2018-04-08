@@ -11,6 +11,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { of } from 'rxjs/observable/of';
 import { catchError } from 'rxjs/operators';
 import { URI } from '../uri';
+import { User } from '../models/user';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -138,7 +139,18 @@ export class RecipeService {
   removePantryItem(pantryItem: Pantryitem): void {
     // this.socket.emit('removeFromPantry', pantryItem);
   }
-
+  searchUsers(name: String): Observable<Array<User>> {
+    return this.http.post<Array<User>>(URI.USER.SEARCH_BY_NAME, name, httpOptions)
+      .pipe(
+        catchError(this.handleError<Array<User>>('searchUsers'))
+      );
+  }
+  requestFriend(user: User): Observable<User> {
+    return this.http.post<User>(URI.USER.REQUEST_FRIEND, user, httpOptions)
+      .pipe(
+        catchError(this.handleError<User>('requestFriend'))
+      );
+  }
   /**
    * Handle Http operation that failed.
    * Let the app continue.
@@ -157,4 +169,5 @@ export class RecipeService {
       return of(result as T);
     };
   }
+
 }

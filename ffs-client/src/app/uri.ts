@@ -5,6 +5,7 @@ export const UNIT_BASE = 'api/unit';
 export const CUISINE_BASE = 'api/cuisine';
 export const FOOD_BASE = 'api/food';
 export const PANTRY_BASE = 'api/pantry';
+export const USER_BASE = 'api/user';
 export const URI = {
   ACCOUNT: {
     SIGNUP: `${ACCOUNT_BASE}/signup`,
@@ -40,5 +41,9 @@ export const URI = {
     GET_ALL: `${PANTRY_BASE}/getAll`,
     SAVE: `${PANTRY_BASE}/save`,
     DELETE: `${PANTRY_BASE}/delete`
+  },
+  USER: {
+    SEARCH_BY_NAME: `${USER_BASE}/searchByName`,
+    REQUEST_FRIEND: `${USER_BASE}/requestFriend`
   }
-}
+};

@@ -14,6 +14,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import java.util.List;
 
 @Component
 @RestController
@@ -38,6 +39,14 @@ public class UserController {
         userRepository.deleteById(id);
         // TODO should probably return something
     }
+
+    @RequestMapping("/searchByName")
+    public List<User> searchByName(@RequestBody String s) {
+         List<User> users = (List<User>) userRepository.findByUsernameContaining(s);
+                return users;
+     }
+
+
 
 
 }
