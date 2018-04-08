@@ -27,7 +27,7 @@ export class FriendsterComponent implements OnInit {
     this.displayedFriendRequestColumns = ['name', 'accept', 'decline'];
   }
 
-  searchFriend(): void{
+  searchFriend(): void {
     this.recipeService.searchUsers(this.friendName)
       .subscribe(searchResults => {
         this.searchResults = searchResults;
@@ -35,7 +35,7 @@ export class FriendsterComponent implements OnInit {
       });
   }
 
-  requestFriend(user: User): void{
+  requestFriend(user: User): void {
     this.recipeService.requestFriend(user)
       .subscribe();
   }

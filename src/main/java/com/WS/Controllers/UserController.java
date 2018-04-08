@@ -42,7 +42,7 @@ public class UserController {
 
     @RequestMapping("/searchByName")
     public List<User> searchByName(@RequestBody String s) {
-         List<User> users = (List<User>) userRepository.findAll();
+         List<User> users = (List<User>) userRepository.findByUsernameContaining(s);
                 return users;
      }
 
