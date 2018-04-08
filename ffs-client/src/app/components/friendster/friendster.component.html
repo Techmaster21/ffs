@@ -2,34 +2,35 @@
 <mat-card>
   Friend Requests
   <mat-table #table [dataSource]="friendRequestDataSource">
+      <!-- Name Column -->
+      <ng-container matColumnDef="name">
+       <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
+        <mat-cell *matCellDef="let user"> {{ user.username }}</mat-cell>
+      </ng-container>
+
+      <!-- Accept Column -->
+      <ng-container matColumnDef="accept">
+        <mat-header-cell *matHeaderCellDef></mat-header-cell>
+        <mat-cell *matCellDef="let i=index; let user">
+          <button mat-icon-button color="accent" (click)="acceptRequest(user)">
+           Accept
+          </button>
+        </mat-cell>
+      </ng-container>
+
+      <!-- Decline Column -->
+      <ng-container matColumnDef="decline">
+       <mat-header-cell *matHeaderCellDef></mat-header-cell>
+        <mat-cell *matCellDef="let i=index; let user">
+          <button mat-icon-button color="accent" (click)="declineRequest(user)">
+            Decline
+         </button>
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedFriendRequestColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedFriendRequestColumns;"></mat-row>
   </mat-table>
-
-  <!-- Name Column -->
-  <ng-container matColumnDef="name">
-    <mat-header-cell *matHeaderCellDef> Name</mat-header-cell>
-    <mat-cell *matCellDef="let user"> {{ user.username }}</mat-cell>
-  </ng-container>
-
-  <!-- Accept Column -->
-  <ng-container matColumnDef="accept">
-    <mat-cell *matCellDef="let i=index; let user">
-      <button mat-icon-button color="accent" (click)="acceptRequest(user)">
-        Accept
-      </button>
-    </mat-cell>
-  </ng-container>
-
-  <!-- Decline Column -->
-  <ng-container matColumnDef="decline">
-    <mat-cell *matCellDef="let i=index; let user">
-      <button mat-icon-button color="accent" (click)="declineRequest(user)">
-        Decline
-      </button>
-    </mat-cell>
-  </ng-container>
-
-  <mat-header-row *matHeaderRowDef="displayedFriendRequestColumns"></mat-header-row>
-  <mat-row *matRowDef="let row; columns: displayedFriendRequestColumns;"></mat-row>
 </mat-card>
 
 <h1>Friends</h1>
@@ -73,7 +74,7 @@
     <ng-container matColumnDef="select">
       <mat-header-cell *matHeaderCellDef></mat-header-cell>
       <mat-cell *matCellDef="let i=index; let user">
-        <button mat-icon-button color="accent" (click)="addFriend(user)">
+        <button mat-icon-button color="accent" (click)="requestFriend(user)">
           Select
         </button>
       </mat-cell>

@@ -107,15 +107,29 @@ export class PantryComponent implements OnInit {
       .subscribe();
   }
 
+  /**
+   * updates the pantry after a user changes something in it
+   */
   updatePantry(): void {
     this.recipeService.savePantry(this.pantry)
       .subscribe();
   }
 
+  /**
+   * the compare function used for comparing units
+   * @param u1 the first unit to be compared
+   * @param u2 the second unit to be compared
+   * @returns whether or not the two units are considered the same
+   */
   compareUnitFn(u1: Unit, u2: Unit): boolean {
     return u1.name === u2.name;
   }
 
+  /**
+   * checks if a food is already in the users pantry
+   * @param f the food to check
+   * @returns if the food is in the pantry
+   */
   checkAlreadyInPantry(f: Food): boolean {
     for (const i of this.pantry.items) {
       if (i.food.name === f.name) return false;
