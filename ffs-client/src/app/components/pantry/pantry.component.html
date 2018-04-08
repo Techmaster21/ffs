@@ -13,13 +13,19 @@
     <!-- Quantity Column -->
     <ng-container matColumnDef="quantity">
       <mat-header-cell *matHeaderCellDef> Quantity</mat-header-cell>
-      <mat-cell *matCellDef="let pantryItem"> {{ pantryItem.quantity }}</mat-cell>
+
+      <mat-cell *matCellDef="let pantryItem"> <input [(ngModel)]="pantryItem.quantity" (change)="updatePantry()"></mat-cell>
+
     </ng-container>
 
     <!-- Unit Column -->
     <ng-container matColumnDef="units">
       <mat-header-cell *matHeaderCellDef> Units</mat-header-cell>
-      <mat-cell *matCellDef="let pantryItem"> {{ pantryItem.unit.name }}</mat-cell>
+      <mat-cell *matCellDef="let pantryItem">
+        <mat-select placeholder="Units" [compareWith]="compareUnitFn" (change)="updatePantry()" [(ngModel)]="pantryItem.unit" name="unit" required>
+          <mat-option *ngFor="let unit of units" [value]="unit">{{ unit.name }}</mat-option>
+        </mat-select>
+      </mat-cell>
     </ng-container>
 
     <!-- Delete Column -->

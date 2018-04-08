@@ -6,6 +6,8 @@ import { Ingredient } from '../../models/ingredient';
 import { Pantry } from '../../models/pantry';
 import { Pantryitem } from '../../models/pantryitem';
 import { Food } from '../../models/food';
+import { Unit } from '../../models/unit';
+import { Cuisine } from '../../models/cuisine';
 
 @Component({
   selector: 'app-pantry',
@@ -45,6 +47,7 @@ export class PantryComponent implements OnInit {
    * An item to add
    */
   pantryItem: Pantryitem;
+  units: Array<Unit>;
 
   constructor(private recipeService: RecipeService, private route: ActivatedRoute) {
     // creating empty pantry so that we can create a behaviorSubject to observe its items
@@ -56,10 +59,14 @@ export class PantryComponent implements OnInit {
   ngOnInit(): void {
     this.recipeService.getPantry()
       .subscribe(pantry => {
-        this.pantry = pantry;
-        this.dataSource.next(this.pantry.items);
+          this.pantry = pantry;
+          this.dataSource.next(this.pantry.items);
         }
       );
+    this.recipeService.getAllUnits()
+      .subscribe(units => {
+        this.units = units;
+      });
     this.displayedPantryColumns = ['name', 'quantity', 'units', 'delete'];
     this.displayedSearchFoodsColumn = ['name', 'select'];
   }
@@ -80,11 +87,13 @@ export class PantryComponent implements OnInit {
    * @param food The food to be added
    */
   selectForUse(food: Food): void {
-    this.pantryItem = {food, unit: {name: 'no unit', id: 3}, quantity: 0 };
-    this.pantry.items.push(this.pantryItem);
-    this.dataSource.next(this.pantry.items);
-    this.recipeService.savePantry(this.pantry)
-      .subscribe();
+    if (this.checkAlreadyInPantry(food)) {
+      this.pantryItem = {food, unit: {name: 'no unit', id: 3}, quantity: 0};
+      this.pantry.items.push(this.pantryItem);
+      this.dataSource.next(this.pantry.items);
+      this.recipeService.savePantry(this.pantry)
+        .subscribe();
+    }
   }
 
   /**
@@ -94,8 +103,24 @@ export class PantryComponent implements OnInit {
   removePantryItem(pantryItem: Pantryitem): void {
     this.pantry.items = this.pantry.items.filter(obj => obj !== pantryItem);
     this.dataSource.next(this.pantry.items);
-    console.log(this.pantry);
     this.recipeService.savePantry(this.pantry)
       .subscribe();
+  }
+
+  updatePantry(): void {
+    this.recipeService.savePantry(this.pantry)
+      .subscribe();
+  }
+
+  compareUnitFn(u1: Unit, u2: Unit): boolean {
+    return u1.name === u2.name;
+  }
+
+  checkAlreadyInPantry(f: Food): boolean {
+    for (const i of this.pantry.items) {
+      if (i.food.name === f.name) return false;
+    }
+
+    return true;
   }
 }
