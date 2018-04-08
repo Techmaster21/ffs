@@ -65,6 +65,10 @@ public class Pantry {
         this.items = items;
     }
 
+    /**
+     * Returns a hash code value for this Pantry object.
+     * @return integer that is the hash code for this Pantry object
+     */
     @Override
     public int hashCode() {
         int hash = 7;
@@ -72,6 +76,11 @@ public class Pantry {
         return hash;
     }
 
+    /**
+     * Indicates whether some other object is "equal to" this Pantry object.
+     * @param obj object being tested for equality with this Pantry.
+     * @return return true if obj and this Pantry are equivalent.  False if not. 
+     */
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -97,6 +106,10 @@ public class Pantry {
     }
 
 
+    /**
+     * Returns a string representation of this Ingredient object.
+     * @return String representation of this Ingredient object. 
+     */
     @Override
     public String toString() {
         return "Pantry{" +

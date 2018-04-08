@@ -77,7 +77,7 @@ public class Cuisine {
     }
 
     /**
-     * Returns a hash code value for the object.
+     * Returns a hash code value for this Cuisine object.
      * @return integer that is the hash code for this Cuisine object
      */
     @Override
