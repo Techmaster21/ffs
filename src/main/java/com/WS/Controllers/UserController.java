@@ -16,37 +16,46 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
+/**
+ * Controller that handles HTTP requests that require queries to the FFSer
+ * table.
+ *
+ * @author YT_6
+ *
+ */
 @Component
 @RestController
 @RequestMapping("/api/user")
 public class UserController {
 
     private final Logger logger = LoggerFactory.getLogger(UserController.class);
+    
+    /**
+     * Repository handling ffser table.
+     */
     private final UserRepository userRepository;
 
+    /**
+     * Creates controller that handles HTTP requests that require do queries to
+     * the ffser table.
+     *
+     * @param userRepository Repository handing ffser table.
+     */
     @Autowired
     public UserController(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 
-    @RequestMapping("/save")
-    public User saveUser(@RequestBody User user) {
-        return userRepository.save(user);
-    }
-
-    @RequestMapping("/delete")
-    public void deleteFfser(@RequestBody Integer id) {
-        userRepository.deleteById(id);
-        // TODO should probably return something
-    }
-
+    /**
+     * HTTP request for getting a specific recipe from the Recipes table
+     *
+     * @param s The string to search the Users table by
+     * @return A list of users with similar names to the search
+     */
     @RequestMapping("/searchByName")
     public List<User> searchByName(@RequestBody String s) {
-         List<User> users = (List<User>) userRepository.findByUsernameContaining(s);
-                return users;
-     }
-
-
-
+        List<User> users = (List<User>) userRepository.findByUsernameContaining(s);
+        return users;
+    }
 
 }

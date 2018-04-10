@@ -23,10 +23,18 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * Controller that handles HTTP requests for logging in and signing up. It also
+ * handles sending tokens
+ *
+ * @author YT_6
+ *
+ */
 @Component
 @RestController
 @RequestMapping(path = "/api/account")
 public class LoginController {
+
     private final AuthenticationManager authenticationManager;
     private final TokenHandler tokenHandler;
     private final SecurityContextService securityContextService;
@@ -35,10 +43,10 @@ public class LoginController {
 
     @Autowired
     public LoginController(AuthenticationManager authenticationManager,
-                           TokenHandler tokenHandler,
-                           SecurityContextService securityContextService,
-                           UserRepository userRepository,
-                           SHA256PasswordEncoder sha256PasswordEncoder) {
+            TokenHandler tokenHandler,
+            SecurityContextService securityContextService,
+            UserRepository userRepository,
+            SHA256PasswordEncoder sha256PasswordEncoder) {
         this.authenticationManager = authenticationManager;
         this.tokenHandler = tokenHandler;
         this.securityContextService = securityContextService;
@@ -74,6 +82,7 @@ public class LoginController {
     }
 
     private static final class AuthParams {
+
         private String username;
         private String password;
 
@@ -107,6 +116,7 @@ public class LoginController {
     }
 
     private static final class AuthResponse {
+
         private String token;
 
         public AuthResponse() {
@@ -126,6 +136,7 @@ public class LoginController {
     }
 
     private static final class SignupParams {
+
         private String username;
         private String password;
 

@@ -18,19 +18,44 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Controller that handles HTTP requests that require queries to the Foods
+ * table.
+ *
+ * @author YT_6
+ *
+ */
 @Component
 @RestController
 @RequestMapping("/api/food")
 public class FoodController {
 
     private final Logger logger = LoggerFactory.getLogger(FoodController.class);
+
+    /**
+     * Repository handling food table.
+     */
     private final FoodRepository foodRepository;
 
+    /**
+     * Creates controller that handles HTTP requests that require do queries to
+     * the Food table.
+     *
+     * @param foodRepository Repository handing Foods table.
+     */
     @Autowired
     public FoodController(FoodRepository foodRepository) {
         this.foodRepository = foodRepository;
     }
 
+    /**
+     * HTTP request for food types able to be used for ingredients of a recipe
+     * or pantry.
+     *
+     * @param name The name of the food to be searched in the food database.
+     * @return A list of food containing the word searched in an order
+     * determined by relevance (determined by an algorithm)
+     */
     @RequestMapping("/searchByName")
     public List<Food> getFoods(@RequestBody String name) {
         List<Food> foodMaster = foodRepository.findByNameContaining(name);
@@ -83,7 +108,8 @@ public class FoodController {
         return finalList;
     }
 
-    public class foodComparator implements java.util.Comparator<Food> {
+    private class foodComparator implements java.util.Comparator<Food> {
+
         public foodComparator() {
             super();
         }

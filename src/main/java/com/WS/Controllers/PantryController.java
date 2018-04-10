@@ -18,6 +18,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * Controller that handles HTTP requests that require queries to the Pantry
+ * table.
+ *
+ * @author YT_6
+ *
+ */
 @Component
 @RestController
 @RequestMapping("/api/pantry")
@@ -26,12 +33,23 @@ public class PantryController {
     private final PantryRepository pantryRepository;
     private final SecurityContextService securityContext;
 
+    /**
+     * Creates controller that handles HTTP requests that require do queries to
+     * the pantry table.
+     *
+     * @param pantryRepository Repository handing pantry table.
+     */
     @Autowired
     public PantryController(PantryRepository pantryRepository, SecurityContextService securityContext) {
         this.pantryRepository = pantryRepository;
         this.securityContext = securityContext;
     }
 
+     /**
+     * HTTP request for getting the pantry for the user requesting it from the pantry table
+     *
+     * @return The user's pantry
+     */
     @RequestMapping("/get")
     public Pantry getPantry() {
         User currentUser = securityContext.currentUser().get();
@@ -45,6 +63,11 @@ public class PantryController {
         return pantryRepository.findByUser(currentUser);
     }
     
+         /**
+     * HTTP request for saving a user's pantry to the pantry table
+     *
+     * @param  pantry The pantry to be saved
+     */
     @RequestMapping("/save")
     public void savePantry(@RequestBody Pantry pantry) {
         User currentUser = securityContext.currentUser().get();

@@ -17,6 +17,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+/**
+ * Controller that handles HTTP requests that require queries to the Units
+ * table.
+ *
+ * @author YT_6
+ *
+ */
 @Component
 @RestController
 @RequestMapping("/api/unit")
@@ -24,32 +31,37 @@ public class UnitController {
 
     private final Logger logger = LoggerFactory.getLogger(UnitController.class);
     private final UnitRepository unitRepository;
-
+    /**
+     * Creates controller that handles HTTP requests that require do queries to
+     * the Units table.
+     *
+     * @param unitRepository Repository handing Units table.
+     */
     @Autowired
     public UnitController(UnitRepository unitRepository) {
         this.unitRepository = unitRepository;
     }
 
+    /**
+     * HTTP request for getting all of the Units from the Units table
+     *
+     * @return All of the Units in the Units table
+     */
     @RequestMapping("/getAll")
     public List<Unit> getAllUnits() {
         List<Unit> units = (List<Unit>) unitRepository.findAll();
         return units;
     }
 
+    /**
+     * HTTP request for getting a specific unit from the Units table
+     *
+     * @param id The id of the unit to return
+     * @return The unit with the requested id
+     */
     @RequestMapping("/get")
     public Unit getUnit(@RequestBody Integer id) {
         return unitRepository.findById(id).get();
-    }
-
-    @RequestMapping("/save")
-    public Unit saveUnit(@RequestBody Unit data) {
-        return unitRepository.save(data);
-    }
-
-    @RequestMapping("/delete")
-    public void deleteUnit(@RequestBody Integer id) {
-        unitRepository.deleteById(id);
-        // TODO should probably return something
     }
 
 }

@@ -17,38 +17,56 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+/**
+ * Controller that handles HTTP requests that require queries to the Ingredients
+ * table.
+ *
+ * @author YT_6
+ *
+ */
 @Component
 @RestController
 @RequestMapping("/api/ingredient")
 public class IngredientController {
 
     private final Logger logger = LoggerFactory.getLogger(IngredientController.class);
+
+    /**
+     * Repository handling ingredients table.
+     */
     private final IngredientRepository ingredientRepository;
 
     @Autowired
+    /**
+     * Creates controller that handles HTTP requests that require do queries to
+     * the Ingredients table.
+     *
+     * @param ingredientRepository Repository handing Ingredients table.
+     */
     public IngredientController(IngredientRepository ingredientRepository) {
         this.ingredientRepository = ingredientRepository;
     }
 
+    /**
+     * HTTP request for getting a specific ingredient from the table
+     *
+     * @param id the id of the ingredient to be searched in the Ingredients
+     * database.
+     * @return The ingredient requested
+     */
     @RequestMapping("/get")
     public Ingredient getIngredient(@RequestBody Integer id) {
         return ingredientRepository.findById(id).get();
     }
 
+    /**
+     * HTTP request for getting all of the ingredients from the table
+     * @return all of the Ingredients in the table
+     */
     @RequestMapping("/getAll")
     public List<Ingredient> getAllIngredients() {
         List<Ingredient> ingredients = (List<Ingredient>) ingredientRepository.findAll();
         return ingredients;
     }
 
-    @RequestMapping("/delete")
-    public void deleteIngredient(@RequestBody Integer id) {
-        ingredientRepository.deleteById(id);
-        // TODO should probably return something
-    }
-
-    @RequestMapping("/save")
-    public Ingredient createIngredient(@RequestBody Ingredient ingredient) {
-        return ingredientRepository.save(ingredient);
-    }
 }
