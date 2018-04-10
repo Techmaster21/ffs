@@ -45,6 +45,13 @@ public class RecipeController {
         return recipes;
     }
 
+    @RequestMapping("/getUsersRecipes")
+    public List<Recipe> getAllUsersRecipes() {
+        User currentUser = securityContext.currentUser().get();
+        List<Recipe> recipes = (List<Recipe>) recipeRepository.findByUser(currentUser);
+        return recipes;
+    }
+
     @RequestMapping("/save")
     public Recipe saveRecipe(@RequestBody Recipe recipe) {
         User currentUser = securityContext.currentUser().get();
@@ -57,6 +64,13 @@ public class RecipeController {
     public void deleteRecipe(@RequestBody Integer id) {
         recipeRepository.deleteById(id);
         // TODO should probably return something
+    }
+    
+    @RequestMapping("/getPublicRecipes")
+    public List<Recipe> getAllPublicRecipes() {
+    	List<Recipe> recipes = (List<Recipe>) recipeRepository.findByPub(true);
+    	return recipes;
+    	
     }
 
 }

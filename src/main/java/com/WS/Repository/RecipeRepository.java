@@ -1,8 +1,12 @@
 package com.WS.Repository;
 
 import com.WS.Entity.Recipe;
+import com.WS.Entity.User;
 import org.springframework.data.repository.CrudRepository;
 
-public interface RecipeRepository extends CrudRepository<Recipe, Integer> {
+import java.util.List;
 
+public interface RecipeRepository extends CrudRepository<Recipe, Integer> {
+    public List<Recipe> findByUser(User user);
+    public List<Recipe> findByPub(boolean boo);
 }

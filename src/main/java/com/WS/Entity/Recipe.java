@@ -79,6 +79,9 @@ public class Recipe {
     @ManyToOne
     @JoinColumn(name = "creator_id")
     private User user;
+    
+    @Column(name = "public")
+    private boolean pub;
 
     /**
      *Representation of a Recipe object in database.
@@ -98,7 +101,7 @@ public class Recipe {
      * @param user User Recipe belongs to
      */
     public Recipe(String name, String description, Cuisine cuisine, String prepTime, String cookTime,
-                  List<Ingredient> ingredients, List<RecipeStep> steps, User user) {
+                  List<Ingredient> ingredients, List<RecipeStep> steps, User user, boolean pub) {
         this.name = name;
         this.description = description;
         this.cuisine = cuisine;
@@ -107,6 +110,7 @@ public class Recipe {
         this.ingredients = ingredients;
         this.steps = steps;
         this.user = user;
+        this.pub = pub;
     }
 
     /**
@@ -304,6 +308,14 @@ public class Recipe {
      */
     public void setUser(User user) {
         this.user = user;
+    }
+    
+    public boolean getPub(boolean pub){
+    	return pub;
+    }
+    
+    public void setPub(boolean pub){
+    	this.pub = pub;
     }
 
     /**

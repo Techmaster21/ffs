@@ -38,18 +38,20 @@ export class RecipesViewerComponent implements OnInit {
    * The list of columns to display in the recipe table
    */
   displayedRecipeColumns: Array<string>;
+  viewing: String;
 
   constructor(private recipeService: RecipeService, private route: ActivatedRoute) {
     this.dataSource = new BehaviorSubject<any>(this.recipes);
   }
 
   ngOnInit(): void {
-    this.recipeService.getAllRecipes()
+    this.viewing = 'myRecipes';
+    this.recipeService.getPublicRecipes()
       .subscribe(recipes => {
-        this.recipes = recipes;
-        this.dataSource.next(this.recipes);
-      }
-    );
+          this.recipes = recipes;
+          this.dataSource.next(this.recipes);
+        }
+      );
     this.displayedRecipeColumns = this.selector ? ['name', 'description', 'user', 'cuisine', 'select'] :
       ['name', 'description', 'user', 'cuisine', 'delete'];
   }
@@ -81,4 +83,25 @@ export class RecipesViewerComponent implements OnInit {
     this.dataSource.next(this.recipes);
   }
 
+  updateRecipeSelection(): void {
+    if (this.viewing === 'publicRecipes'){
+      if (!this.selector)
+        this.displayedRecipeColumns = ['name', 'description', 'user', 'cuisine'];
+      this.recipeService.getPublicRecipes()
+        .subscribe(recipes => {
+            this.recipes = recipes;
+            this.dataSource.next(this.recipes);
+          }
+        );
+    } else {
+      if (!this.selector)
+        this.displayedRecipeColumns = ['name', 'description', 'user', 'cuisine', 'delete'];
+      this.recipeService.getUserRecipes()
+        .subscribe(recipes => {
+            this.recipes = recipes;
+            this.dataSource.next(this.recipes);
+          }
+        );
+    }
+  }
 }

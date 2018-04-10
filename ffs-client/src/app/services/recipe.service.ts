@@ -39,6 +39,24 @@ export class RecipeService {
   }
 
   /**
+   *gets a list of all of the public recipes
+   * @returns All public recipes from the database
+   */
+  getPublicRecipes(): Observable<Array<Recipe>> {
+    return this.http.get<Array<Recipe>>(URI.RECIPE.GET_PUBLIC, httpOptions)
+      .pipe(
+        catchError(this.handleError<Array<Recipe>>('getPublicRecipes'))
+      );
+  }
+
+
+  getUserRecipes(): Observable<Array<Recipe>> {
+    return this.http.get<Array<Recipe>>(URI.RECIPE.GET_USERS, httpOptions)
+      .pipe(
+        catchError(this.handleError<Array<Recipe>>('getAllRecipes'))
+      );
+  }
+  /**
    * gets a certain recipe
    * @param id id of the recipe we want to get
    * @returns the recipe corresponding to the
