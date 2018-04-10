@@ -38,6 +38,12 @@ export class RecipeService {
       );
   }
 
+  getUserRecipes(): Observable<Array<Recipe>> {
+    return this.http.get<Array<Recipe>>(URI.RECIPE.GET_USERS, httpOptions)
+      .pipe(
+        catchError(this.handleError<Array<Recipe>>('getAllRecipes'))
+      );
+  }
   /**
    * gets a certain recipe
    * @param id id of the recipe we want to get

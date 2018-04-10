@@ -2,6 +2,10 @@
 
 <mat-card>
   <p>Recipes </p>
+  <mat-select placeholder="Recipes" [(ngModel)]="viewing" (change)="updateRecipeSelection()" name="viewingSelector" required>
+    <mat-option value="myRecipes">My Recipes</mat-option>
+    <mat-option value="publicRecipes">Public Recipes</mat-option>
+  </mat-select>
   <mat-table #table [dataSource]="dataSource">
 
     <!-- Name Column -->
