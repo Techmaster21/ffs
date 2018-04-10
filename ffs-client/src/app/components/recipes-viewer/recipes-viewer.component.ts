@@ -45,8 +45,8 @@ export class RecipesViewerComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.viewing = 'publicRecipes';
-    this.recipeService.getAllRecipes()
+    this.viewing = 'myRecipes';
+    this.recipeService.getPublicRecipes()
       .subscribe(recipes => {
           this.recipes = recipes;
           this.dataSource.next(this.recipes);
@@ -84,19 +84,24 @@ export class RecipesViewerComponent implements OnInit {
   }
 
   updateRecipeSelection(): void {
-    if (this.viewing === 'publicRecipes')
-      this.recipeService.getAllRecipes()
+    if (this.viewing === 'publicRecipes'){
+      if (!this.selector)
+        this.displayedRecipeColumns = ['name', 'description', 'user', 'cuisine'];
+      this.recipeService.getPublicRecipes()
         .subscribe(recipes => {
             this.recipes = recipes;
             this.dataSource.next(this.recipes);
           }
         );
-    else
+    } else {
+      if (!this.selector)
+        this.displayedRecipeColumns = ['name', 'description', 'user', 'cuisine', 'delete'];
       this.recipeService.getUserRecipes()
         .subscribe(recipes => {
             this.recipes = recipes;
             this.dataSource.next(this.recipes);
           }
         );
+    }
   }
 }

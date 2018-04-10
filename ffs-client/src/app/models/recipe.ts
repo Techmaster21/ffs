@@ -11,6 +11,7 @@ export class Recipe {
    * @param ingredients a list of ingredients used in the recipe
    * @param steps a list of steps used in order to make the recipe
    * @param cuisine the cuisine of the recipe
+   * @param isPublic true if the recipe is public
    * @param prepTime the amount of time the recipe takes to prep
    * @param cookTime the amount of time the recipe takes to cook
    * @param user the user that owns the recipe
@@ -22,9 +23,10 @@ export class Recipe {
     public ingredients: Array<Ingredient> = [],
     public steps: Array<Step> = [],
     public cuisine: Cuisine = new Cuisine(),
+    public isPublic = false,
     public prepTime?: string,
     public cookTime?: string,
     public user?: User,
-    public id?: number
+    public id?: number,
   ) {}
 }
