@@ -68,7 +68,7 @@ public class RecipeController {
     
     @RequestMapping("/getPublicRecipes")
     public List<Recipe> getAllPublicRecipes() {
-    	List<Recipe> recipes = (List<Recipe>) recipeRepository.findByPublic(true);
+    	List<Recipe> recipes = (List<Recipe>) recipeRepository.findByPub(true);
     	return recipes;
     	
     }
