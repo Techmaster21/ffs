@@ -65,5 +65,12 @@ public class RecipeController {
         recipeRepository.deleteById(id);
         // TODO should probably return something
     }
+    
+    @RequestMapping("/getPublicRecipes")
+    public List<Recipe> getAllPublicRecipes() {
+    	List<Recipe> recipes = (List<Recipe>) recipeRepository.findByPublic(true);
+    	return recipes;
+    	
+    }
 
 }
