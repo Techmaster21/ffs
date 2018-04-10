@@ -1,6 +1,7 @@
 <mat-card>
   <h1> Add Recipe </h1>
   <form class="recipe-form" (ngSubmit)="submitRecipe()" #recipeForm="ngForm">
+      <p>Public</p><input type="checkbox" [(ngModel)]="recipe.isPublic" name="isPublic">
     <mat-form-field class="recipe-full-width">
       <input matInput placeholder="Name" [(ngModel)]="recipe.name" name="name" required>
     </mat-form-field>
