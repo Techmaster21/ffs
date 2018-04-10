@@ -169,6 +169,12 @@ export class RecipeService {
         catchError(this.handleError<User>('requestFriend'))
       );
   }
+  getFriendRequests(): Observable<Array<User>> {
+    return this.http.get<Array<User>>(URI.USER.GET_FRIEND_REQUESTS, httpOptions)
+      .pipe(
+        catchError(this.handleError<Array<User>>('getFriendRequests'))
+      );
+  }
   /**
    * Handle Http operation that failed.
    * Let the app continue.

@@ -46,6 +46,7 @@ export const URI = {
   },
   USER: {
     SEARCH_BY_NAME: `${USER_BASE}/searchByName`,
-    REQUEST_FRIEND: `${USER_BASE}/requestFriend`
+    REQUEST_FRIEND: `${USER_BASE}/requestFriend`,
+    GET_FRIEND_REQUESTS: `${USER_BASE}/getFriendRequests`
   }
 };
