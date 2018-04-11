@@ -8,6 +8,8 @@ ffs-client/dist
 ffs-client/dist-server
 ffs-client/tmp
 ffs-client/out-tsc
+ffs-client/documentation
+/doc
 
 # dependencies
 ffs-client/node_modules

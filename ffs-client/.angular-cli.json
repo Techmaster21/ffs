@@ -8,9 +8,7 @@
       "root": "src",
       "outDir": "dist",
       "assets": [
-        "assets",
-        "favicon.ico",
-        "donuticon.png"
+        "assets"
       ],
       "index": "index.html",
       "main": "main.ts",
