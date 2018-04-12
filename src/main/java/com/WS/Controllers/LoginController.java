@@ -27,12 +27,35 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping(path = "/api/account")
 public class LoginController {
+    /**
+     * spring boot auth manager to ensure user autherize tokens
+     */
     private final AuthenticationManager authenticationManager;
+    /**
+     * Used to create tokens to send to the user
+     */
     private final TokenHandler tokenHandler;
+    /**
+     * current Security context used for security and permissions
+     */
     private final SecurityContextService securityContextService;
+    /**
+     * User repository used for the Users table
+     */
     private final UserRepository userRepository;
+    /**
+     * Used for encoding passwords for storage
+     */
     private SHA256PasswordEncoder sha256PasswordEncoder;
 
+    /**
+     * 
+     * @param authenticationManager spring boot auth manager to ensure user autherize tokens
+     * @param tokenHandler Used to create tokens to send to the user
+     * @param securityContextService current Security context used for security and permissions
+     * @param userRepository User repository used for the Users table
+     * @param sha256PasswordEncoder Used for encoding passwords for storage
+     */
     @Autowired
     public LoginController(AuthenticationManager authenticationManager,
                            TokenHandler tokenHandler,
@@ -46,6 +69,12 @@ public class LoginController {
         this.sha256PasswordEncoder = sha256PasswordEncoder;
     }
 
+    /**
+     * HTTP request for logging in
+     * @param params user data for attempted login for autherization 
+     * @return AuthResponse which contains the token for the user's session
+     * @throws AuthenticationException 
+     */
     @PostMapping("/login")
     public AuthResponse login(@RequestBody AuthParams params) throws AuthenticationException {
         final UsernamePasswordAuthenticationToken loginToken = params.toAuthenticationToken();
@@ -58,6 +87,11 @@ public class LoginController {
         }).orElseThrow(RuntimeException::new); // it does not happen.
     }
 
+    /**
+     * 
+     * @param signupParams User data being used for creation of a new account
+     * @return a boolean on whether or not account creation was successful 
+     */
     @PostMapping("/signup")
     public boolean signUp(@RequestBody SignupParams signupParams) {
         Authority authority = new Authority();
