@@ -44,6 +44,7 @@ export class FriendsterComponent implements OnInit {
   }
 
   requestFriend(user: User): void {
+    console.log('here');
     this.recipeService.requestFriend(user)
       .subscribe();
   }

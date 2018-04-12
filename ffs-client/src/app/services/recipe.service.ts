@@ -164,13 +164,14 @@ export class RecipeService {
       );
   }
   requestFriend(user: User): Observable<User> {
-    return this.http.post<User>(URI.USER.REQUEST_FRIEND, user, httpOptions)
+    console.log(user);
+    return this.http.post<User>(URI.FRIENDSHIP.REQUEST_FRIEND, user, httpOptions)
       .pipe(
         catchError(this.handleError<User>('requestFriend'))
       );
   }
   getFriendRequests(): Observable<Array<User>> {
-    return this.http.get<Array<User>>(URI.USER.GET_FRIEND_REQUESTS, httpOptions)
+    return this.http.get<Array<User>>(URI.FRIENDSHIP.GET_FRIEND_REQUESTS, httpOptions)
       .pipe(
         catchError(this.handleError<Array<User>>('getFriendRequests'))
       );
