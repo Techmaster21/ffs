@@ -8,6 +8,6 @@ import com.WS.Entity.Friendship;
 import com.WS.Entity.Recipe;
 import com.WS.Entity.User;
 
-public interface FriendshipRepository extends CrudRepository<Recipe, Integer> {
+public interface FriendshipRepository extends CrudRepository<Friendship, Integer> {
 
 }

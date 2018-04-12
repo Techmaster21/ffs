@@ -1,8 +1,12 @@
 package com.WS.Controllers;
 
+import com.WS.Entity.Friendship;
 import com.WS.Entity.Ingredient;
+import com.WS.Entity.User;
 import com.WS.Repository.FriendshipRepository;
 import com.WS.Repository.IngredientRepository;
+import com.WS.Service.SecurityContextService;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +21,26 @@ import org.springframework.web.bind.annotation.RestController;
 public class FriendshipController {
 
     private final Logger logger = LoggerFactory.getLogger(IngredientController.class);
-//    private final FriendshipRepository friendshipRepository;
+    private final FriendshipRepository friendshipRepository;
+    private final SecurityContextService securityContext;
 	
+    public FriendshipController(FriendshipRepository friendshipRepository, SecurityContextService securityContext){
+    	this.friendshipRepository = friendshipRepository; 
+    	this.securityContext = securityContext;
+    }
+    
+    
+    //TODO:Add Friend Request (requestFriend)
+    //Get Friend Requests (getFriendRequests)
+    //Accept Friend Requests (getFriendRequest)
+    //Deny Friend Request (declineFriendRequest)
+    
+    @RequestMapping("/requestFriend")
+    public void requestFriend(@RequestBody User user){
+    	Friendship f = new Friendship();
+    	f.setUser(securityContext.currentUser().get());
+    	f.setFriend(user);
+    	f.setRequest(true);
+    	friendshipRepository.save(f);
+    }
 }
