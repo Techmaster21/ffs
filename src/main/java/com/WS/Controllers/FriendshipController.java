@@ -49,7 +49,7 @@ public class FriendshipController {
     @RequestMapping("/getFriendRequests")
     public List<Friendship> getFriendRequests(){
     	User currentUser = securityContext.currentUser().get();
-    	List<Friendship> friendshipRequests = friendshipRepository.findByUser(currentUser);
+    	List<Friendship> friendshipRequests = friendshipRepository.findByFriend(currentUser);
     	for(int i = 0; i < friendshipRequests.size(); i++){
     		if(!friendshipRequests.get(i).isRequest()){
     			friendshipRequests.remove(i);

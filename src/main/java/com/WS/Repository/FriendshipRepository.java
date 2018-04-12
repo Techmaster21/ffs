@@ -10,4 +10,5 @@ import com.WS.Entity.User;
 
 public interface FriendshipRepository extends CrudRepository<Friendship, Integer> {
 	public List<Friendship> findByUser(User user);
+	public List<Friendship> findByFriend(User user);
 }
