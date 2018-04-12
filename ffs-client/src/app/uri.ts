@@ -6,6 +6,7 @@ export const CUISINE_BASE = 'api/cuisine';
 export const FOOD_BASE = 'api/food';
 export const PANTRY_BASE = 'api/pantry';
 export const USER_BASE = 'api/user';
+export const FRIENDSHIP_BASE = 'api/friendship';
 export const URI = {
   ACCOUNT: {
     SIGNUP: `${ACCOUNT_BASE}/signup`,
@@ -46,7 +47,11 @@ export const URI = {
   },
   USER: {
     SEARCH_BY_NAME: `${USER_BASE}/searchByName`,
-    REQUEST_FRIEND: `${USER_BASE}/requestFriend`,
-    GET_FRIEND_REQUESTS: `${USER_BASE}/getFriendRequests`
+  },
+  FRIENDSHIP: {
+    REQUEST_FRIEND: `${FRIENDSHIP_BASE}/requestFriend`,
+    GET_FRIEND_REQUESTS: `${FRIENDSHIP_BASE}/getFriendRequests`
+    // acceptFriendRequest(User)
+    // declineFriendRequest(User)
   }
 };
