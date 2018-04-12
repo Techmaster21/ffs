@@ -3,6 +3,8 @@ import { Recipe } from '../../models/recipe';
 import { RecipeService } from '../../services/recipe.service';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { ActivatedRoute } from '@angular/router';
+import * as moment from 'moment';
+import { Duration } from 'moment';
 
 @Component({
   selector: 'app-recipes-viewer',
@@ -39,6 +41,8 @@ export class RecipesViewerComponent implements OnInit {
    */
   displayedRecipeColumns: Array<string>;
   viewing: String;
+  cookTime: Duration;
+  prepTime: Duration;
 
   constructor(private recipeService: RecipeService, private route: ActivatedRoute) {
     this.dataSource = new BehaviorSubject<any>(this.recipes);
@@ -62,6 +66,8 @@ export class RecipesViewerComponent implements OnInit {
    */
   recipeSelect(recipe: Recipe): void {
     this.selectedRecipe = recipe;
+    this.cookTime = moment.duration(this.selectedRecipe.cookTime);
+    this.prepTime = moment.duration(this.selectedRecipe.prepTime);
   }
 
   /**
@@ -84,7 +90,7 @@ export class RecipesViewerComponent implements OnInit {
   }
 
   updateRecipeSelection(): void {
-    if (this.viewing === 'publicRecipes'){
+    if (this.viewing === 'publicRecipes') {
       if (!this.selector)
         this.displayedRecipeColumns = ['name', 'description', 'user', 'cuisine'];
       this.recipeService.getPublicRecipes()

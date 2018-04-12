@@ -12,8 +12,8 @@ export class Recipe {
    * @param steps a list of steps used in order to make the recipe
    * @param cuisine the cuisine of the recipe
    * @param isPublic true if the recipe is public
-   * @param prepTime the amount of time the recipe takes to prep
-   * @param cookTime the amount of time the recipe takes to cook
+   * @param prepTime the amount of time the recipe takes to prep (in ISO 8601 duration format)
+   * @param cookTime the amount of time the recipe takes to cook (in ISO 8601 duration format)
    * @param user the user that owns the recipe
    * @param id the id of the recipe
    */
@@ -27,6 +27,7 @@ export class Recipe {
     public prepTime?: string,
     public cookTime?: string,
     public user?: User,
-    public id?: number,
-  ) {}
+    public id?: number
+  ) {
+  }
 }
