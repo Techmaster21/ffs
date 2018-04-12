@@ -9,5 +9,5 @@ import com.WS.Entity.Recipe;
 import com.WS.Entity.User;
 
 public interface FriendshipRepository extends CrudRepository<Friendship, Integer> {
-
+	public List<Friendship> findByUser(User user);
 }

@@ -7,6 +7,8 @@ import com.WS.Repository.FriendshipRepository;
 import com.WS.Repository.IngredientRepository;
 import com.WS.Service.SecurityContextService;
 
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,5 +44,17 @@ public class FriendshipController {
     	f.setFriend(user);
     	f.setRequest(true);
     	friendshipRepository.save(f);
+    }
+    
+    @RequestMapping("/getFriendRequests")
+    public List<Friendship> getFriendRequests(){
+    	User currentUser = securityContext.currentUser().get();
+    	List<Friendship> friendshipRequests = friendshipRepository.findByUser(currentUser);
+    	for(int i = 0; i < friendshipRequests.size(); i++){
+    		if(!friendshipRequests.get(i).isRequest()){
+    			friendshipRequests.remove(i);
+    		}
+    	}
+    	return friendshipRequests;
     }
 }
