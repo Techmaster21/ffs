@@ -16,7 +16,8 @@ export const URI = {
     GET_ALL: `${RECIPE_BASE}/getAll`,
     SAVE: `${RECIPE_BASE}/save`,
     DELETE: `${RECIPE_BASE}/delete`,
-    GET_USERS: `${RECIPE_BASE}/getUsersRecipes`
+    GET_USERS: `${RECIPE_BASE}/getUsersRecipes`,
+    GET_PUBLIC: `${RECIPE_BASE}/getPublicRecipes`
   },
   UNIT: {
     GET: `${UNIT_BASE}/get`,
@@ -45,6 +46,7 @@ export const URI = {
   },
   USER: {
     SEARCH_BY_NAME: `${USER_BASE}/searchByName`,
-    REQUEST_FRIEND: `${USER_BASE}/requestFriend`
+    REQUEST_FRIEND: `${USER_BASE}/requestFriend`,
+    GET_FRIEND_REQUESTS: `${USER_BASE}/getFriendRequests`
   }
 };

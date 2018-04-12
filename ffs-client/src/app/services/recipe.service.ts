@@ -38,6 +38,18 @@ export class RecipeService {
       );
   }
 
+  /**
+   *gets a list of all of the public recipes
+   * @returns All public recipes from the database
+   */
+  getPublicRecipes(): Observable<Array<Recipe>> {
+    return this.http.get<Array<Recipe>>(URI.RECIPE.GET_PUBLIC, httpOptions)
+      .pipe(
+        catchError(this.handleError<Array<Recipe>>('getPublicRecipes'))
+      );
+  }
+
+
   getUserRecipes(): Observable<Array<Recipe>> {
     return this.http.get<Array<Recipe>>(URI.RECIPE.GET_USERS, httpOptions)
       .pipe(
@@ -155,6 +167,12 @@ export class RecipeService {
     return this.http.post<User>(URI.USER.REQUEST_FRIEND, user, httpOptions)
       .pipe(
         catchError(this.handleError<User>('requestFriend'))
+      );
+  }
+  getFriendRequests(): Observable<Array<User>> {
+    return this.http.get<Array<User>>(URI.USER.GET_FRIEND_REQUESTS, httpOptions)
+      .pipe(
+        catchError(this.handleError<Array<User>>('getFriendRequests'))
       );
   }
   /**

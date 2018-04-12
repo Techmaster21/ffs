@@ -8,4 +8,5 @@ import java.util.List;
 
 public interface RecipeRepository extends CrudRepository<Recipe, Integer> {
     public List<Recipe> findByUser(User user);
+    public List<Recipe> findByPub(boolean boo);
 }
