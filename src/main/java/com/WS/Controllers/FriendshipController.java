@@ -7,6 +7,7 @@ import com.WS.Repository.FriendshipRepository;
 import com.WS.Repository.IngredientRepository;
 import com.WS.Service.SecurityContextService;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -34,7 +35,7 @@ public class FriendshipController {
     
     //TODO:Add Friend Request (requestFriend)
     //Get Friend Requests (getFriendRequests)
-    //Accept Friend Requests (getFriendRequest)
+    //Accept Friend Requests (acceptFriendRequest)
     //Deny Friend Request (declineFriendRequest)
     
     @RequestMapping("/requestFriend")
@@ -47,7 +48,7 @@ public class FriendshipController {
     }
     
     @RequestMapping("/getFriendRequests")
-    public List<Friendship> getFriendRequests(){
+    public List<User> getFriendRequests(){
     	User currentUser = securityContext.currentUser().get();
     	List<Friendship> friendshipRequests = friendshipRepository.findByFriend(currentUser);
     	for(int i = 0; i < friendshipRequests.size(); i++){
@@ -55,6 +56,22 @@ public class FriendshipController {
     			friendshipRequests.remove(i);
     		}
     	}
-    	return friendshipRequests;
+    	
+    	List<User> usersRequesting = new ArrayList<User>();
+    	for(int i = 0; i < friendshipRequests.size(); i++){
+    		usersRequesting.add(friendshipRequests.get(i).getUser());
+    	}
+    	
+    	return usersRequesting;
+    }
+    
+    @RequestMapping("/acceptFriendRequest")
+    public void acceptFriendRequest(@RequestBody User user){
+    	
+    }
+    
+    @RequestMapping("/declineFriendRequest")
+    public void  declineFriendRequest(@RequestBody User user){
+    	
     }
 }
