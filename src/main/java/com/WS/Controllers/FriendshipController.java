@@ -33,12 +33,6 @@ public class FriendshipController {
     }
     
     
-    //TODO:Add Friend Request (requestFriend)
-    //Get Friend Requests (getFriendRequests)
-    //Accept Friend Requests (acceptFriendRequest)
-    //Deny Friend Request (declineFriendRequest)
-    //Get Friends (getFriends)
-    
     @RequestMapping("/requestFriend")
     public void requestFriend(@RequestBody User user){
     	Friendship f = new Friendship();
@@ -105,4 +99,20 @@ public class FriendshipController {
     	}
     	return friends;
     }
+    
+    @RequestMapping("/deleteFriend")
+    public void deleteFriend(User user){
+    	User currentUser = securityContext.currentUser().get();
+    	List<Friendship> friendships = friendshipRepository.findByFriend(user);
+    	for(int i = 0; i < friendships.size(); i++){
+    		Friendship f = friendships.get(i);
+    		if(f.getUser().equals(currentUser)){
+    			friendshipRepository.delete(f);
+    		}
+    	}
+    }
+    
+    
+    
+    //Fix search to not have current user and already added friends
 }
