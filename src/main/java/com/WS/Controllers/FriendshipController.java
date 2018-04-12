@@ -74,6 +74,7 @@ public class FriendshipController {
     		Friendship f = friendshipRequests.get(i);
     		if(f.getUser().equals(user)){
     			friendshipRepository.delete(f);
+    			f.setRequest(false);
     			friendshipRepository.save(f);
     		}
     	}
