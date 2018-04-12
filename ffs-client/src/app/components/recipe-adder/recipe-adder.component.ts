@@ -11,6 +11,7 @@ import { Step } from '../../models/step';
 import { Cuisine } from '../../models/cuisine';
 import { Food } from '../../models/food';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-recipe-adder',
@@ -54,6 +55,8 @@ export class RecipeAdderComponent implements OnInit {
    * Columns to display for searched foods table
    */
   displayedSearchFoodsColumn: Array<string>;
+  cookTime: Time;
+  prepTime: Time;
 
   constructor(private router: Router,
               private recipeService: RecipeService,
@@ -64,6 +67,8 @@ export class RecipeAdderComponent implements OnInit {
     this.newStep = new Step();
     this.searchedFoodDataSource = new BehaviorSubject<any>(this.searchResults);
     this.displayedSearchFoodsColumn = ['name', 'select'];
+    this.cookTime = new Time();
+    this.prepTime = new Time();
   }
 
   /**
@@ -86,6 +91,14 @@ export class RecipeAdderComponent implements OnInit {
    * Sends a request to save the recipe to the backend
    */
   submitRecipe(): void {
+    this.recipe.cookTime = moment.duration({
+      hours: this.cookTime.hours,
+      minutes: this.cookTime.minutes})
+      .toISOString();
+    this.recipe.prepTime = moment.duration({
+      hours: this.prepTime.hours,
+      minutes: this.prepTime.minutes})
+      .toISOString();
     this.recipeService.saveRecipe(this.recipe)
       .subscribe(() =>
       this.location.back()
@@ -151,7 +164,20 @@ export class RecipeAdderComponent implements OnInit {
     const param = this.route.snapshot.paramMap.get('id');
     if (param)
       this.recipeService.getRecipe(+param)
-        .subscribe(recipe => this.recipe = recipe);
+        .subscribe(recipe => {
+          this.recipe = recipe;
+          const cook = moment.duration(this.recipe.cookTime);
+          const prep = moment.duration(this.recipe.prepTime);
+          this.cookTime.hours = cook.hours();
+          this.cookTime.minutes = cook.minutes();
+          this.prepTime.hours = prep.hours();
+          this.prepTime.minutes = prep.minutes();
+        });
   }
-
+}
+class Time {
+  constructor(public hours?: number,
+              public minutes?: number) {
+    //
+  }
 }

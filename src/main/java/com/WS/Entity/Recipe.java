@@ -8,6 +8,7 @@ package com.WS.Entity;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -51,13 +52,13 @@ public class Recipe {
      * Prepping time for this Recipe
      */
     @Column(name = "prep_time")
-    private String prepTime;
+    private Duration prepTime;
 
     /**
      * Cooking time for this Recipe
      */
     @Column(name = "cook_time")
-    private String cookTime;
+    private Duration cookTime;
 
     /**
      * Ingredients in this Recipe
@@ -100,7 +101,7 @@ public class Recipe {
      * @param steps RecipeSteps in Recipe
      * @param user User Recipe belongs to
      */
-    public Recipe(String name, String description, Cuisine cuisine, String prepTime, String cookTime,
+    public Recipe(String name, String description, Cuisine cuisine, Duration prepTime, Duration cookTime,
                   List<Ingredient> ingredients, List<RecipeStep> steps, User user, boolean pub) {
         this.name = name;
         this.description = description;
@@ -234,7 +235,7 @@ public class Recipe {
      * Gets the prepping time of this Recipe
      * @return Prepping time of this Recipe 
      */
-    public String getPrepTime() {
+    public Duration getPrepTime() {
         return prepTime;
     }
 
@@ -242,7 +243,7 @@ public class Recipe {
      * Sets the prepping time for this Recipe object.
      * @param prepTime Prepping time of this Recipe.
      */
-    public void setPrepTime(String prepTime) {
+    public void setPrepTime(Duration prepTime) {
         this.prepTime = prepTime;
     }
 
@@ -250,7 +251,7 @@ public class Recipe {
      * Gets the cooking time of this Recipe
      * @return Cook time of this Recipe 
      */
-    public String getCookTime() {
+    public Duration getCookTime() {
         return cookTime;
     }
 
@@ -258,7 +259,7 @@ public class Recipe {
      * Sets the cooking time for this Recipe object.
      * @param cookTime Cook time of this Recipe.
      */
-    public void setCookTime(String cookTime) {
+    public void setCookTime(Duration cookTime) {
         this.cookTime = cookTime;
     }
 
