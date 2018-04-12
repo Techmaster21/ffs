@@ -50,7 +50,7 @@ export class RecipesViewerComponent implements OnInit {
 
   ngOnInit(): void {
     this.viewing = 'myRecipes';
-    this.recipeService.getPublicRecipes()
+    this.recipeService.getUserRecipes()
       .subscribe(recipes => {
           this.recipes = recipes;
           this.dataSource.next(this.recipes);
