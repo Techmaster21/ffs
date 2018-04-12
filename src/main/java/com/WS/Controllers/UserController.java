@@ -7,6 +7,8 @@ package com.WS.Controllers;
 
 import com.WS.Entity.User;
 import com.WS.Repository.UserRepository;
+import com.WS.Service.SecurityContextService;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +31,8 @@ import java.util.List;
 public class UserController {
 
     private final Logger logger = LoggerFactory.getLogger(UserController.class);
+    private final SecurityContextService securityContext;
+
     
     /**
      * Repository handling ffser table.
@@ -42,8 +46,9 @@ public class UserController {
      * @param userRepository Repository handing ffser table.
      */
     @Autowired
-    public UserController(UserRepository userRepository) {
+    public UserController(UserRepository userRepository, SecurityContextService securityContext) {
         this.userRepository = userRepository;
+        this.securityContext = securityContext;
     }
 
     /**
@@ -54,8 +59,12 @@ public class UserController {
      */
     @RequestMapping("/searchByName")
     public List<User> searchByName(@RequestBody String s) {
+    	User currentUser = securityContext.currentUser().get();
         List<User> users = (List<User>) userRepository.findByUsernameContaining(s);
+        users.remove(currentUser);
         return users;
     }
-
+    
+//    @RequestMapping("/searchWithoutFriends")
+//    public List<User
 }
