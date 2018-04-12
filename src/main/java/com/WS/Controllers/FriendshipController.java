@@ -67,7 +67,15 @@ public class FriendshipController {
     
     @RequestMapping("/acceptFriendRequest")
     public void acceptFriendRequest(@RequestBody User user){
-    	
+    	User currentUser = securityContext.currentUser().get();
+    	List<Friendship> friendshipRequests = friendshipRepository.findByFriend(currentUser);
+    	for(int i = 0; i < friendshipRequests.size(); i++){
+    		Friendship f = friendshipRequests.get(i);
+    		if(f.getUser().equals(user)){
+    			friendshipRepository.delete(f);
+    			friendshipRepository.save(f);
+    		}
+    	}
     }
     
     @RequestMapping("/declineFriendRequest")
