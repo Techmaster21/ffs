@@ -61,8 +61,10 @@
 <mat-card *ngIf="selectedRecipe">
   <h2>{{ selectedRecipe.name }} details</h2>
   <p>Description: {{ selectedRecipe.description }}</p>
-  <p>Prep Time: {{ prepTime.humanize() }} and {{prepTime.clone().subtract(prepTime.hours(), 'h').humanize()}}</p>
-  <p>Cook Time: {{ cookTime.humanize() }} and {{cookTime.clone().subtract(cookTime.hours(), 'h').humanize()}}</p>
+  <p>Prep Time: {{ prepTime.hours() === 0 ? '' : prepTime.humanize() }} {{prepTime.minutes() === 0 ? '' :
+    (prepTime.hours() === 0 ? '' : 'and ') + prepTime.clone().subtract(prepTime.hours(), 'h').humanize()}}</p>
+  <p>Cook Time: {{ cookTime.hours() === 0 ? '' : cookTime.humanize() }} {{cookTime.minutes() === 0 ? '' :
+    (cookTime.hours() === 0 ? '' : 'and ') + cookTime.clone().subtract(cookTime.hours(), 'h').humanize()}}</p>
   <app-ingredients-viewer [(ingredients)]="selectedRecipe.ingredients" [canEdit]="false"></app-ingredients-viewer>
   <app-steps-viewer [steps]="selectedRecipe.steps"></app-steps-viewer>
   <button *ngIf="!selector" mat-raised-button color="accent" routerLink="/addrecipe/{{selectedRecipe.id}}">Edit Recipe</button>
