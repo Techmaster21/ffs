@@ -181,6 +181,12 @@ export class RecipeService {
         catchError(this.handleError<User>('acceptRequest'))
       );
   }
+  declineRequest(user: User): Observable<User> {
+    return this.http.post<User>(URI.FRIENDSHIP.DECLINE_REQUEST, user, httpOptions)
+      .pipe(
+        catchError(this.handleError<User>('declineRequest'))
+      );
+  }
   getFriends(): Observable<Array<User>> {
     return this.http.get<Array<User>>(URI.FRIENDSHIP.GET_FRIENDS, httpOptions)
       .pipe(

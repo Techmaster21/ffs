@@ -56,11 +56,24 @@ export class FriendsterComponent implements OnInit {
   requestFriend(user: User): void {
     this.recipeService.requestFriend(user)
       .subscribe();
+    this.searchResults = this.searchResults.filter(obj => obj !== user);
+    this.searchedFriendDataSource.next(this.searchResults);
   }
 
   acceptRequest(user: User): void {
     this.recipeService.acceptRequest(user)
       .subscribe();
+    this.friendRequests =  this.friendRequests.filter(obj => obj !== user);
+    this.friendRequestDataSource.next(this.friendRequests);
+    this.friends.push(user);
+    this.friendDataSource.next(this.friends);
+  }
+
+  declineRequest(user: User): void {
+    this.recipeService.declineRequest(user)
+      .subscribe();
+    this.friendRequests =  this.friendRequests.filter(obj => obj !== user);
+    this.friendRequestDataSource.next(this.friendRequests);
   }
 
 }
