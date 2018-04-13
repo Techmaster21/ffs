@@ -16,22 +16,32 @@ export class FriendsterComponent implements OnInit {
   friendName: String;
   searchedFriendDataSource: BehaviorSubject<any>;
   friendRequestDataSource: BehaviorSubject<any>;
+  friendDataSource: BehaviorSubject<any>;
   searchResults: Array<User>;
   friendRequests: Array<User>;
+  friends: Array<User>;
   displayedSearchFriendsColumn: Array<string>;
   displayedFriendRequestColumns: Array<string>;
+  displayedFriendsColumns: Array<string>;
   constructor(private recipeService: RecipeService, private route: ActivatedRoute) {
     this.searchedFriendDataSource = new BehaviorSubject<any>(this.searchResults);
     this.friendRequestDataSource = new BehaviorSubject<any>(this.friendRequests);
+    this.friendDataSource = new BehaviorSubject<any>(this.friends);
   }
 
   ngOnInit(): void {
     this.displayedSearchFriendsColumn = ['name', 'select'];
     this.displayedFriendRequestColumns = ['name', 'accept', 'decline'];
+    this.displayedFriendsColumns = ['name', 'delete'];
     this.recipeService.getFriendRequests()
       .subscribe(friendRequests => {
         this.friendRequests = friendRequests;
         this.friendRequestDataSource.next(this.friendRequests);
+      });
+    this.recipeService.getFriends()
+      .subscribe(friends => {
+        this.friends = friends;
+        this.friendDataSource.next(this.friends);
       });
   }
 
@@ -44,8 +54,12 @@ export class FriendsterComponent implements OnInit {
   }
 
   requestFriend(user: User): void {
-    console.log('here');
     this.recipeService.requestFriend(user)
+      .subscribe();
+  }
+
+  acceptRequest(user: User): void {
+    this.recipeService.acceptRequest(user)
       .subscribe();
   }
 

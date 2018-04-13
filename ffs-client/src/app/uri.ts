@@ -46,12 +46,13 @@ export const URI = {
     DELETE: `${PANTRY_BASE}/delete`
   },
   USER: {
-    SEARCH_BY_NAME: `${USER_BASE}/searchByName`,
+    SEARCH_BY_NAME: `${USER_BASE}/searchWithoutFriends`,
   },
   FRIENDSHIP: {
     REQUEST_FRIEND: `${FRIENDSHIP_BASE}/requestFriend`,
-    GET_FRIEND_REQUESTS: `${FRIENDSHIP_BASE}/getFriendRequests`
-    // acceptFriendRequest(User)
+    GET_FRIEND_REQUESTS: `${FRIENDSHIP_BASE}/getFriendRequests`,
+    ACCEPT_REQUEST: `${FRIENDSHIP_BASE}/acceptFriendRequest`,
+    GET_FRIENDS: `${FRIENDSHIP_BASE}/getFriends`
     // declineFriendRequest(User)
   }
 };
