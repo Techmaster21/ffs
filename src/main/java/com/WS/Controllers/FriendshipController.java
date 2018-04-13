@@ -113,6 +113,14 @@ public class FriendshipController {
     			friendshipRepository.delete(f);
     		}
     	}
+    	
+    	List<Friendship> friendships2 = friendshipRepository.findByUser(user);
+    	for(int i = 0; i < friendships2.size(); i++){
+    		Friendship f = friendships2.get(i);
+    		if(f.getFriend().equals(currentUser)){
+    			friendshipRepository.delete(f);
+    		}
+    	}
     }
     
     
