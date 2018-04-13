@@ -70,6 +70,9 @@ public class FriendshipController {
     			friendshipRepository.delete(f);
     			f.setRequest(false);
     			friendshipRepository.save(f);
+    			
+    			Friendship g = new Friendship(currentUser, user, false);
+    			friendshipRepository.save(g);
     		}
     	}
     }
