@@ -23,7 +23,7 @@ export class Recipe {
     public ingredients: Array<Ingredient> = [],
     public steps: Array<Step> = [],
     public cuisine: Cuisine = new Cuisine(),
-    public isPublic = false,
+    public pub = false,
     public prepTime?: string,
     public cookTime?: string,
     public user?: User,

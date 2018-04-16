@@ -84,7 +84,8 @@ export class RecipesViewerComponent implements OnInit {
    * @param recipe The recipe to remove
    */
   removeRecipe(recipe: Recipe): void {
-    this.recipeService.deleteRecipe(recipe.id);
+    this.recipeService.deleteRecipe(recipe.id)
+      .subscribe();
     this.recipes.splice(this.recipes.indexOf(recipe), 1);
     this.dataSource.next(this.recipes);
   }

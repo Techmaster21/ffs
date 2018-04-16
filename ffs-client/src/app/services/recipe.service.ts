@@ -74,6 +74,7 @@ export class RecipeService {
    * @returns the updated recipe
    */
   saveRecipe(recipe: Recipe): Observable<Recipe> {
+    console.log(recipe.pub)
     return this.http.post<Recipe>(URI.RECIPE.SAVE, recipe, httpOptions)
       .pipe(
         catchError(this.handleError<Recipe>('saveRecipe'))
@@ -86,7 +87,7 @@ export class RecipeService {
    * @returns nothing
    */
   deleteRecipe(id: number): Observable<Recipe> {
-    return this.http.post<Recipe>(URI.RECIPE.SAVE, id, httpOptions)
+    return this.http.post<Recipe>(URI.RECIPE.DELETE, id, httpOptions)
       .pipe(
         catchError(this.handleError<Recipe>('deleteRecipe'))
       );
