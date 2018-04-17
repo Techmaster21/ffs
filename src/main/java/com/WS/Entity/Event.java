@@ -17,10 +17,10 @@ public class Event {
     @Column(name = "event_id")
     private int id;
 
-    @Column(name = "dateandtime", columnDefinition = "DATETIME")
+    @Column(name = "starttime", columnDefinition = "DATETIME")
     private Time startTime;
 
-    @Column(name = "dateandtime2", columnDefinition = "DATETIME")
+    @Column(name = "endtime", columnDefinition = "DATETIME")
     private Time endTime;
 
     @OneToOne
@@ -82,39 +82,40 @@ public class Event {
         this.user = user;
     }
 
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Event other = (Event) obj;
+		if (endTime == null) {
+			if (other.endTime != null)
+				return false;
+		} else if (!endTime.equals(other.endTime))
+			return false;
+		if (id != other.id)
+			return false;
+		if (recipe == null) {
+			if (other.recipe != null)
+				return false;
+		} else if (!recipe.equals(other.recipe))
+			return false;
+		if (startTime == null) {
+			if (other.startTime != null)
+				return false;
+		} else if (!startTime.equals(other.startTime))
+			return false;
+		if (user == null) {
+			if (other.user != null)
+				return false;
+		} else if (!user.equals(other.user))
+			return false;
+		return true;
+	}
 
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        Event other = (Event) obj;
-        if (endTime == null) {
-            if (other.endTime != null)
-                return false;
-        } else if (!endTime.equals(other.endTime))
-            return false;
-        if (id != other.id)
-            return false;
-        if (recipe == null) {
-            if (other.recipe != null)
-                return false;
-        } else if (!recipe.equals(other.recipe))
-            return false;
-        if (startTime == null) {
-            if (other.startTime != null)
-                return false;
-        } else if (!startTime.equals(other.startTime))
-            return false;
-        if (user == null) {
-            if (other.user != null)
-                return false;
-        } else if (!user.equals(other.user))
-            return false;
-        return true;
-    }
+
 
 }
