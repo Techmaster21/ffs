@@ -26,7 +26,8 @@ public class FriendshipController {
     private final Logger logger = LoggerFactory.getLogger(IngredientController.class);
     private final FriendshipRepository friendshipRepository;
     private final SecurityContextService securityContext;
-	
+
+    @Autowired
     public FriendshipController(FriendshipRepository friendshipRepository, SecurityContextService securityContext){
     	this.friendshipRepository = friendshipRepository; 
     	this.securityContext = securityContext;

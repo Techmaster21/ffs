@@ -1,4 +1,4 @@
-import { Pantryitem } from './pantryitem';
+import { PantryItem } from './pantry-item';
 import { User } from './user';
 
 export class Pantry {
@@ -9,7 +9,7 @@ export class Pantry {
    * @param id the id of the pantry
    */
   constructor(
-    public items: Array<Pantryitem> = [],
+    public items: Array<PantryItem> = [],
     public user?: User,
     public id?: number
   ) {}

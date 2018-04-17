@@ -1,7 +1,7 @@
 import { Food } from './food';
 import { Unit } from './unit';
 
-export class Pantryitem {
+export class PantryItem {
   /**
    * represents an entry in a pantry
    * @param food the food being stored in the pantry

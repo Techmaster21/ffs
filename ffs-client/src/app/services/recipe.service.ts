@@ -5,7 +5,7 @@ import { Recipe } from '../models/recipe';
 import { Unit } from '../models/unit';
 import { Cuisine } from '../models/cuisine';
 import { Pantry } from '../models/pantry';
-import { Pantryitem } from '../models/pantryitem';
+import { PantryItem } from '../models/pantry-item';
 import { Food } from '../models/food';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { of } from 'rxjs/observable/of';
@@ -155,7 +155,7 @@ export class RecipeService {
    * @param pantryItem the pantryItem to be deleted
    */
   // TODO this has no server side implementation
-  removePantryItem(pantryItem: Pantryitem): void {
+  removePantryItem(pantryItem: PantryItem): void {
     // this.socket.emit('removeFromPantry', pantryItem);
   }
   searchUsers(name: String): Observable<Array<User>> {

@@ -4,7 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Ingredient } from '../../models/ingredient';
 import { Pantry } from '../../models/pantry';
-import { Pantryitem } from '../../models/pantryitem';
+import { PantryItem } from '../../models/pantry-item';
 import { Food } from '../../models/food';
 import { Unit } from '../../models/unit';
 import { Cuisine } from '../../models/cuisine';
@@ -46,7 +46,7 @@ export class PantryComponent implements OnInit {
   /**
    * An item to add
    */
-  pantryItem: Pantryitem;
+  pantryItem: PantryItem;
   units: Array<Unit>;
 
   constructor(private recipeService: RecipeService, private route: ActivatedRoute) {
@@ -100,7 +100,7 @@ export class PantryComponent implements OnInit {
    * Removes the selected food from the pantry
    * @param pantryItem The food to be removed
    */
-  removePantryItem(pantryItem: Pantryitem): void {
+  removePantryItem(pantryItem: PantryItem): void {
     this.pantry.items = this.pantry.items.filter(obj => obj !== pantryItem);
     this.dataSource.next(this.pantry.items);
     this.recipeService.savePantry(this.pantry)
