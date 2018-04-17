@@ -45,10 +45,11 @@ public class EventController {
     	eventRepository.deleteById(id);
     }
     
-    //TODO
-//    @RequestMapping("/getUserEvents")
-//    public List<Event> getUserEvents(){
-//    	
-//    }
+    @RequestMapping("/getUserEvents")
+    public List<Event> getUserEvents(){
+    	User currentUser = securityContext.currentUser().get();
+    	List<Event> events = eventRepository.findByUser(currentUser);
+    	return events;
+    }
 
 }
