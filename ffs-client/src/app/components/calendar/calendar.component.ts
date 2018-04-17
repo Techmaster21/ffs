@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CalendarEvent } from 'angular-calendar';
+import { Subject } from 'rxjs/Subject';
 
 const colors: any = {
   red: {
@@ -16,7 +17,9 @@ const colors: any = {
   styleUrls: ['./calendar.component.css']
 })
 export class CalendarComponent implements OnInit {
+  activeDayIsOpen = false;
   viewDate: Date = new Date();
+  refresh: Subject<any> = new Subject();
   // events: Array<CalendarEvent> = [];
 
   events: Array<CalendarEvent> = [

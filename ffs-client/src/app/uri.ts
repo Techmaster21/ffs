@@ -48,6 +48,7 @@ export const URI = {
   },
   USER: {
     SEARCH_BY_NAME: `${USER_BASE}/searchByName`,
+    SEARCH_NO_FRIENDS: `${USER_BASE}/searchWithoutFriends`
   },
   FRIENDSHIP: {
     REQUEST_FRIEND: `${FRIENDSHIP_BASE}/requestFriend`,
