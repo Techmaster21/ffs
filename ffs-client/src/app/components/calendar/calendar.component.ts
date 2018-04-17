@@ -19,6 +19,7 @@ const colors: any = {
 export class CalendarComponent implements OnInit {
   activeDayIsOpen = false;
   viewDate: Date = new Date();
+  view = 'month';
   refresh: Subject<any> = new Subject();
   // events: Array<CalendarEvent> = [];
 
@@ -32,4 +33,5 @@ export class CalendarComponent implements OnInit {
     ]
   ngOnInit(): void {
   }
+
 }

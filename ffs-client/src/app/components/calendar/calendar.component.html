@@ -1,13 +1,45 @@
-<button mat-button color="secondary" mwlCalendarPreviousView [view]="view" [(viewDate)]="viewDate"
+<div>
+  <button mat-button color="secondary" mwlCalendarPreviousView [view]="view" [(viewDate)]="viewDate"
         (viewDateChange)="activeDayIsOpen = false">Previous</button>
-<button mat-button color="primary" mwlCalendarToday [(viewDate)]="viewDate">Today</button>
-<button mat-button color="secondary" mwlCalendarNextView [view]="view" [(viewDate)]="viewDate"
+  <button mat-button color="primary" mwlCalendarToday [(viewDate)]="viewDate">Today</button>
+  <button mat-button color="secondary" mwlCalendarNextView [view]="view" [(viewDate)]="viewDate"
         (viewDateChange)="activeDayIsOpen = false">Next</button>
-<mwl-calendar-month-view
-  [viewDate]="viewDate"
-  [activeDayIsOpen]="activeDayIsOpen"
-  [refresh]="refresh"
-  [events]="events">
-</mwl-calendar-month-view>
+</div>
+
+<div>
+  <button mat-button color="secondary" (click)="view = 'month'">Month</button>
+  <button mat-button color="secondary" (click)="view = 'week'">Week</button>
+  <button mat-button color="secondary" (click)="view = 'day'">Day</button>
+</div>
+<h3>{{ viewDate | calendarDate:(view + 'ViewTitle'):'en' }}</h3>
+<br>
+<div [ngSwitch]="view">
+  <mwl-calendar-month-view
+    *ngSwitchCase="'month'"
+    [viewDate]="viewDate"
+    [events]="events"
+    [refresh]="refresh"
+    [activeDayIsOpen]="activeDayIsOpen"
+    (dayClicked)="dayClicked($event.day)"
+    (eventClicked)="handleEvent('Clicked', $event.event)"
+    (eventTimesChanged)="eventTimesChanged($event)">
+  </mwl-calendar-month-view>
+  <mwl-calendar-week-view
+    *ngSwitchCase="'week'"
+    [viewDate]="viewDate"
+    [events]="events"
+    [refresh]="refresh"
+    (eventClicked)="handleEvent('Clicked', $event.event)"
+    (eventTimesChanged)="eventTimesChanged($event)">
+  </mwl-calendar-week-view>
+  <mwl-calendar-day-view
+    *ngSwitchCase="'day'"
+    [viewDate]="viewDate"
+    [events]="events"
+    [refresh]="refresh"
+    (eventClicked)="handleEvent('Clicked', $event.event)"
+    (eventTimesChanged)="eventTimesChanged($event)">
+  </mwl-calendar-day-view>
+</div>
 <button mat-button color="primary" routerLink="/scheduler">Scheduler</button>
 
