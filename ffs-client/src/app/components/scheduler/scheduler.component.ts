@@ -9,11 +9,12 @@ import { Recipe } from '../../models/recipe';
 })
 export class SchedulerComponent {
   selectedRecipe: Recipe;
+  variable = "18:00";
   recipeSelect(recipe: Recipe): void {
     this.selectedRecipe = recipe;
   }
   addEvent(): void {
-    
+
   }
 
 }

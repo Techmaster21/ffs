@@ -25,6 +25,7 @@ import { PantryComponent } from './components/pantry/pantry.component';
 import { LogoutComponent } from './components/logout/logout.component';
 import { FriendsterComponent } from './components/friendster/friendster.component';
 import { AuthInterceptor } from './interceptors/auth-interceptor.service';
+import { AmazingTimePickerModule } from 'amazing-time-picker';
 
 @NgModule({
   declarations: [
@@ -50,7 +51,8 @@ import { AuthInterceptor } from './interceptors/auth-interceptor.service';
     MaterialModule,
     CalendarModule.forRoot(),
     BrowserAnimationsModule,
-    HttpClientModule
+    HttpClientModule,
+    AmazingTimePickerModule
   ],
   providers: [
     RecipeService,
