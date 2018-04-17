@@ -1,6 +1,6 @@
 import { Recipe } from './recipe';
 
-export class Calendarevent {
+export class CalendarEvent {
   /**
    * represents an event in a calendar
    * @param date the date the event takes place
