@@ -1,18 +1,19 @@
-<form class="scheduler-form" (ngSubmit)="addEvent()" #schedulerForm="ngForm">
+<form class="scheduler-form" (ngSubmit)="addEvent(time.value)" #schedulerForm="ngForm">
   <h1>Schedule a Recipe</h1>
   <mat-card>
     <div>
       <mat-form-field>
-        <input matInput [matDatepicker]="picker" placeholder="Choose a date">
+        <input matInput name="datepicker" [matDatepicker]="picker" placeholder="Choose a date" [(ngModel)]="date">
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>
       </mat-form-field>
     </div>
-    <input #test type="time" theme="dark" atp-time-picker value="19:00">
+    <input #time type="time" theme="dark" atp-time-picker value="19:00">
   </mat-card>
-<div *ngIf="selectedRecipe">
-  <h2>Selected Recipe</h2>
-  <p>{{selectedRecipe.name}}</p>
-</div>
-<app-recipes-viewer [selector]=true (selectRecipe)="recipeSelect($event)"></app-recipes-viewer>
+  <div *ngIf="selectedRecipe">
+    <h2>Selected Recipe</h2>
+    <p>{{selectedRecipe.name}}</p>
+  </div>
+  <app-recipes-viewer [selector]=true (selectRecipe)="recipeSelect($event)"></app-recipes-viewer>
+  <button type="submit" mat-raised-button color="primary">Submit</button>
 </form>
