@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CalendarEvent } from 'angular-calendar';
 import { Subject } from 'rxjs/Subject';
+import { RecipeService } from '../../services/recipe.service';
+import { FFSCalendarEvent } from '../../models/ffs-calendar-event';
 
 const colors: any = {
   red: {
@@ -21,9 +23,9 @@ export class CalendarComponent implements OnInit {
   viewDate: Date = new Date();
   view = 'month';
   refresh: Subject<any> = new Subject();
-  // events: Array<CalendarEvent> = [];
+  calendarEvents: Array<FFSCalendarEvent> = [];
 
-  events: Array<CalendarEvent> = [
+ events: Array<CalendarEvent> = [
     {
       start: new Date(),
       end: new Date(),
@@ -31,7 +33,17 @@ export class CalendarComponent implements OnInit {
       color: colors.red
     }
     ]
+
+  constructor(private recipeService: RecipeService) {}
+
   ngOnInit(): void {
+    console.log(new Date());
+    this.recipeService.getEvents()
+      .subscribe(events => {
+        this.calendarEvents = events;
+        console.log(this.calendarEvents);
+      });
+
   }
 
 }

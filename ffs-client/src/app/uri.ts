@@ -7,6 +7,7 @@ export const FOOD_BASE = 'api/food';
 export const PANTRY_BASE = 'api/pantry';
 export const USER_BASE = 'api/user';
 export const FRIENDSHIP_BASE = 'api/friendship';
+export const EVENT_BASE = 'api/event';
 export const URI = {
   ACCOUNT: {
     SIGNUP: `${ACCOUNT_BASE}/signup`,
@@ -56,5 +57,8 @@ export const URI = {
     ACCEPT_REQUEST: `${FRIENDSHIP_BASE}/acceptFriendRequest`,
     GET_FRIENDS: `${FRIENDSHIP_BASE}/getFriends`,
     DECLINE_REQUEST: `${FRIENDSHIP_BASE}/declineFriendRequest`
+  },
+  EVENT: {
+    GET_EVENTS: `${EVENT_BASE}/getUserEvents`,
   }
 };

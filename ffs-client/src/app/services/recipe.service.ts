@@ -12,6 +12,7 @@ import { of } from 'rxjs/observable/of';
 import { catchError } from 'rxjs/operators';
 import { URI } from '../uri';
 import { User } from '../models/user';
+import { FFSCalendarEvent } from '../models/ffs-calendar-event';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -198,6 +199,12 @@ export class RecipeService {
     return this.http.get<Array<User>>(URI.FRIENDSHIP.GET_FRIENDS, httpOptions)
       .pipe(
         catchError(this.handleError<Array<User>>('getFriends'))
+      );
+  }
+  getEvents(): Observable<Array<FFSCalendarEvent>> {
+    return this.http.get<Array<FFSCalendarEvent>>(URI.EVENT.GET_EVENTS, httpOptions)
+      .pipe(
+        catchError(this.handleError<Array<FFSCalendarEvent>>('getEvents'))
       );
   }
   /**

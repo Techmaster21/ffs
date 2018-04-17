@@ -1,7 +1,7 @@
 package com.WS.Entity;
 
 import javax.persistence.*;
-import java.sql.Time;
+import java.util.Date;
 
 /**
  * This entity is not yet finished so no javadoc comments will be provided
@@ -18,10 +18,12 @@ public class Event {
     private int id;
 
     @Column(name = "starttime", columnDefinition = "DATETIME")
-    private Time startTime;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date startTime;
 
     @Column(name = "endtime", columnDefinition = "DATETIME")
-    private Time endTime;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date endTime;
 
     @OneToOne
     @JoinColumn(name = "recipe_id")
@@ -35,7 +37,7 @@ public class Event {
 
     }
 
-    public Event(Time startTime, Time endTime, Recipe recipe, User user) {
+    public Event(Date startTime, Date endTime, Recipe recipe, User user) {
         this.startTime = startTime;
         this.endTime = endTime;
         this.recipe = recipe;
@@ -50,19 +52,19 @@ public class Event {
         this.id = id;
     }
 
-    public Time getStartTime() {
+    public Date getStartTime() {
         return startTime;
     }
 
-    public void setStartTime(Time startTime) {
+    public void setStartTime(Date startTime) {
         this.startTime = startTime;
     }
 
-    public Time getEndTime() {
+    public Date getEndTime() {
         return endTime;
     }
 
-    public void setEndTime(Time endTime) {
+    public void setEndTime(Date endTime) {
         this.endTime = endTime;
     }
 
