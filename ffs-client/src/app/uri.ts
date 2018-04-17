@@ -17,8 +17,9 @@ export const URI = {
     GET_ALL: `${RECIPE_BASE}/getAll`,
     SAVE: `${RECIPE_BASE}/save`,
     DELETE: `${RECIPE_BASE}/delete`,
-    GET_USERS: `${RECIPE_BASE}/getUsersRecipes`,
-    GET_PUBLIC: `${RECIPE_BASE}/getPublicRecipes`
+    GET_USERS_RECIPES: `${RECIPE_BASE}/getUsersRecipes`,
+    GET_PUBLIC_RECIPES: `${RECIPE_BASE}/getPublicRecipes`,
+    GET_FRIENDS_RECIPES: `${RECIPE_BASE}/getFriendsRecipes`
   },
   UNIT: {
     GET: `${UNIT_BASE}/get`,

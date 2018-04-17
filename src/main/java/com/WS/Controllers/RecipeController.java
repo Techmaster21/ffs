@@ -5,8 +5,10 @@
  */
 package com.WS.Controllers;
 
+import com.WS.Entity.Friendship;
 import com.WS.Entity.Recipe;
 import com.WS.Entity.User;
+import com.WS.Repository.FriendshipRepository;
 import com.WS.Repository.RecipeRepository;
 import com.WS.Service.SecurityContextService;
 import org.slf4j.Logger;
@@ -18,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.time.Duration;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -35,6 +38,7 @@ public class RecipeController {
     private final Logger logger = LoggerFactory.getLogger(RecipeController.class);
 
     private final RecipeRepository recipeRepository;
+    private final FriendshipRepository friendshipRepository;
     private final SecurityContextService securityContext;
 
     /**
@@ -44,9 +48,10 @@ public class RecipeController {
      * @param recipeRepository Repository handing Recipes table.
      */
     @Autowired
-    public RecipeController(RecipeRepository recipeRepository, SecurityContextService securityContext) {
+    public RecipeController(RecipeRepository recipeRepository, FriendshipRepository friendshipRepository, SecurityContextService securityContext) {
         this.recipeRepository = recipeRepository;
         this.securityContext = securityContext;
+        this.friendshipRepository = friendshipRepository;
     }
 
     /**
@@ -82,6 +87,19 @@ public class RecipeController {
         User currentUser = securityContext.currentUser().get();
         List<Recipe> recipes = (List<Recipe>) recipeRepository.findByUser(currentUser);
         return recipes;
+    }
+    
+    @RequestMapping("/getFriendsRecipes")
+    public List<Recipe> getFriendsRecipes(){
+    	User currentUser = securityContext.currentUser().get();
+    	List<Recipe> friendRecipes = new ArrayList<Recipe>();
+    	List<Friendship> friendships = friendshipRepository.findByFriend(currentUser);
+    	for(int i = 0; i < friendships.size(); i++){
+    		if(!friendships.get(i).isRequest()){
+    			friendRecipes.addAll(recipeRepository.findByUser(friendships.get(i).getUser()));
+    		}
+    	}
+    	return friendRecipes;
     }
 
     /**
