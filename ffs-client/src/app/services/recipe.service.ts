@@ -74,6 +74,7 @@ export class RecipeService {
    * @returns the updated recipe
    */
   saveRecipe(recipe: Recipe): Observable<Recipe> {
+    console.log(recipe.pub)
     return this.http.post<Recipe>(URI.RECIPE.SAVE, recipe, httpOptions)
       .pipe(
         catchError(this.handleError<Recipe>('saveRecipe'))
@@ -86,7 +87,7 @@ export class RecipeService {
    * @returns nothing
    */
   deleteRecipe(id: number): Observable<Recipe> {
-    return this.http.post<Recipe>(URI.RECIPE.SAVE, id, httpOptions)
+    return this.http.post<Recipe>(URI.RECIPE.DELETE, id, httpOptions)
       .pipe(
         catchError(this.handleError<Recipe>('deleteRecipe'))
       );
@@ -164,7 +165,6 @@ export class RecipeService {
       );
   }
   requestFriend(user: User): Observable<User> {
-    console.log(user);
     return this.http.post<User>(URI.FRIENDSHIP.REQUEST_FRIEND, user, httpOptions)
       .pipe(
         catchError(this.handleError<User>('requestFriend'))
@@ -174,6 +174,24 @@ export class RecipeService {
     return this.http.get<Array<User>>(URI.FRIENDSHIP.GET_FRIEND_REQUESTS, httpOptions)
       .pipe(
         catchError(this.handleError<Array<User>>('getFriendRequests'))
+      );
+  }
+  acceptRequest(user: User): Observable<User> {
+    return this.http.post<User>(URI.FRIENDSHIP.ACCEPT_REQUEST, user, httpOptions)
+      .pipe(
+        catchError(this.handleError<User>('acceptRequest'))
+      );
+  }
+  declineRequest(user: User): Observable<User> {
+    return this.http.post<User>(URI.FRIENDSHIP.DECLINE_REQUEST, user, httpOptions)
+      .pipe(
+        catchError(this.handleError<User>('declineRequest'))
+      );
+  }
+  getFriends(): Observable<Array<User>> {
+    return this.http.get<Array<User>>(URI.FRIENDSHIP.GET_FRIENDS, httpOptions)
+      .pipe(
+        catchError(this.handleError<Array<User>>('getFriends'))
       );
   }
   /**

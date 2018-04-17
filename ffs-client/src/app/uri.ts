@@ -50,8 +50,9 @@ export const URI = {
   },
   FRIENDSHIP: {
     REQUEST_FRIEND: `${FRIENDSHIP_BASE}/requestFriend`,
-    GET_FRIEND_REQUESTS: `${FRIENDSHIP_BASE}/getFriendRequests`
-    // acceptFriendRequest(User)
-    // declineFriendRequest(User)
+    GET_FRIEND_REQUESTS: `${FRIENDSHIP_BASE}/getFriendRequests`,
+    ACCEPT_REQUEST: `${FRIENDSHIP_BASE}/acceptFriendRequest`,
+    GET_FRIENDS: `${FRIENDSHIP_BASE}/getFriends`,
+    DECLINE_REQUEST: `${FRIENDSHIP_BASE}/declineFriendRequest`
   }
 };

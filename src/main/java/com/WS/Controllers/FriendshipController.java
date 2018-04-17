@@ -70,6 +70,9 @@ public class FriendshipController {
     			friendshipRepository.delete(f);
     			f.setRequest(false);
     			friendshipRepository.save(f);
+    			
+    			Friendship g = new Friendship(currentUser, user, false);
+    			friendshipRepository.save(g);
     		}
     	}
     }
@@ -107,6 +110,14 @@ public class FriendshipController {
     	for(int i = 0; i < friendships.size(); i++){
     		Friendship f = friendships.get(i);
     		if(f.getUser().equals(currentUser)){
+    			friendshipRepository.delete(f);
+    		}
+    	}
+    	
+    	List<Friendship> friendships2 = friendshipRepository.findByUser(user);
+    	for(int i = 0; i < friendships2.size(); i++){
+    		Friendship f = friendships2.get(i);
+    		if(f.getFriend().equals(currentUser)){
     			friendshipRepository.delete(f);
     		}
     	}

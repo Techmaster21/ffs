@@ -50,7 +50,7 @@ export class RecipesViewerComponent implements OnInit {
 
   ngOnInit(): void {
     this.viewing = 'myRecipes';
-    this.recipeService.getPublicRecipes()
+    this.recipeService.getUserRecipes()
       .subscribe(recipes => {
           this.recipes = recipes;
           this.dataSource.next(this.recipes);
@@ -84,7 +84,8 @@ export class RecipesViewerComponent implements OnInit {
    * @param recipe The recipe to remove
    */
   removeRecipe(recipe: Recipe): void {
-    this.recipeService.deleteRecipe(recipe.id);
+    this.recipeService.deleteRecipe(recipe.id)
+      .subscribe();
     this.recipes.splice(this.recipes.indexOf(recipe), 1);
     this.dataSource.next(this.recipes);
   }

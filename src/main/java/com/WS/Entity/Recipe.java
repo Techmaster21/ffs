@@ -311,7 +311,7 @@ public class Recipe {
         this.user = user;
     }
     
-    public boolean getPub(boolean pub){
+    public boolean getPub(){
     	return pub;
     }
     

@@ -91,6 +91,8 @@ export class RecipeAdderComponent implements OnInit {
    * Sends a request to save the recipe to the backend
    */
   submitRecipe(): void {
+    if (this.recipe.pub === undefined)
+      this.recipe.pub = false;
     this.recipe.cookTime = moment.duration({
       hours: this.cookTime.hours,
       minutes: this.cookTime.minutes})
