@@ -49,7 +49,6 @@ export class RecipeService {
       );
   }
 
-
   getUserRecipes(): Observable<Array<Recipe>> {
     return this.http.get<Array<Recipe>>(URI.RECIPE.GET_USERS_RECIPES, httpOptions)
       .pipe(
@@ -166,7 +165,7 @@ export class RecipeService {
     // this.socket.emit('removeFromPantry', pantryItem);
   }
   searchUsers(name: String): Observable<Array<User>> {
-    return this.http.post<Array<User>>(URI.USER.SEARCH_BY_NAME, name, httpOptions)
+    return this.http.post<Array<User>>(URI.USER.SEARCH_NO_FRIENDS, name, httpOptions)
       .pipe(
         catchError(this.handleError<Array<User>>('searchUsers'))
       );
