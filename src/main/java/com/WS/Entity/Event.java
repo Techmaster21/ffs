@@ -1,34 +1,12 @@
 package com.WS.Entity;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
+import javax.persistence.*;
+import java.sql.Time;
 
 /**
  * This entity is not yet finished so no javadoc comments will be provided
- * @author Samuel
  *
+ * @author Samuel
  */
 @Entity
 @Table(name = "events")
@@ -38,107 +16,105 @@ public class Event {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "event_id")
     private int id;
-    
-    @Column(name = "dateandtime", columnDefinition="DATETIME")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date startTime;
-    
-    @Column(name = "dateandtime2", columnDefinition="DATETIME")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date endTime;
 
-	@OneToOne
+    @Column(name = "dateandtime", columnDefinition = "DATETIME")
+    private Time startTime;
+
+    @Column(name = "dateandtime2", columnDefinition = "DATETIME")
+    private Time endTime;
+
+    @OneToOne
     @JoinColumn(name = "recipe_id")
     private Recipe recipe;
-    
+
     @OneToOne
     @JoinColumn(name = "ffser_id")
     private User user;
-    
-    public Event(){
-    	
-    }
-    
-    public Event(Date startTime, Date endTime, Recipe recipe, User user){
-    	this.startTime = startTime;
-    	this.endTime = endTime;
-    	this.recipe = recipe;
-    	this.user = user;
+
+    public Event() {
+
     }
 
-	public int getId() {
-		return id;
-	}
+    public Event(Time startTime, Time endTime, Recipe recipe, User user) {
+        this.startTime = startTime;
+        this.endTime = endTime;
+        this.recipe = recipe;
+        this.user = user;
+    }
 
-	public void setId(int id) {
-		this.id = id;
-	}
+    public int getId() {
+        return id;
+    }
 
-	public Date getStartTime() {
-		return startTime;
-	}
+    public void setId(int id) {
+        this.id = id;
+    }
 
-	public void setStartTime(Date startTime) {
-		this.startTime = startTime;
-	}
+    public Time getStartTime() {
+        return startTime;
+    }
 
-	public Date getEndTime() {
-		return endTime;
-	}
+    public void setStartTime(Time startTime) {
+        this.startTime = startTime;
+    }
 
-	public void setEndTime(Date endTime) {
-		this.endTime = endTime;
-	}
+    public Time getEndTime() {
+        return endTime;
+    }
 
-	public Recipe getRecipe() {
-		return recipe;
-	}
+    public void setEndTime(Time endTime) {
+        this.endTime = endTime;
+    }
 
-	public void setRecipe(Recipe recipe) {
-		this.recipe = recipe;
-	}
+    public Recipe getRecipe() {
+        return recipe;
+    }
 
-	public User getUser() {
-		return user;
-	}
+    public void setRecipe(Recipe recipe) {
+        this.recipe = recipe;
+    }
 
-	public void setUser(User user) {
-		this.user = user;
-	}
-	
-	
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Event other = (Event) obj;
-		if (endTime == null) {
-			if (other.endTime != null)
-				return false;
-		} else if (!endTime.equals(other.endTime))
-			return false;
-		if (id != other.id)
-			return false;
-		if (recipe == null) {
-			if (other.recipe != null)
-				return false;
-		} else if (!recipe.equals(other.recipe))
-			return false;
-		if (startTime == null) {
-			if (other.startTime != null)
-				return false;
-		} else if (!startTime.equals(other.startTime))
-			return false;
-		if (user == null) {
-			if (other.user != null)
-				return false;
-		} else if (!user.equals(other.user))
-			return false;
-		return true;
-	}
-	
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Event other = (Event) obj;
+        if (endTime == null) {
+            if (other.endTime != null)
+                return false;
+        } else if (!endTime.equals(other.endTime))
+            return false;
+        if (id != other.id)
+            return false;
+        if (recipe == null) {
+            if (other.recipe != null)
+                return false;
+        } else if (!recipe.equals(other.recipe))
+            return false;
+        if (startTime == null) {
+            if (other.startTime != null)
+                return false;
+        } else if (!startTime.equals(other.startTime))
+            return false;
+        if (user == null) {
+            if (other.user != null)
+                return false;
+        } else if (!user.equals(other.user))
+            return false;
+        return true;
+    }
+
 }
