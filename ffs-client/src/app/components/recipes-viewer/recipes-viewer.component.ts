@@ -91,10 +91,20 @@ export class RecipesViewerComponent implements OnInit {
   }
 
   updateRecipeSelection(): void {
+    this.selectedRecipe = undefined;
     if (this.viewing === 'publicRecipes') {
       if (!this.selector)
         this.displayedRecipeColumns = ['name', 'description', 'user', 'cuisine'];
       this.recipeService.getPublicRecipes()
+        .subscribe(recipes => {
+            this.recipes = recipes;
+            this.dataSource.next(this.recipes);
+          }
+        );
+    } else if (this.viewing === 'friendsRecipes') {
+      if (!this.selector)
+        this.displayedRecipeColumns = ['name', 'description', 'user', 'cuisine'];
+      this.recipeService.getFriendsRecipes()
         .subscribe(recipes => {
             this.recipes = recipes;
             this.dataSource.next(this.recipes);

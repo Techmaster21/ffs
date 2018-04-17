@@ -5,6 +5,7 @@
   <mat-select placeholder="Recipes" [(ngModel)]="viewing" (change)="updateRecipeSelection()" name="viewingSelector" required>
     <mat-option value="myRecipes">My Recipes</mat-option>
     <mat-option value="publicRecipes">Public Recipes</mat-option>
+    <mat-option value="friendsRecipes">Friends Recipes</mat-option>
   </mat-select>
   <mat-table #table [dataSource]="dataSource">
 
@@ -23,7 +24,7 @@
     <!-- User Column -->
     <ng-container matColumnDef="user">
       <mat-header-cell *matHeaderCellDef> User</mat-header-cell>
-      <mat-cell *matCellDef="let recipe"> {{ recipe.id.name }}</mat-cell>
+      <mat-cell *matCellDef="let recipe"> {{ recipe.user.username }}</mat-cell>
     </ng-container>
 
     <!-- Cuisine Column -->
@@ -61,11 +62,11 @@
 <mat-card *ngIf="selectedRecipe">
   <h2>{{ selectedRecipe.name }} details</h2>
   <p>Description: {{ selectedRecipe.description }}</p>
-  <p>Prep Time: {{ prepTime.humanize() }} and {{prepTime.clone().subtract(prepTime.hours(), 'h').humanize()}}</p>
-  <p>Cook Time: {{ cookTime.humanize() }} and {{cookTime.clone().subtract(cookTime.hours(), 'h').humanize()}}</p>
+  <p>Prep Time: {{ prepTime.humanize() }} and {{ prepTime.clone().subtract(prepTime.hours(), 'h').humanize() }}</p>
+  <p>Cook Time: {{ cookTime.humanize() }} and {{ cookTime.clone().subtract(cookTime.hours(), 'h').humanize() }}</p>
   <app-ingredients-viewer [(ingredients)]="selectedRecipe.ingredients" [canEdit]="false"></app-ingredients-viewer>
   <app-steps-viewer [steps]="selectedRecipe.steps"></app-steps-viewer>
-  <button *ngIf="!selector" mat-raised-button color="accent" routerLink="/addrecipe/{{selectedRecipe.id}}">Edit Recipe</button>
+  <button *ngIf="(!selector) && (viewing==='myRecipes')" mat-raised-button color="accent" routerLink="/addrecipe/{{selectedRecipe.id}}">Edit Recipe</button>
 </mat-card>
 
 <button *ngIf="!selector" mat-raised-button color="accent" routerLink="/addrecipe">Add Recipe</button>
