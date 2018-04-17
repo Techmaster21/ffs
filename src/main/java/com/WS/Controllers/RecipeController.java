@@ -95,7 +95,9 @@ public class RecipeController {
     	List<Recipe> friendRecipes = new ArrayList<Recipe>();
     	List<Friendship> friendships = friendshipRepository.findByFriend(currentUser);
     	for(int i = 0; i < friendships.size(); i++){
-    		friendRecipes.addAll(recipeRepository.findByUser(friendships.get(i).getUser()));
+    		if(!friendships.get(i).isRequest()){
+    			friendRecipes.addAll(recipeRepository.findByUser(friendships.get(i).getUser()));
+    		}
     	}
     	return friendRecipes;
     }
