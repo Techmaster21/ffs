@@ -5,7 +5,9 @@
  */
 package com.WS.Controllers;
 
+import com.WS.Entity.Friendship;
 import com.WS.Entity.User;
+import com.WS.Repository.FriendshipRepository;
 import com.WS.Repository.UserRepository;
 import com.WS.Service.SecurityContextService;
 
@@ -38,6 +40,7 @@ public class UserController {
      * Repository handling ffser table.
      */
     private final UserRepository userRepository;
+    private final FriendshipRepository friendshipRepository;
 
     /**
      * Creates controller that handles HTTP requests that require do queries to
@@ -46,9 +49,10 @@ public class UserController {
      * @param userRepository Repository handing ffser table.
      */
     @Autowired
-    public UserController(UserRepository userRepository, SecurityContextService securityContext) {
+    public UserController(UserRepository userRepository, FriendshipRepository friendshipRepository, SecurityContextService securityContext) {
         this.userRepository = userRepository;
         this.securityContext = securityContext;
+        this.friendshipRepository = friendshipRepository;
     }
 
     /**
@@ -65,6 +69,16 @@ public class UserController {
         return users;
     }
     
-//    @RequestMapping("/searchWithoutFriends")
-//    public List<User
+    @RequestMapping("/searchWithoutFriends")
+    public List<User> searchWithoutFriends(@RequestBody String s) {
+    	User currentUser = securityContext.currentUser().get();
+    	List<User> users = (List<User>) userRepository.findByUsernameContaining(s);
+    	List<Friendship> friendships = friendshipRepository.findByUser(currentUser);
+
+    	users.remove(currentUser);
+    	for(int i = 0; i < friendships.size(); i++){
+    		users.remove(friendships.get(i).getFriend());
+    	}
+    	return users;
+    }
 }
