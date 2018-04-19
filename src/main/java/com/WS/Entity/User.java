@@ -219,9 +219,7 @@ public class User implements UserDetails {
 
         if (id != user.id) return false;
         if (username != null ? !username.equals(user.username) : user.username != null) return false;
-        if (password != null ? !password.equals(user.password) : user.password != null) return false;
-        if (authority != null ? !authority.equals(user.authority) : user.authority != null) return false;
-        return authorities != null ? authorities.equals(user.authorities) : user.authorities == null;
+        return authority != null ? !authority.equals(user.authority) : user.authority != null;
     }
 
     /**

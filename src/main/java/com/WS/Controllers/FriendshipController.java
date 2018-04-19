@@ -116,8 +116,4 @@ public class FriendshipController {
 			}
 		}
     }
-    
-    
-    
-    //Fix search to not have current user and already added friends
-}
+ }
