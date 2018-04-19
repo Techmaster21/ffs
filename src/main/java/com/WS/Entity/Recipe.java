@@ -134,40 +134,6 @@ public class Recipe {
     }
 
     /**
-     * Returns a hash code value for this Recipe object.
-     * @return integer that is the hash code for this Recipe object
-     */
-    @Override
-    public int hashCode() {
-        int hash = 3;
-        hash = 41 * hash + this.id;
-        return hash;
-    }
-    
-    /**
-     * Indicates whether some other object is "equal to" this Recipe object.
-     * @param obj object being tested for equality with this Recipe.
-     * @return return true if obj and this Recipe are equivalent.  False if not. 
-     */
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Recipe other = (Recipe) obj;
-        if (this.id != other.id) {
-            return false;
-        }
-        return true;
-    }
-
-    /**
      * Gets the id of this Recipe
      * @return Id of this Recipe 
      */
@@ -337,4 +303,46 @@ public class Recipe {
         this.ingredients.add(ing);
     }
 
+    /**
+     * Indicates whether some other object is "equal to" this Recipe object.
+     * @param o object being tested for equality with this Recipe.
+     * @return return true if obj and this Recipe are equivalent.  False if not.
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Recipe recipe = (Recipe) o;
+
+        if (id != recipe.id) return false;
+        if (pub != recipe.pub) return false;
+        if (name != null ? !name.equals(recipe.name) : recipe.name != null) return false;
+        if (description != null ? !description.equals(recipe.description) : recipe.description != null) return false;
+        if (cuisine != null ? !cuisine.equals(recipe.cuisine) : recipe.cuisine != null) return false;
+        if (prepTime != null ? !prepTime.equals(recipe.prepTime) : recipe.prepTime != null) return false;
+        if (cookTime != null ? !cookTime.equals(recipe.cookTime) : recipe.cookTime != null) return false;
+        if (ingredients != null ? !ingredients.equals(recipe.ingredients) : recipe.ingredients != null) return false;
+        if (steps != null ? !steps.equals(recipe.steps) : recipe.steps != null) return false;
+        return user != null ? user.equals(recipe.user) : recipe.user == null;
+    }
+
+    /**
+     * Returns a hash code value for this Recipe object.
+     * @return integer that is the hash code for this Recipe object
+     */
+    @Override
+    public int hashCode() {
+        int result = id;
+        result = 31 * result + (name != null ? name.hashCode() : 0);
+        result = 31 * result + (description != null ? description.hashCode() : 0);
+        result = 31 * result + (cuisine != null ? cuisine.hashCode() : 0);
+        result = 31 * result + (prepTime != null ? prepTime.hashCode() : 0);
+        result = 31 * result + (cookTime != null ? cookTime.hashCode() : 0);
+        result = 31 * result + (ingredients != null ? ingredients.hashCode() : 0);
+        result = 31 * result + (steps != null ? steps.hashCode() : 0);
+        result = 31 * result + (user != null ? user.hashCode() : 0);
+        result = 31 * result + (pub ? 1 : 0);
+        return result;
+    }
 }

@@ -4,7 +4,6 @@ import { RecipeService } from '../../services/recipe.service';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { ActivatedRoute } from '@angular/router';
 import * as moment from 'moment';
-import { Duration } from 'moment';
 
 @Component({
   selector: 'app-recipes-viewer',
@@ -41,8 +40,8 @@ export class RecipesViewerComponent implements OnInit {
    */
   displayedRecipeColumns: Array<string>;
   viewing: string;
-  cookTime: Duration;
-  prepTime: Duration;
+  cookTime: moment.Duration;
+  prepTime: moment.Duration;
 
   constructor(private recipeService: RecipeService, private route: ActivatedRoute) {
     this.dataSource = new BehaviorSubject<any>(this.recipes);
@@ -93,8 +92,9 @@ export class RecipesViewerComponent implements OnInit {
   updateRecipeSelection(): void {
     this.selectedRecipe = undefined;
     if (this.viewing === 'publicRecipes') {
-      if (!this.selector)
+      if (!this.selector) {
         this.displayedRecipeColumns = ['name', 'description', 'user', 'cuisine'];
+      }
       this.recipeService.getPublicRecipes()
         .subscribe(recipes => {
             this.recipes = recipes;
@@ -102,8 +102,9 @@ export class RecipesViewerComponent implements OnInit {
           }
         );
     } else if (this.viewing === 'friendsRecipes') {
-      if (!this.selector)
+      if (!this.selector) {
         this.displayedRecipeColumns = ['name', 'description', 'user', 'cuisine'];
+      }
       this.recipeService.getFriendsRecipes()
         .subscribe(recipes => {
             this.recipes = recipes;
@@ -111,8 +112,9 @@ export class RecipesViewerComponent implements OnInit {
           }
         );
     } else {
-      if (!this.selector)
+      if (!this.selector) {
         this.displayedRecipeColumns = ['name', 'description', 'user', 'cuisine', 'delete'];
+      }
       this.recipeService.getUserRecipes()
         .subscribe(recipes => {
             this.recipes = recipes;

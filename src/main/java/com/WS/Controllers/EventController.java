@@ -3,10 +3,8 @@ package com.WS.Controllers;
 import com.WS.Entity.Event;
 import com.WS.Entity.User;
 import com.WS.Repository.EventRepository;
-import com.WS.Repository.FriendshipRepository;
 import com.WS.Service.SecurityContextService;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -48,8 +46,7 @@ public class EventController {
     @RequestMapping("/getUserEvents")
     public List<Event> getUserEvents(){
     	User currentUser = securityContext.currentUser().get();
-    	List<Event> events = eventRepository.findByUser(currentUser);
-    	return events;
+        return eventRepository.findByUser(currentUser);
     }
 
 }

@@ -117,47 +117,6 @@ public class Pantry {
     }
 
     /**
-     * Returns a hash code value for this Pantry object.
-     * @return integer that is the hash code for this Pantry object
-     */
-    @Override
-    public int hashCode() {
-        int hash = 7;
-        hash = 61 * hash + this.id;
-        return hash;
-    }
-
-    /**
-     * Indicates whether some other object is "equal to" this Pantry object.
-     * @param obj object being tested for equality with this Pantry.
-     * @return return true if obj and this Pantry are equivalent.  False if not. 
-     */
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Pantry other = (Pantry) obj;
-        if (this.id != other.id) {
-            return false;
-        }
-        if (!Objects.equals(this.user, other.user)) {
-            return false;
-        }
-        if (!Objects.equals(this.items, other.items)) {
-            return false;
-        }
-        return true;
-    }
-
-
-    /**
      * Returns a string representation of this Pantry object.
      * @return String representation of this Pantry object. 
      */
@@ -168,5 +127,34 @@ public class Pantry {
                 ", user=" + user +
                 ", items=" + items +
                 '}';
+    }
+
+    /**
+     * Indicates whether some other object is "equal to" this Pantry object.
+     * @param o object being tested for equality with this Pantry.
+     * @return return true if obj and this Pantry are equivalent.  False if not.
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Pantry pantry = (Pantry) o;
+
+        if (id != pantry.id) return false;
+        if (user != null ? !user.equals(pantry.user) : pantry.user != null) return false;
+        return items != null ? items.equals(pantry.items) : pantry.items == null;
+    }
+
+    /**
+     * Returns a hash code value for this Pantry object.
+     * @return integer that is the hash code for this Pantry object
+     */
+    @Override
+    public int hashCode() {
+        int result = id;
+        result = 31 * result + (user != null ? user.hashCode() : 0);
+        result = 31 * result + (items != null ? items.hashCode() : 0);
+        return result;
     }
 }

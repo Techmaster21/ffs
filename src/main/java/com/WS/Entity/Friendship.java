@@ -1,10 +1,5 @@
 package com.WS.Entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-
 import javax.persistence.*;
 
 @Entity
@@ -70,29 +65,25 @@ public class Friendship {
 	}
 
 	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Friendship other = (Friendship) obj;
-		if (friend == null) {
-			if (other.friend != null)
-				return false;
-		} else if (!friend.equals(other.friend))
-			return false;
-		if (id != other.id)
-			return false;
-		if (request != other.request)
-			return false;
-		if (user == null) {
-			if (other.user != null)
-				return false;
-		} else if (!user.equals(other.user))
-			return false;
-		return true;
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+
+		Friendship that = (Friendship) o;
+
+		if (id != that.id) return false;
+		if (request != that.request) return false;
+		if (user != null ? !user.equals(that.user) : that.user != null) return false;
+		return friend != null ? friend.equals(that.friend) : that.friend == null;
+	}
+
+	@Override
+	public int hashCode() {
+		int result = id;
+		result = 31 * result + (user != null ? user.hashCode() : 0);
+		result = 31 * result + (friend != null ? friend.hashCode() : 0);
+		result = 31 * result + (request ? 1 : 0);
+		return result;
 	}
 
 	@Override

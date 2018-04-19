@@ -17,7 +17,7 @@ public class Application {
      * Because Angular is a single page application and Apache Tomcat didn't get the memo, this forwards all non-static
      * (html, css, js, etc) paths to the root path (/) so that Angular can take it from there.
      *
-     * @return
+     * @return address to forward to
      */
     @GetMapping(value = "/{path:[^\\.]*}")
     public String redirect() {

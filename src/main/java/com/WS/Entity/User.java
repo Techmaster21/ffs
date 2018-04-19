@@ -192,17 +192,6 @@ public class User implements UserDetails {
     }
 
     /**
-     * Returns a hash code value for this User object.
-     * @return integer that is the hash code for this User object
-     */
-    @Override
-    public int hashCode() {
-        int hash = 3;
-        hash = 29 * hash + this.id;
-        return hash;
-    }
-
-    /**
      * Returns a string representation of this User object.
      * @return String representation of this User object. 
      */
@@ -218,25 +207,34 @@ public class User implements UserDetails {
 
     /**
      * Indicates whether some other object is "equal to" this User object.
-     * @param obj object being tested for equality with this User.
+     * @param o object being tested for equality with this User.
      * @return return true if obj and this User are equivalent.  False if not. 
      */
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final User other = (User) obj;
-        if (this.id != other.id) {
-            return false;
-        }
-        return true;
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        User user = (User) o;
+
+        if (id != user.id) return false;
+        if (username != null ? !username.equals(user.username) : user.username != null) return false;
+        if (password != null ? !password.equals(user.password) : user.password != null) return false;
+        if (authority != null ? !authority.equals(user.authority) : user.authority != null) return false;
+        return authorities != null ? authorities.equals(user.authorities) : user.authorities == null;
     }
 
+    /**
+     * Returns a hash code value for this User object.
+     * @return integer that is the hash code for this User object
+     */
+    @Override
+    public int hashCode() {
+        int result = id;
+        result = 31 * result + (username != null ? username.hashCode() : 0);
+        result = 31 * result + (password != null ? password.hashCode() : 0);
+        result = 31 * result + (authority != null ? authority.hashCode() : 0);
+        result = 31 * result + (authorities != null ? authorities.hashCode() : 0);
+        return result;
+    }
 }

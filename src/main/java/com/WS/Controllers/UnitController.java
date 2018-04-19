@@ -49,8 +49,7 @@ public class UnitController {
      */
     @RequestMapping("/getAll")
     public List<Unit> getAllUnits() {
-        List<Unit> units = (List<Unit>) unitRepository.findAll();
-        return units;
+        return (List<Unit>) unitRepository.findAll();
     }
 
     /**

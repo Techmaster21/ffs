@@ -7,7 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 public interface PantryRepository extends CrudRepository<Pantry, Integer> {
 
-    public Pantry findByUser(User user);
+    Pantry findByUser(User user);
     @Transactional
-    public Integer deleteByUser(User user);
+    Integer deleteByUser(User user);
 }

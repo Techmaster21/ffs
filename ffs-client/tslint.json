@@ -23,6 +23,10 @@
         "app"
       ],
       "kebab-case"
+    ],
+    "curly": [
+      true,
+      "ignore-same-line"
     ]
   }
 }

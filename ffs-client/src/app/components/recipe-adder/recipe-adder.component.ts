@@ -5,7 +5,6 @@ import { Location } from '@angular/common';
 import { Ingredient } from '../../models/ingredient';
 import { Recipe } from '../../models/recipe';
 import { RecipeService } from '../../services/recipe.service';
-import { User } from '../../models/user';
 import { Unit } from '../../models/unit';
 import { Step } from '../../models/step';
 import { Cuisine } from '../../models/cuisine';
@@ -91,8 +90,9 @@ export class RecipeAdderComponent implements OnInit {
    * Sends a request to save the recipe to the backend
    */
   submitRecipe(): void {
-    if (this.recipe.pub === undefined)
+    if (this.recipe.pub === undefined) {
       this.recipe.pub = false;
+    }
     this.recipe.cookTime = moment.duration({
       hours: this.cookTime.hours,
       minutes: this.cookTime.minutes})
@@ -164,7 +164,7 @@ export class RecipeAdderComponent implements OnInit {
         this.cuisines = cuisines;
       });
     const param = this.route.snapshot.paramMap.get('id');
-    if (param)
+    if (param) {
       this.recipeService.getRecipe(+param)
         .subscribe(recipe => {
           this.recipe = recipe;
@@ -175,6 +175,7 @@ export class RecipeAdderComponent implements OnInit {
           this.prepTime.hours = prep.hours();
           this.prepTime.minutes = prep.minutes();
         });
+    }
   }
 }
 class Time {

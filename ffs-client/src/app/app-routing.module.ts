@@ -6,7 +6,7 @@ import { RecipesViewerComponent } from './components/recipes-viewer/recipes-view
 import { RecipeAdderComponent } from './components/recipe-adder/recipe-adder.component';
 import { LoginComponent } from './components/login/login.component';
 import { CreateAccountComponent } from './components/create-account/create-account.component';
-import { PantryComponent} from './components/pantry/pantry.component';
+import { PantryComponent } from './components/pantry/pantry.component';
 import { CalendarComponent } from './components/calendar/calendar.component';
 import { RegisterGuard } from './guards/register.guard';
 import { SchedulerComponent } from './components/scheduler/scheduler.component';

@@ -36,13 +36,13 @@ public class IngredientController {
      */
     private final IngredientRepository ingredientRepository;
 
-    @Autowired
     /**
      * Creates controller that handles HTTP requests that require do queries to
      * the Ingredients table.
      *
      * @param ingredientRepository Repository handing Ingredients table.
      */
+    @Autowired
     public IngredientController(IngredientRepository ingredientRepository) {
         this.ingredientRepository = ingredientRepository;
     }
@@ -65,8 +65,7 @@ public class IngredientController {
      */
     @RequestMapping("/getAll")
     public List<Ingredient> getAllIngredients() {
-        List<Ingredient> ingredients = (List<Ingredient>) ingredientRepository.findAll();
-        return ingredients;
+        return (List<Ingredient>) ingredientRepository.findAll();
     }
 
 }

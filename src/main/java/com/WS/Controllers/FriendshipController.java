@@ -1,10 +1,8 @@
 package com.WS.Controllers;
 
 import com.WS.Entity.Friendship;
-import com.WS.Entity.Ingredient;
 import com.WS.Entity.User;
 import com.WS.Repository.FriendshipRepository;
-import com.WS.Repository.IngredientRepository;
 import com.WS.Service.SecurityContextService;
 
 import java.util.ArrayList;
@@ -47,16 +45,16 @@ public class FriendshipController {
     public List<User> getFriendRequests(){
     	User currentUser = securityContext.currentUser().get();
     	List<Friendship> friendshipRequests = friendshipRepository.findByFriend(currentUser);
-    	for(int i = 0; i < friendshipRequests.size(); i++){
+    	for(int i = 0; i < friendshipRequests.size(); i++) {
     		if(!friendshipRequests.get(i).isRequest()){
     			friendshipRequests.remove(i);
     		}
     	}
     	
-    	List<User> usersRequesting = new ArrayList<User>();
-    	for(int i = 0; i < friendshipRequests.size(); i++){
-    		usersRequesting.add(friendshipRequests.get(i).getUser());
-    	}
+    	List<User> usersRequesting = new ArrayList<>();
+		for (Friendship friendshipRequest : friendshipRequests) {
+			usersRequesting.add(friendshipRequest.getUser());
+		}
     	
     	return usersRequesting;
     }
@@ -65,42 +63,39 @@ public class FriendshipController {
     public void acceptFriendRequest(@RequestBody User user){
     	User currentUser = securityContext.currentUser().get();
     	List<Friendship> friendshipRequests = friendshipRepository.findByFriend(currentUser);
-    	for(int i = 0; i < friendshipRequests.size(); i++){
-    		Friendship f = friendshipRequests.get(i);
-    		if(f.getUser().equals(user)){
-    			friendshipRepository.delete(f);
-    			f.setRequest(false);
-    			friendshipRepository.save(f);
-    			
-    			Friendship g = new Friendship(currentUser, user, false);
-    			friendshipRepository.save(g);
-    		}
-    	}
+		for (Friendship f : friendshipRequests) {
+			if (f.getUser().equals(user)) {
+				friendshipRepository.delete(f);
+				f.setRequest(false);
+				friendshipRepository.save(f);
+
+				Friendship g = new Friendship(currentUser, user, false);
+				friendshipRepository.save(g);
+			}
+		}
     }
     
     @RequestMapping("/declineFriendRequest")
     public void  declineFriendRequest(@RequestBody User user){
     	User currentUser = securityContext.currentUser().get();
     	List<Friendship> friendshipRequests = friendshipRepository.findByFriend(currentUser);
-    	for(int i = 0; i < friendshipRequests.size(); i++){
-    		Friendship f = friendshipRequests.get(i);
-    		if(f.getUser().equals(user)){
-    			friendshipRepository.delete(f);
-    		}
-    	}
+		for (Friendship f : friendshipRequests) {
+			if (f.getUser().equals(user)) {
+				friendshipRepository.delete(f);
+			}
+		}
     }
     
     @RequestMapping("/getFriends")
     public List<User> getFriends(){
     	User currentUser = securityContext.currentUser().get();
     	List<Friendship> friendships = friendshipRepository.findByUser(currentUser);
-    	List<User> friends = new ArrayList<User>();
-    	for(int i = 0; i < friendships.size(); i++){
-    		Friendship f = friendships.get(i);
-    		if(!f.isRequest()){
-    			friends.add(f.getFriend());
-    		}
-    	}
+    	List<User> friends = new ArrayList<>();
+		for (Friendship f : friendships) {
+			if (!f.isRequest()) {
+				friends.add(f.getFriend());
+			}
+		}
     	return friends;
     }
     
@@ -108,20 +103,18 @@ public class FriendshipController {
     public void deleteFriend(User user){
     	User currentUser = securityContext.currentUser().get();
     	List<Friendship> friendships = friendshipRepository.findByFriend(user);
-    	for(int i = 0; i < friendships.size(); i++){
-    		Friendship f = friendships.get(i);
-    		if(f.getUser().equals(currentUser)){
-    			friendshipRepository.delete(f);
-    		}
-    	}
+		for (Friendship f : friendships) {
+			if (f.getUser().equals(currentUser)) {
+				friendshipRepository.delete(f);
+			}
+		}
     	
     	List<Friendship> friendships2 = friendshipRepository.findByUser(user);
-    	for(int i = 0; i < friendships2.size(); i++){
-    		Friendship f = friendships2.get(i);
-    		if(f.getFriend().equals(currentUser)){
-    			friendshipRepository.delete(f);
-    		}
-    	}
+		for (Friendship f : friendships2) {
+			if (f.getFriend().equals(currentUser)) {
+				friendshipRepository.delete(f);
+			}
+		}
     }
     
     

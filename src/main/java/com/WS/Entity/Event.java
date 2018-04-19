@@ -84,40 +84,27 @@ public class Event {
         this.user = user;
     }
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Event other = (Event) obj;
-		if (endTime == null) {
-			if (other.endTime != null)
-				return false;
-		} else if (!endTime.equals(other.endTime))
-			return false;
-		if (id != other.id)
-			return false;
-		if (recipe == null) {
-			if (other.recipe != null)
-				return false;
-		} else if (!recipe.equals(other.recipe))
-			return false;
-		if (startTime == null) {
-			if (other.startTime != null)
-				return false;
-		} else if (!startTime.equals(other.startTime))
-			return false;
-		if (user == null) {
-			if (other.user != null)
-				return false;
-		} else if (!user.equals(other.user))
-			return false;
-		return true;
-	}
+    @Override
+    public int hashCode() {
+        int result = id;
+        result = 31 * result + (startTime != null ? startTime.hashCode() : 0);
+        result = 31 * result + (endTime != null ? endTime.hashCode() : 0);
+        result = 31 * result + (recipe != null ? recipe.hashCode() : 0);
+        result = 31 * result + (user != null ? user.hashCode() : 0);
+        return result;
+    }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
 
+        Event event = (Event) o;
 
+        if (id != event.id) return false;
+        if (startTime != null ? !startTime.equals(event.startTime) : event.startTime != null) return false;
+        if (endTime != null ? !endTime.equals(event.endTime) : event.endTime != null) return false;
+        if (recipe != null ? !recipe.equals(event.recipe) : event.recipe != null) return false;
+        return user != null ? user.equals(event.user) : event.user == null;
+    }
 }

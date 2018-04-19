@@ -59,6 +59,6 @@ export const URI = {
     DECLINE_REQUEST: `${FRIENDSHIP_BASE}/declineFriendRequest`
   },
   EVENT: {
-    GET_EVENTS: `${EVENT_BASE}/getUserEvents`,
+    GET_EVENTS: `${EVENT_BASE}/getUserEvents`
   }
 };

@@ -75,40 +75,6 @@ public class Ingredient {
     }
 
     /**
-     * Returns a hash code value for this Ingredient object.
-     * @return integer that is the hash code for this Ingredient object
-     */
-    @Override
-    public int hashCode() {
-        int hash = 3;
-        hash = 29 * hash + this.id;
-        return hash;
-    }
-
-    /**
-     * Indicates whether some other object is "equal to" this Ingredient object.
-     * @param obj object being tested for equality with this Ingredient.
-     * @return return true if obj and this Ingredient are equivalent.  False if not. 
-     */
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Ingredient other = (Ingredient) obj;
-        if (this.id != other.id) {
-            return false;
-        }
-        return true;
-    }
-
-    /**
      * Gets the id of this Ingredient
      * @return id of this Ingredient 
      */
@@ -201,5 +167,41 @@ public class Ingredient {
                 ", quantity=" + quantity +
                 ", recipe=" + recipe +
                 '}';
+    }
+
+    /**
+     * Indicates whether some other object is "equal to" this Ingredient object.
+     * @param o object being tested for equality with this Ingredient.
+     * @return return true if obj and this Ingredient are equivalent.  False if not.
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Ingredient that = (Ingredient) o;
+
+        if (id != that.id) return false;
+        if (Double.compare(that.quantity, quantity) != 0) return false;
+        if (food != null ? !food.equals(that.food) : that.food != null) return false;
+        if (unit != null ? !unit.equals(that.unit) : that.unit != null) return false;
+        return recipe != null ? recipe.equals(that.recipe) : that.recipe == null;
+    }
+
+    /**
+     * Returns a hash code value for this Ingredient object.
+     * @return integer that is the hash code for this Ingredient object
+     */
+    @Override
+    public int hashCode() {
+        int result;
+        long temp;
+        result = id;
+        result = 31 * result + (food != null ? food.hashCode() : 0);
+        result = 31 * result + (unit != null ? unit.hashCode() : 0);
+        temp = Double.doubleToLongBits(quantity);
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        result = 31 * result + (recipe != null ? recipe.hashCode() : 0);
+        return result;
     }
 }

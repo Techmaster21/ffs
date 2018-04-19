@@ -8,7 +8,6 @@ import { catchError } from 'rxjs/operators';
 import { Token } from '../models/token';
 import { URI } from '../uri';
 
-
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
@@ -28,7 +27,7 @@ export class AccountService {
    * @returns whether or not a user is logged in
    */
   getLoginStatus(): boolean {
-    return this.getToken() ? true : false;
+    return !!this.getToken();
   }
   /**
    * sets the token

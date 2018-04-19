@@ -30,7 +30,7 @@ export class RecipeService {
   }
   // TODO delete methods don't return anything - they probably should.
   /**
-   *gets a list of all of the recipes
+   * gets a list of all of the recipes
    * @returns All recipes from the database
    */
   getAllRecipes(): Observable<Array<Recipe>> {
@@ -41,7 +41,7 @@ export class RecipeService {
   }
 
   /**
-   *gets a list of all of the public recipes
+   * gets a list of all of the public recipes
    * @returns All public recipes from the database
    */
   getPublicRecipes(): Observable<Array<Recipe>> {
@@ -82,7 +82,6 @@ export class RecipeService {
    * @returns the updated recipe
    */
   saveRecipe(recipe: Recipe): Observable<Recipe> {
-    console.log(recipe.pub)
     return this.http.post<Recipe>(URI.RECIPE.SAVE, recipe, httpOptions)
       .pipe(
         catchError(this.handleError<Recipe>('saveRecipe'))

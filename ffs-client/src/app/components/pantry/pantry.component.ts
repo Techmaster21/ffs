@@ -2,12 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { RecipeService } from '../../services/recipe.service';
 import { ActivatedRoute } from '@angular/router';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { Ingredient } from '../../models/ingredient';
 import { Pantry } from '../../models/pantry';
 import { PantryItem } from '../../models/pantry-item';
 import { Food } from '../../models/food';
 import { Unit } from '../../models/unit';
-import { Cuisine } from '../../models/cuisine';
 
 @Component({
   selector: 'app-pantry',

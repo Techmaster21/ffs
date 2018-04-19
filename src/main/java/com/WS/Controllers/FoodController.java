@@ -97,10 +97,10 @@ public class FoodController {
         }
         FoodController.foodComparator fdc = new FoodController.foodComparator();
         ArrayList<Food> finalList = new ArrayList<>();
-        java.util.Collections.sort(foods, fdc);
-        java.util.Collections.sort(foodsStartingWith, fdc);
-        java.util.Collections.sort(foodsWithStrictlyWord, fdc);
-        java.util.Collections.sort(foodsWithSingularWord, fdc);
+        foods.sort(fdc);
+        foodsStartingWith.sort(fdc);
+        foodsWithStrictlyWord.sort(fdc);
+        foodsWithSingularWord.sort(fdc);
         finalList.addAll(foodsWithStrictlyWord);
         finalList.addAll(foodsStartingWith);
         finalList.addAll(foodsWithSingularWord);
@@ -115,13 +115,7 @@ public class FoodController {
         }
 
         public int compare(Food s1, Food s2) {
-            if (s1.getName().length() > s2.getName().length()) {
-                return 1;
-            } else if (s1.getName().length() < s2.getName().length()) {
-                return -1;
-            } else {
-                return 0;
-            }
+            return Integer.compare(s1.getName().length(), s2.getName().length());
         }
     }
 }

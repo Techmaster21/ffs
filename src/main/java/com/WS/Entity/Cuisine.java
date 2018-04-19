@@ -77,17 +77,6 @@ public class Cuisine {
     }
 
     /**
-     * Returns a hash code value for this Cuisine object.
-     * @return integer that is the hash code for this Cuisine object
-     */
-    @Override
-    public int hashCode() {
-        int hash = 5;
-        hash = 37 * hash + this.id;
-        return hash;
-    }
-
-    /**
      * Returns a string representation of this Cuisine object.
      * @return String representation of this Cuisine object. 
      */
@@ -98,29 +87,31 @@ public class Cuisine {
                 ", name='" + name + '\'' +
                 '}';
     }
-    
+
     /**
      * Indicates whether some other object is "equal to" this Cuisine object.
-     * @param obj object being tested for equality with this Cuisine.
-     * @return return true if obj and this Cuisine are equivalent.  False if not. 
+     * @param o object being tested for equality with this Cuisine.
+     * @return return true if obj and this Cuisine are equivalent.  False if not.
      */
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Cuisine other = (Cuisine) obj;
-        if (this.id != other.id) {
-            return false;
-        }
-        return true;
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Cuisine cuisine = (Cuisine) o;
+
+        if (id != cuisine.id) return false;
+        return name != null ? name.equals(cuisine.name) : cuisine.name == null;
     }
 
-
+    /**
+     * Returns a hash code value for this Cuisine object.
+     * @return integer that is the hash code for this Cuisine object
+     */
+    @Override
+    public int hashCode() {
+        int result = id;
+        result = 31 * result + (name != null ? name.hashCode() : 0);
+        return result;
+    }
 }

@@ -57,40 +57,6 @@ public class RecipeStep {
     }
 
     /**
-     * Returns a hash code value for this RecipeStep object.
-     * @return integer that is the hash code for this RecipeStep object
-     */
-    @Override
-    public int hashCode() {
-        int hash = 5;
-        hash = 37 * hash + this.id;
-        return hash;
-    }
-
-    /**
-     * Indicates whether some other object is "equal to" this RecipeStep object.
-     * @param obj object being tested for equality with this RecipeStep.
-     * @return return true if obj and this RecipeStep are equivalent.  False if not. 
-     */
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final RecipeStep other = (RecipeStep) obj;
-        if (this.id != other.id) {
-            return false;
-        }
-        return true;
-    }
-
-    /**
      * Gets the id of this RecipeStep.
      * @return Id of this RecipeStep
      */
@@ -150,5 +116,34 @@ public class RecipeStep {
                 ", step='" + step + '\'' +
                 ", recipe=" + recipe +
                 '}';
+    }
+
+    /**
+     * Indicates whether some other object is "equal to" this RecipeStep object.
+     * @param o object being tested for equality with this RecipeStep.
+     * @return return true if obj and this RecipeStep are equivalent.  False if not.
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        RecipeStep that = (RecipeStep) o;
+
+        if (id != that.id) return false;
+        if (step != null ? !step.equals(that.step) : that.step != null) return false;
+        return recipe != null ? recipe.equals(that.recipe) : that.recipe == null;
+    }
+
+    /**
+     * Returns a hash code value for this RecipeStep object.
+     * @return integer that is the hash code for this RecipeStep object
+     */
+    @Override
+    public int hashCode() {
+        int result = id;
+        result = 31 * result + (step != null ? step.hashCode() : 0);
+        result = 31 * result + (recipe != null ? recipe.hashCode() : 0);
+        return result;
     }
 }

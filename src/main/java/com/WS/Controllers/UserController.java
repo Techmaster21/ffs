@@ -64,7 +64,7 @@ public class UserController {
     @RequestMapping("/searchByName")
     public List<User> searchByName(@RequestBody String s) {
     	User currentUser = securityContext.currentUser().get();
-        List<User> users = (List<User>) userRepository.findByUsernameContaining(s);
+        List<User> users = userRepository.findByUsernameContaining(s);
         users.remove(currentUser);
         return users;
     }
@@ -72,13 +72,13 @@ public class UserController {
     @RequestMapping("/searchWithoutFriends")
     public List<User> searchWithoutFriends(@RequestBody String s) {
     	User currentUser = securityContext.currentUser().get();
-    	List<User> users = (List<User>) userRepository.findByUsernameContaining(s);
+    	List<User> users = userRepository.findByUsernameContaining(s);
     	List<Friendship> friendships = friendshipRepository.findByUser(currentUser);
 
     	users.remove(currentUser);
-    	for(int i = 0; i < friendships.size(); i++){
-    		users.remove(friendships.get(i).getFriend());
-    	}
+        for (Friendship friendship : friendships) {
+            users.remove(friendship.getFriend());
+        }
     	return users;
     }
 }

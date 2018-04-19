@@ -46,7 +46,7 @@ public class LoginController {
     /**
      * Used for encoding passwords for storage
      */
-    private SHA256PasswordEncoder sha256PasswordEncoder;
+    private final SHA256PasswordEncoder sha256PasswordEncoder;
 
     /**
      * 
@@ -73,7 +73,7 @@ public class LoginController {
      * HTTP request for logging in
      * @param params user data for attempted login for autherization 
      * @return AuthResponse which contains the token for the user's session
-     * @throws AuthenticationException 
+     * @throws AuthenticationException if authentication manager throws exception
      */
     @PostMapping("/login")
     public AuthResponse login(@RequestBody AuthParams params) throws AuthenticationException {

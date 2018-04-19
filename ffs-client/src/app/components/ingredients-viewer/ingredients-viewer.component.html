@@ -3,19 +3,19 @@
     <!-- Name Column -->
     <ng-container matColumnDef="name">
       <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
-      <mat-cell *matCellDef="let ingredient"> {{ingredient.food.name}} </mat-cell>
+      <mat-cell *matCellDef="let ingredient"> {{ ingredient.food.name }} </mat-cell>
     </ng-container>
 
     <!-- Quantity Column -->
     <ng-container matColumnDef="quantity">
       <mat-header-cell *matHeaderCellDef> Quantity </mat-header-cell>
-      <mat-cell *matCellDef="let ingredient"> {{ingredient.quantity}} </mat-cell>
+      <mat-cell *matCellDef="let ingredient"> {{ ingredient.quantity }} </mat-cell>
     </ng-container>
 
     <!-- Units Column -->
     <ng-container matColumnDef="unit">
       <mat-header-cell *matHeaderCellDef> Unit </mat-header-cell>
-      <mat-cell *matCellDef="let ingredient"> {{ingredient.unit.name}} </mat-cell>
+      <mat-cell *matCellDef="let ingredient"> {{ ingredient.unit.name }} </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="actions">

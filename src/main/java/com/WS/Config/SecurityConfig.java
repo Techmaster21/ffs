@@ -1,6 +1,6 @@
-/**
- * Code courtesy of Jakub Remenec (https://blog.davincisoftware.sk/blog-angular-and-spring-security-integration-part1)
- * with modifications by Adrian Bolt
+/*
+  Code courtesy of Jakub Remenec (https://blog.davincisoftware.sk/blog-angular-and-spring-security-integration-part1)
+  with modifications by Adrian Bolt
  */
 package com.WS.Config;
 
@@ -28,7 +28,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private final UserDetailsService userService;
     private final StatelessAuthenticationFilter statelessAuthenticationFilter;
 
-    private SHA256PasswordEncoder sha256PasswordEncoder;
+    private final SHA256PasswordEncoder sha256PasswordEncoder;
 
     @Autowired
     public SecurityConfig(UserDetailsService userService,
@@ -78,7 +78,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
      */
     @Bean
     public FilterRegistrationBean registration(StatelessAuthenticationFilter filter) {
-        FilterRegistrationBean registration = new FilterRegistrationBean(filter);
+        FilterRegistrationBean<StatelessAuthenticationFilter> registration = new FilterRegistrationBean<>(filter);
         registration.setEnabled(false);
         return registration;
     }

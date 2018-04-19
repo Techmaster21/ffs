@@ -50,8 +50,7 @@ public class CuisineController {
      */
     @RequestMapping("/getAll")
     public List<Cuisine> getAllCuisines() {
-        List<Cuisine> cuisines = (List<Cuisine>) cuisineRepository.findAll();
-        return cuisines;
+        return (List<Cuisine>) cuisineRepository.findAll();
     }
     
 

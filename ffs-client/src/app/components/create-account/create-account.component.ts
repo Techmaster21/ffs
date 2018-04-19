@@ -36,10 +36,11 @@ export class CreateAccountComponent {
     user = {username: this.userName}; // todo server should do this
     this.accountService.createAccount(user, this.newPassword)
       .subscribe(success => {
-        if (success)
+        if (success) {
           this.router.navigate(['/login']);
-        else
+        } else {
           console.log('fail');
+        }
         }
       );
   }

@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -72,8 +71,7 @@ public class RecipeController {
      */
     @RequestMapping("/getAll")
     public List<Recipe> getAllRecipes() {
-        List<Recipe> recipes = (List<Recipe>) recipeRepository.findAll();
-        return recipes;
+        return (List<Recipe>) recipeRepository.findAll();
     }
 
     /**
@@ -85,20 +83,19 @@ public class RecipeController {
     @RequestMapping("/getUsersRecipes")
     public List<Recipe> getAllUsersRecipes() {
         User currentUser = securityContext.currentUser().get();
-        List<Recipe> recipes = (List<Recipe>) recipeRepository.findByUser(currentUser);
-        return recipes;
+        return recipeRepository.findByUser(currentUser);
     }
     
     @RequestMapping("/getFriendsRecipes")
     public List<Recipe> getFriendsRecipes(){
     	User currentUser = securityContext.currentUser().get();
-    	List<Recipe> friendRecipes = new ArrayList<Recipe>();
+    	List<Recipe> friendRecipes = new ArrayList<>();
     	List<Friendship> friendships = friendshipRepository.findByFriend(currentUser);
-    	for(int i = 0; i < friendships.size(); i++){
-    		if(!friendships.get(i).isRequest()){
-    			friendRecipes.addAll(recipeRepository.findByUser(friendships.get(i).getUser()));
-    		}
-    	}
+        for (Friendship friendship : friendships) {
+            if (!friendship.isRequest()) {
+                friendRecipes.addAll(recipeRepository.findByUser(friendship.getUser()));
+            }
+        }
     	return friendRecipes;
     }
 
@@ -129,8 +126,7 @@ public class RecipeController {
     
     @RequestMapping("/getPublicRecipes")
     public List<Recipe> getAllPublicRecipes() {
-    	List<Recipe> recipes = (List<Recipe>) recipeRepository.findByPub(true);
-    	return recipes;
+        return recipeRepository.findByPub(true);
     	
     }
 }

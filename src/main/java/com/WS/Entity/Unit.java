@@ -45,40 +45,6 @@ public class Unit {
     }
 
     /**
-     * Returns a hash code value for this Unit object.
-     * @return integer that is the hash code for this Unit object
-     */
-    @Override
-    public int hashCode() {
-        int hash = 5;
-        hash = 97 * hash + this.id;
-        return hash;
-    }
-
-    /**
-     * Indicates whether some other object is "equal to" this Unit object.
-     * @param obj object being tested for equality with this Unit.
-     * @return return true if obj and this Unit are equivalent.  False if not. 
-     */
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Unit other = (Unit) obj;
-        if (this.id != other.id) {
-            return false;
-        }
-        return true;
-    }
-
-    /**
      * Gets the id of this Unit.
      * @return Id of this Unit
      */
@@ -121,5 +87,32 @@ public class Unit {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 '}';
+    }
+
+    /**
+     * Indicates whether some other object is "equal to" this Unit object.
+     * @param o object being tested for equality with this Unit.
+     * @return return true if obj and this Unit are equivalent.  False if not.
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Unit unit = (Unit) o;
+
+        if (id != unit.id) return false;
+        return name != null ? name.equals(unit.name) : unit.name == null;
+    }
+
+    /**
+     * Returns a hash code value for this Unit object.
+     * @return integer that is the hash code for this Unit object
+     */
+    @Override
+    public int hashCode() {
+        int result = id;
+        result = 31 * result + (name != null ? name.hashCode() : 0);
+        return result;
     }
 }

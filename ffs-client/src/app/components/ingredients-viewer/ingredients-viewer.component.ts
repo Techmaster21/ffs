@@ -45,8 +45,9 @@ export class IngredientsViewerComponent implements DoCheck, OnInit {
 
   ngDoCheck(): void {
     const changes = this.differ.diff(this.ingredients);
-    if (changes)
+    if (changes) {
       this.dataSource.next(this.ingredients);
+    }
   }
 
   ngOnInit(): void {

@@ -1,6 +1,6 @@
-/**
- * Code courtesy of Jakub Remenec (https://blog.davincisoftware.sk/blog-angular-and-spring-security-integration-part1)
- * with modifications by Adrian Bolt
+/*
+  Code courtesy of Jakub Remenec (https://blog.davincisoftware.sk/blog-angular-and-spring-security-integration-part1)
+  with modifications by Adrian Bolt
  */
 package com.WS.Auth;
 

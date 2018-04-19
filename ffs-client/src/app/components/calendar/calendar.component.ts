@@ -32,12 +32,11 @@ export class CalendarComponent implements OnInit {
       title: 'A 3 day event',
       color: colors.red
     }
-    ]
+    ];
 
   constructor(private recipeService: RecipeService) {}
 
   ngOnInit(): void {
-    console.log(new Date());
     this.recipeService.getEvents()
       .subscribe(events => {
         this.calendarEvents = events;
