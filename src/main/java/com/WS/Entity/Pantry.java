@@ -88,6 +88,7 @@ public class Pantry {
      * Gets the User of this Pantry
      * @return User Pantry belongs to.
      */
+    @JsonIgnore
     public User getUser() {
         return user;
     }
