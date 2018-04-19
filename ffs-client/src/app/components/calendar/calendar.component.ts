@@ -24,15 +24,7 @@ export class CalendarComponent implements OnInit {
   view = 'month';
   refresh: Subject<any> = new Subject();
   calendarEvents: Array<FFSCalendarEvent> = [];
-
- events: Array<CalendarEvent> = [
-    {
-      start: new Date(),
-      end: new Date(),
-      title: 'A 3 day event',
-      color: colors.red
-    }
-    ];
+  events: Array<CalendarEvent> = [];
 
   constructor(private recipeService: RecipeService) {}
 
@@ -40,7 +32,15 @@ export class CalendarComponent implements OnInit {
     this.recipeService.getEvents()
       .subscribe(events => {
         this.calendarEvents = events;
-        console.log(this.calendarEvents);
+        for (const event of this.calendarEvents) {
+         this.events.push({
+           start: event.startTime,
+           end: event.endTime,
+           title: event.recipe.name,
+           color: colors.red
+         });
+        }
+        this.refresh.next();
       });
 
   }
