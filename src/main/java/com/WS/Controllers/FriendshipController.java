@@ -100,7 +100,7 @@ public class FriendshipController {
     }
     
     @RequestMapping("/deleteFriend")
-    public void deleteFriend(User user){
+    public void deleteFriend(@RequestBody User user){
     	User currentUser = securityContext.currentUser().get();
     	List<Friendship> friendships = friendshipRepository.findByFriend(user);
 		for (Friendship f : friendships) {
