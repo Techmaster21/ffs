@@ -19,7 +19,7 @@ public class Application {
      *
      * @return address to forward to
      */
-    @GetMapping(value = "/{path:[^\\.]*}")
+    @GetMapping(value = "/**/{path:[^\\.]*}")
     public String redirect() {
         return "forward:/";
     }
