@@ -51,6 +51,11 @@ export class CalendarComponent implements OnInit {
 
   }
 
+  eventClicked(event: CalendarEvent): void {
+    this.modalData = { event, action };
+    this.modal.open(this.modalContent, { size: 'lg' });
+  }
+
   dayClicked({date, events}: { date: Date; events: Array<CalendarEvent> }): void {
     if (isSameMonth(date, this.viewDate)) {
       if (
