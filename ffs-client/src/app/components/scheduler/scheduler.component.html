@@ -12,7 +12,7 @@
   </mat-card>
   <div *ngIf="selectedRecipe">
     <h2>Selected Recipe</h2>
-    <p>{{selectedRecipe.name}}</p>
+    <p>{{ selectedRecipe.name }}</p>
   </div>
   <app-recipes-viewer [selector]=true (selectRecipe)="recipeSelect($event)"></app-recipes-viewer>
   <button type="submit" mat-raised-button color="primary">Submit</button>

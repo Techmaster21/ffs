@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { Recipe } from '../../models/recipe';
 import * as moment from 'moment';
+import { Duration, Moment } from 'moment';
+import { RecipeService } from '../../services/recipe.service';
+
 
 @Component({
   selector: 'app-scheduler',
@@ -10,6 +13,9 @@ import * as moment from 'moment';
 export class SchedulerComponent {
   selectedRecipe: Recipe;
   date: Date;
+
+  constructor(private recipeService: RecipeService) {
+  }
 
   recipeSelect(recipe: Recipe): void {
     this.selectedRecipe = recipe;
@@ -27,6 +33,11 @@ export class SchedulerComponent {
     const end: Date = momentDate.add(prepTime)
       .add(cookTime)
       .toDate();
+    this.recipeService.addEvent({
+      startTime: start,
+      endTime: end,
+      recipe: this.selectedRecipe
+    })
+    .subscribe();
   }
-
 }
