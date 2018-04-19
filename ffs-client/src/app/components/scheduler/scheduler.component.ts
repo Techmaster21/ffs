@@ -3,6 +3,7 @@ import { Recipe } from '../../models/recipe';
 import * as moment from 'moment';
 import { Duration, Moment } from 'moment';
 import { RecipeService } from '../../services/recipe.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -14,7 +15,7 @@ export class SchedulerComponent {
   selectedRecipe: Recipe;
   date: Date;
 
-  constructor(private recipeService: RecipeService) {
+  constructor(private router: Router, private recipeService: RecipeService) {
   }
 
   recipeSelect(recipe: Recipe): void {
@@ -39,5 +40,6 @@ export class SchedulerComponent {
       recipe: this.selectedRecipe
     })
     .subscribe();
+    this.router.navigate(['/calendar']);
   }
 }

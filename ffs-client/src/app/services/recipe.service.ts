@@ -222,6 +222,8 @@ export class RecipeService {
       );
   }
   addEvent(event: FFSCalendarEvent): Observable<FFSCalendarEvent> {
+    console.log('here');
+
     return this.http.post<FFSCalendarEvent>(URI.EVENT.ADD_EVENT, event, httpOptions)
       .pipe(
         catchError(this.handleError<FFSCalendarEvent>('addEvent'))
