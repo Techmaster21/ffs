@@ -9,6 +9,7 @@ import { PantryItem } from '../models/pantry-item';
 import { Food } from '../models/food';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { of } from 'rxjs/observable/of';
+import 'rxjs/add/operator/map';
 import { catchError } from 'rxjs/operators';
 import { URI } from '../uri';
 import { User } from '../models/user';
@@ -203,6 +204,14 @@ export class RecipeService {
   }
   getEvents(): Observable<Array<FFSCalendarEvent>> {
     return this.http.get<Array<FFSCalendarEvent>>(URI.EVENT.GET_EVENTS, httpOptions)
+      .map(events => {
+        for (const event of events) {
+          event.startTime = new Date(String(event.startTime));
+          event.endTime = new Date(String(event.endTime));
+        }
+
+        return events;
+      })
       .pipe(
         catchError(this.handleError<Array<FFSCalendarEvent>>('getEvents'))
       );
