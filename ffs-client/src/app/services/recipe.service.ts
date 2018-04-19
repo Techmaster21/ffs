@@ -195,6 +195,12 @@ export class RecipeService {
         catchError(this.handleError<User>('declineRequest'))
       );
   }
+  deleteFriend(user: User): Observable<User> {
+    return this.http.post<User>(URI.FRIENDSHIP.DELETE_FRIEND, user, httpOptions)
+      .pipe(
+        catchError(this.handleError<User>('deleteFriend'))
+      );
+  }
   getFriends(): Observable<Array<User>> {
     return this.http.get<Array<User>>(URI.FRIENDSHIP.GET_FRIENDS, httpOptions)
       .pipe(
@@ -215,6 +221,14 @@ export class RecipeService {
         catchError(this.handleError<Array<FFSCalendarEvent>>('getEvents'))
       );
   }
+  addEvent(event: FFSCalendarEvent): Observable<FFSCalendarEvent> {
+    console.log('here');
+
+    return this.http.post<FFSCalendarEvent>(URI.EVENT.ADD_EVENT, event, httpOptions)
+      .pipe(
+        catchError(this.handleError<FFSCalendarEvent>('addEvent'))
+      );
+}
   /**
    * Handle Http operation that failed.
    * Let the app continue.

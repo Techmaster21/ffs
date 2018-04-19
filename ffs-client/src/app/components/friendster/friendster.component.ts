@@ -76,4 +76,11 @@ export class FriendsterComponent implements OnInit {
     this.friendRequestDataSource.next(this.friendRequests);
   }
 
+  deleteFriend(user: User): void {
+    this.recipeService.deleteFriend(user)
+      .subscribe();
+    this.friends =  this.friendRequests.filter(obj => obj !== user);
+    this.friendDataSource.next(this.friendRequests);
+  }
+
 }

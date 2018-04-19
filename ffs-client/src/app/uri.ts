@@ -56,9 +56,11 @@ export const URI = {
     GET_FRIEND_REQUESTS: `${FRIENDSHIP_BASE}/getFriendRequests`,
     ACCEPT_REQUEST: `${FRIENDSHIP_BASE}/acceptFriendRequest`,
     GET_FRIENDS: `${FRIENDSHIP_BASE}/getFriends`,
-    DECLINE_REQUEST: `${FRIENDSHIP_BASE}/declineFriendRequest`
+    DECLINE_REQUEST: `${FRIENDSHIP_BASE}/declineFriendRequest`,
+    DELETE_FRIEND: `${FRIENDSHIP_BASE}/deleteFriend`
   },
   EVENT: {
-    GET_EVENTS: `${EVENT_BASE}/getUserEvents`
+    GET_EVENTS: `${EVENT_BASE}/getUserEvents`,
+    ADD_EVENT: `${EVENT_BASE}/saveEvent`
   }
 };
