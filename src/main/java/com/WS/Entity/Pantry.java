@@ -5,12 +5,12 @@
  */
 package com.WS.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 /**
  * Class representing a Pantry object in the database with proper links to it.
@@ -88,6 +88,7 @@ public class Pantry {
      * Gets the User of this Pantry
      * @return User Pantry belongs to.
      */
+    @JsonIgnore
     public User getUser() {
         return user;
     }
