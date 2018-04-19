@@ -32,7 +32,7 @@
     <ng-container matColumnDef="delete">
       <mat-header-cell *matHeaderCellDef><mat-icon aria-label="Delete">delete</mat-icon></mat-header-cell>
       <mat-cell *matCellDef="let i=index; let pantryItem">
-        <button mat-icon-button color="accent" (click)="removePantryItem(pantryItem)">
+        <button type="button" mat-icon-button color="accent" (click)="removePantryItem(pantryItem)">
           <mat-icon aria-label="Delete">delete</mat-icon>
         </button>
       </mat-cell>
@@ -47,7 +47,7 @@
 <mat-card>
   <p>Add Item</p>
   <input matInput placeholder="Ingredient" [(ngModel)]="ingredientName" name="Ingredient" required>
-  <button mat-icon-button color="accent" (click)="searchIngredient()">Search</button>
+  <button type="button" mat-icon-button color="accent" (click)="searchIngredient()">Search</button>
   <mat-table #table [dataSource]="searchedFoodDataSource">
     <ng-container matColumnDef="name">
       <mat-header-cell *matHeaderCellDef> Name</mat-header-cell>
@@ -57,7 +57,7 @@
     <ng-container matColumnDef="select">
       <mat-header-cell *matHeaderCellDef></mat-header-cell>
       <mat-cell *matCellDef="let i=index; let food">
-        <button mat-icon-button color="accent" (click)="selectForUse(food)">
+        <button type="button" mat-icon-button color="accent" (click)="selectForUse(food)">
           Select
         </button>
       </mat-cell>

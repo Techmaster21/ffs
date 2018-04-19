@@ -12,7 +12,7 @@
       <ng-container matColumnDef="accept">
         <mat-header-cell *matHeaderCellDef></mat-header-cell>
         <mat-cell *matCellDef="let i=index; let user">
-          <button mat-icon-button color="accent" (click)="acceptRequest(user)">
+          <button type="button" mat-icon-button color="accent" (click)="acceptRequest(user)">
            Accept
           </button>
         </mat-cell>
@@ -22,7 +22,7 @@
       <ng-container matColumnDef="decline">
        <mat-header-cell *matHeaderCellDef></mat-header-cell>
         <mat-cell *matCellDef="let i=index; let user">
-          <button mat-icon-button color="accent" (click)="declineRequest(user)">
+          <button type="button" mat-icon-button color="accent" (click)="declineRequest(user)">
             Decline
          </button>
         </mat-cell>
@@ -49,7 +49,7 @@
     <ng-container matColumnDef="delete">
       <mat-header-cell *matHeaderCellDef><mat-icon aria-label="Delete">delete</mat-icon></mat-header-cell>
       <mat-cell *matCellDef="let i=index; let user">
-        <button mat-icon-button color="accent" (click)="deleteFriend(user)">
+        <button type="button" mat-icon-button color="accent" (click)="deleteFriend(user)">
           <mat-icon aria-label="Delete">delete</mat-icon>
         </button>
       </mat-cell>
@@ -64,7 +64,7 @@
 <mat-card>
   <p>Add Friends</p>
   <input matInput placeholder="Friends" [(ngModel)]="friendName" name="Friend" required>
-  <button mat-icon-button color="accent" (click)="searchFriend()">Search</button>
+  <button type="button" mat-icon-button color="accent" (click)="searchFriend()">Search</button>
   <mat-table #table [dataSource]="searchedFriendDataSource">
     <ng-container matColumnDef="name">
       <mat-header-cell *matHeaderCellDef> Name</mat-header-cell>
@@ -74,7 +74,7 @@
     <ng-container matColumnDef="select">
       <mat-header-cell *matHeaderCellDef></mat-header-cell>
       <mat-cell *matCellDef="let i=index; let user">
-        <button mat-icon-button color="accent" (click)="requestFriend(user)">
+        <button type="button" mat-icon-button color="accent" (click)="requestFriend(user)">
           Select
         </button>
       </mat-cell>
