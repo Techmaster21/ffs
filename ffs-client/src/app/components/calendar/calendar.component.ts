@@ -7,6 +7,7 @@ import {
   isSameDay,
   isSameMonth
 } from 'date-fns';
+import { Router } from '@angular/router';
 
 const colors: any = {
   red: {
@@ -31,7 +32,7 @@ export class CalendarComponent implements OnInit {
   calendarEvents: Array<FFSCalendarEvent> = [];
   events: Array<CalendarEvent> = [];
 
-  constructor(private recipeService: RecipeService) {
+  constructor(private router: Router, private recipeService: RecipeService) {
   }
 
   ngOnInit(): void {
@@ -52,7 +53,7 @@ export class CalendarComponent implements OnInit {
   }
 
   eventClicked(event: CalendarEvent): void {
-  
+    this.router.navigate(['/scheduler/']);
   }
 
   dayClicked({date, events}: { date: Date; events: Array<CalendarEvent> }): void {

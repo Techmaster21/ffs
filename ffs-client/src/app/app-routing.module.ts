@@ -24,6 +24,7 @@ const routes: Routes = [
   { path: 'createaccount', component: CreateAccountComponent },
   { path: 'calendar', component: CalendarComponent, canActivate: [RegisterGuard] },
   {path: 'scheduler', component: SchedulerComponent, canActivate: [RegisterGuard]},
+  { path: 'scheduler/:id', component: SchedulerComponent, canActivate: [RegisterGuard] },
   {path: 'pantry', component: PantryComponent, canActivate: [RegisterGuard]},
   {path: 'friends', component: FriendsterComponent, canActivate: [RegisterGuard]}
 ];
