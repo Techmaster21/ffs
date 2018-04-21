@@ -221,13 +221,29 @@ export class RecipeService {
         catchError(this.handleError<Array<FFSCalendarEvent>>('getEvents'))
       );
   }
-  addEvent(event: FFSCalendarEvent): Observable<FFSCalendarEvent> {
-    console.log('here');
+  getEvent(id: number): Observable<FFSCalendarEvent>{
+    return this.http.post<FFSCalendarEvent>(URI.EVENT.GET_EVENT, id, httpOptions)
+      .map(event => {
+        event.startTime = new Date(String(event.startTime));
+        event.endTime = new Date(String(event.endTime));
 
+        return event;
+      })
+      .pipe(
+        catchError(this.handleError<FFSCalendarEvent>('getEvent'))
+      );
+  }
+  addEvent(event: FFSCalendarEvent): Observable<FFSCalendarEvent> {
     return this.http.post<FFSCalendarEvent>(URI.EVENT.ADD_EVENT, event, httpOptions)
       .pipe(
         catchError(this.handleError<FFSCalendarEvent>('addEvent'))
       );
+}
+deleteEvent(eventId: number): Observable<FFSCalendarEvent>{
+  return this.http.post<FFSCalendarEvent>(URI.EVENT.DELETE_EVENT, eventId, httpOptions)
+    .pipe(
+      catchError(this.handleError<FFSCalendarEvent>('deleteEvent'))
+    );
 }
   /**
    * Handle Http operation that failed.

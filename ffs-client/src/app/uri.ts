@@ -61,6 +61,8 @@ export const URI = {
   },
   EVENT: {
     GET_EVENTS: `${EVENT_BASE}/getUserEvents`,
-    ADD_EVENT: `${EVENT_BASE}/saveEvent`
+    ADD_EVENT: `${EVENT_BASE}/saveEvent`,
+    GET_EVENT: `${EVENT_BASE}/get`,
+    DELETE_EVENT: `${EVENT_BASE}/delete`
   }
 };

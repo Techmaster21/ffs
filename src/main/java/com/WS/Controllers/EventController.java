@@ -49,4 +49,9 @@ public class EventController {
         return eventRepository.findByUser(currentUser);
     }
 
+    @RequestMapping("/get")
+    public Event getEvent(@RequestBody Integer id) {
+       return eventRepository.findById(id).get();
+    }
+
 }

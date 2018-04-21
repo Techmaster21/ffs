@@ -10,7 +10,8 @@ export class FFSCalendarEvent {
   constructor(
     public startTime: Date = new Date(),
     public endTime: Date = new Date(),
-    public recipe = new Recipe()
+    public recipe = new Recipe(),
+    public id?: number
   ) {
   }
 }

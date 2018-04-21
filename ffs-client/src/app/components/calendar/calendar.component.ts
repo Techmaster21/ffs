@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CalendarEvent } from 'angular-calendar';
+import { CalendarEvent, CalendarEventAction } from 'angular-calendar';
 import { Subject } from 'rxjs/Subject';
 import { RecipeService } from '../../services/recipe.service';
 import { FFSCalendarEvent } from '../../models/ffs-calendar-event';
@@ -31,6 +31,19 @@ export class CalendarComponent implements OnInit {
   refresh: Subject<any> = new Subject();
   calendarEvents: Array<FFSCalendarEvent> = [];
   events: Array<CalendarEvent> = [];
+  actions: Array<CalendarEventAction> = [
+    {
+      label: 'delete',
+      onClick: ({ event }: { event: CalendarEvent }): void => {
+        this.recipeService.deleteEvent(this.calendarEvents[this.events.indexOf(event)].id)
+          .subscribe();
+        this.calendarEvents =  this.calendarEvents.filter(obj => obj
+          !== this.calendarEvents[this.events.indexOf(event)]);
+        this.events = this.events.filter(obj => obj !== event);
+        this.refresh.next();
+      }
+    }
+  ];
 
   constructor(private router: Router, private recipeService: RecipeService) {
   }
@@ -44,7 +57,8 @@ export class CalendarComponent implements OnInit {
             start: event.startTime,
             end: event.endTime,
             title: event.recipe.name,
-            color: colors.red
+            color: colors.red,
+            actions: this.actions
           });
         }
         this.refresh.next();
@@ -53,7 +67,8 @@ export class CalendarComponent implements OnInit {
   }
 
   eventClicked(event: CalendarEvent): void {
-    this.router.navigate(['/scheduler/']);
+    const id = this.calendarEvents[this.events.indexOf(event)].id;
+    this.router.navigate([`/scheduler/${id}`]);
   }
 
   dayClicked({date, events}: { date: Date; events: Array<CalendarEvent> }): void {
@@ -69,6 +84,5 @@ export class CalendarComponent implements OnInit {
       }
     }
   }
-
 
 }
