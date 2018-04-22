@@ -42,6 +42,7 @@ export class RecipesViewerComponent implements OnInit {
   viewing: string;
   cookTime: moment.Duration;
   prepTime: moment.Duration;
+  userID: number;
 
   constructor(private recipeService: RecipeService, private route: ActivatedRoute) {
     this.dataSource = new BehaviorSubject<any>(this.recipes);
@@ -54,6 +55,11 @@ export class RecipesViewerComponent implements OnInit {
           this.recipes = recipes;
           this.dataSource.next(this.recipes);
         }
+      );
+    this.recipeService.getUserID()
+      .subscribe(userID => {
+        this.userID = userID;
+      }
       );
     this.displayedRecipeColumns = this.selector ? ['name', 'description', 'user', 'cuisine', 'select'] :
       ['name', 'description', 'user', 'cuisine', 'delete'];
@@ -139,5 +145,9 @@ export class RecipesViewerComponent implements OnInit {
       pub: false
     })
        .subscribe();
+  }
+
+  isUser(id: number): boolean {
+    return this.userID === id;
   }
 }

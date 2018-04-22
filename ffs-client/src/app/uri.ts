@@ -48,6 +48,7 @@ export const URI = {
     DELETE: `${PANTRY_BASE}/delete`
   },
   USER: {
+    GET_ID: `${USER_BASE}/getId`,
     SEARCH_BY_NAME: `${USER_BASE}/searchByName`,
     SEARCH_NO_FRIENDS: `${USER_BASE}/searchWithoutFriends`
   },

@@ -245,6 +245,13 @@ deleteEvent(eventId: number): Observable<FFSCalendarEvent>{
       catchError(this.handleError<FFSCalendarEvent>('deleteEvent'))
     );
 }
+
+getUserID(): Observable<number>{
+  return this.http.post<number>(URI.USER.GET_ID, httpOptions)
+    .pipe(
+      catchError(this.handleError<number>('getUserID'))
+    );
+}
   /**
    * Handle Http operation that failed.
    * Let the app continue.

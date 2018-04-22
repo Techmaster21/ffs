@@ -57,7 +57,7 @@
     <ng-container matColumnDef="copy">
       <mat-header-cell *matHeaderCellDef></mat-header-cell>
       <mat-cell *matCellDef="let i=index; let recipe">
-        <button type="button" mat-icon-button color="accent" (click)="copyRecipe(recipe)">
+        <button type="button" mat-icon-button color="accent" [disabled]="isUser(recipe.user.id)" (click)="copyRecipe(recipe)">
           Copy
         </button>
       </mat-cell>

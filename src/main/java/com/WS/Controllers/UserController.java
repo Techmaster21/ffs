@@ -81,4 +81,10 @@ public class UserController {
         }
     	return users;
     }
+
+        @RequestMapping("/getId")
+        public int getId(@RequestBody String s) {
+        	User currentUser = securityContext.currentUser().get();
+            return currentUser.getId();
+        }
 }
