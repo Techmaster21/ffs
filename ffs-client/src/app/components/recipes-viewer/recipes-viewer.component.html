@@ -2,7 +2,7 @@
 
 <mat-card>
   <p>Recipes </p>
-  <mat-select placeholder="Recipes" [(ngModel)]="viewing" (change)="updateRecipeSelection()" name="viewingSelector" required>
+  <mat-select *ngIf="(!selector)" placeholder="Recipes" [(ngModel)]="viewing" (change)="updateRecipeSelection()" name="viewingSelector" required>
     <mat-option value="myRecipes">My Recipes</mat-option>
     <mat-option value="publicRecipes">Public Recipes</mat-option>
     <mat-option value="friendsRecipes">Friends Recipes</mat-option>
@@ -49,6 +49,16 @@
       <mat-cell *matCellDef="let i=index; let recipe">
         <button type="button" mat-icon-button color="accent" (click)="selectForUse(recipe)">
           Select
+        </button>
+      </mat-cell>
+    </ng-container>
+
+    <!-- Copy Column -->
+    <ng-container matColumnDef="copy">
+      <mat-header-cell *matHeaderCellDef></mat-header-cell>
+      <mat-cell *matCellDef="let i=index; let recipe">
+        <button type="button" mat-icon-button color="accent" (click)="copyRecipe(recipe)">
+          Copy
         </button>
       </mat-cell>
     </ng-container>

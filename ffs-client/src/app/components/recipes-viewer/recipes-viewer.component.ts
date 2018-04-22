@@ -93,7 +93,7 @@ export class RecipesViewerComponent implements OnInit {
     this.selectedRecipe = undefined;
     if (this.viewing === 'publicRecipes') {
       if (!this.selector) {
-        this.displayedRecipeColumns = ['name', 'description', 'user', 'cuisine'];
+        this.displayedRecipeColumns = ['name', 'description', 'user', 'cuisine', 'copy'];
       }
       this.recipeService.getPublicRecipes()
         .subscribe(recipes => {
@@ -103,7 +103,7 @@ export class RecipesViewerComponent implements OnInit {
         );
     } else if (this.viewing === 'friendsRecipes') {
       if (!this.selector) {
-        this.displayedRecipeColumns = ['name', 'description', 'user', 'cuisine'];
+        this.displayedRecipeColumns = ['name', 'description', 'user', 'cuisine', 'copy'];
       }
       this.recipeService.getFriendsRecipes()
         .subscribe(recipes => {
@@ -122,5 +122,22 @@ export class RecipesViewerComponent implements OnInit {
           }
         );
     }
+  }
+
+  copyRecipe(recipe: Recipe): void {
+    for (const i of recipe.ingredients) {
+      i.id = undefined;
+    }
+    this.recipeService.saveRecipe({
+      name: recipe.name,
+      description: recipe.description,
+      ingredients: recipe.ingredients,
+      steps: recipe.steps,
+      cuisine: recipe.cuisine,
+      prepTime: recipe.prepTime,
+      cookTime: recipe.cookTime,
+      pub: false
+    })
+       .subscribe();
   }
 }
