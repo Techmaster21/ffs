@@ -116,6 +116,11 @@ public class RecipeController {
         recipeRepository.delete(recipe);
         return recipeRepository.save(recipe);
     }
+    
+//    @RequestMapping("/update")
+//    public Recipe updateRecipe(@RequestBody Recipe recipe){
+//    	
+//    }
 
         /**
      * HTTP request for deleting a specific recipe from the Recipes table
@@ -124,9 +129,10 @@ public class RecipeController {
      */
     @RequestMapping("/delete")
     public void deleteRecipe(@RequestBody Integer id) {
-        recipeRepository.deleteById(id);
         List<Event> e = eventRepository.findByRecipe(id);
         eventRepository.deleteAll(e);
+        recipeRepository.deleteById(id);
+
         
     }
     
