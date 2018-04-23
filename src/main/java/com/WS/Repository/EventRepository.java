@@ -10,5 +10,5 @@ import org.springframework.data.repository.CrudRepository;
 
 public interface EventRepository extends CrudRepository<Event, Integer>{
 	List<Event> findByUser(User user);
-	List<Event> findByRecipe(int id);
+	List<Event> findByRecipe(Recipe recipe);
 }

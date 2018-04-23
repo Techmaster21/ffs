@@ -119,7 +119,7 @@ public class RecipeController {
     
 //    @RequestMapping("/update")
 //    public Recipe updateRecipe(@RequestBody Recipe recipe){
-//    	
+//    	recipe
 //    }
 
         /**
@@ -129,7 +129,9 @@ public class RecipeController {
      */
     @RequestMapping("/delete")
     public void deleteRecipe(@RequestBody Integer id) {
-        List<Event> e = eventRepository.findByRecipe(id);
+    	Recipe rec = new Recipe();
+    	rec.setId(id);
+        List<Event> e = eventRepository.findByRecipe(rec);
         eventRepository.deleteAll(e);
         recipeRepository.deleteById(id);
 
