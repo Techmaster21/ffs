@@ -5,9 +5,11 @@
  */
 package com.WS.Controllers;
 
+import com.WS.Entity.Event;
 import com.WS.Entity.Friendship;
 import com.WS.Entity.Recipe;
 import com.WS.Entity.User;
+import com.WS.Repository.EventRepository;
 import com.WS.Repository.FriendshipRepository;
 import com.WS.Repository.RecipeRepository;
 import com.WS.Service.SecurityContextService;
@@ -38,6 +40,7 @@ public class RecipeController {
 
     private final RecipeRepository recipeRepository;
     private final FriendshipRepository friendshipRepository;
+    private final EventRepository eventRepository;
     private final SecurityContextService securityContext;
 
     /**
@@ -47,10 +50,11 @@ public class RecipeController {
      * @param recipeRepository Repository handing Recipes table.
      */
     @Autowired
-    public RecipeController(RecipeRepository recipeRepository, FriendshipRepository friendshipRepository, SecurityContextService securityContext) {
+    public RecipeController(RecipeRepository recipeRepository, FriendshipRepository friendshipRepository, EventRepository eventRepository, SecurityContextService securityContext) {
         this.recipeRepository = recipeRepository;
         this.securityContext = securityContext;
         this.friendshipRepository = friendshipRepository;
+        this.eventRepository = eventRepository;
     }
 
     /**
@@ -121,7 +125,9 @@ public class RecipeController {
     @RequestMapping("/delete")
     public void deleteRecipe(@RequestBody Integer id) {
         recipeRepository.deleteById(id);
-        // TODO should probably return something
+        List<Event> e = eventRepository.findByRecipe(id);
+        eventRepository.deleteAll(e);
+        
     }
     
     @RequestMapping("/getPublicRecipes")
