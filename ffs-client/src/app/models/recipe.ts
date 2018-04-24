@@ -30,4 +30,9 @@ export class Recipe {
     public id?: number
   ) {
   }
+  // kinda sorta clones
+  clone(): Recipe {
+    return new Recipe(this.name, this.description, this.ingredients.slice(0), this.steps.slice(0), this.cuisine,
+      this.pub, this.prepTime, this.cookTime, this.user, this.id);
+  }
 }

@@ -1,5 +1,6 @@
-import { Component, DoCheck, Input, IterableDiffers, OnInit } from '@angular/core';
+import { Component, DoCheck, EventEmitter, Input, IterableDiffers, OnInit, Output } from '@angular/core';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { RecipeService } from '../../services/recipe.service';
 
 /**
  * View for Ingredients list
@@ -21,6 +22,10 @@ export class IngredientsViewerComponent implements DoCheck, OnInit {
   /**
    * Data source for the table
    */
+  /**
+   * Emits the ID of the Ingredient to remove
+   */
+  @Output() remove: EventEmitter<any> = new EventEmitter();
   dataSource: BehaviorSubject<any>;
   differ: any;
 
@@ -40,6 +45,7 @@ export class IngredientsViewerComponent implements DoCheck, OnInit {
    * @param index The index of the ingredient to remove
    */
   removeIngredient(index: number): void {
+    this.remove.emit(this.ingredients[index].id);
     this.ingredients.splice(index, 1);
   }
 

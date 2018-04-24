@@ -14,6 +14,8 @@ import { catchError } from 'rxjs/operators';
 import { URI } from '../uri';
 import { User } from '../models/user';
 import { FFSCalendarEvent } from '../models/ffs-calendar-event';
+import { Step } from '../models/step';
+import { Ingredient } from '../models/ingredient';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -97,6 +99,20 @@ export class RecipeService {
     return this.http.post<Recipe>(URI.RECIPE.DELETE, id, httpOptions)
       .pipe(
         catchError(this.handleError<Recipe>('deleteRecipe'))
+      );
+  }
+
+  deleteStep(id: number): Observable<Step> {
+    return this.http.post<Step>(URI.STEP.DELETE, id, httpOptions)
+      .pipe(
+        catchError(this.handleError<Step>('deleteStep'))
+      );
+  }
+
+  deleteIngredient(id: number): Observable<Ingredient> {
+    return this.http.post<Ingredient>(URI.INGREDIENT.DELETE, id, httpOptions)
+      .pipe(
+        catchError(this.handleError<Ingredient>('deleteIngredient'))
       );
   }
 

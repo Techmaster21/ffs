@@ -34,7 +34,8 @@
       </mat-form-field>
     </div>
 
-    <app-ingredients-viewer [(ingredients)]="recipe.ingredients" [canEdit]="true"></app-ingredients-viewer>
+    <app-ingredients-viewer (remove)="ingredientsToRemove.push($event)" [(ingredients)]="recipe.ingredients"
+                            [canEdit]="true"></app-ingredients-viewer>
 
     <form class="ingredient-form" (ngSubmit)="addIngredient()" #ingredientForm="ngForm">
       <div>
@@ -75,7 +76,7 @@
       </div>
     </form>
 
-    <app-steps-viewer [(steps)]="recipe.steps" [canEdit]="true"></app-steps-viewer>
+    <app-steps-viewer (remove)="stepsToRemove.push($event)" [(steps)]="recipe.steps" [canEdit]="true"></app-steps-viewer>
 
     <form class="step-form" (ngSubmit)="addStep()" #stepForm="ngForm">
       <div>

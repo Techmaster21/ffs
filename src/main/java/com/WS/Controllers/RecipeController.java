@@ -8,10 +8,13 @@ package com.WS.Controllers;
 import com.WS.Entity.Event;
 import com.WS.Entity.Friendship;
 import com.WS.Entity.Recipe;
+import com.WS.Entity.RecipeStep;
 import com.WS.Entity.User;
 import com.WS.Repository.EventRepository;
 import com.WS.Repository.FriendshipRepository;
+import com.WS.Repository.IngredientRepository;
 import com.WS.Repository.RecipeRepository;
+import com.WS.Repository.RecipeStepRepository;
 import com.WS.Service.SecurityContextService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -50,7 +53,8 @@ public class RecipeController {
      * @param recipeRepository Repository handing Recipes table.
      */
     @Autowired
-    public RecipeController(RecipeRepository recipeRepository, FriendshipRepository friendshipRepository, EventRepository eventRepository, SecurityContextService securityContext) {
+    public RecipeController(RecipeRepository recipeRepository, FriendshipRepository friendshipRepository,
+                            EventRepository eventRepository, SecurityContextService securityContext) {
         this.recipeRepository = recipeRepository;
         this.securityContext = securityContext;
         this.friendshipRepository = friendshipRepository;
@@ -113,7 +117,6 @@ public class RecipeController {
     public Recipe saveRecipe(@RequestBody Recipe recipe) {
         User currentUser = securityContext.currentUser().get();
         recipe.setUser(currentUser);
-        recipeRepository.delete(recipe);
         return recipeRepository.save(recipe);
     }
     

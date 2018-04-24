@@ -56,6 +56,8 @@ export class RecipeAdderComponent implements OnInit {
   displayedSearchFoodsColumn: Array<string>;
   cookTime: Time;
   prepTime: Time;
+  stepsToRemove: Array<number>;
+  ingredientsToRemove: Array<number>;
 
   constructor(private router: Router,
               private recipeService: RecipeService,
@@ -68,6 +70,8 @@ export class RecipeAdderComponent implements OnInit {
     this.displayedSearchFoodsColumn = ['name', 'select'];
     this.cookTime = new Time();
     this.prepTime = new Time();
+    this.stepsToRemove = [];
+    this.ingredientsToRemove = [];
   }
 
   /**
@@ -90,6 +94,14 @@ export class RecipeAdderComponent implements OnInit {
    * Sends a request to save the recipe to the backend
    */
   submitRecipe(): void {
+    for (const id of this.stepsToRemove) {
+      this.recipeService.deleteStep(id)
+        .subscribe();
+    }
+    for (const id of this.ingredientsToRemove) {
+      this.recipeService.deleteIngredient(id)
+        .subscribe();
+    }
     if (this.recipe.pub === undefined) {
       this.recipe.pub = false;
     }

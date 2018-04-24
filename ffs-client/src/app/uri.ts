@@ -2,6 +2,8 @@
 export const ACCOUNT_BASE = '/api/account';
 export const RECIPE_BASE = 'api/recipe';
 export const UNIT_BASE = 'api/unit';
+export const STEP_BASE = 'api/step';
+export const INGREDIENT_BASE = 'api/ingredient';
 export const CUISINE_BASE = 'api/cuisine';
 export const FOOD_BASE = 'api/food';
 export const PANTRY_BASE = 'api/pantry';
@@ -27,6 +29,18 @@ export const URI = {
     GET_ALL: `${UNIT_BASE}/getAll`,
     SAVE: `${UNIT_BASE}/save`,
     DELETE: `${UNIT_BASE}/delete`
+  },
+  STEP: {
+    GET: `${STEP_BASE}/get`,
+    GET_ALL: `${STEP_BASE}/getAll`,
+    SAVE: `${STEP_BASE}/save`,
+    DELETE: `${STEP_BASE}/delete`
+  },
+  INGREDIENT: {
+    GET: `${INGREDIENT_BASE}/get`,
+    GET_ALL: `${INGREDIENT_BASE}/getAll`,
+    SAVE: `${INGREDIENT_BASE}/save`,
+    DELETE: `${INGREDIENT_BASE}/delete`
   },
   CUISINE: {
     GET: `${CUISINE_BASE}/get`,

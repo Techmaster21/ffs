@@ -59,6 +59,11 @@ public class IngredientController {
         return ingredientRepository.findById(id).get();
     }
 
+    @RequestMapping("/delete")
+    public void deleteIngredient(@RequestBody Integer id) {
+        ingredientRepository.deleteById(id);
+    }
+
     /**
      * HTTP request for getting all of the ingredients from the table
      * @return all of the Ingredients in the table
