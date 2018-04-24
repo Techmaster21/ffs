@@ -23,9 +23,9 @@ export class Recipe {
     public ingredients: Array<Ingredient> = [],
     public steps: Array<Step> = [],
     public cuisine: Cuisine = new Cuisine(),
-    public pub = false,
     public prepTime?: string,
     public cookTime?: string,
+    public pub = false,
     public user?: User,
     public id?: number
   ) {
@@ -33,6 +33,6 @@ export class Recipe {
   // kinda sorta clones
   clone(): Recipe {
     return new Recipe(this.name, this.description, this.ingredients.slice(0), this.steps.slice(0), this.cuisine,
-      this.pub, this.prepTime, this.cookTime, this.user, this.id);
+      this.prepTime, this.cookTime, this.pub, this.user, this.id);
   }
 }

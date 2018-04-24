@@ -137,8 +137,6 @@ public class RecipeController {
         List<Event> e = eventRepository.findByRecipe(rec);
         eventRepository.deleteAll(e);
         recipeRepository.deleteById(id);
-
-        
     }
     
     @RequestMapping("/getPublicRecipes")

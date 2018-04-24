@@ -134,16 +134,16 @@ export class RecipesViewerComponent implements OnInit {
     for (const i of recipe.ingredients) {
       i.id = undefined;
     }
-    this.recipeService.saveRecipe({
-      name: recipe.name,
-      description: recipe.description,
-      ingredients: recipe.ingredients,
-      steps: recipe.steps,
-      cuisine: recipe.cuisine,
-      prepTime: recipe.prepTime,
-      cookTime: recipe.cookTime,
-      pub: false
-    })
+    this.recipeService.saveRecipe(new Recipe(
+      recipe.name,
+      recipe.description,
+      recipe.ingredients,
+      recipe.steps,
+      recipe.cuisine,
+      recipe.prepTime,
+      recipe.cookTime,
+      false
+    ))
        .subscribe();
   }
 
