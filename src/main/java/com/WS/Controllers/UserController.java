@@ -79,6 +79,14 @@ public class UserController {
         for (Friendship friendship : friendships) {
             users.remove(friendship.getFriend());
         }
+        
+        List<Friendship> requests = friendshipRepository.findByFriend(currentUser);
+        for(Friendship request : requests){
+        	if(request.isRequest()){
+        		users.remove(request.getUser());
+        	}
+        }
+        
     	return users;
     }
 
